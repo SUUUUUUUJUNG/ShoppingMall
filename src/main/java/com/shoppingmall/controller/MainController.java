@@ -2,6 +2,7 @@ package com.shoppingmall.controller;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import com.shoppingmall.dto.GoodsDTO;
 import com.shoppingmall.service.GoodsService;
 
 @Controller
+@Slf4j
 public class MainController {
 
 	@Autowired
@@ -20,9 +22,7 @@ public class MainController {
 
 	@GetMapping("/") // 리스트 무조건 뿌리기
 	public String mainView(Model model) {
-		System.out.println("model = " + model);
 		List<GoodsDTO> list = service.goodsList("top");
-		System.out.println("list = " + list);
 		model.addAttribute("goodsList", list);
 		return "main";
 	}
