@@ -34,6 +34,7 @@ public class MemberController {
 	
 	@PostMapping ("/memberAdd")
 	public String memberAdd(MemberDTO dto,Model model) {
+		System.out.println("dto = " + dto);
 		int n = service.memberAdd(dto);
 		model.addAttribute("success","회원가입성공"); // request객체에 담겨있는거 
 		//System.out.println("insert 개수 : " + n);

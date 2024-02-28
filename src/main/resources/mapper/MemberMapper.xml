@@ -1,60 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
- 
- 
-     <select id="idSearch" resultType="string" 
-    parameterType="MemberDTO">
-         select userid
-         from member
-         where username=#{username} and phone1=#{phone1} and phone2=#{phone2} and phone3=#{phone3}
+
+
+    <select id="idSearch" resultType="string"
+            parameterType="MemberDTO">
+        select userid
+        from member
+        where username=#{username} and PHONENUMBER=#{phonenumber}
     </select>
-    
-   <update id="memberUpdate" parameterType="MemberDTO">
-     update member
-     set post = #{post},
-     addr1 = #{addr1},
-     addr2 = #{addr2},
-     phone1 = #{phone1},
-     phone2 = #{phone2},
-     phone3 = #{phone3},
-     email1 = #{email1},
-     email2 = #{email2}
-    where userid = #{userid}
-   </update>
 
 
-   <insert id="memberAdd" parameterType="MemberDTO">
-     insert into member (userid,passwd,username,post,addr1,addr2,
-                         phone1,phone2,phone3,email1,email2)
-     values( #{userid},#{passwd},#{username},#{post},#{addr1},#{addr2},
-              #{phone1},#{phone2},#{phone3},#{email1},#{email2})
-   </insert>
-   
-   <select id="idCheck" parameterType="string"
-	            resultType="int">
-     select count(*)
-     from member
-     where userid = #{userid}
-	</select>
-	
-	<select id="login" parameterType="hashmap" resultType="MemberDTO">
-	  select userid,passwd,username,post,addr1,addr2,
-                         phone1,phone2,phone3,email1,email2
-      from member
-      where userid = #{userid} and passwd = #{passwd}
-	</select>
-	
-	<select id="myPage" parameterType="string" resultType="MemberDTO">
-	  select userid,passwd,username,post,addr1,addr2,
-                         phone1,phone2,phone3,email1,email2
-      from member
-      where userid = #{userid}
-	</select>
-	
-	
-	
-	
+
+    <insert id="memberAdd" parameterType="MemberDTO">
+        insert into member (memberid,userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+                            phonenumber,email, ROLE,STATUS)
+        values(SUJUNG.MEMBERID_SEQ.nextval, #{userid},#{passwd},#{username},#{zipCode},#{addr},#{addrDetail},
+               #{phonenumber},#{email},'ROLE_User','Active')
+    </insert>
+
+<!--    <select id="idCheck" parameterType="string"-->
+<!--            resultType="int">-->
+<!--        select count(*)-->
+<!--        from member-->
+<!--        where userid = #{userid}-->
+<!--    </select>-->
+
+<!--    <update id="memberUpdate" parameterType="MemberDTO">-->
+<!--        update member-->
+<!--        set post = #{post},-->
+<!--            addr1 = #{addr1},-->
+<!--            addr2 = #{addr2},-->
+<!--            phonenumber = #{phonenumber},-->
+<!--            email = #{email},-->
+<!--            where userid = #{userid}-->
+<!--    </update>-->
+<!--    <select id="login" parameterType="hashmap" resultType="MemberDTO">-->
+<!--        select userid,passwd,username,post,addr1,addr2,-->
+<!--               phonenumber,email-->
+<!--        from member-->
+<!--        where userid = #{userid} and passwd = #{passwd}-->
+<!--    </select>-->
+
+<!--    <select id="myPage" parameterType="string" resultType="MemberDTO">-->
+<!--        select userid,passwd,username,post,addr1,addr2,-->
+<!--               phonenumber,email-->
+<!--        from member-->
+<!--        where userid = #{userid}-->
+<!--    </select>-->
+
+
+
+
 </mapper>
