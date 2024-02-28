@@ -28,7 +28,7 @@
 </script>	
 
 
-<form name="myForm" method="get" action="loginCheck/orderDone">
+<form name="myForm" method="get" action="orderDone">
 <input type="hidden" name="gCode" value="${cDTO.gCode}">
 <input type="hidden" name="gName" value="${cDTO.gName}">
 <input type="hidden" name="gPrice" value="${cDTO.gPrice}">

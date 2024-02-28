@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.service.MemberService;
@@ -25,12 +22,17 @@ public class MemberController {
 //		return "main";
 //	}
 //	
-//	@RequestMapping("/loginForm")
-//	public void loginForm() { //void로 처리 loginForm.jsp로 이동
-//		
-//	}
+	@GetMapping ("/loginForm")
+	public void loginForm() { //void로 처리 loginForm.jsp로 이동
+
+	}
+
+	@GetMapping("/memberForm")
+	public String memberForm(){
+		return "memberForm";
+	}
 	
-	@RequestMapping(value="/memberAdd",method = RequestMethod.POST)
+	@PostMapping ("/memberAdd")
 	public String memberAdd(MemberDTO dto,Model model) {
 		int n = service.memberAdd(dto);
 		model.addAttribute("success","회원가입성공"); // request객체에 담겨있는거 
@@ -39,7 +41,7 @@ public class MemberController {
 		return "main";
 	}	
 	
-	@RequestMapping(value="/loginCheck/myPage",method = RequestMethod.GET )
+	@GetMapping ("/myPage")
 	public String mypage(HttpSession session ) {
 		MemberDTO mDto =(MemberDTO)session.getAttribute("login");
 		String userid=mDto.getUserid();

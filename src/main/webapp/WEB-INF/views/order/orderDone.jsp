@@ -23,7 +23,7 @@
 	</tr>
 
 	<tr>
-		<td class="td_default" align="center"><b></b> 님의 주문이
+		<td class="td_default" align="center"><b></b> ${oDTO.userid}님의 주문이
 			안전하게 처리되었습니다.</td>
 	</tr>
 

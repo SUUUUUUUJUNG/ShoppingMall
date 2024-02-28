@@ -24,7 +24,7 @@
 </head>
 <body>
 
-	<h1><a href="/app/">메인 화면</a></h1>
+	<h1><a href="/">메인 화면</a></h1>
 
 	<!-- top / menu 헤더로 include처리 -->
 	<jsp:include page="common/top.jsp" flush="true" /><br>

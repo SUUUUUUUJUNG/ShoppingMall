@@ -39,12 +39,12 @@ public class LoginController {
 
 	}
 
-	@RequestMapping("/loginCheck/logout")
+	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		//인터셉터 통과
-		//System.out.println("/loginCheck/logout   ");
-		session.invalidate();
-		return "redirect:../"; //loginForm.jsp
+		if(session.getAttribute("login")!=null){
+			session.invalidate();
+		}
+		return "loginForm";
 
 	}
 

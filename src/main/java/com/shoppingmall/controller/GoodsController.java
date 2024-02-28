@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,15 +63,14 @@ public class GoodsController {
 		return "redirect:../goodsRetrieve?gCode="+cdto.getgCode();
 	}
 	
-	@RequestMapping(value="/loginCheck/cartList") // 인터셉터 통과
-	public String cartList(RedirectAttributes attr, HttpSession session) {
+	@RequestMapping(value="/cartList") // 인터셉터 통과
+	public String cartList(RedirectAttributes attr, HttpSession session, Model model) {
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		String userid = member.getUserid();
 		//System.out.println(userid);
 		List<CartDTO> list = service.cartList(userid);
-		//System.out.println(list);
-		attr.addFlashAttribute("cartList",list);// 리다이렉트시 데이터 유지
-		return "redirect:../cartList"; //servlet-context에 등록
+		model.addAttribute("cartList",list);// 리다이렉트시 데이터 유지
+		return "cartList"; //servlet-context에 등록
 		
 	}	
 	
@@ -97,28 +97,28 @@ public class GoodsController {
 		return "redirect:cartList";
 	}
 	
-	@RequestMapping(value="/loginCheck/orderConfirm")
-	public String orderConfirm(@RequestParam("num") String num, HttpSession session, RedirectAttributes xxx) {
+	@RequestMapping(value="/orderConfirm")
+	public String orderConfirm(@RequestParam("num") String num, HttpSession session,Model model) {
 		CartDTO cart = service.cartByNum(num);
 		String userid = cart.getUserid();
 		MemberDTO member = mService.myPage(userid);
-		xxx.addFlashAttribute("mDTO", member);
-		xxx.addFlashAttribute("cDTO", cart);
+		model.addAttribute("mDTO", member);
+		model.addAttribute("cDTO", cart);
 		//System.out.println("orderConfirm : " + cart);
 		//System.out.println("orderConfirm : " + member);
-		return "redirect:../orderConfirm";
+		return "orderConfirm";
 	}
 	
-	@RequestMapping(value="/loginCheck/orderDone")
+	@RequestMapping(value="/orderDone")
 	public String orderDone(@RequestParam("orderNum") Integer orderNum, OrderDTO oDTO,
-			HttpSession session, RedirectAttributes xxx) {
+			HttpSession session, Model model) {
 //		System.out.println(num);
 //		System.out.println(oDTO);
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		oDTO.setUserid(dto.getUserid());
 		service.orderDone(oDTO,orderNum);//insert,delete
-		xxx.addFlashAttribute("oDTO", oDTO);
-		return "redirect:../orderDone";
+		model.addAttribute("oDTO", oDTO);
+		return "orderDone";
 		
 	}
 	
