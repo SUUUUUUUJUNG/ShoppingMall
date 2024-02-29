@@ -37,19 +37,19 @@
 <!--            email = #{email},-->
 <!--            where userid = #{userid}-->
 <!--    </update>-->
-<!--    <select id="login" parameterType="hashmap" resultType="MemberDTO">-->
-<!--        select userid,passwd,username,post,addr1,addr2,-->
-<!--               phonenumber,email-->
-<!--        from member-->
-<!--        where userid = #{userid} and passwd = #{passwd}-->
-<!--    </select>-->
+    <select id="login" parameterType="hashmap" resultType="MemberDTO">
+        select userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+               phonenumber,email
+        from member
+        where userid = #{userid} and PASSWORD = #{passwd}
+    </select>
 
-<!--    <select id="myPage" parameterType="string" resultType="MemberDTO">-->
-<!--        select userid,passwd,username,post,addr1,addr2,-->
-<!--               phonenumber,email-->
-<!--        from member-->
-<!--        where userid = #{userid}-->
-<!--    </select>-->
+    <select id="myPage" parameterType="string" resultType="MemberDTO">
+        select userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+               phonenumber,email
+        from member
+        where userid = #{userid}
+    </select>
 
 
 

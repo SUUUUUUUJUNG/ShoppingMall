@@ -48,7 +48,6 @@ public class MemberController {
 		String userid=mDto.getUserid();
 		MemberDTO dto = service.myPage(userid);
 		session.setAttribute("login", dto);
-		//System.out.println(dto);
 		return "myPage";	
 	}
 	

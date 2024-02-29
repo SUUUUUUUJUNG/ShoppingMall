@@ -33,29 +33,16 @@ alert('${mesg}');
 <span id="result"></span>
 <br> 
 이름:<input type="text" name="username" value="${login.username }" ><br> 
-<input type="text" value="${login.post }"name="post" id="sample4_postcode" placeholder="우편번호">
+<input type="text" value="${login.zip_Code }"name="post" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" value="${login.addr1 }" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" value="${login.addr2 }" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
+<input type="text" value="${login.address }" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" value="${login.addr_Detail }" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 <br>
-전화번호:<select name="phone1">
-  <option value="010" 
-   <c:if test="${login.phone1=='010' }">selected</c:if> 
-  >010</option><!-- html태그 사이에서 jstl태그 사용  -->
-  <option value="011"
-  <c:if test="${login.phone1=='011' }"></c:if>
-  >011</option><!-- html태그 사이에서 jstl태그 사용  -->
-</select>-
-<input type="text" value="${login.phone2}" name="phone2" >
--<input type="text" value="${login.phone3}" name="phone3" >
-<br>
-이메일:<input type="text" value="${login.email1}" name="email1" id="email1">@
-       <input type="text" value="${login.email2}" name="email2" id="email2" placeholder="직접입력">
-       <select  id="emailSelect">
-        <option value="daum.net" <c:if test="${login.email2=='daum.net'}">selected</c:if>> daum.net</option>
-        <option value="naver.com"<c:if test="${login.email2=='naver.com'}">selected</c:if>>naver.com</option>
-       </select>
+전화번호:
+<input type="text" value="${login.phonenumber}" name="phone2" ><br>
+
+이메일:<input type="text" value="${login.email}" name="email" id="email">
 <br>
 <input type="submit" value="수정">
 <input type="reset" value="취소">

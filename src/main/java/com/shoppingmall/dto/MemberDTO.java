@@ -12,25 +12,25 @@ public class MemberDTO {
 	private String memberid;
 	private String userid;
 	private String username;
-	private String passwd;
+	private String password;
 	private String email;
 	private String phonenumber;
-	private String zipCode;
-	private String addr;
-	private String addrDetail;
+	private String zip_Code;
+	private String address;
+	private String addr_Detail;
 	private String status;
 	private String role;
 
-	public MemberDTO(String memberid, String userid, String username, String passwd, String email, String phonenumber, String zipCode, String addr, String addrDetail, String status, String role) {
+	public MemberDTO(String memberid, String userid, String username, String password, String email, String phonenumber, String zip_Code, String address, String addr_Detail, String status, String role) {
 		this.memberid = memberid;
 		this.userid = userid;
 		this.username = username;
-		this.passwd = passwd;
+		this.password = password;
 		this.email = email;
 		this.phonenumber = phonenumber;
-		this.zipCode = zipCode;
-		this.addr = addr;
-		this.addrDetail = addrDetail;
+		this.zip_Code = zip_Code;
+		this.address = address;
+		this.addr_Detail = addr_Detail;
 		this.status = status;
 		this.role = role;
 	}
@@ -44,12 +44,12 @@ public class MemberDTO {
 				"memberid='" + memberid + '\'' +
 				", userid='" + userid + '\'' +
 				", username='" + username + '\'' +
-				", passwd='" + passwd + '\'' +
+				", password='" + password + '\'' +
 				", email='" + email + '\'' +
 				", phonenumber='" + phonenumber + '\'' +
-				", zipCode='" + zipCode + '\'' +
-				", addr='" + addr + '\'' +
-				", addrDetail='" + addrDetail + '\'' +
+				", zip_Code='" + zip_Code + '\'' +
+				", address='" + address + '\'' +
+				", addr_Detail='" + addr_Detail + '\'' +
 				", status='" + status + '\'' +
 				", role='" + role + '\'' +
 				'}';
