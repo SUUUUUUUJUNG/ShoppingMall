@@ -26,11 +26,11 @@ public class MemberDAO {
 
 	public MemberDTO myPage(String userid) {
 		MemberDTO dto = session.selectOne("MemberMapper.myPage",userid);
-		System.out.println("dto = " + dto);
 		return dto;
 	}
 
 	public int memberUpdate(MemberDTO dto) {
+		System.out.println("MemberDAO : " + dto);
 		int n = session.update("MemberMapper.memberUpdate",dto);
 		return n;
 	}

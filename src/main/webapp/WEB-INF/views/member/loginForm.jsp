@@ -12,6 +12,6 @@ alert('${mesg}');
 } %>
 <form action="login" method="post">
 	아이디:<input type="text" name="userid"><br>
-	비밀번호:<input type="text" name="passwd"><br>
+	비밀번호:<input type="text" name="password"><br>
 	<input type="submit" value="로그인"> <input type="reset" value="취소">
 </form>

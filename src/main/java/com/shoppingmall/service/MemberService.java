@@ -30,6 +30,7 @@ public class MemberService {
 	}
 
 	public int memberUpdate(MemberDTO dto) {
+		System.out.println("MemberService : " + dto);
 		int n= dao.memberUpdate(dto);
 		return n;
 		

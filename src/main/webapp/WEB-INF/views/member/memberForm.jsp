@@ -7,22 +7,22 @@
     	//form 서브밋
  $("form").on("submit",function(event){		
 	 var userid = $("#userid").val();
-	 var passwd = $("#passwd").val();
+	 var password = $("#password").val();
     		if(userid.length==0){
     			alert("userid 필수")
     			$("#userid").focus();
     			event.preventDefault();
-    		}else if(passwd.length==0){
-    			alert("passwd 필수")
-    			$("#passwd").focus();
+    		}else if(password.length==0){
+    			alert("password 필수")
+    			$("#password").focus();
     			event.preventDefault();
     		}
     	});
 //비번확인
- $("#passwd2").on("keyup",function(){
-		var passwd = $("#passwd").val();
+ $("#password2").on("keyup",function(){
+		var password = $("#password").val();
 		var mesg = "비번 불일치";
-		if(passwd == $(this).val()){
+		if(password == $(this).val()){
 			mesg = "비번 일치";
 		}
 		$("#result2").text(mesg);
@@ -50,15 +50,15 @@
 <form action="memberAdd" method="post">
 *아이디 : <input type="text" name="userid" id="userid">
 <span id="result"></span><br>
-*비밀번호 : <input type="text" name="passwd" id="passwd"><br>
-비빌번호확인 : <input type="text" name="passwd2" id="passwd2">
+*비밀번호 : <input type="text" name="password" id="password"><br>
+비빌번호확인 : <input type="text" name="password2" id="password2">
 <span id="result2"></span>
 <br> 
 이름 : <input type="text" name="username"><br>
-주소 : <input type="text" name="zipCode" id="sample4_postcode" placeholder="우편번호">
+주소 : <input type="text" name="zip_Code" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" name="addr" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" name="addrDetail" id="sample4_jibunAddress" placeholder="상세주소">
+<input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
 <span id="guide" style="color:#999"></span>
 <br>
 전화번호 : <input type="text" name="phonenumber" >

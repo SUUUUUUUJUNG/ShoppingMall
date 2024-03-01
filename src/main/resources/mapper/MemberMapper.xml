@@ -9,15 +9,15 @@
             parameterType="MemberDTO">
         select userid
         from member
-        where username=#{username} and PHONENUMBER=#{phonenumber}
+        where username=#{username} and phonenumber=#{phonenumber}
     </select>
 
 
 
     <insert id="memberAdd" parameterType="MemberDTO">
-        insert into member (memberid,userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+        insert into member (memberid,userid,password,username,zip_Code,address,addr_Detail,
                             phonenumber,email, ROLE,STATUS)
-        values(SUJUNG.MEMBERID_SEQ.nextval, #{userid},#{passwd},#{username},#{zipCode},#{addr},#{addrDetail},
+        values(SUJUNG.MEMBERID_SEQ.nextval, #{userid},#{password},#{username},#{zip_Code},#{address},#{addr_Detail},
                #{phonenumber},#{email},'ROLE_User','Active')
     </insert>
 
@@ -28,24 +28,24 @@
 <!--        where userid = #{userid}-->
 <!--    </select>-->
 
-<!--    <update id="memberUpdate" parameterType="MemberDTO">-->
-<!--        update member-->
-<!--        set post = #{post},-->
-<!--            addr1 = #{addr1},-->
-<!--            addr2 = #{addr2},-->
-<!--            phonenumber = #{phonenumber},-->
-<!--            email = #{email},-->
-<!--            where userid = #{userid}-->
-<!--    </update>-->
+    <update id="memberUpdate" parameterType="MemberDTO">
+        update member
+        set zip_Code = #{zip_Code},
+            address = #{address},
+            addr_Detail = #{addr_Detail},
+            phonenumber = #{phonenumber},
+            email = #{email}
+            where userid = #{userid}
+    </update>
     <select id="login" parameterType="hashmap" resultType="MemberDTO">
-        select userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+        select userid,password,username,zip_Code,address,addr_Detail,
                phonenumber,email
         from member
-        where userid = #{userid} and PASSWORD = #{passwd}
+        where userid = #{userid} and PASSWORD = #{password}
     </select>
 
     <select id="myPage" parameterType="string" resultType="MemberDTO">
-        select userid,password,username,ZIP_CODE,ADDRESS,ADDR_DETAIL,
+        select userid,password,username,zip_Code,address,addr_Detail,
                phonenumber,email
         from member
         where userid = #{userid}

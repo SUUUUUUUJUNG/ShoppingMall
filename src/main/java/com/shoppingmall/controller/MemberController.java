@@ -34,12 +34,11 @@ public class MemberController {
 	
 	@PostMapping ("/memberAdd")
 	public String memberAdd(MemberDTO dto,Model model) {
-		System.out.println("dto = " + dto);
 		int n = service.memberAdd(dto);
 		model.addAttribute("success","회원가입성공"); // request객체에 담겨있는거 
 		//System.out.println("insert 개수 : " + n);
 		//System.out.println("MemberController : " +dto);
-		return "main";
+		return "redirect:/";
 	}	
 	
 	@GetMapping ("/myPage")
@@ -66,13 +65,13 @@ public class MemberController {
 		return mesg;
 	}
 	
-	@RequestMapping(value="/loginCheck/memberUpdate",method = RequestMethod.POST)
+	@RequestMapping(value="/memberUpdate",method = RequestMethod.POST)
 	public String memberUpdate(MemberDTO dto,HttpSession session){
-		//System.out.println("update"+dto);
+		System.out.println("MemberController " + dto);
 		int n = service.memberUpdate(dto);
 		session.setAttribute("login", dto);
 		session.setAttribute("mesg", "회원정보가 수정되었습니다.");
-		return "redirect:../loginCheck/myPage";
+		return "redirect:/myPage";
 		//1. myPage.jsp바로 응답처리
 		//2. /loginCheck/myPage로 재요청 -> servlet-context/myPage -> myPage.jsp
 	}
