@@ -141,7 +141,7 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mpost1" size="4"
-							maxlength="3" value="${mDTO.post}" readonly></input>
+							maxlength="3" value="${mDTO.zip_Code}" readonly></input>
 						
 					</td>
 				</tr>
@@ -152,9 +152,9 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="maddress1" size="35"
-							maxlength="200" value="${mDTO.addr1}" readonly></input><br>
+							maxlength="200" value="${mDTO.address}" readonly></input><br>
 						<input class="input_default" type="text" id="maddress2" size="35"
-							maxlength="200" value="${mDTO.addr2}" readonly></input>
+							maxlength="200" value="${mDTO.addr_Detail}" readonly></input>
 					</td>
 				</tr>
 				
@@ -164,7 +164,7 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mphone" size="15"
-							maxlength="15" value="${mDTO.phone1}${mDTO.phone2}${mDTO.phone3}"></input>
+							maxlength="15" value="${mDTO.phonenumber}"></input>
 						
 					</td>
 				</tr>
@@ -220,10 +220,10 @@
 					</td>
 					<td height="35" class="td_default">
 <!-- 다음주소 시작-->
-	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
+	<input type="text" name="zip_Code" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
+<input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
 <span id="guide" style="color:#999"></span>
 <br>
 <!-- 다음주소 끝 -->
@@ -237,7 +237,7 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="phone"
-							name="phone" size="15" maxlength="15" value=""></input>
+							name="phonenumber" size="15" maxlength="15" value=""></input>
 					
 					</td>
 				</tr>

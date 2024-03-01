@@ -50,14 +50,14 @@
 				</tr>
 				<tr>
 					<td class="td_default" height="35"> 주소</td>
-					<td class="td_default" height="35"> (${oDTO.post})<br>
-					${oDTO.addr1}${oDTO.addr2}	
+					<td class="td_default" height="35"> (${oDTO.zip_Code})<br>
+					${oDTO.address}${oDTO.addr_Detail}
 					</td>
 				</tr>
 				
 				<tr>
 					<td class="td_default" height="35"> 휴대전화</td>
-					<td class="td_default" height="35">${oDTO.phone} </td>
+					<td class="td_default" height="35">${oDTO.phonenumber} </td>
 				</tr>
 			</table>
 	</tr>

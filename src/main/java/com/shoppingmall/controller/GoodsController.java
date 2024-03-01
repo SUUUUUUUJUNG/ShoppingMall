@@ -112,8 +112,6 @@ public class GoodsController {
 	@RequestMapping(value="/orderDone")
 	public String orderDone(@RequestParam("orderNum") Integer orderNum, OrderDTO oDTO,
 			HttpSession session, Model model) {
-//		System.out.println(num);
-//		System.out.println(oDTO);
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		oDTO.setUserid(dto.getUserid());
 		service.orderDone(oDTO,orderNum);//insert,delete
