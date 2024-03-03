@@ -10,12 +10,23 @@
 <script>
 
 	$(function() {
+		// 장바구니 버튼 클릭 이벤트
+		$("#cart").on("click",function(e){
+			// 사이즈와 색상이 선택되었는지 확인
+			var size = $("#gSize").val();
+			var color = $("#gColor").val();
 
-		$("#cart").on("click",function(){
-			$("form").attr("action","loginCheck/cartAdd")
-		})
+			// 사이즈나 색상이 선택되지 않았으면 경고창 표시
+			if(size === "사이즈선택" || color === "색상선택") {
+				alert("상품의 사이즈와 색상 옵션을 선택해주세요.");
+				e.preventDefault(); // 폼 제출 방지
+			} else {
+				// 사이즈와 색상이 모두 선택되었으면 폼 액션 변경 후 제출
+				$("form").attr("action","loginCheck/cartAdd");
+			}
+		});
+	});
 
-		})
 
 </script>
 <!--  -->
