@@ -25,5 +25,6 @@ alert('${mesg}');
 	<hr>
 
 	<jsp:include page="goods/goodsRetrieve.jsp"></jsp:include>
+	<jsp:include page="goods/product-details-tabs.jsp"></jsp:include>
 </body>
 </html>

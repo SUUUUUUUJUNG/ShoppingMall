@@ -3,6 +3,9 @@
 	pageEncoding="UTF-8"%>
 
 
+
+
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
@@ -21,6 +24,8 @@
 	    <input type="hidden" name="gCode" value="${goodsDTO.gCode}">
 	     <input	type="hidden" name="gName" value="${goodsDTO.gName}"> 
 	     <input	type="hidden" name="gPrice" value="${goodsDTO.gPrice}">
+
+
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
@@ -105,6 +110,7 @@
 					</tr>
 				</table>
 
+
 			</td>
 		</tr>
 	</table>
@@ -113,5 +119,11 @@
 	&nbsp;&nbsp;
 	<button id="cart">장바구니</button>
 </FORM>
+
+
+
+
+
+
 
 
