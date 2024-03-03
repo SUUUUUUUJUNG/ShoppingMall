@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Bootstrap JS 추가 -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS 추가 -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -285,8 +288,8 @@
 
 	<tr>
 		<td class="td_default" align="center">
-			<input type='button' value='취소' onclick="javascript:history.back()">	
-			<input type='submit' value='결제하기'>
+			<input type='button' class="btn btn-primary btn-sm" value='취소' onclick="javascript:history.back()" >
+			<input type='submit' class="btn btn-primary btn-sm" value='결제하기'>
 		</td>
 	</tr>
 

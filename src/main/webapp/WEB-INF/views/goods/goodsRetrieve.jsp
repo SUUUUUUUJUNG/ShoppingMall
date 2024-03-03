@@ -14,8 +14,8 @@
 		$("#cart").on("click",function(){
 			$("form").attr("action","loginCheck/cartAdd")
 		})
-		
-	})
+
+		})
 
 </script>
 <!--  -->
@@ -26,8 +26,8 @@
 	     <input	type="hidden" name="gPrice" value="${goodsDTO.gPrice}">
 
 
-
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<%--상품 정보 table 가운데 정렬하는 코드 추가--%>
+	<table width="710" cellspacing="0" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td height="30">
 		</tr>
@@ -115,9 +115,11 @@
 		</tr>
 	</table>
 
-	<br> <button >구매</button>
-	&nbsp;&nbsp;
-	<button id="cart">장바구니</button>
+	<div style="text-align: center;">
+		<button class="btn btn-primary">구매</button>
+		&nbsp;&nbsp;
+		<button class="btn btn-primary" id="cart">장바구니</button>
+	</div>
 </FORM>
 
 

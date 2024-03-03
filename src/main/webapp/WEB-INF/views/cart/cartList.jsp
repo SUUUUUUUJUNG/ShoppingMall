@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Bootstrap JS 추가 -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS 추가 -->
+
 <script>
 	$(document).ready(function(){
 		$(".check").on("click",function(){
@@ -186,7 +189,7 @@
 
 
 				<td><input type="button" value="수정"
-						   class="updataBtn"
+						   class="updataBtn btn btn-primary btn-sm"
 						   data-num="${dto.num}"
 						   data-price="${dto.gPrice}" id="gPrice${dto.num}"/></td>
 
@@ -195,12 +198,12 @@
 					style='padding-left: 5px'><span id="sum${dto.num}" class="sum">
 						${dto.gAmount*dto.gPrice}
 				</span></td>
-				<td><input type="button" value="주문" class="orderBtn"
+				<td><input type="button" value="주문" class="orderBtn btn btn-primary btn-sm"
 						   data-num="${dto.num}"/></td>
 				<td class="td_default" align="center" width="30"
 					style='padding-left: 10px'>
 					<input type="button" value="삭제"
-						   class="delBtn" data-num="${dto.num}" ></td>
+						   class="delBtn btn btn-primary btn-sm" data-num="${dto.num}" ></td>
 				<td height="10"></td>
 			</tr>
 
@@ -224,9 +227,9 @@
 
 	<tr>
 		<td align="center" colspan="5">&nbsp;&nbsp;
-			<button onclick="orderAllConfirm(myForm)">전체 주문하기</button>
-			<button id="delAllCart">전체 삭제하기</button>
-			<button id="continue-shopping">계속 쇼핑하기</button>
+			<button onclick="orderAllConfirm(myForm)" class="btn btn-primary btn-sm">전체 주문하기</button>
+			<button id="delAllCart" class="btn btn-primary btn-sm">전체 삭제하기</button>
+			<button id="continue-shopping" class="btn btn-primary btn-sm">계속 쇼핑하기</button>
 		</td>
 	</tr>
 	<tr>

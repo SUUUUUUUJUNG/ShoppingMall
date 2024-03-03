@@ -25,6 +25,7 @@ alert('${mesg}');
 	<hr>
 
 	<jsp:include page="goods/goodsRetrieve.jsp"></jsp:include>
+	<div style="margin-bottom: 70px;"></div> <%--상품정보 table과 tab 사이의 여백 추가--%>
 	<jsp:include page="goods/product-details-tabs.jsp"></jsp:include>
 </body>
 </html>
