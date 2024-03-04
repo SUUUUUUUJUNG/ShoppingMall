@@ -1,6 +1,7 @@
 package com.shoppingmall.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,9 +58,17 @@ public class GoodsController {
 	public String cartAdd(CartDTO cdto,HttpSession session) {
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		String userid = mdto.getUserid();
-		cdto.setUserid(userid);
+		Map<String,String> map = new HashMap<>();
+		map.put("userid",userid);
+		map.put("gCode", cdto.getgCode());
+		map.put("gSize", cdto.getgSize());
+		map.put("gColor", cdto.getgColor());
+		//userid, gCode, gSize, gColor 세션에 저장되어있는 userid랑 db cart테이블에 저장되어있는 userid,
+		//gCode, gSize, gColor가 다 똑같을 때 수량이 추가되는 로직
 		session.setAttribute("mesg", cdto.getgCode());
-		service.cartAdd(cdto);
+		cdto.setUserid(userid);
+		service.mergeCartItems(map,cdto);
+//		service.cartAdd(cdto);
 		return "redirect:../goodsRetrieve?gCode="+cdto.getgCode();
 	}
 	

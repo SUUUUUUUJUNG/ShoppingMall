@@ -79,5 +79,15 @@
         where userid = #{userid}
     </select>
 
+    <select id="findDuplicateCartItem" parameterType="map" resultType="CartDTO">
+        select * from cart where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and userid=#{userid}
+    </select>
+
+    <update id="updateItemQuantity" parameterType="map">
+        update cart
+        set gAmount = gAmount+1
+        where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and userid=#{userid}
+    </update>
+
 
 </mapper>
