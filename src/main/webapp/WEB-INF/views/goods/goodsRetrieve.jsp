@@ -8,14 +8,12 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
 	$(function() {
 		// 장바구니 버튼 클릭 이벤트
 		$("#cart").on("click",function(e){
-			// 사이즈와 색상이 선택되었는지 확인
+ 			// 사이즈와 색상이 선택되었는지 확인
 			var size = $("#gSize").val();
 			var color = $("#gColor").val();
-
 			// 사이즈나 색상이 선택되지 않았으면 경고창 표시
 			if(size === "사이즈선택" || color === "색상선택") {
 				alert("상품의 사이즈와 색상 옵션을 선택해주세요.");
@@ -25,6 +23,11 @@
 				$("form").attr("action","loginCheck/cartAdd");
 			}
 		});
+
+
+
+
+
 	});
 
 
@@ -127,7 +130,7 @@
 	</table>
 
 	<div style="text-align: center;">
-		<button class="btn btn-primary">구매</button>
+		<button class="btn btn-primary" >구매</button>
 		&nbsp;&nbsp;
 		<button class="btn btn-primary" id="cart">장바구니</button>
 	</div>
