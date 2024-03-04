@@ -29,9 +29,9 @@ public class GoodsService {
 		return dao.goodsRetrieve(session,gCode);
 	}
 
-	public void cartAdd(CartDTO cdto) {
-		dao.cartAdd(session,cdto);
-	}
+//	public void cartAdd(CartDTO cdto) {
+//		dao.cartAdd(session,cdto);
+//	}
 
 	public List<CartDTO> cartList(String userid) {
 		return dao.cartList(session,userid);
@@ -60,8 +60,16 @@ public class GoodsService {
 		
 	}
 
-	
 
-	
+    public void mergeCartItems(Map<String, String> map,CartDTO dto) {
+		CartDTO duplicateCart = dao.findDuplicateCartItem(session, map);
+		System.out.println("GoodsService duplicateCart = " + duplicateCart);
+		if(duplicateCart==null){
+			dao.cartAdd(session,dto);
+		}else{
+			dao.updateItemQuantity(session,map);
+		}
 
+
+    }
 }

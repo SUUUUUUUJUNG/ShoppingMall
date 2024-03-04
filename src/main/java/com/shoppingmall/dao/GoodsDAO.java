@@ -23,9 +23,9 @@ public class GoodsDAO {
         return session.selectOne("GoodsMapper.goodsRetrieve",gCode);
 	}
 
-	public void cartAdd(SqlSessionTemplate session,CartDTO cdto) {
-		session.insert("CartMapper.cartAdd",cdto);
-		
+	public void cartAdd(SqlSessionTemplate session,CartDTO dto) {
+		System.out.println("dto = " + dto);
+		session.insert("CartMapper.cartAdd",dto);
 	}
 
 	public List<CartDTO> cartList(SqlSessionTemplate session,String userid) {
@@ -61,4 +61,12 @@ public class GoodsDAO {
 	}
 
 
+    public CartDTO findDuplicateCartItem(SqlSessionTemplate session, Map<String, String> map) {
+		return session.selectOne("CartMapper.findDuplicateCartItem", map);
+    }
+
+
+	public void updateItemQuantity(SqlSessionTemplate session, Map<String,String> map) {
+		session.update("CartMapper.updateItemQuantity",map);
+	}
 }
