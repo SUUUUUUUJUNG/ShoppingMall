@@ -7,7 +7,7 @@
 <!-- top부분 -->
 <!-- EL&JSTL태그 -->
 <c:if test = "${empty login}">			<!-- 로그인 안 된 경우 -->
-	<a href="${pageContext.request.contextPath}/loginForm">로그인</a>
+	<a href="${pageContext.request.contextPath}/login">로그인</a>
 	<a href="${pageContext.request.contextPath}/memberForm">회원가입</a>
 </c:if>
 <c:if test = "${!empty login}">			<!-- 로그인 된 경우 -->
