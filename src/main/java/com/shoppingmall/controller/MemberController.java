@@ -22,10 +22,6 @@ public class MemberController {
 //		return "main";
 //	}
 //	
-	@GetMapping ("/loginForm")
-	public void loginForm() { //void로 처리 loginForm.jsp로 이동
-
-	}
 
 	@GetMapping("/memberForm")
 	public String memberForm(){
