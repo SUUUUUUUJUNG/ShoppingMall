@@ -20,8 +20,7 @@ public class MemberDAO {
 	}
 
 	public MemberDTO login(Map<String, String> m) {
-		MemberDTO dto = session.selectOne("MemberMapper.login",m);
-		return dto;
+        return session.selectOne("MemberMapper.login",m);
 	}
 
 	public MemberDTO myPage(String userid) {
