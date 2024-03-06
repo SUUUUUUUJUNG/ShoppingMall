@@ -69,4 +69,9 @@ public class GoodsDAO {
 	public void updateItemQuantity(SqlSessionTemplate session, Map<String,String> map) {
 		session.update("CartMapper.updateItemQuantity",map);
 	}
+
+	public void insertWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
+		System.out.println("DAO map = " + map);
+		session.insert("WishListMapper.insertWishlistItem",map);
+	}
 }

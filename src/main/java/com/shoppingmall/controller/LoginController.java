@@ -29,9 +29,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String,String> m,HttpSession session, Model model) {
-		System.out.println(m);
 		MemberDTO dto=service.login(m);
-		System.out.println(dto);
 		if(dto!=null) {
 			session.setAttribute("login", dto);
 			return "redirect:/goodsList?gCategory=top";//로그인시 top카테고리를 보이도록 작성

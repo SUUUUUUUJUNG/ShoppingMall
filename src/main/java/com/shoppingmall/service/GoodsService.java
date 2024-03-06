@@ -60,7 +60,6 @@ public class GoodsService {
 		
 	}
 
-
     public void mergeCartItems(Map<String, String> map,CartDTO dto) {
 		CartDTO duplicateCart = dao.findDuplicateCartItem(session, map);
 		System.out.println("GoodsService duplicateCart = " + duplicateCart);
@@ -69,7 +68,9 @@ public class GoodsService {
 		}else{
 			dao.updateItemQuantity(session,map);
 		}
-
-
     }
+
+	public void toggleWishlistItem(Map<String, String> map) {
+		dao.insertWishlistItem(session,map);
+	}
 }

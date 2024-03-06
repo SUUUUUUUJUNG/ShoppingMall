@@ -20,8 +20,7 @@ public class MemberService {
 	}
 
 	public MemberDTO login(Map<String, String> m) {
-		MemberDTO dto = dao.login(m);
-		return dto;
+        return dao.login(m);
 	}
 
 	public MemberDTO myPage(String userid) {

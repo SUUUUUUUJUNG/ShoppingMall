@@ -38,7 +38,7 @@
             where userid = #{userid}
     </update>
     <select id="login" parameterType="hashmap" resultType="MemberDTO">
-        select userid,password,username,zip_Code,address,addr_Detail,
+        select MEMBERID,userid,password,username,zip_Code,address,addr_Detail,
                phonenumber,email
         from member
         where userid = #{userid} and PASSWORD = #{password}

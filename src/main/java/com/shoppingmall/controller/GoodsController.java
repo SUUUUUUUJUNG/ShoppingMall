@@ -1,27 +1,27 @@
 package com.shoppingmall.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import jakarta.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.shoppingmall.dto.CartDTO;
 import com.shoppingmall.dto.GoodsDTO;
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.dto.OrderDTO;
 import com.shoppingmall.service.GoodsService;
 import com.shoppingmall.service.MemberService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 public class GoodsController {
 	
@@ -48,10 +48,11 @@ public class GoodsController {
 		
 	}
 	
-	@RequestMapping(value="goodsRetrieve")
-	public GoodsDTO goodsRetrieve(@RequestParam("gCode")String gCode) {
-		GoodsDTO dto = service.goodsRetrieve(gCode);
-		return dto;
+	@GetMapping("goodsRetrieve")
+	public String goodsRetrieve(@RequestParam("gCode")String gCode, Model model) {
+		GoodsDTO goodsDTO = service.goodsRetrieve(gCode);
+		model.addAttribute("goodsDTO", goodsDTO);
+		return "goodsRetrieve";
 	} 
 	
 	@RequestMapping(value="/loginCheck/cartAdd")
@@ -128,6 +129,26 @@ public class GoodsController {
 		return "orderDone";
 		
 	}
+
+	@RequestMapping("wishList")
+	@ResponseBody
+	public ResponseEntity<?> wishList(HttpSession session, @RequestParam(value = "gCode") String gCode){
+		System.out.println("GoodsController 찜하기 : " + gCode);
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+		Long memberId = memberDTO.getMemberId();
+		Map<String,String> map = new HashMap<>();
+		map.put("memberId", String.valueOf(memberId));
+		map.put("gCode",gCode);
+		service.toggleWishlistItem(map);
+		//찜하기 버튼 클릭하면 상품이 담아지고, 원래 있던 상품이면 찜 목록에서 삭제(userid, gCode로 같은 상품이 있는지 확인)
+//		MemberDTO wishdto = (MemberDTO) session.getAttribute("login");
+//		String userid = wishdto.getUserid();
+//		Map<String,String> map = new HashMap<>();
+//		map.put("userid",userid);
+//		map.put("gCode",)
+		return ResponseEntity.ok("성공했습니다.");
+	}
+
 	
 
 }
