@@ -26,7 +26,7 @@
 			var gPrice = $(this).attr("data-price");
 			var total = gAmount*gPrice;
 			$.ajax({
-				url:"loginCheck/cartUpdate",
+				url:"/cart/update",
 				type:"post",
 				data:{
 					'num':num,
@@ -51,7 +51,7 @@
 			var xxx = $(this);
 			console.log(num);
 			$.ajax({
-				url:"loginCheck/cartDelete",
+				url:"/cart/delete",
 				type:"get",
 				datatype:"text",
 				data:{
@@ -91,7 +91,7 @@
 
 		$(".orderBtn").on("click",function(){
 			var num = $(this).data("num");
-			location.href="orderConfirm?num="+num;
+			location.href="/order/confirm?num="+num;
 		})
 
 
@@ -176,7 +176,7 @@
 						   name="check" id="check${dto.num}" class="check"
 						   value="${dto.num}"></td>
 				<td class="td_default" width="80">${dto.num}</td>
-				<td class="td_default" width="80"><img src="images/items/${dto.gImage}.gif" border="0" align="center" width="80" /></td>
+				<td class="td_default" width="80"><img src="/images/items/${dto.gImage}.gif" border="0" align="center" width="80" /></td>
 				<td class="td_default" width="300" style='padding-left: 30px'>${dto.gName}
 					<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.gSize}) , 색상(${dto.gColor})] </font></td>
 				<td class="td_default" align="center" width="110">

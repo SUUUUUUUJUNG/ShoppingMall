@@ -4,6 +4,8 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +18,26 @@ import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.service.MemberService;
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
-	@Autowired
-	MemberService service;
+	private final MemberService memberService;
 
 	@GetMapping("/login")
 	public String loginForm() { //void로 처리 loginForm.jsp로 이동
 		System.out.println("LoginController loginForm 메서드 실행");
+		log.info("LoginController loginForm 메서드 실행");
 		return "loginForm";
 	}
 
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String,String> m,HttpSession session, Model model) {
-		MemberDTO dto=service.login(m);
-		if(dto!=null) {
-			session.setAttribute("login", dto);
-			return "redirect:/goodsList?gCategory=top";//로그인시 top카테고리를 보이도록 작성
+		MemberDTO memberDTO=memberService.login(m);
+		log.info("memberDTO = [{}]", memberDTO);
+		if(memberDTO!=null) {
+			session.setAttribute("login", memberDTO); // spring security 추후 이용
+			return "redirect:/goods/list?gCategory=top";//로그인시 top카테고리를 보이도록 작성
 		}else {
 			model.addAttribute("mesg","아이디 또는 비번이 잘못되었습니다.");
 			return "loginForm";
@@ -45,8 +50,5 @@ public class LoginController {
 			session.invalidate();
 		}
 		return "loginForm";
-
 	}
-
-
 }

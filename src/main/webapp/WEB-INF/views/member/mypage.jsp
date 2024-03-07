@@ -18,7 +18,7 @@ alert('${mesg}');
      
      </script>
   
-<form action="memberUpdate" method="post">
+<form action="/myPage/update" method="post">
 <input type="hidden" name="userid" value="${login.userid}">
 *아이디:${login.userid}
 <span id="result"></span>
@@ -31,7 +31,7 @@ alert('${mesg}');
 <span id="guide" style="color:#999"></span>
 <br>
 전화번호:
-<input type="text" value="${login.phonenumber}" name="phonenumber" ><br>
+<input type="text" value="${login.phoneNumber}" name="phoneNumber" ><br>
 
 이메일:<input type="text" value="${login.email}" name="email" id="email">
 <br>
