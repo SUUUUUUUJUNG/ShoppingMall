@@ -31,7 +31,7 @@
 </script>	
 
 
-<form name="myForm" method="get" action="orderDone">
+<form name="myForm" method="get" action="/order/done">
 <input type="hidden" name="gCode" value="${cDTO.gCode}">
 <input type="hidden" name="gName" value="${cDTO.gName}">
 <input type="hidden" name="gPrice" value="${cDTO.gPrice}">
@@ -83,7 +83,7 @@
 
 					<tr>
 						<td class="td_default" width="80">${cDTO.num}</td>
-						<td class="td_default" width="80"><img src="images/items/${cDTO.gImage}.gif" border="0" align="center" width="80" /></td>
+						<td class="td_default" width="80"><img src="/images/items/${cDTO.gImage}.gif" border="0" align="center" width="80" /></td>
 						<td class="td_default" width="300" style='padding-left: 30px'>
 						${cDTO.gName}
 							<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${cDTO.gSize}), 색상(${cDTO.gColor})]
@@ -167,7 +167,7 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mphone" size="15"
-							maxlength="15" value="${mDTO.phonenumber}"></input>
+							maxlength="15" value="${mDTO.phoneNumber}"></input>
 						
 					</td>
 				</tr>

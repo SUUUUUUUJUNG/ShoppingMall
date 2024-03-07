@@ -13,7 +13,7 @@
 <c:if test = "${!empty login}">			<!-- 로그인 된 경우 -->
 	${login.getUsername()}님 환영합니다.
 	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-	<a href="${pageContext.request.contextPath}/cartList">장바구니</a>
+	<a href="${pageContext.request.contextPath}/cart/list">장바구니</a>
 	<a href="${pageContext.request.contextPath}/myPage">myPage</a>
 </c:if>
 

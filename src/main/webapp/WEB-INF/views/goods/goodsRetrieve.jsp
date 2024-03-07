@@ -20,7 +20,7 @@
 				e.preventDefault(); // 폼 제출 방지
 			} else {
 				// 사이즈와 색상이 모두 선택되었으면 폼 액션 변경 후 제출
-				$("form").attr("action","loginCheck/cartAdd");
+				$("form").attr("action","/cart/add");
 			}
 		});
 
@@ -29,7 +29,7 @@
 			var code = $("#wishlist-button").data("code");
 			console.log(code);
 			$.ajax({
-				url:"wishList",
+				url:"/wishList",
 				type:"post",
 				data:{
 					gCode:code
@@ -84,7 +84,7 @@
 					</tr>
 
 					<tr>
-						<td rowspan="7"><img src="images/items/${goodsDTO.gImage}.gif"
+						<td rowspan="7"><img src="/images/items/${goodsDTO.gImage}.gif"
 											 border="0" align="center" width="300" /></td>
 						<td class="td_title">제품코드</td>
 						<td class="td_default" colspan="2" style='padding-left: 30px'>
@@ -139,7 +139,7 @@
 						<td style="padding-left: 30px"><input type="text"
 															  name="gAmount" value="1" id="gAmount"
 															  style="text-align: right; height: 18px"> <img
-								src="images/up.PNG" id="up"> <img src="images/down.png"
+								src="/images/up.PNG" id="up"> <img src="/images/down.png"
 																  id="down"></td>
 					</tr>
 				</table>

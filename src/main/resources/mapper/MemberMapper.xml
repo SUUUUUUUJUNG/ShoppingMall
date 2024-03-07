@@ -9,16 +9,16 @@
             parameterType="MemberDTO">
         select userid
         from member
-        where username=#{username} and phonenumber=#{phonenumber}
+        where username=#{username} and phoneNumber=#{phoneNumber}
     </select>
 
 
 
     <insert id="memberAdd" parameterType="MemberDTO">
         insert into member (memberid,userid,password,username,zip_Code,address,addr_Detail,
-                            phonenumber,email, ROLE,STATUS)
+                            phoneNumber,email, ROLE,STATUS)
         values(SUJUNG.MEMBERID_SEQ.nextval, #{userid},#{password},#{username},#{zip_Code},#{address},#{addr_Detail},
-               #{phonenumber},#{email},'ROLE_User','Active')
+               #{phoneNumber},#{email},'ROLE_User','Active')
     </insert>
 
 <!--    <select id="idCheck" parameterType="string"-->
@@ -33,20 +33,20 @@
         set zip_Code = #{zip_Code},
             address = #{address},
             addr_Detail = #{addr_Detail},
-            phonenumber = #{phonenumber},
+            phoneNumber = #{phoneNumber},
             email = #{email}
             where userid = #{userid}
     </update>
     <select id="login" parameterType="hashmap" resultType="MemberDTO">
         select MEMBERID,userid,password,username,zip_Code,address,addr_Detail,
-               phonenumber,email
+               phoneNumber,email
         from member
         where userid = #{userid} and PASSWORD = #{password}
     </select>
 
     <select id="myPage" parameterType="string" resultType="MemberDTO">
         select userid,password,username,zip_Code,address,addr_Detail,
-               phonenumber,email
+               phoneNumber,email
         from member
         where userid = #{userid}
     </select>
