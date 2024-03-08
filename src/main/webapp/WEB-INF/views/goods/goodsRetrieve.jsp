@@ -1,12 +1,9 @@
 <%@ page import="com.shoppingmall.dto.GoodsDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-
-
-
-
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css" />
+
 <script>
 	$(function() {
 		// 장바구니 버튼 클릭 이벤트
@@ -29,13 +26,20 @@
 			var code = $("#wishlist-button").data("code");
 			console.log(code);
 			$.ajax({
-				url:"/wishList",
+				url:"/api/wishList",
 				type:"post",
 				data:{
 					gCode:code
 				},
 				success:function(data,status,xhr){
-					alert(data);
+					let mesg = data.message;
+					alert(mesg);
+					if(mesg.includes("추가")) {
+						$("#wishlist-button").html('<i class="fas fa-heart"></i>');
+					}
+					if(mesg.includes("삭제")) {
+						$("#wishlist-button").html('<i class="far fa-heart"></i>');
+					}
 				},
 				error:function(xhr,status,error){
 					console.log("찜하기 실패");
@@ -45,19 +49,15 @@
 		})
 
 
-
-
-
 	});
-
-
 </script>
 <!--  -->
-<FORM name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
+<form name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
 	<input type="hidden" name="gImage" value="${goodsDTO.gImage}">
 	<input type="hidden" name="gCode" value="${goodsDTO.gCode}">
 	<input	type="hidden" name="gName" value="${goodsDTO.gName}">
 	<input	type="hidden" name="gPrice" value="${goodsDTO.gPrice}">
+
 
 
 	<%--상품 정보 table 가운데 정렬하는 코드 추가--%>
@@ -154,16 +154,15 @@
 		System.out.println("gCode = " + gCode);
 	%>
 	<div style="text-align: center;">
-		<button class="btn btn-primary" id="wishlist-button" data-code="<%=gCode%>">&#x2764;</button>
+		<button class="btn btn-primary" id="wishlist-button" data-code="<%=gCode%>"><%
+			boolean itemWishlisted = (boolean) request.getAttribute("itemWishlisted");
+			if (itemWishlisted) { %>
+			<i class="fas fa-heart"></i>
+
+			<%} else {%>
+			<i class="far fa-heart"></i>
+			<%}%></button>
 		<button class="btn btn-primary" >구매</button>
 		<button class="btn btn-primary" id="cart">장바구니</button>
 	</div>
-</FORM>
-
-
-
-
-
-
-
-
+</form>

@@ -1,7 +1,9 @@
 package com.shoppingmall.controller.goods;
 
 import com.shoppingmall.dto.GoodsDTO;
+import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.service.GoodsService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/goods")
 public class GoodsController {
 
-	private final GoodsService service;
+	private final GoodsService goodsService;
 
 	@RequestMapping(value="/list")
 	public ModelAndView goodsList(@RequestParam("gCategory")String gCategory) {
@@ -24,7 +29,7 @@ public class GoodsController {
 			gCategory="top";
 		}
 
-		List<GoodsDTO> list = service.goodsList(gCategory);
+		List<GoodsDTO> list = goodsService.goodsList(gCategory);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("goodsList",list);
 		mav.setViewName("main");
@@ -33,9 +38,18 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/detail")
-	public String goodsRetrieve(@RequestParam("gCode")String gCode, Model model) {
-		GoodsDTO goodsDTO = service.goodsRetrieve(gCode);
+	public String goodsRetrieve(@RequestParam("gCode")String gCode, Model model, HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
+		Long memberId = memberDTO.getMemberId();
+		GoodsDTO goodsDTO = goodsService.goodsRetrieve(gCode);
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", String.valueOf(memberId));
+		map.put("gCode",gCode);
+		boolean itemWishlisted = goodsService.isItemWishlisted(map);
+		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
+
+
 		return "goodsRetrieve";
 	} 
 }
