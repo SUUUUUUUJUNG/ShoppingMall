@@ -71,11 +71,13 @@ public class GoodsService {
 		}
 	}
 
-	public void toggleWishlistItem(Map<String, String> map) {
+	public String toggleWishlistItem(Map<String, String> map) {
 		if(isItemWishlisted(map)){
 			dao.deleteWishlistItem(session, map);
+			return "찜 목록에서 삭제되었습니다.";
 		} else {
 			dao.insertWishlistItem(session, map);
+			return "찜 목록에 추가되었습니다.";
 		}
 	}
 
