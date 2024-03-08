@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/wishList")
 @RequiredArgsConstructor
 public class WishListController {
@@ -21,7 +21,6 @@ public class WishListController {
     @ResponseBody
     @PostMapping
     public ResponseEntity<?> wishList(HttpSession session, @RequestParam(value = "gCode") String gCode){
-        System.out.println("GoodsController 찜하기 : " + gCode);
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         Long memberId = memberDTO.getMemberId();
         Map<String,String> map = new HashMap<>();

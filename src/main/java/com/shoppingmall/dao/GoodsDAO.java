@@ -3,6 +3,7 @@ package com.shoppingmall.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.shoppingmall.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class GoodsDAO {
 
 	public void cartDel(SqlSessionTemplate session,int num) {
 		session.delete("CartMapper.cartDel",num);
-		
+
 	}
 
 	public void cartAllDel(SqlSessionTemplate session,List<String> list) {
 		session.delete("CartMapper.cartAllDel",list);
-		
+
 	}
 
 	public CartDTO cartByNum(SqlSessionTemplate session,String num) {
@@ -52,12 +53,12 @@ public class GoodsDAO {
 
 	public void orderDone(SqlSessionTemplate session,OrderDTO oDTO) {
 		session.insert("CartMapper.orderDone",oDTO);
-		
+
 	}
 
 	public void cartDelete(SqlSessionTemplate session,Integer orderNum) {
 		session.delete("CartMapper.cartDel",orderNum);
-		
+
 	}
 
 
@@ -73,5 +74,14 @@ public class GoodsDAO {
 	public void insertWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
 		System.out.println("DAO map = " + map);
 		session.insert("WishListMapper.insertWishlistItem",map);
+	}
+
+
+	public List<MemberDTO> checkWishlistItemExists(SqlSessionTemplate session, Map<String, String> map) {
+		return session.selectList("WishListMapper.checkWishlistItemExists",map);
+	}
+
+	public void deleteWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
+		session.delete("WishListMapper.deleteWishlistItem",map);
 	}
 }

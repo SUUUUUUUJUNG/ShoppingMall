@@ -9,6 +9,13 @@
         values (SUJUNG.WISHLISTID_SEQ.nextval, #{memberId}, #{gCode})
     </insert>
 
+    <select id="checkWishlistItemExists" parameterType="map" resultType="MemberDTO">
+        select * from wishList where memberid=#{memberId} and gCode=#{gCode}
+    </select>
+
+    <delete id="deleteWishlistItem" parameterType="map">
+        delete from wishList where memberid=#{memberId} and gCode=#{gCode}
+    </delete>
 
 
 
