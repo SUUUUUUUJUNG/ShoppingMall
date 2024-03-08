@@ -7,6 +7,8 @@
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css" />
+
 <script>
 	$(function() {
 		// 장바구니 버튼 클릭 이벤트
@@ -43,14 +45,7 @@
 				}
 			})
 		})
-
-
-
-
-
 	});
-
-
 </script>
 <!--  -->
 <FORM name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
@@ -58,6 +53,14 @@
 	<input type="hidden" name="gCode" value="${goodsDTO.gCode}">
 	<input	type="hidden" name="gName" value="${goodsDTO.gName}">
 	<input	type="hidden" name="gPrice" value="${goodsDTO.gPrice}">
+	<%
+		boolean itemWishlisted = (boolean) request.getAttribute("itemWishlisted");
+		if (itemWishlisted) { %>
+	<i class="fas fa-heart"></i>
+
+	<%} else {%>
+	<i class="far fa-heart"></i>
+	<%}%>
 
 
 	<%--상품 정보 table 가운데 정렬하는 코드 추가--%>
