@@ -15,5 +15,10 @@
 	<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 	<a href="${pageContext.request.contextPath}/cart/list">장바구니</a>
 	<a href="${pageContext.request.contextPath}/myPage">myPage</a>
+	<a href="${pageContext.request.contextPath}/myShopping">myShopping</a>
 </c:if>
+
+
+
+
 

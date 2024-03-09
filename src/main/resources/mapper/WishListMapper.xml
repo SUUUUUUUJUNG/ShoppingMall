@@ -17,6 +17,21 @@
         delete from wishList where memberid=#{memberId} and gCode=#{gCode}
     </delete>
 
+    <select id="findWishListByMemberId" parameterType="Long" resultType="WishListDTO">
+        SELECT
+            W.WISHLISTID as wishListId,
+            W.GCODE as gcode,
+            G.GNAME as gname,
+            G.GIMAGE as gimage,
+            G.GPRICE as gprice
+        FROM WISHLIST W
+                 INNER JOIN GOODS G ON W.GCODE = G.GCODE
+        WHERE W.MEMBERID = #{memberId}
+    </select>
+
+
+
+
 
 
 

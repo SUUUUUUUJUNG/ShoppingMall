@@ -1,7 +1,9 @@
 package com.shoppingmall.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import com.shoppingmall.dto.WishListDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +12,7 @@ import com.shoppingmall.dto.MemberDTO;
 
 @Repository
 public class MemberDAO {
-	
+
 	@Autowired
 	SqlSessionTemplate session;  // 자동 주입
 
@@ -20,7 +22,7 @@ public class MemberDAO {
 	}
 
 	public MemberDTO login(Map<String, String> m) {
-        return session.selectOne("MemberMapper.login",m);
+		return session.selectOne("MemberMapper.login",m);
 	}
 
 	public MemberDTO myPage(String userid) {
@@ -34,4 +36,8 @@ public class MemberDAO {
 		return n;
 	}
 
+
+	public List<WishListDTO> findWishListByMemberId(Long memberId) {
+		return session.selectList("WishListMapper.findWishListByMemberId",memberId);
+	}
 }
