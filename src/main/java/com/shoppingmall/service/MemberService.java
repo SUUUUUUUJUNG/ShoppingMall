@@ -1,7 +1,9 @@
 package com.shoppingmall.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.shoppingmall.dto.WishListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +37,8 @@ public class MemberService {
 		
 	}
 
+
+	public List<WishListDTO> findWishListByMemberId(Long memberId) {
+		return dao.findWishListByMemberId(memberId);
+	}
 }
