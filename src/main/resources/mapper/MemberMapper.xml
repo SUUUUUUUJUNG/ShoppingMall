@@ -45,7 +45,7 @@
     </select>
 
     <select id="myPage" parameterType="string" resultType="MemberDTO">
-        select userid,password,username,zip_Code,address,addr_Detail,
+        select memberid,userid,password,username,zip_Code,address,addr_Detail,
                phoneNumber,email
         from member
         where userid = #{userid}
