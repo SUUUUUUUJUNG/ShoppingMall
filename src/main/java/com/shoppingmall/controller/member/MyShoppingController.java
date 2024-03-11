@@ -28,8 +28,4 @@ public class MyShoppingController {
         model.addAttribute("wishListItems",wishListItems);
         return "myShopping";
     }
-
-
-
-
 }
