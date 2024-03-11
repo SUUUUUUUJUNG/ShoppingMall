@@ -43,15 +43,70 @@
         %>
         <tr>
             <td class="text-details"><%= item.getGCode() %></td>
-            <td><img src="<%= request.getContextPath() + "/images/items/" + item.getGImage() + ".gif" %>" alt="<%= item.getGName() %>" class="item-image"/></td>
+            <td>
+                <a href="/goods/detail?gCode=<%= item.getGCode() %>">
+                    <img src="<%= request.getContextPath() + "/images/items/" + item.getGImage() + ".gif" %>" alt="<%= item.getGName() %>" class="item-image"/>
+                </a>
+            </td>
             <td class="text-details">
                 <strong><%= item.getGName() %></strong><br>
                 <%= item.getGPrice() %>원
             </td>
             <td class="text-details">
                 <div class="button-group">
-                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>
-                    <a href="/removeFromWishList?wishListId=<%= item.getWishListId() %>" class="btn btn-danger btn-block">삭제</a>
+<%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        장바구니
+    </button>
+
+    <!-- Modal -->
+    <form action="">
+        <input type="hidden" name="gCode" value="">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">상품 옵션 선택</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Size Selection -->
+                    <div class="form-group">
+                        <label for="size-selection">사이즈 선택</label>
+                        <select class="form-control" id="size-selection">
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                        </select>
+                    </div>
+                    <!-- Color Selection -->
+                    <div class="form-group">
+                        <label for="color-selection">색상 선택</label>
+                        <select class="form-control" id="color-selection">
+                            <option>navy</option>
+                            <option>black</option>
+                            <option>white</option>
+                        </select>
+                    </div>
+                    <!-- Quantity Input -->
+                    <div class="form-group">
+                        <label for="quantity-input">주문 수량</label>
+                        <input type="number" class="form-control" id="quantity-input" min="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">장바구니 담기</button>
+                    <button type="button" class="btn btn-primary">결제하기</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <a href="/removeFromWishList?wishListId=<%= item.getWishListId() %>" class="btn btn-danger btn-block">삭제</a>
                 </div>
             </td>
         </tr>
@@ -66,6 +121,8 @@
     <%
         }
     %>
+
+
 </div>
 </body>
 </html>
