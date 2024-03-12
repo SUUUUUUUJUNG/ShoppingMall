@@ -51,7 +51,7 @@
 				<tr>
 					<td class="td_default" height="35"> 주소</td>
 					<td class="td_default" height="35"> (${oDTO.zip_Code})<br>
-					${oDTO.address}${oDTO.addr_Detail}
+					${oDTO.address}${oDTO.addrDetail}
 					</td>
 				</tr>
 				

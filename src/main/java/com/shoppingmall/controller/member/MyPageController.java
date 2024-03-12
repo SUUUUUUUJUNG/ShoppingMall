@@ -19,8 +19,8 @@ public class MyPageController {
     @GetMapping
     public String mypage(HttpSession session ) {
         MemberDTO mDto =(MemberDTO)session.getAttribute("login");
-        String userid=mDto.getUserid();
-        MemberDTO dto = service.myPage(userid);
+        String userId=mDto.getUserId();
+        MemberDTO dto = service.myPage(userId);
         session.setAttribute("login", dto);
         return "myPage";
     }

@@ -9,33 +9,33 @@
 <script>
 	$(document).ready(function(){
 		$(".check").on("click",function(){
-			var num = $(this).val(); // 체크박스의 value 값 (dto.num)을 가져옴
-			var sumValue = $("#sum" + num).text(); // 해당 항목의 합계
-			var cartAmountValue = $("#cartAmount" + num).val(); // 해당 항목의 수량
+			var cartid = $(this).val(); // 체크박스의 value 값 (dto.cartid)을 가져옴
+			var sumValue = $("#sum" + cartid).text(); // 해당 항목의 합계
+			var cartAmountValue = $("#cartAmount" + cartid).val(); // 해당 항목의 수량
 			// 수정된 부분: 상품 가격을 가져오는 올바른 방식
-			var gPriceValue = $("#gPrice" + num).attr("data-price"); // 해당 항목의 가격
+			var gPriceValue = $("#gPrice" + cartid).attr("data-price"); // 해당 항목의 가격
 
-			console.log("sum" + num + ": " + sumValue);
-			console.log("cartAmount" + num + ": " + cartAmountValue);
-			console.log("gPrice" + num + ": " + gPriceValue); // 수정된 부분: 변수 이름 일치
+			console.log("sum" + cartid + ": " + sumValue);
+			console.log("cartAmount" + cartid + ": " + cartAmountValue);
+			console.log("gPrice" + cartid + ": " + gPriceValue); // 수정된 부분: 변수 이름 일치
 		});
 
 		$(".updataBtn").on("click",function(){
-			var num = $(this).data("num");
-			var gAmount = $("#cartAmount" + num).val(); // 해당 항목의 수량
+			var cartid = $(this).data("cartid");
+			var gAmount = $("#cartAmount" + cartid).val(); // 해당 항목의 수량
 			var gPrice = $(this).attr("data-price");
 			var total = gAmount*gPrice;
 			$.ajax({
 				url:"/cart/update",
 				type:"post",
 				data:{
-					'num':num,
+					'cartid':cartid,
 					'gAmount':gAmount,
 					'gPrice':gPrice
 				},
 				success:function(data,status,xhr){
 					console.log(data)
-					$("#sum"+num).text(total);
+					$("#sum"+cartid).text(total);
 					totalResult();
 				},
 				error:function(xhr,status,error){
@@ -47,15 +47,15 @@
 
 		//삭제 버튼 이벤트 처리
 		$(".delBtn").on("click",function(){
-			var num = $(this).data("num");
+			var cartid = $(this).data("cartid");
 			var xxx = $(this);
-			console.log(num);
+			console.log(cartid);
 			$.ajax({
 				url:"/cart/delete",
 				type:"get",
 				datatype:"text",
 				data:{
-					num:num
+					cartid:cartid
 				},
 				success:function(data,status,xhr){
 					console.log("success");
@@ -90,8 +90,8 @@
 		});
 
 		$(".orderBtn").on("click",function(){
-			var num = $(this).data("num");
-			location.href="/order/confirm?num="+num;
+			var cartid = $(this).data("cartid");
+			location.href="/order/confirm?cartid="+cartid;
 		})
 
 
@@ -159,7 +159,7 @@
 		<!-- 반복시작 -->
 
 
-		<!-- 	<input type="text" name="num81" value="81" id="num81">
+		<!-- 	<input type="text" name="cartid81" value="81" id="cartid81">
 			<input type="text" name="gImage81" value="bottom1" id="gImage81">
 		 <input type="text" name="gName81" value="제나 레이스 스커트" id="gName81">
 		  <input type="text" name="gSize81" value="L" id="gSize81">
@@ -171,11 +171,11 @@
 			<tr>
 				<td class="td_default" width="80">
 					<!-- checkbox는 체크된 값만 서블릿으로 넘어간다.
-                    따라서 value에 삭제할 num값을 설정한다. -->
+                    따라서 value에 삭제할 cartid값을 설정한다. -->
 					<input type="checkbox"
-						   name="check" id="check${dto.num}" class="check"
-						   value="${dto.num}"></td>
-				<td class="td_default" width="80">${dto.num}</td>
+						   name="check" id="check${dto.cartid}" class="check"
+						   value="${dto.cartid}"></td>
+				<td class="td_default" width="80">${dto.cartid}</td>
 				<td class="td_default" width="80"><img src="/images/items/${dto.gImage}.gif" border="0" align="center" width="80" /></td>
 				<td class="td_default" width="300" style='padding-left: 30px'>${dto.gName}
 					<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.gSize}) , 색상(${dto.gColor})] </font></td>
@@ -184,26 +184,26 @@
 				</td>
 				<td class="td_default" align="center" width="90"><input
 						class="input_default" type="text" name="cartAmount"
-						id="cartAmount${dto.num}" style="text-align: right" maxlength="3"
+						id="cartAmount${dto.cartid}" style="text-align: right" maxlength="3"
 						size="2" value="${dto.gAmount }"></input></td>
 
 
 				<td><input type="button" value="수정"
 						   class="updataBtn btn btn-primary btn-sm"
-						   data-num="${dto.num}"
-						   data-price="${dto.gPrice}" id="gPrice${dto.num}"/></td>
+						   data-cartid="${dto.cartid}"
+						   data-price="${dto.gPrice}" id="gPrice${dto.cartid}"/></td>
 
 
 				<td class="td_default" align="center" width="80"
-					style='padding-left: 5px'><span id="sum${dto.num}" class="sum">
+					style='padding-left: 5px'><span id="sum${dto.cartid}" class="sum">
 						${dto.gAmount*dto.gPrice}
 				</span></td>
 				<td><input type="button" value="주문" class="orderBtn btn btn-primary btn-sm"
-						   data-num="${dto.num}"/></td>
+						   data-cartid="${dto.cartid}"/></td>
 				<td class="td_default" align="center" width="30"
 					style='padding-left: 10px'>
 					<input type="button" value="삭제"
-						   class="delBtn btn btn-primary btn-sm" data-num="${dto.num}" ></td>
+						   class="delBtn btn btn-primary btn-sm" data-cartid="${dto.cartid}" ></td>
 				<td height="10"></td>
 			</tr>
 

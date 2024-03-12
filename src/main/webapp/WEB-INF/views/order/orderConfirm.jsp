@@ -157,7 +157,7 @@
 						<input class="input_default" type="text" id="maddress1" size="35"
 							maxlength="200" value="${mDTO.address}" readonly></input><br>
 						<input class="input_default" type="text" id="maddress2" size="35"
-							maxlength="200" value="${mDTO.addr_Detail}" readonly></input>
+							maxlength="200" value="${mDTO.addrDetail}" readonly></input>
 					</td>
 				</tr>
 				
@@ -226,7 +226,7 @@
 	<input type="text" name="zip_Code" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
+<input type="text" name="addrDetail" id="sample4_jibunAddress" placeholder="상세주소">
 <span id="guide" style="color:#999"></span>
 <br>
 <!-- 다음주소 끝 -->

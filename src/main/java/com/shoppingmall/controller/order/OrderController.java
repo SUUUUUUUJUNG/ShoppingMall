@@ -1,6 +1,6 @@
 package com.shoppingmall.controller.order;
 
-import com.shoppingmall.dto.CartDTO;
+import com.shoppingmall.dto.cart.CartDTO;
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.dto.OrderDTO;
 import com.shoppingmall.service.GoodsService;
@@ -21,10 +21,10 @@ public class OrderController {
     private final MemberService memberService;
 
     @RequestMapping(value="/confirm")
-    public String orderConfirm(@RequestParam("num") String num, HttpSession session, Model model) {
-        CartDTO cart = goodsService.cartByNum(num);
-        String userid = cart.getUserid();
-        MemberDTO member = memberService.myPage(userid);
+    public String orderConfirm(@RequestParam("cartId") String cartId, HttpSession session, Model model) {
+        CartDTO cart = goodsService.cartByNum(cartId);
+        String userId = cart.getUserId();
+        MemberDTO member = memberService.myPage(userId);
         model.addAttribute("mDTO", member);
         model.addAttribute("cDTO", cart);
         return "orderConfirm";
@@ -34,7 +34,7 @@ public class OrderController {
     public String orderDone(@RequestParam("orderNum") Integer orderNum, OrderDTO oDTO,
                             HttpSession session, Model model) {
         MemberDTO dto = (MemberDTO)session.getAttribute("login");
-        oDTO.setUserid(dto.getUserid());
+        oDTO.setUserId(dto.getUserId());
         goodsService.orderDone(oDTO,orderNum);//insert,delete
         model.addAttribute("oDTO", oDTO);
         return "orderDone";

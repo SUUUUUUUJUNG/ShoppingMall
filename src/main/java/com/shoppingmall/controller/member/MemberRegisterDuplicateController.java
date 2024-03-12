@@ -15,8 +15,8 @@ public class MemberRegisterDuplicateController {
     private final MemberService memberService;
 
     @RequestMapping(value="/idDuplicateCheck", produces="text/plain;charset=UTF-8" )
-    public String idDuplicateCheck(@RequestParam("userid") String userid) {
-        MemberDTO memberDTO = memberService.myPage(userid);
+    public String idDuplicateCheck(@RequestParam("userId") String userId) {
+        MemberDTO memberDTO = memberService.myPage(userId);
         String mesg = "";
         if(memberDTO==null) {
             mesg="아이디 사용가능";

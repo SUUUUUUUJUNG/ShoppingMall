@@ -5,7 +5,7 @@
 <mapper namespace="WishListMapper">
 
     <insert id="insertWishlistItem" parameterType="map">
-        insert into wishList (wishlistid, memberId, gCode)
+        insert into wishList (wishlistId, memberId, gCode)
         values (SUJUNG.WISHLISTID_SEQ.nextval, #{memberId}, #{gCode})
     </insert>
 

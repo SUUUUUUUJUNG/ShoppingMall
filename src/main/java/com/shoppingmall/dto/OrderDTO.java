@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("OrderDTO")
 public class OrderDTO {
 	int num;
-	String userid;
+	String userId;
 	String gCode;
 	String gName;
 	int gPrice;
@@ -16,16 +16,16 @@ public class OrderDTO {
 	int gAmount;
 	String gImage;
 	String orderName;
-	String zip_Code;
+	String zipCode;
 	String address;
-	String addr_Detail;
-	String phonenumber;
+	String addrDetail;
+	String phoneNumber;
 	String payMethod;
-	String orderday;
+	String orderDay;
 
-	public OrderDTO(int num, String userid, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage, String orderName, String zip_Code, String address, String addr_Detail, String phonenumber, String payMethod, String orderday) {
+	public OrderDTO(int num, String userId, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage, String orderName, String zipCode, String address, String addr_Detail, String phoneNumber, String payMethod, String orderDay) {
 		this.num = num;
-		this.userid = userid;
+		this.userId = userId;
 		this.gCode = gCode;
 		this.gName = gName;
 		this.gPrice = gPrice;
@@ -34,37 +34,15 @@ public class OrderDTO {
 		this.gAmount = gAmount;
 		this.gImage = gImage;
 		this.orderName = orderName;
-		this.zip_Code = zip_Code;
+		this.zipCode = zipCode;
 		this.address = address;
-		this.addr_Detail = addr_Detail;
-		this.phonenumber = phonenumber;
+		this.addrDetail = addrDetail;
+		this.phoneNumber = phoneNumber;
 		this.payMethod = payMethod;
-		this.orderday = orderday;
+		this.orderDay = orderDay;
 	}
 
 	public OrderDTO() {
-	}
-
-	@Override
-	public String toString() {
-		return "OrderDTO{" +
-				"num=" + num +
-				", userid='" + userid + '\'' +
-				", gCode='" + gCode + '\'' +
-				", gName='" + gName + '\'' +
-				", gPrice=" + gPrice +
-				", gSize='" + gSize + '\'' +
-				", gColor='" + gColor + '\'' +
-				", gAmount=" + gAmount +
-				", gImage='" + gImage + '\'' +
-				", orderName='" + orderName + '\'' +
-				", zip_Code='" + zip_Code + '\'' +
-				", address='" + address + '\'' +
-				", addr_Detail='" + addr_Detail + '\'' +
-				", phonenumber='" + phonenumber + '\'' +
-				", payMethod='" + payMethod + '\'' +
-				", orderday='" + orderday + '\'' +
-				'}';
 	}
 
 	public int getNum() {
@@ -75,67 +53,67 @@ public class OrderDTO {
 		this.num = num;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getgCode() {
+	public String getGCode() {
 		return gCode;
 	}
 
-	public void setgCode(String gCode) {
+	public void setGCode(String gCode) {
 		this.gCode = gCode;
 	}
 
-	public String getgName() {
+	public String getGName() {
 		return gName;
 	}
 
-	public void setgName(String gName) {
+	public void setGName(String gName) {
 		this.gName = gName;
 	}
 
-	public int getgPrice() {
+	public int getGPrice() {
 		return gPrice;
 	}
 
-	public void setgPrice(int gPrice) {
+	public void setGPrice(int gPrice) {
 		this.gPrice = gPrice;
 	}
 
-	public String getgSize() {
+	public String getGSize() {
 		return gSize;
 	}
 
-	public void setgSize(String gSize) {
+	public void setGSize(String gSize) {
 		this.gSize = gSize;
 	}
 
-	public String getgColor() {
+	public String getGColor() {
 		return gColor;
 	}
 
-	public void setgColor(String gColor) {
+	public void setGColor(String gColor) {
 		this.gColor = gColor;
 	}
 
-	public int getgAmount() {
+	public int getGAmount() {
 		return gAmount;
 	}
 
-	public void setgAmount(int gAmount) {
+	public void setGAmount(int gAmount) {
 		this.gAmount = gAmount;
 	}
 
-	public String getgImage() {
+	public String getGImage() {
 		return gImage;
 	}
 
-	public void setgImage(String gImage) {
+	public void setGImage(String gImage) {
 		this.gImage = gImage;
 	}
 
@@ -147,12 +125,12 @@ public class OrderDTO {
 		this.orderName = orderName;
 	}
 
-	public String getZip_Code() {
-		return zip_Code;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setZip_Code(String zip_Code) {
-		this.zip_Code = zip_Code;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public String getAddress() {
@@ -163,20 +141,20 @@ public class OrderDTO {
 		this.address = address;
 	}
 
-	public String getAddr_Detail() {
-		return addr_Detail;
+	public String getAddrDetail() {
+		return addrDetail;
 	}
 
-	public void setAddr_Detail(String addr_Detail) {
-		this.addr_Detail = addr_Detail;
+	public void setAddr_Detail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
 
-	public String getPhonenumber() {
-		return phonenumber;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getPayMethod() {
@@ -187,11 +165,33 @@ public class OrderDTO {
 		this.payMethod = payMethod;
 	}
 
-	public String getOrderday() {
-		return orderday;
+	public String getOrderDay() {
+		return orderDay;
 	}
 
-	public void setOrderday(String orderday) {
-		this.orderday = orderday;
+	public void setOrderDay(String orderDay) {
+		this.orderDay = orderDay;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderDTO{" +
+				"num=" + num +
+				", userId='" + userId + '\'' +
+				", gCode='" + gCode + '\'' +
+				", gName='" + gName + '\'' +
+				", gPrice=" + gPrice +
+				", gSize='" + gSize + '\'' +
+				", gColor='" + gColor + '\'' +
+				", gAmount=" + gAmount +
+				", gImage='" + gImage + '\'' +
+				", orderName='" + orderName + '\'' +
+				", zipCode='" + zipCode + '\'' +
+				", address='" + address + '\'' +
+				", addrDetail='" + addrDetail + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", payMethod='" + payMethod + '\'' +
+				", orderDay='" + orderDay + '\'' +
+				'}';
 	}
 }

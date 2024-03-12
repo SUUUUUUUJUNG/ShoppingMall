@@ -27,7 +27,7 @@ alert('${mesg}');
 <input type="text" value="${login.zip_Code }"name="zip_Code" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" value="${login.address }" name="address" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" value="${login.addr_Detail }" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
+<input type="text" value="${login.addrDetail }" name="addrDetail" id="sample4_jibunAddress" placeholder="상세주소">
 <span id="guide" style="color:#999"></span>
 <br>
 전화번호:

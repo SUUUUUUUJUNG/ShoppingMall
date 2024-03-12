@@ -24,37 +24,37 @@ public class GoodsDTO {
 		this.gPrice = gPrice;
 		this.gImage = gImage;
 	}
-	public String getgCode() {
+	public String geGCode() {
 		return gCode;
 	}
 	public void setgCode(String gCode) {
 		this.gCode = gCode;
 	}
-	public String getgCategory() {
+	public String getGCategory() {
 		return gCategory;
 	}
 	public void setgCategory(String gCategory) {
 		this.gCategory = gCategory;
 	}
-	public String getgName() {
+	public String getGName() {
 		return gName;
 	}
 	public void setgName(String gName) {
 		this.gName = gName;
 	}
-	public String getgContent() {
+	public String getGContent() {
 		return gContent;
 	}
 	public void setgContent(String gContent) {
 		this.gContent = gContent;
 	}
-	public int getgPrice() {
+	public int getGPrice() {
 		return gPrice;
 	}
 	public void setgPrice(int gPrice) {
 		this.gPrice = gPrice;
 	}
-	public String getgImage() {
+	public String getGImage() {
 		return gImage;
 	}
 	public void setgImage(String gImage) {

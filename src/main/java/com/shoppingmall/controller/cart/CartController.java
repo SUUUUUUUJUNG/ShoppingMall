@@ -1,7 +1,8 @@
 package com.shoppingmall.controller.cart;
 
-import com.shoppingmall.dto.CartDTO;
+import com.shoppingmall.dto.cart.CartDTO;
 import com.shoppingmall.dto.MemberDTO;
+import com.shoppingmall.dto.cart.CartListResponseDTO;
 import com.shoppingmall.service.GoodsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,10 @@ public class CartController {
     private final GoodsService goodsService;
 
     @RequestMapping("/list")
-    public String cartList(RedirectAttributes attr, HttpSession session, Model model) {
+    public String cartList(HttpSession session, Model model) {
         MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
-        String userid = memberDTO.getUserid();
-        List<CartDTO> list = goodsService.cartList(userid);
+        String userId = memberDTO.getUserId();
+        List<CartListResponseDTO> list = goodsService.cartList(userId);
         model.addAttribute("cartList",list);
         return "cartList";
     }
@@ -39,16 +40,16 @@ public class CartController {
     @ResponseBody
     public ResponseEntity<?> cartAddV2(@RequestBody CartDTO cdto, HttpSession session) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        String userid = memberDTO.getUserid();
+        String userId = memberDTO.getUserId();
 
         Map<String, String> map = new HashMap<>();
-        map.put("userid", userid);
-        map.put("gCode", cdto.getgCode());
-        map.put("gSize", cdto.getgSize());
-        map.put("gColor", cdto.getgColor());
+        map.put("userId", userId);
+        map.put("gCode", cdto.getGCode());
+        map.put("gSize", cdto.getGSize());
+        map.put("gColor", cdto.getGColor());
         //userid, gCode, gSize, gColor 세션에 저장되어있는 userid랑 db cart테이블에 저장되어있는 userid,
         //gCode, gSize, gColor가 다 똑같을 때 수량이 추가되는 로직
-        cdto.setUserid(userid);
+        cdto.setUserId(userId);
         goodsService.mergeCartItems(map, cdto);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","장바구니에 추가되었습니다."));
     }

@@ -3,13 +3,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
     <title>찜목록</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            $(".cart-btn").on("click",function(){
+                let gCode = $(this).data("code");
+                $("#gCode-input").val(gCode);
+            });//end click cart-btn
+
+            $("#cart").on("click",function(e){
+                e.preventDefault();
+                // 사이즈와 색상이 선택되었는지 확인
+                var gSize = $("#gSize").val();
+                var gColor = $("#gColor").val();
+                // 사이즈나 색상이 선택되지 않았으면 경고창 표시
+                if(gSize === "사이즈선택" || gColor === "색상선택") {
+                    alert("상품의 사이즈와 색상 옵션을 선택해주세요.");
+                    return; // 폼 제출 방지
+                }
+
+                var gCode=$("#gCode").val();
+                var gImage=$("#gImage").val();
+                var gName=$("#gName").val();
+                var gPrice=$("#gPrice").val();
+                var gAmount=$("#gAmount").val();
+
+                $.ajax({
+                    url:"/cart/add",
+                    type: "post",
+                    contentType: "application/json",
+                    data:JSON.stringify({
+                        gCode:gCode,
+                        gImage:gImage,
+                        gName:gName,
+                        gPrice:gPrice,
+                        gSize:gSize,
+                        gColor:gColor,
+                        gAmount:gAmount
+                    }),
+                    success:function (data,status,xhr){
+                        alert(data.message);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                    },
+                })
+
+            });//end click cart
+
+
+        })
+    </script>
     <style>
         .item-image {
             width: 100px;
@@ -57,13 +104,13 @@
 <%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary cart-btn" data-toggle="modal" data-target="#exampleModal" data-code="<%=item.getGCode()%>">
         장바구니
     </button>
 
     <!-- Modal -->
     <form action="">
-        <input type="hidden" name="gCode" value="">
+        <input type="hidden" name="gCode" id="gCode-input" value="">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -97,7 +144,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">장바구니 담기</button>
+                    <button type="button" class="btn btn-primary" id="cart">장바구니 담기</button>
                     <button type="button" class="btn btn-primary">결제하기</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 </div>
@@ -124,5 +171,4 @@
 
 
 </div>
-</body>
-</html>
+

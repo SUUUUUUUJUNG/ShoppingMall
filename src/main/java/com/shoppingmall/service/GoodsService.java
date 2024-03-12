@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.shoppingmall.dto.MemberDTO;
+import com.shoppingmall.dto.cart.CartListResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppingmall.dao.GoodsDAO;
-import com.shoppingmall.dto.CartDTO;
+import com.shoppingmall.dto.cart.CartDTO;
 import com.shoppingmall.dto.GoodsDTO;
 import com.shoppingmall.dto.OrderDTO;
 
@@ -34,8 +34,8 @@ public class GoodsService {
 //		dao.cartAdd(session,cdto);
 //	}
 
-	public List<CartDTO> cartList(String userid) {
-		return dao.cartList(session, userid);
+	public List<CartListResponseDTO> cartList(String userId) {
+		return dao.cartList(session, userId);
 	}
 
 	public void cartUpdate(Map<String, String> m) {
@@ -50,8 +50,8 @@ public class GoodsService {
 		dao.cartAllDel(session, list);
 	}
 
-	public CartDTO cartByNum(String num) {
-		return dao.cartByNum(session, num);
+	public CartDTO cartByNum(String cartid) {
+		return dao.cartByNum(session, cartid);
 	}
 
 	@Transactional

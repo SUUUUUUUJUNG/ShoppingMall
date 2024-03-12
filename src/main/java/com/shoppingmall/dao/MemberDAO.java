@@ -26,8 +26,7 @@ public class MemberDAO {
 	}
 
 	public MemberDTO myPage(String userid) {
-		MemberDTO dto = session.selectOne("MemberMapper.myPage",userid);
-		return dto;
+        return session.selectOne("MemberMapper.myPage",userid);
 	}
 
 	public int memberUpdate(MemberDTO dto) {
