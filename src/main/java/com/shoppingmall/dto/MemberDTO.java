@@ -10,7 +10,7 @@ import org.apache.ibatis.type.Alias;
 public class MemberDTO {
 
 	private Long memberId;
-	private String userid;
+	private String userId;
 	private String username;
 	private String password;
 	private String email;
@@ -21,9 +21,9 @@ public class MemberDTO {
 	private String status;
 	private String role;
 
-	public MemberDTO(Long memberId, String userid, String username, String password, String email, String phoneNumber, String zip_Code, String address, String addr_Detail, String status, String role) {
+	public MemberDTO(Long memberId, String userId, String username, String password, String email, String phoneNumber, String zip_Code, String address, String addr_Detail, String status, String role) {
 		this.memberId = memberId;
-		this.userid = userid;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.email = email;

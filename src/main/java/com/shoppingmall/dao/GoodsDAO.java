@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.shoppingmall.dto.MemberDTO;
-import lombok.RequiredArgsConstructor;
+import com.shoppingmall.dto.cart.CartListResponseDTO;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shoppingmall.dto.CartDTO;
+import com.shoppingmall.dto.cart.CartDTO;
 import com.shoppingmall.dto.GoodsDTO;
 import com.shoppingmall.dto.OrderDTO;
 
@@ -29,8 +28,8 @@ public class GoodsDAO {
 		session.insert("CartMapper.cartAdd",dto);
 	}
 
-	public List<CartDTO> cartList(SqlSessionTemplate session,String userid) {
-        return session.selectList("CartMapper.cartList",userid);
+	public List<CartListResponseDTO> cartList(SqlSessionTemplate session, String userId) {
+        return session.selectList("CartMapper.cartByNum",userId);
 	}
 
 	public void cartUpdate(SqlSessionTemplate session,Map<String, String> m) {
@@ -47,8 +46,8 @@ public class GoodsDAO {
 
 	}
 
-	public CartDTO cartByNum(SqlSessionTemplate session,String num) {
-        return session.selectOne("CartMapper.cartByNum",num);
+	public CartDTO cartByNum(SqlSessionTemplate session,String cartId) {
+        return session.selectOne("CartMapper.cartByNum",cartId);
 	}
 
 	public void orderDone(SqlSessionTemplate session,OrderDTO oDTO) {

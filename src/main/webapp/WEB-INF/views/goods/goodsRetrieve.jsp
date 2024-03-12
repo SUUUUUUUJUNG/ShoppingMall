@@ -8,17 +8,43 @@
 	$(function() {
 		// 장바구니 버튼 클릭 이벤트
 		$("#cart").on("click",function(e){
+			e.preventDefault();
 			// 사이즈와 색상이 선택되었는지 확인
-			var size = $("#gSize").val();
-			var color = $("#gColor").val();
+			var gSize = $("#gSize").val();
+			var gColor = $("#gColor").val();
 			// 사이즈나 색상이 선택되지 않았으면 경고창 표시
-			if(size === "사이즈선택" || color === "색상선택") {
+			if(gSize === "사이즈선택" || gColor === "색상선택") {
 				alert("상품의 사이즈와 색상 옵션을 선택해주세요.");
-				e.preventDefault(); // 폼 제출 방지
-			} else {
-				// 사이즈와 색상이 모두 선택되었으면 폼 액션 변경 후 제출
-				$("form").attr("action","/cart/add");
+				return; // 폼 제출 방지
 			}
+
+			var gCode=$("#gCode").val();
+			var gImage=$("#gImage").val();
+			var gName=$("#gName").val();
+			var gPrice=$("#gPrice").val();
+			var gAmount=$("#gAmount").val();
+
+			$.ajax({
+				url:"/cart/add",
+				type: "post",
+				contentType: "application/json",
+				data:JSON.stringify({
+					gCode:gCode,
+					gImage:gImage,
+					gName:gName,
+					gPrice:gPrice,
+					gSize:gSize,
+					gColor:gColor,
+					gAmount:gAmount
+				}),
+				success:function (data,status,xhr){
+					alert(data.message);
+				},
+				error: function (xhr, status, error) {
+					console.log(error)
+				},
+			})
+
 		});
 
 		$("#wishlist-button").on("click",function(e){
@@ -53,10 +79,10 @@
 </script>
 <!--  -->
 <form name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
-	<input type="hidden" name="gImage" value="${goodsDTO.gImage}">
-	<input type="hidden" name="gCode" value="${goodsDTO.gCode}">
-	<input	type="hidden" name="gName" value="${goodsDTO.gName}">
-	<input	type="hidden" name="gPrice" value="${goodsDTO.gPrice}">
+	<input type="hidden" name="gImage" id="gImage" value="${goodsDTO.gImage}">
+	<input type="hidden" name="gCode" id="gCode" value="${goodsDTO.gCode}">
+	<input	type="hidden" name="gName" id="gName" value="${goodsDTO.gName}">
+	<input	type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.gPrice}">
 
 
 
@@ -113,8 +139,8 @@
 					</tr>
 					<tr>
 						<td class="td_title" rowspan="2">상품옵션</td>
-						<td colspan="2" style='padding-left: 30px'><select
-								class="select_change" size="1" name="gSize" id="gSize">
+						<td colspan="2" style='padding-left: 30px'>
+							<select class="select_change" size="1" name="gSize" id="gSize">
 							<option selected value="사이즈선택">사이즈선택</option>
 							<option value="L">L</option>
 							<option value="M">M</option>
