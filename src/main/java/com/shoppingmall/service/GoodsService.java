@@ -61,11 +61,12 @@ public class GoodsService {
 
 	}
 
-	public void mergeCartItems(Map<String, String> map, CartDTO dto) {
+	public void mergeCartItems(Map<String, String> map) {
+		System.out.println("GoodsService map = " + map);
 		CartDTO duplicateCart = dao.findDuplicateCartItem(session, map);
 		System.out.println("GoodsService duplicateCart = " + duplicateCart);
 		if (duplicateCart == null) {
-			dao.cartAdd(session, dto);
+			dao.cartAdd(session, map);
 		} else {
 			dao.updateItemQuantity(session, map);
 		}

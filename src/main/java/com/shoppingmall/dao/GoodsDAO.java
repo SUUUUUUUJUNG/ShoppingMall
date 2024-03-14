@@ -23,9 +23,8 @@ public class GoodsDAO {
         return session.selectOne("GoodsMapper.goodsRetrieve",gCode);
 	}
 
-	public void cartAdd(SqlSessionTemplate session,CartDTO dto) {
-		System.out.println("dto = " + dto);
-		session.insert("CartMapper.cartAdd",dto);
+	public void cartAdd(SqlSessionTemplate session,Map<String,String> map) {
+		session.insert("CartMapper.cartAdd",map);
 	}
 
 	public List<CartListResponseDTO> cartList(SqlSessionTemplate session, String userId) {

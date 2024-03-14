@@ -21,24 +21,20 @@
 			}
 
 			var gCode=$("#gCode").val();
-			var gImage=$("#gImage").val();
-			var gName=$("#gName").val();
-			var gPrice=$("#gPrice").val();
 			var gAmount=$("#gAmount").val();
+
+			const data = {
+				gCode:gCode,
+				gSize:gSize,
+				gColor:gColor,
+				gAmount:gAmount,
+			}
 
 			$.ajax({
 				url:"/cart/add",
 				type: "post",
 				contentType: "application/json",
-				data:JSON.stringify({
-					gCode:gCode,
-					gImage:gImage,
-					gName:gName,
-					gPrice:gPrice,
-					gSize:gSize,
-					gColor:gColor,
-					gAmount:gAmount
-				}),
+				data:JSON.stringify(data),
 				success:function (data,status,xhr){
 					alert(data.message);
 				},
