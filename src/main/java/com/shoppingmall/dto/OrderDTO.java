@@ -16,14 +16,14 @@ public class OrderDTO {
 	int gAmount;
 	String gImage;
 	String orderName;
-	String zipCode;
+	String zip_Code;
 	String address;
-	String addrDetail;
+	String addr_Detail;
 	String phoneNumber;
 	String payMethod;
 	String orderDay;
 
-	public OrderDTO(int num, String userId, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage, String orderName, String zipCode, String address, String addr_Detail, String phoneNumber, String payMethod, String orderDay) {
+	public OrderDTO(int num, String userId, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage, String orderName, String zip_Code, String address, String addr_Detail, String phoneNumber, String payMethod, String orderDay) {
 		this.num = num;
 		this.userId = userId;
 		this.gCode = gCode;
@@ -34,9 +34,9 @@ public class OrderDTO {
 		this.gAmount = gAmount;
 		this.gImage = gImage;
 		this.orderName = orderName;
-		this.zipCode = zipCode;
+		this.zip_Code = zip_Code;
 		this.address = address;
-		this.addrDetail = addrDetail;
+		this.addr_Detail = addr_Detail;
 		this.phoneNumber = phoneNumber;
 		this.payMethod = payMethod;
 		this.orderDay = orderDay;
@@ -125,12 +125,8 @@ public class OrderDTO {
 		this.orderName = orderName;
 	}
 
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public String getZip_Code() {
+		return zip_Code;
 	}
 
 	public String getAddress() {
@@ -141,12 +137,8 @@ public class OrderDTO {
 		this.address = address;
 	}
 
-	public String getAddrDetail() {
-		return addrDetail;
-	}
-
-	public void setAddr_Detail(String addrDetail) {
-		this.addrDetail = addrDetail;
+	public String getAddr_Detail() {
+		return addr_Detail;
 	}
 
 	public String getPhoneNumber() {
@@ -186,9 +178,9 @@ public class OrderDTO {
 				", gAmount=" + gAmount +
 				", gImage='" + gImage + '\'' +
 				", orderName='" + orderName + '\'' +
-				", zipCode='" + zipCode + '\'' +
+				", zip_Code='" + zip_Code + '\'' +
 				", address='" + address + '\'' +
-				", addrDetail='" + addrDetail + '\'' +
+				", addr_Detail='" + addr_Detail + '\'' +
 				", phoneNumber='" + phoneNumber + '\'' +
 				", payMethod='" + payMethod + '\'' +
 				", orderDay='" + orderDay + '\'' +

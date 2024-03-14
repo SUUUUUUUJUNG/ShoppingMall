@@ -1,14 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+		 pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.shoppingmall.dto.GoodsDTO"%>
 
 <table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td>
-			<table align="center" width="710" cellspacing="0" cellpadding="0"
-				border="0">
+			<table align="center" width="710" cellspacing="0" cellpadding="0" border="0">
 				<tr>
 					<td height="5"></td>
 				</tr>
@@ -19,51 +17,50 @@
 					<td height="10"></td>
 				</tr>
 				<tr>
-
-<!-- 반복시작 -->
-<c:forEach var ="dto" items="${goodsList }" varStatus="status">
-
-						<td>
-							<table style='padding: 15px'>
-								<tr>
-									<td><a href="/goods/detail?gCode=${dto.gCode}"> <img
-											src="/images/items/${dto.gImage}.gif" border="0"
-											align="center" width="200"><!--  수정-->
-									</a></td>
-								</tr>
-								<tr>
-
-									<td height="10">
-								</tr>
-								<tr>
-									<td class="td_default" align="center"><a class="a_black"
-										href="/goods/detail?gCode=${dto.gCode}"> ${dto.gName} <br><!-- 수정   -->
-									</a> <font color="gray"> -------------------- </font></td>
-
-								</tr>
-								<tr>
-									<td height="10">
-								</tr>
-								<tr>
-									<td class="td_gray" align="center">${dto.gContent}</td>
-								</tr>
-								<tr>
-									<td height="10">
-								</tr>
-								<tr>
-									<td class="td_red" align="center"><font color="red"><strong>
-												${dto.gPrice}</strong></font></td>
-								</tr>
-							</table>
-						</td>
-						<!-- 한 줄에4개씩 -->
-					<c:if test="${status.count%4==0 }">
-						<tr>
-							<td height="10"></td>
-						</tr>
-					</c:if>
-<!-- 반복끝-->
-</c:forEach>
+					<%
+						List<GoodsDTO> goodsList = (List<GoodsDTO>) request.getAttribute("goodsList");
+						if(goodsList != null) {
+							for(int i = 0; i < goodsList.size(); i++) {
+								GoodsDTO dto = goodsList.get(i);
+					%>
+					<td>
+						<table style='padding: 15px'>
+							<tr>
+								<td><a href="/goods/detail?gCode=<%=dto.getGCode()%>"> <img
+										src="/images/items/<%=dto.getGImage()%>.gif" border="0" align="center" width="200">
+								</a></td>
+							</tr>
+							<tr>
+								<td height="10">
+							</tr>
+							<tr>
+								<td class="td_default" align="center"><a class="a_black"
+																		 href="/goods/detail?gCode=<%=dto.getGCode()%>"> <%=dto.getGName()%> <br>
+								</a> <font color="gray"> -------------------- </font></td>
+							</tr>
+							<tr>
+								<td height="10">
+							</tr>
+							<tr>
+								<td class="td_gray" align="center"><%=dto.getGContent()%></td>
+							</tr>
+							<tr>
+								<td height="10">
+							</tr>
+							<tr>
+								<td class="td_red" align="center"><font color="red"><strong>
+									<%=dto.getGPrice()%></strong></font></td>
+							</tr>
+						</table>
+					</td>
+					<%
+								// 한 줄에 4개씩 표시 후 줄바꿈
+								if((i + 1) % 4 == 0) {
+									out.println("</tr><tr><td height='10'></td></tr><tr>");
+								}
+							}
+						}
+					%>
 				</tr>
 			</table>
 		</td>
