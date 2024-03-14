@@ -100,9 +100,7 @@
 
 </script>
 
-
 <table width="90%" cellspacing="0" cellpadding="0" border="0">
-
 	<tr>
 		<td height="30">
 	</tr>
@@ -143,75 +141,54 @@
 		<td height="7">
 	</tr>
 
-
-
 	<tr>
 		<td colspan="10">
 			<hr size="1" color="CCCCCC">
 		</td>
 	</tr>
 
-
-
 	<form name="myForm">
-
-
-		<!-- 반복시작 -->
-
-
-		<!-- 	<input type="text" name="cartid81" value="81" id="cartid81">
-			<input type="text" name="gImage81" value="bottom1" id="gImage81">
-		 <input type="text" name="gName81" value="제나 레이스 스커트" id="gName81">
-		  <input type="text" name="gSize81" value="L" id="gSize81">
-		   <input type="text" name="gColor81" value="navy" id="gColor81">
-		   <input type="text" name="gPrice81" value="9800" id="gPrice81"> -->
 		<c:forEach var = "dto" items="${cartList}">
-
-
 			<tr>
 				<td class="td_default" width="80">
 					<!-- checkbox는 체크된 값만 서블릿으로 넘어간다.
                     따라서 value에 삭제할 cartid값을 설정한다. -->
 					<input type="checkbox"
-						   name="check" id="check${dto.cartid}" class="check"
-						   value="${dto.cartid}"></td>
-				<td class="td_default" width="80">${dto.cartid}</td>
-				<td class="td_default" width="80"><img src="/images/items/${dto.gImage}.gif" border="0" align="center" width="80" /></td>
-				<td class="td_default" width="300" style='padding-left: 30px'>${dto.gName}
-					<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.gSize}) , 색상(${dto.gColor})] </font></td>
+						   name="check" id="check${dto.cartId}" class="check"
+						   value="${dto.cartId}"></td>
+				<td class="td_default" width="80">${dto.cartId}</td>
+				<td class="td_default" width="80"><img src="/images/items/${dto.GImage}.gif" border="0" align="center" width="80" /></td>
+				<td class="td_default" width="300" style='padding-left: 30px'>${dto.GName}
+					<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.GSize}) , 색상(${dto.GColor})] </font></td>
 				<td class="td_default" align="center" width="110">
-					<span id="">${dto.gPrice}</span>
+					<span id="">${dto.GPrice}</span>
 				</td>
 				<td class="td_default" align="center" width="90"><input
 						class="input_default" type="text" name="cartAmount"
-						id="cartAmount${dto.cartid}" style="text-align: right" maxlength="3"
-						size="2" value="${dto.gAmount }"></input></td>
+						id="cartAmount${dto.cartId}" style="text-align: right" maxlength="3"
+						size="2" value="${dto.GAmount }"></input></td>
 
 
 				<td><input type="button" value="수정"
 						   class="updataBtn btn btn-primary btn-sm"
-						   data-cartid="${dto.cartid}"
-						   data-price="${dto.gPrice}" id="gPrice${dto.cartid}"/></td>
+						   data-cartid="${dto.cartId}"
+						   data-price="${dto.GPrice}" id="gPrice${dto.cartId}"/></td>
 
 
 				<td class="td_default" align="center" width="80"
-					style='padding-left: 5px'><span id="sum${dto.cartid}" class="sum">
-						${dto.gAmount*dto.gPrice}
+					style='padding-left: 5px'><span id="sum${dto.cartId}" class="sum">
+						${dto.GAmount*dto.GPrice}
 				</span></td>
 				<td><input type="button" value="주문" class="orderBtn btn btn-primary btn-sm"
-						   data-cartid="${dto.cartid}"/></td>
+						   data-cartId="${dto.cartId}"/></td>
 				<td class="td_default" align="center" width="30"
 					style='padding-left: 10px'>
 					<input type="button" value="삭제"
-						   class="delBtn btn btn-primary btn-sm" data-cartid="${dto.cartid}" ></td>
+						   class="delBtn btn btn-primary btn-sm" data-cartId="${dto.cartId}" ></td>
 				<td height="10"></td>
 			</tr>
-
-
-
 			<!-- 반복끝 -->
 		</c:forEach>
-
 
 	</form>
 	<tr>
