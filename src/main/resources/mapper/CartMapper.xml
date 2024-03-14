@@ -69,7 +69,7 @@
         </foreach>
     </delete>
 
-    <update id="cartUpdate" parameterType="hashmap">
+    <update id="cartUpdate" parameterType="map">
         update cart
         set gAmount = #{gAmount}
         where CARTID = #{cartId}
