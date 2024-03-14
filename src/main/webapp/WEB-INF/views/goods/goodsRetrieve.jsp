@@ -3,6 +3,8 @@
 		 pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script>
 	$(function() {
@@ -19,24 +21,20 @@
 			}
 
 			var gCode=$("#gCode").val();
-			var gImage=$("#gImage").val();
-			var gName=$("#gName").val();
-			var gPrice=$("#gPrice").val();
 			var gAmount=$("#gAmount").val();
+
+			const data = {
+				gCode:gCode,
+				gSize:gSize,
+				gColor:gColor,
+				gAmount:gAmount,
+			}
 
 			$.ajax({
 				url:"/cart/add",
 				type: "post",
 				contentType: "application/json",
-				data:JSON.stringify({
-					gCode:gCode,
-					gImage:gImage,
-					gName:gName,
-					gPrice:gPrice,
-					gSize:gSize,
-					gColor:gColor,
-					gAmount:gAmount
-				}),
+				data:JSON.stringify(data),
 				success:function (data,status,xhr){
 					alert(data.message);
 				},
@@ -79,10 +77,10 @@
 </script>
 <!--  -->
 <form name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
-	<input type="hidden" name="gImage" id="gImage" value="${goodsDTO.gImage}">
-	<input type="hidden" name="gCode" id="gCode" value="${goodsDTO.gCode}">
-	<input	type="hidden" name="gName" id="gName" value="${goodsDTO.gName}">
-	<input	type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.gPrice}">
+	<input type="hidden" name="gImage" id="gImage" value="${goodsDTO.GImage}">
+	<input type="hidden" name="gCode" id="gCode" value="${goodsDTO.GCode}">
+	<input	type="hidden" name="gName" id="gName" value="${goodsDTO.GName}">
+	<input	type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.GPrice}">
 
 
 
@@ -110,17 +108,17 @@
 					</tr>
 
 					<tr>
-						<td rowspan="7"><img src="/images/items/${goodsDTO.gImage}.gif"
+						<td rowspan="7"><img src="/images/items/${goodsDTO.GImage}.gif"
 											 border="0" align="center" width="300" /></td>
 						<td class="td_title">제품코드</td>
 						<td class="td_default" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.gCode}
+							${goodsDTO.GCode}
 						</td>
 					</tr>
 					<tr>
 						<td class="td_title">상품명</td>
 						<td class="td_default" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.gName}
+							${goodsDTO.GName}
 
 						</td>
 					</tr>
@@ -128,7 +126,7 @@
 						<td class="td_title">가격</td>
 
 						<td class="td_red" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.gPrice}
+							${goodsDTO.GPrice}
 						</td>
 					</tr>
 					<tr>
@@ -176,7 +174,7 @@
 	</table>
 	<%
 		GoodsDTO goodsDTO = (GoodsDTO)request.getAttribute("goodsDTO");
-		String gCode = goodsDTO.getgCode();
+		String gCode = goodsDTO.getGCode();
 		System.out.println("gCode = " + gCode);
 	%>
 	<div style="text-align: center;">

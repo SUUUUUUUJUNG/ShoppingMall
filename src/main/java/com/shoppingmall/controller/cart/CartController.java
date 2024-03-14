@@ -38,19 +38,11 @@ public class CartController {
 
     @PostMapping("/add")
     @ResponseBody
-    public ResponseEntity<?> cartAddV2(@RequestBody CartDTO cdto, HttpSession session) {
+    public ResponseEntity<?> cartAddV2(@RequestBody Map<String, String> map, HttpSession session) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         String userId = memberDTO.getUserId();
-
-        Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
-        map.put("gCode", cdto.getGCode());
-        map.put("gSize", cdto.getGSize());
-        map.put("gColor", cdto.getGColor());
-        //userid, gCode, gSize, gColor 세션에 저장되어있는 userid랑 db cart테이블에 저장되어있는 userid,
-        //gCode, gSize, gColor가 다 똑같을 때 수량이 추가되는 로직
-        cdto.setUserId(userId);
-        goodsService.mergeCartItems(map, cdto);
+        goodsService.mergeCartItems(map);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","장바구니에 추가되었습니다."));
     }
 }

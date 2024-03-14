@@ -69,7 +69,7 @@
         </foreach>
     </delete>
 
-    <update id="cartUpdate" parameterType="hashmap">
+    <update id="cartUpdate" parameterType="map">
         update cart
         set gAmount = #{gAmount}
         where CARTID = #{cartId}
@@ -81,7 +81,7 @@
         where CARTID = #{cartId}
     </delete>
 
-    <insert id="cartAdd" parameterType="CartDTO" >
+    <insert id="cartAdd" parameterType="map" >
         insert into cart (cartid,userid,gCode,gSize,gColor,gAmount)
         values (cart_seq.nextval,#{userId},#{gCode},
                 #{gSize},#{gColor},#{gAmount})
