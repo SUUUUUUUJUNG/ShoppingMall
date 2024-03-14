@@ -52,15 +52,14 @@
 
         //삭제 버튼 이벤트 처리
         $(".delBtn").on("click", function () {
-            var cartid = $(this).data("cartid");
+            var cartId = $(this).data("id");
             var xxx = $(this);
-            console.log(cartid);
             $.ajax({
                 url: "/cart/delete",
                 type: "get",
                 datatype: "text",
                 data: {
-                    cartid: cartid
+                    cartId: cartId
                 },
                 success: function (data, status, xhr) {
                     console.log("success");
@@ -177,7 +176,7 @@
                            size="2" value="${dto.GAmount }"></input></td>
 
 
-                <td><input type="button" value="수정이"
+                <td><input type="button" value="수정"
                            class="update-Btn btn btn-primary btn-sm"
                            data-id="${dto.cartId}" data-amount="${dto.GAmount}"
                            data-price="${dto.GPrice}" id="gPrice${dto.cartId}"/></td>
@@ -192,7 +191,7 @@
                 <td class="td_default" align="center" width="30"
                     style='padding-left: 10px'>
                     <input type="button" value="삭제"
-                           class="delBtn btn btn-primary btn-sm" data-cartId="${dto.cartId}"></td>
+                           class="delBtn btn btn-primary btn-sm" data-id="${dto.cartId}"></td>
                 <td height="10"></td>
             </tr>
             <!-- 반복끝 -->

@@ -25,8 +25,8 @@ public class CartManagementController {
     }
 
     @RequestMapping("/delete")
-    public String cartDelete(int num) {
-        goodsService.cartDel(num);
+    public String cartDelete(int cartId) {
+        goodsService.cartDel(cartId);
         return "ok";
     }
 
