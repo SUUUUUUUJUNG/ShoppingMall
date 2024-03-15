@@ -50,7 +50,7 @@ public class GoodsService {
 		dao.cartAllDel(session, list);
 	}
 
-	public CartDTO cartByNum(String cartid) {
+	public CartListResponseDTO cartByNum(String cartid) {
 		return dao.cartByNum(session, cartid);
 	}
 
@@ -85,5 +85,9 @@ public class GoodsService {
 	public boolean isItemWishlisted(Map<String,String> map){
 		List<MemberDTO> existingItems = dao.checkWishlistItemExists(session, map);
 		return !existingItems.isEmpty();
+	}
+
+	public CartListResponseDTO findById(String cartId) {
+		return dao.findById(session, cartId);
 	}
 }

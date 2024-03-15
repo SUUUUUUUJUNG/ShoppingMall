@@ -5,11 +5,11 @@
 <mapper namespace="CartMapper">
 
     <insert id="orderDone" parameterType="OrderDTO" >
-        insert into orderInfo (num,userid,gCode,gName,gPrice,gSize,gColor,gAmount,
-                               gImage,orderName,zip_Code,address,addr_Detail,phonenumber,payMethod)
-        values(orderInfo_seq.nextval, #{userId},#{gCode},#{gName},#{gPrice},
+        insert into order_info (ORDER_ID,USERID,GCODE,GSIZE,GCOLOR,GAMOUNT,
+                               ORDERNAME,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,PAYMETHOD,ORDERDAY,TOTALPRICE)
+        values(orderInfo_seq.nextval, #{userId},#{gCode},
                #{gSize},#{gColor},#{gAmount},
-               #{gImage},#{orderName},#{zip_Code},#{address},#{addr_Detail},#{phonenumber},#{payMethod} )
+              #{orderName},#{zip_Code},#{address},#{addr_Detail},#{phoneNumber},#{payMethod}, #{orderDay}, #{totalPrice})
     </insert>
 
 
@@ -17,12 +17,12 @@
 
         insert all
         <foreach collection="list" item="item">
-            into orderInfo (num,userid,gCode,gName,gPrice,gSize,gColor,gAmount,
-            gImage,orderName,post,addr1,addr2,phone,payMethod)
+            into ORDER_INFO (order_Id,userid,gCode,gSize,gColor,gAmount,
+            orderName,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,payMethod)
 
-            values( orderSeq()  , #{item.userId},#{item.gCode},#{item.gName},#{item.gPrice},
+            values( orderSeq()  , #{item.userId},#{item.gCode},
             #{item.gSize},#{item.gColor},#{item.gAmount},
-            #{item.gImage},#{item.orderName},#{item.post},
+           #{item.orderName},#{item.post},
             #{item.addr1},#{item.addr2},#{item.phone},#{item.payMethod} )
         </foreach>
         select *
@@ -41,21 +41,41 @@
 
     <select id="cartByNum" parameterType="string" resultType="CartListResponseDTO">
         SELECT
-            c.CARTID,
-            c.USERID,
-            c.GCODE,
-            c.GSIZE,
-            c.GCOLOR,
-            c.GAMOUNT,
-            g.GNAME,
-            g.GIMAGE,
-            g.GPRICE
+            c.CARTID as CARTID,
+            c.USERID as USERID,
+            c.GCODE as GCODE,
+            c.GSIZE as GSIZE,
+            c.GCOLOR as GCOLOR,
+            c.GAMOUNT as GAMOUNT,
+            g.GNAME as GNAME,
+            g.GIMAGE as GIMAGE,
+            g.GPRICE as GPRICE
         FROM
             cart c
                 JOIN
             goods g ON c.GCODE = g.GCODE
         WHERE
             c.USERID = #{userId}
+    </select>
+
+
+    <select id="findByCartId" parameterType="string" resultType="CartListResponseDTO">
+        SELECT
+            c.CARTID as CARTID,
+            c.USERID as USERID,
+            c.GCODE as GCODE,
+            c.GSIZE as GSIZE,
+            c.GCOLOR as GCOLOR,
+            c.GAMOUNT as GAMOUNT,
+            g.GNAME as GNAME,
+            g.GIMAGE as GIMAGE,
+            g.GPRICE as GPRICE
+        FROM
+            cart c
+                JOIN
+            goods g ON c.GCODE = g.GCODE
+        WHERE
+            c.CARTID = #{cartId}
     </select>
 
 

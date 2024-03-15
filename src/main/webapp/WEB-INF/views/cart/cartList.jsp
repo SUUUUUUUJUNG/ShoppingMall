@@ -94,10 +94,25 @@
             $("form").submit();
         });
 
+/*
         $(".orderBtn").on("click", function () {
-            var cartid = $(this).data("cartid");
-            location.href = "/order/confirm?cartid=" + cartid;
+            var cartId = $(this).data("id");
+            $.ajax({
+                url:"/order/confirm",
+                type:"post",
+                dataType:"text",
+                data:{
+                    cartId:cartId
+                },
+                success:function (data,status,xhr){
+                    console.log("success");
+                },
+                error:function (xhr,status,error){
+                    console.log(error);
+                }
+            });//end ajax
         })
+*/
 
 
     });
@@ -186,8 +201,8 @@
                     style='padding-left: 5px'><span id="sum${dto.cartId}" class="sum">
                         ${dto.GAmount*dto.GPrice}
                 </span></td>
-                <td><input type="button" value="주문" class="orderBtn btn btn-primary btn-sm"
-                           data-cartId="${dto.cartId}"/></td>
+                <td>
+                    <a href="/order/confirm?cartId=${dto.cartId}" type="button" class="btn btn-primary btn-sm" ${dto.cartId}>주문</a></td>
                 <td class="td_default" align="center" width="30"
                     style='padding-left: 10px'>
                     <input type="button" value="삭제"
