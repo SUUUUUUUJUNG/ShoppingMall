@@ -45,7 +45,7 @@ public class GoodsDAO {
 
 	}
 
-	public CartDTO cartByNum(SqlSessionTemplate session,String cartId) {
+	public CartListResponseDTO cartByNum(SqlSessionTemplate session,String cartId) {
         return session.selectOne("CartMapper.cartByNum",cartId);
 	}
 
@@ -81,5 +81,9 @@ public class GoodsDAO {
 
 	public void deleteWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
 		session.delete("WishListMapper.deleteWishlistItem",map);
+	}
+
+	public CartListResponseDTO findById(SqlSessionTemplate session, String cartId) {
+		return session.selectOne("CartMapper.findByCartId", cartId);
 	}
 }

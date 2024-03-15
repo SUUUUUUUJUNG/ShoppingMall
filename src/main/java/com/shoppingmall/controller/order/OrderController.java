@@ -3,6 +3,7 @@ package com.shoppingmall.controller.order;
 import com.shoppingmall.dto.cart.CartDTO;
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.dto.OrderDTO;
+import com.shoppingmall.dto.cart.CartListResponseDTO;
 import com.shoppingmall.service.GoodsService;
 import com.shoppingmall.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -21,8 +22,8 @@ public class OrderController {
     private final MemberService memberService;
 
     @RequestMapping(value="/confirm")
-    public String orderConfirm(@RequestParam("cartId") String cartId, HttpSession session, Model model) {
-        CartDTO cart = goodsService.cartByNum(cartId);
+    public String orderConfirm(@RequestParam("cartId") String cartId, Model model) {
+        CartListResponseDTO cart = goodsService.findById(cartId);
         String userId = cart.getUserId();
         MemberDTO member = memberService.myPage(userId);
         model.addAttribute("mDTO", member);

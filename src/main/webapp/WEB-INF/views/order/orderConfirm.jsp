@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Bootstrap JS 추가 -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS 추가 -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 	$(document).ready(function(){
 
@@ -32,14 +32,15 @@
 
 
 <form name="myForm" method="get" action="/order/done">
-<input type="hidden" name="gCode" value="${cDTO.gCode}">
-<input type="hidden" name="gName" value="${cDTO.gName}">
-<input type="hidden" name="gPrice" value="${cDTO.gPrice}">
-<input type="hidden" name="gSize" value="${cDTO.gSize}">
-<input type="hidden" name="gColor" value="${cDTO.gColor}">
-<input type="hidden" name="gAmount" value="${cDTO.gAmount}">
-<input type="hidden" name="gImage" value="${cDTO.gImage}">
-<input type="hidden" name="orderNum" value="${cDTO.num}"> <!-- 장바구니 번호, 장바구니 삭제 시 사용 -->
+<input type="hidden" name="gCode" value="${cDTO.GCode}">
+<input type="hidden" name="gName" value="${cDTO.GName}">
+<input type="hidden" name="gPrice" value="${cDTO.GPrice}">
+<input type="hidden" name="gSize" value="${cDTO.GSize}">
+<input type="hidden" name="gColor" value="${cDTO.GColor}">
+<input type="hidden" name="gAmount" value="${cDTO.GAmount}">
+<input type="hidden" name="gImage" value="${cDTO.GImage}">
+<input type="hidden" name="orderNum" value="${cDTO.cartId}"> <!-- 장바구니 번호, 장바구니 삭제 시 사용 -->
+<input type="hidden" name="totalPrice" value="${cDTO.GPrice*cDTO.GAmount}">
 	<table width="80%" cellspacing="0" cellpadding="0">
 
 		<tr>
@@ -82,15 +83,15 @@
 					</tr>
 
 					<tr>
-						<td class="td_default" width="80">${cDTO.num}</td>
-						<td class="td_default" width="80"><img src="/images/items/${cDTO.gImage}.gif" border="0" align="center" width="80" /></td>
+						<td class="td_default" width="80">${cDTO.cartId}</td>
+						<td class="td_default" width="80"><img src="/images/items/${cDTO.GImage}.gif" border="0" align="center" width="80" /></td>
 						<td class="td_default" width="300" style='padding-left: 30px'>
-						${cDTO.gName}
-							<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${cDTO.gSize}), 색상(${cDTO.gColor})]
+						${cDTO.GName}
+							<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${cDTO.GSize}), 색상(${cDTO.GColor})]
 						</font></td>
-						<td class="td_default" align="center" width="110">${cDTO.gPrice}
+						<td class="td_default" align="center" width="110">${cDTO.GPrice}
 						</td>
-						<td class="td_default" align="center" width="90">${cDTO.gAmount}</td>
+						<td class="td_default" align="center" width="90">${cDTO.GAmount}</td>
 
 					</tr>
 
@@ -98,7 +99,7 @@
 					<tr>
 						<td height="30"></td>
 						<td class="td_default" align="right">총 결제 금액 :</td>
-						<td class="td_default" align='right'>${cDTO.gAmount*cDTO.gPrice}원</td>
+						<td class="td_default" align='right'>${cDTO.GAmount*cDTO.GPrice}원</td>
 					</tr>
 				</table> <tr>
 			<td>
@@ -157,7 +158,7 @@
 						<input class="input_default" type="text" id="maddress1" size="35"
 							maxlength="200" value="${mDTO.address}" readonly></input><br>
 						<input class="input_default" type="text" id="maddress2" size="35"
-							maxlength="200" value="${mDTO.addrDetail}" readonly></input>
+							maxlength="200" value="${mDTO.addr_Detail}" readonly></input>
 					</td>
 				</tr>
 				
@@ -226,7 +227,7 @@
 	<input type="text" name="zip_Code" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" name="addrDetail" id="sample4_jibunAddress" placeholder="상세주소">
+<input type="text" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
 <span id="guide" style="color:#999"></span>
 <br>
 <!-- 다음주소 끝 -->
@@ -240,7 +241,7 @@
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="phone"
-							name="phonenumber" size="15" maxlength="15" value=""></input>
+							name="phoneNumber" size="15" maxlength="15" value=""></input>
 					
 					</td>
 				</tr>
