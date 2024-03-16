@@ -11,7 +11,8 @@
         $(function(){
             $(".cart-btn").on("click",function(){
                 let gCode = $(this).data("code");
-                $("#gCode-input").val(gCode);
+                $("#gCode").val(gCode);
+                console.log("gCode",gCode);
             });//end click cart-btn
 
             $("#cart").on("click",function(e){
@@ -25,25 +26,23 @@
                     return; // 폼 제출 방지
                 }
 
-                var gCode=$("#gCode").val();
-                var gImage=$("#gImage").val();
-                var gName=$("#gName").val();
-                var gPrice=$("#gPrice").val();
-                var gAmount=$("#gAmount").val();
+               var gCode = $("#gCode").val();
+               var gAmount = $("#gAmount").val();
+
+               const data = {
+                   gCode:gCode,
+                   gSize:gSize,
+                   gColor:gColor,
+                   gAmount:gAmount
+               }
+
+               console.log("data",data);
 
                 $.ajax({
                     url:"/cart/add",
                     type: "post",
                     contentType: "application/json",
-                    data:JSON.stringify({
-                        gCode:gCode,
-                        gImage:gImage,
-                        gName:gName,
-                        gPrice:gPrice,
-                        gSize:gSize,
-                        gColor:gColor,
-                        gAmount:gAmount
-                    }),
+                    data:JSON.stringify(data),
                     success:function (data,status,xhr){
                         alert(data.message);
                     },
@@ -138,7 +137,7 @@
 
     <!-- Modal -->
     <form action="">
-        <input type="hidden" name="gCode" id="gCode-input" value="">
+        <input type="hidden" name="gCode" id="gCode" value="<%=item.getGCode()%>">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -149,26 +148,25 @@
                 <div class="modal-body">
                     <!-- Size Selection -->
                     <div class="form-group">
-                        <label for="size-selection">사이즈 선택</label>
-                        <select class="form-control" id="size-selection">
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
+                        <select class="form-control select_change" id="gSize">
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
                         </select>
                     </div>
                     <!-- Color Selection -->
                     <div class="form-group">
-                        <label for="color-selection">색상 선택</label>
-                        <select class="form-control" id="color-selection">
-                            <option>navy</option>
-                            <option>black</option>
-                            <option>white</option>
+                        <label for="gColor">색상 선택</label>
+                        <select class="form-control" id="gColor">
+                            <option value="navy">navy</option>
+                            <option value="black">black</option>
+                            <option value="white">white</option>
                         </select>
                     </div>
                     <!-- Quantity Input -->
                     <div class="form-group">
-                        <label for="quantity-input">주문 수량</label>
-                        <input type="number" class="form-control" id="quantity-input" min="1">
+                        <label for="gAmount">주문 수량</label>
+                        <input type="number" class="form-control" id="gAmount" min="1" value="1">
                     </div>
                 </div>
                 <div class="modal-footer">
