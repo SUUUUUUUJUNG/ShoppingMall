@@ -54,6 +54,28 @@
 
             });//end click cart
 
+            $(".delete-btn").on("click",function(){
+                let wishListId = $(this).data("id");
+                let buttonClicked = $(this);
+
+                console.log(wishListId);
+
+                if(confirm("이 항목을 삭제하시겠습니까?")){
+                    $.ajax({
+                        url:"/api/wishList/delete",
+                        type:"DELETE",
+                        data:{wishListId:wishListId},
+                        success:function (response){
+                            alert("상품이 삭제되었습니다.");
+                            buttonClicked.closest("tr").remove();
+                        },
+                        error:function (xhr,status,error){
+                            alert("삭제 중 오류가 발생했습니다.");
+                        }
+                    })
+                }
+            });//end click
+
 
         })
     </script>
@@ -74,6 +96,12 @@
         }
         .text-details {
             vertical-align: middle;
+        }
+
+        .button-group{
+            width: 75%;
+            padding: 10px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -104,7 +132,7 @@
 <%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary cart-btn" data-toggle="modal" data-target="#exampleModal" data-code="<%=item.getGCode()%>">
+    <button type="button" class="btn btn-primary cart-btn button-group" data-toggle="modal" data-target="#exampleModal" data-code="<%=item.getGCode()%>">
         장바구니
     </button>
 
@@ -153,7 +181,8 @@
     </div>
     </form>
 
-    <a href="/removeFromWishList?wishListId=<%= item.getWishListId() %>" class="btn btn-danger btn-block">삭제</a>
+    <button type="button" class="btn btn-danger btn-block delete-btn button-group" data-id="<%= item.getWishListId() %>">삭제</button>
+<%--    <a href="/removeFromWishList?wishListId=<%= item.getWishListId() %>" class="btn btn-danger btn-block delete.btn" data-id="<%=item.getWishListId()%>">삭제</a>--%>
                 </div>
             </td>
         </tr>
