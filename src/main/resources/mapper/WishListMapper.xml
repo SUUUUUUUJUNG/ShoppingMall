@@ -14,7 +14,7 @@
     </select>
 
     <delete id="deleteWishlistItem" parameterType="map">
-        delete from wishList where memberid=#{memberId} and gCode=#{gCode}
+        delete from wishList where memberid=#{memberId} and WISHLISTID=#{wishListId}
     </delete>
 
     <select id="findWishListByMemberId" parameterType="Long" resultType="WishListDTO">

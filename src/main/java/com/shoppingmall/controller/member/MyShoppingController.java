@@ -24,7 +24,6 @@ public class MyShoppingController {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         Long memberId = memberDTO.getMemberId();
         List<WishListDTO> wishListItems = service.findWishListByMemberId(memberId);
-        System.out.println("MyShoppingController wishListItems = " + wishListItems);
         model.addAttribute("wishListItems",wishListItems);
         return "myShopping";
     }

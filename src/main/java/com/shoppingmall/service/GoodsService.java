@@ -90,4 +90,9 @@ public class GoodsService {
 	public CartListResponseDTO findById(String cartId) {
 		return dao.findById(session, cartId);
 	}
+
+
+	public void deleteWishListItem(Map<String, String> map) {
+		dao.deleteWishlistItem(session,map);
+	}
 }
