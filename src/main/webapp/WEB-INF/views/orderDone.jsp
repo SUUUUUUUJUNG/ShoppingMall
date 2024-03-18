@@ -17,9 +17,6 @@
 
 <h1>주문 완료 페이지입니다.</h1>
 
-<jsp:include page="common/top.jsp" flush="true" /><br>
-<jsp:include page="common/menu.jsp" flush="true" />
-
 <hr>
 
 <jsp:include page="order/orderDone.jsp"></jsp:include>

@@ -21,15 +21,8 @@ alert('${mesg}');
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
 	<jsp:include page="common/navbar.jsp" flush="true"/>
-
-
-	<jsp:include page="common/top.jsp" flush="true" /><br>
-	<jsp:include page="common/menu.jsp" flush="true" />
-
 	<hr>
-
 	<jsp:include page="goods/goodsRetrieve.jsp"></jsp:include>
 	<div style="margin-bottom: 70px;"></div> <%--상품정보 table과 tab 사이의 여백 추가--%>
 	<jsp:include page="goods/product-details-tabs.jsp"></jsp:include>
