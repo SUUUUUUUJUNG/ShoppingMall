@@ -18,6 +18,7 @@ public class InquiryDTO {
     private String inquiry_Type;
     private String inquiry_Title;
     private String inquiry_Content;
-    LocalDateTime inquiry_Date = LocalDateTime.now();
+    private LocalDateTime inquiry_Date = LocalDateTime.now();
     private String status = "UNPROCESSED";
+    private String response;
 }
