@@ -22,4 +22,12 @@ public class InquiryService {
     public List<InquiryDTO> inquiriesList(Long memberId) {
         return inquiryDAO.inquiriesList(session,memberId);
     }
+
+    public void deleteInquiryByMemberId(Long inquiryId) {
+        inquiryDAO.deleteInquiryByMemberId(session,inquiryId);
+    }
+
+    public List<InquiryDTO> viewInquiryDetails(Long inquiryId) {
+         return inquiryDAO.viewInquiryDetails(session,inquiryId);
+    }
 }

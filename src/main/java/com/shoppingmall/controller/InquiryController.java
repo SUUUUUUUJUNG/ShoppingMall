@@ -41,7 +41,19 @@ public class InquiryController {
         Long memberId = memberDTO.getMemberId();
         List<InquiryDTO> inquiries = inquiryService.inquiriesList(memberId);
         model.addAttribute("inquiries", inquiries);
-        System.out.println("inquiryController inquiries = " + inquiries);
         return "inquiriesList";
+    }
+
+    @GetMapping("/delete")
+    public String deleteInquiryByMemberId(@RequestParam("inquiry_Id") Long inquiry_Id){
+        inquiryService.deleteInquiryByMemberId(inquiry_Id);
+        return "redirect:/inquiry/inquiriesList";
+    }
+
+    @GetMapping("/detail/{inquiryId}")
+    public String viewInquiryDetails(@PathVariable("inquiryId") Long inquiryId,Model model){
+        List<InquiryDTO> inquiries = inquiryService.viewInquiryDetails(inquiryId);
+        model.addAttribute("inquiries",inquiries);
+        return "inquiryDetail";
     }
 }

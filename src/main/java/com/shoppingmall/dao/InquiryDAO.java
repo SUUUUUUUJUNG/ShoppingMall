@@ -15,4 +15,12 @@ public class InquiryDAO {
     public List<InquiryDTO> inquiriesList(SqlSessionTemplate session, Long memberId) {
         return session.selectList("InquiryMapper.inquiriesList",memberId);
     }
+
+    public void deleteInquiryByMemberId(SqlSessionTemplate session, Long inquiryId) {
+        session.delete("InquiryMapper.deleteInquiryByMemberId",inquiryId);
+    }
+
+    public List<InquiryDTO> viewInquiryDetails(SqlSessionTemplate session, Long inquiryId) {
+        return session.selectList("InquiryMapper.viewInquiryDetails",inquiryId);
+    }
 }

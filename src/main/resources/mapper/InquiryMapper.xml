@@ -13,4 +13,12 @@ values (SUJUNG.CUSTOMER_INQUIRIES_SEQ.nextval, #{memberId},#{inquiry_Type},#{inq
       select * from CUSTOMER_INQUIRIES where MEMBERID=#{memberId}
    </select>
 
+   <delete id="deleteInquiryByMemberId" parameterType="Long">
+    delete from CUSTOMER_INQUIRIES where INQUIRY_ID=#{inquiry_Id}
+   </delete>
+
+   <select id="viewInquiryDetails" parameterType="Long" resultType="inquiryDTO">
+        select * from CUSTOMER_INQUIRIES where INQUIRY_ID=#{inquiry_Id}
+   </select>
+
 </mapper>
