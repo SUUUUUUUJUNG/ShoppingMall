@@ -6,7 +6,11 @@
 
    <insert id="submitInquiry" parameterType="inquiryDTO">
 insert into CUSTOMER_INQUIRIES (INQUIRY_ID,MEMBERID,INQUIRY_TYPE,INQUIRY_TITLE,INQUIRY_CONTENT,INQUIRY_DATE,STATUS)
-values (SUJUNG.CUSTOMER_INQUIRIES_SEQ.nextval, #{memberId},#{inquiryType},#{inquiryTitle},#{inquiryContent},#{inquiryData}, #{status})
+values (SUJUNG.CUSTOMER_INQUIRIES_SEQ.nextval, #{memberId},#{inquiry_Type},#{inquiry_Title},#{inquiry_Content},#{inquiry_Date}, #{status})
    </insert>
+
+   <select id="inquiriesList" parameterType="Long" resultType="inquiryDTO">
+      select * from CUSTOMER_INQUIRIES where MEMBERID=#{memberId}
+   </select>
 
 </mapper>

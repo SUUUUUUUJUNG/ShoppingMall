@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class InquiryService {
@@ -15,5 +17,9 @@ public class InquiryService {
 
     public void submitInquiry(InquiryDTO inquiryDTO) {
         inquiryDAO.submitInquiry(session,inquiryDTO);
+    }
+
+    public List<InquiryDTO> inquiriesList(Long memberId) {
+        return inquiryDAO.inquiriesList(session,memberId);
     }
 }
