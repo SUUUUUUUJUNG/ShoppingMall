@@ -13,13 +13,13 @@
     </div>
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">문의 내용</h5>
+            <h3 class="card-title"><b>문의 내용</b></h3>
             <p class="card-text">${inquiry.inquiry_Content}</p>
         </div>
     </div>
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">답변</h5>
+            <h3 class="card-title"><b>답변</b></h3>
             <!-- 여기서 c:if는 답변이 있을 경우에만 답변 섹션을 표시하기 위함입니다. -->
             <c:if test="${not empty inquiry.response}">
                 <p class="card-text">${inquiry.response}</p>
