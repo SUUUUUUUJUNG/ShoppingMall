@@ -24,6 +24,7 @@
 <body>
 <jsp:include page="common/navbar.jsp" flush="true"/>
 <h1>문의하기 화면입니다</h1><br>
+<a href="/inquiry/inquiriesList">문의 내역</a>
 
 <jsp:include page="member/inquiry.jsp" flush="true"></jsp:include><br>
 </body>

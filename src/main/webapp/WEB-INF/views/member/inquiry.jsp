@@ -19,10 +19,10 @@
             let memberId = $("#memberId").val();
 
             const data = {
-                inquiryType:inquiryType,
-                inquiryContent:inquiryContent,
+                inquiry_Type:inquiryType,
+                inquiry_Content:inquiryContent,
                 image:image,
-                inquiryTitle:inquiryTitle,
+                inquiry_Title:inquiryTitle,
                 memberId:memberId
             }
 
