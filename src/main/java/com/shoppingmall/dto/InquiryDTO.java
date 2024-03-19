@@ -19,7 +19,7 @@ public class InquiryDTO {
     private String inquiryTitle;
     private String inquiryContent;
     LocalDateTime inquiryData = LocalDateTime.now();
-    private String status;
+    private String status = "UNPROCESSED";
 
     public InquiryDTO() {
     }
