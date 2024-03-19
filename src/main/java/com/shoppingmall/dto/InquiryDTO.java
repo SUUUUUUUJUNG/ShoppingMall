@@ -13,24 +13,11 @@ import java.time.LocalDateTime;
 @Alias("InquiryDTO")
 public class InquiryDTO {
 
-    private Long inquiryId;
+    private Long inquiry_Id;
     private Long memberId;
-    private String inquiryType;
-    private String inquiryTitle;
-    private String inquiryContent;
-    LocalDateTime inquiryData = LocalDateTime.now();
+    private String inquiry_Type;
+    private String inquiry_Title;
+    private String inquiry_Content;
+    LocalDateTime inquiry_Date = LocalDateTime.now();
     private String status = "UNPROCESSED";
-
-    public InquiryDTO() {
-    }
-
-    public InquiryDTO(Long inquiryId, Long memberId, String inquiryType, String inquiryTitle, String inquiryContent, LocalDateTime inquiryData, String status) {
-        this.inquiryId = inquiryId;
-        this.memberId = memberId;
-        this.inquiryType = inquiryType;
-        this.inquiryTitle = inquiryTitle;
-        this.inquiryContent = inquiryContent;
-        this.inquiryData = inquiryData;
-        this.status = status;
-    }
 }
