@@ -13,48 +13,81 @@
         body {
             font-family: 'Roboto', sans-serif;
         }
+
         .login-container {
             max-width: 400px;
             margin: 5% auto;
             padding: 2rem;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /*background: #fff0f3; !* 컨테이너 배경색을 더 연한 파스텔 핑크로 설정 *!*/
+            /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
         }
+
         .login-header {
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.5rem;
             color: #333;
         }
+
         .login-form button {
             width: 100%;
             height: 48px;
             border-radius: 0.25rem;
-            background-color: #007bff;
+            background-color: #ffafc5; /* 버튼 색상을 파스텔 핑크로 설정 */
             color: white;
             font-size: 1rem;
             border: none;
             transition: background-color 0.2s;
         }
+
         .login-form button:hover {
-            background-color: #0056b3;
+            background-color: #f783ac; /* 버튼 호버 색상을 더 진한 파스텔 핑크로 설정 */
         }
+
         .login-form input {
             height: 48px;
             margin-bottom: 1rem;
-            border: 1px solid #ced4da;
+            /*border: 1px solid #ffadc4; !* 입력 필드 테두리를 파스텔 핑크로 설정 *!*/
             border-radius: 0.25rem;
         }
+
         .login-form-link {
             text-align: center;
             display: block;
             margin-top: 2rem;
-            color: #007bff;
+            color: black; /* 이전에 파스텔 핑크로 설정했으나 검은색으로 변경됨 */
             transition: color 0.2s;
+            text-decoration: none; /* 링크의 밑줄을 제거 */
         }
+
+
         .login-form-link:hover {
-            color: #0056b3;
+            color: #f783ac; /* 링크 호버 색상을 더 진한 파스텔 핑크로 설정 */
         }
+
+
+        .login-logo {
+            width: 7%; /* 로그인 폼의 60% 크기 */
+            display: block; /* 블록 레벨 요소로 만들어 중앙 정렬 가능하게 함 */
+            margin: 0 auto -70px; /* 위, 양옆 자동(중앙 정렬), 아래 마진 20px */
+        }
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 뷰포트의 전체 높이를 사용하여 중앙 정렬 */
+        }
+
+        .login-form input {
+            height: 48px;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            background-color: #ffffff; /* 입력란 배경색을 흰색으로 설정 */
+            border: 1px solid #ced4da; /* 입력란 테두리 색상 다시 추가 */
+        }
+
+
     </style>
     <script>
         window.onload = function() {
@@ -103,18 +136,20 @@
     </script>
 </head>
 <body>
+<div class="centered-container">
 <div class="container">
+    <a href="/"><img src="/images/logo.png" class="login-logo"/></a>
     <div class="row justify-content-center">
         <div class="login-container">
-            <div class="login-header">로그인</div>
             <form action="/login" method="post" class="login-form" id="loginForm">
                 <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" required>
                 <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
                 <button type="submit" class="btn btn-primary">로그인</button>
-                <a href="/register" class="login-form-link">회원가입</a>
+                <a href="/member/register" class="login-form-link">회원가입</a>
             </form>
         </div>
     </div>
+</div>
 </div>
 
 <script>
