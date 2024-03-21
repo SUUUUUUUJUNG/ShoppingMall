@@ -24,7 +24,8 @@
 <body>
 <jsp:include page="common/navbar.jsp" flush="true"/>
 	<hr>
-	<jsp:include page="goods/goodsList.jsp" flush="true"></jsp:include>
+<jsp:include page="main/mainCarousel.jsp" flush="true"></jsp:include>
+<jsp:include page="goods/goodsList.jsp" flush="true"></jsp:include>
 	<%-- <jsp:include page="goods/goodsList.jsp" flush="true" /> --%>
 </body>
 </html>
