@@ -12,45 +12,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            //form 서브밋
-            $("form").on("submit",function(event){
-                if (!passwordValid){
-                    event.preventDefault();
-                    alert("비밀번호를 다시 확인해주세요")
-                    return;
-                }
-                alert("회원가입이 완료되었습니다.");
-            });
-            //비번확인
-            let passwordValid = false;
-            $("#password2").on("keyup",function(){
+            // 비밀번호 일치 여부 검사
+            let idValid = false;
+
+            $("#password, #password2").on("keyup", function() {
                 var password = $("#password").val();
-                var mesg = "비번 불일치";
-                if(password == $(this).val()){
-                    mesg = "비번 일치";
-                    passwordValid = true;
+                var confirmPassword = $("#password2").val();
+                // 비밀번호와 비밀번호 확인이 일치하지 않는 경우
+                if(password !== confirmPassword) {
+                    $("#passwordMismatch").show().text("비밀번호가 일치하지 않습니다.");
+                } else {
+                    // 일치하는 경우
+                    $("#passwordMismatch").hide();
                 }
-                $("#result2").text(mesg);
             });
 
-            $("#userId").on("focusout",function(){
-                var userId = $("#userId").val();
+            $("#userId").on("keyup", function () {
+                var userId = $(this).val();
                 $.ajax({
-                    url:"idDuplicateCheck",
-                    type:"post",
-                    datatype:"text",
-                    data:{userId:userId},
-                    success:function(data,status,xhr){
-                        console.log(data);
-                        $("#result").text(data);
-                        alert(data);
+                    url: "/idDuplicateCheck",
+                    type: "post",
+                    datatype: "json",
+                    data: {userId: userId},
+                    success: function (data) {
+                        idValid = data.valid;
+                        if (!idValid) {
+                            $("#userId").css("border-color", "red");
+                            $("#idCheck").show().text("이미 사용중인 아이디입니다.");
+                        } else {
+                            $("#userId").css("border-color", ""); // 테두리 색상 초기화
+                            $("#idCheck").hide(); // 메시지 숨김
+                        }
                     },
-                    error:function(xhr,status,error){
-                        console.log(error)
+                    error: function (xhr, status, error) {
+                        console.error(error);
                     }
                 });
             });
 
+            // 폼 제출 이벤트
+            $("form").on("submit", function(event){
+                var password = $("#password").val();
+                var confirmPassword = $("#password2").val();
+
+                if(password !== confirmPassword) {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (!idValid) {
+                    alert("아이디를 다시 확인해주세요");
+                    event.preventDefault();
+                    return;
+                }
+                alert("회원가입이 완료되었습니다.");
+            });
         });
     </script>
     <style>
@@ -133,7 +150,6 @@
             /* 필요에 따라 padding, margin 조정 */
         }
 
-        .input-group
     </style>
 </head>
 <body>
@@ -150,6 +166,7 @@
                             <input type="text" class="form-control" id="userId" name="userId"  placeholder="아이디" required >
                             <label for="userId">아이디</label>
                         </div>
+                        <p id="idCheck" style="display: none; color: red">이미 사용중인 아이디입니다.</p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
                             <input type="password" class="form-control" id="password" name="password"  placeholder=" " aria-label="비밀번호" aria-describedby="basic-addon1" required>
@@ -160,6 +177,8 @@
                             <input type="password2" class="form-control" id="password2" placeholder=" " aria-label="비밀번호 확인" aria-describedby="basic-addon1" required>
                             <label for="password">비밀번호 확인</label>
                         </div>
+                        <!-- 비밀번호 불일치 메시지 -->
+                        <p id="passwordMismatch" style="display: none; color: red;"></p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon"><i class="fas fa-id-card"></i></span>
                             <input type="text" class="form-control" id="username" name="username"  placeholder="이름" required>
