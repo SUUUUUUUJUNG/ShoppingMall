@@ -44,11 +44,8 @@
         where userId = #{userId} and PASSWORD = #{password}
     </select>
 
-    <select id="myPage" parameterType="string" resultType="MemberDTO">
-        select memberId,userId,password,username,zip_Code,address,addr_Detail,
-               phoneNumber,email
-        from member
-        where userId = #{userId}
+    <select id="myPage" parameterType="String" resultType="MemberDTO">
+        select * from member where userId = #{userId}
     </select>
 
 

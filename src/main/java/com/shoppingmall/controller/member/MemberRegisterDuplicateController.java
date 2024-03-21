@@ -3,10 +3,11 @@ package com.shoppingmall.controller.member;
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Member;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,15 +15,15 @@ public class MemberRegisterDuplicateController {
 
     private final MemberService memberService;
 
-    @RequestMapping(value="/idDuplicateCheck", produces="text/plain;charset=UTF-8" )
-    public String idDuplicateCheck(@RequestParam("userId") String userId) {
+    @PostMapping("/idDuplicateCheck")
+    public ResponseEntity<?> idDuplicateCheck(@RequestParam("userId") String userId) {
+        System.out.println("userId = " + userId);
         MemberDTO memberDTO = memberService.myPage(userId);
-        String mesg = "";
+        System.out.println("memberDTO = " + memberDTO);
         if(memberDTO==null) {
-            mesg="아이디 사용가능";
+            return ResponseEntity.ok(Map.of("message","사용 가능한 아이디입니다.","valid",true));
         }else {
-            mesg="사용 불가능";
+            return ResponseEntity.ok(Map.of("message","중복된 아이디 입니다.","valid",false));
         }
-        return mesg;
     }
 }
