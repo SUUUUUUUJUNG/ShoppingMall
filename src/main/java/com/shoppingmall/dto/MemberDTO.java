@@ -1,20 +1,43 @@
 package com.shoppingmall.dto;
 
+import jakarta.validation.constraints.*;
 import org.apache.ibatis.type.Alias;
 
 @Alias("MemberDTO")
 public class MemberDTO {
 
 	private Long memberId;
+	@NotBlank(message = "아이디를 올바르게 입력해주세요.")
+	@Size(min=3, max=30, message = "아이디는 3자 이상 30자 이하로 입력해주세요.")
 	private String userId;
+
+	@NotBlank(message = "이름을 정확히 입력해주세요.")
+	@Size(min=2, max=30)
 	private String username;
+
+	@NotBlank(message = "비밀번호를 정확히 입력해주세요.")
+	@Size(min=8, max=30 , message = "영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.")
 	private String password;
+
+	@NotBlank(message = "이메일을 올바르게 입력해주세요.")
+	@Email(message = "유효한 이메일 주소를 입력해주세요.")
 	private String email;
+
+	@NotBlank(message = "휴대폰 번호를 정확하게 입력하세요.")
 	private String phoneNumber;
+
+	@NotBlank
 	private String zip_Code;
+
+	@NotBlank
 	private String address;
+
+	@NotBlank
 	private String addr_Detail;
+
 	private String status;
+
+	@NotBlank
 	private String role;
 
 	public MemberDTO() {
