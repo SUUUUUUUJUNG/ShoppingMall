@@ -1,4 +1,4 @@
-<%@ page import="com.shoppingmall.dto.MemberDTO" %>
+<%@ page import="com.shoppingmall.domain.dto.MemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
