@@ -12,6 +12,7 @@
 <body>
 <jsp:include page="common/navbar.jsp" flush="true"/>
 <hr>
-<jsp:include page="member/mypage.jsp"></jsp:include>
+<jsp:include page="common/sidebar.jsp" flush="true"></jsp:include>
+<jsp:include page="member/mypage.jsp" flush="true"></jsp:include>
 </body>
 </html>

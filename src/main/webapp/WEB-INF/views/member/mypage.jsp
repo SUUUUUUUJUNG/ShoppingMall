@@ -1,43 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:if test="${! empty mesg}">
-	<script>
-alert('${mesg}');
-</script>
+    <script>
+        alert('${mesg}');
+    </script>
 </c:if>
 <% if(session.getAttribute("mesg")!=null){
-	session.removeAttribute("mesg");
+    session.removeAttribute("mesg");
 } %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <script>
 
-     
-     
-     </script>
-  
-<form action="/myPage/update" method="post">
-<input type="hidden" name="userId" value="${login.userId}">
-*아이디:${login.userId}
-<span id="result"></span>
-<br> 
-이름:<input type="text" name="username" value="${login.username }" ><br> 
-<input type="text" value="${login.zip_Code }"name="zip_Code" id="sample4_postcode" placeholder="우편번호">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" value="${login.address }" name="address" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" value="${login.addr_Detail }" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
-<span id="guide" style="color:#999"></span>
-<br>
-전화번호:
-<input type="text" value="${login.phoneNumber}" name="phoneNumber" ><br>
+<!-- 메인 컨텐츠 영역 -->
+<div class="content">
+    <form action="/myPage/update" method="post">
+        <input type="hidden" name="userId" value="${login.userId}">
+        *아이디:${login.userId}
+        <span id="result"></span>
+        <br>
+        이름:<input type="text" name="username" value="${login.username }" ><br>
+        <input type="text" value="${login.zip_Code }"name="zip_Code" id="sample4_postcode" placeholder="우편번호">
+        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+        <input type="text" value="${login.address }" name="address" id="sample4_roadAddress" placeholder="도로명주소">
+        <input type="text" value="${login.addr_Detail }" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
+        <span id="guide" style="color:#999"></span>
+        <br>
+        전화번호:
+        <input type="text" value="${login.phoneNumber}" name="phoneNumber" ><br>
 
-이메일:<input type="text" value="${login.email}" name="email" id="email">
-<br>
-<input type="submit" value="수정">
-<input type="reset" value="취소">
-</form>
+        이메일:<input type="text" value="${login.email}" name="email" id="email">
+        <br>
+        <input type="submit" value="수정">
+        <input type="reset" value="취소">
+    </form>
+</div>
+
+<!-- 다음 주소 API 스크립트 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -58,7 +58,7 @@ alert('${mesg}');
                 }
                 // 건물명이 있고, 공동주택일 경우 추가한다.
                 if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
                 // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                 if(extraRoadAddr !== ''){
@@ -90,5 +90,5 @@ alert('${mesg}');
             }
         }).open();
     }
-    
+
 </script>
