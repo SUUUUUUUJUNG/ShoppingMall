@@ -1,6 +1,6 @@
 package com.shoppingmall.web.controller.cart;
 
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import com.shoppingmall.domain.service.GoodsService;
 import jakarta.servlet.http.HttpSession;

@@ -1,94 +1,212 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:if test="${! empty mesg}">
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>마이페이지 - 정보 수정</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+
+        <c:if test="${! empty mesg}">
+
         alert('${mesg}');
+
+        </c:if>
+        <% if(session.getAttribute("mesg")!=null){
+            session.removeAttribute("mesg");
+        } %>
+
     </script>
-</c:if>
-<% if(session.getAttribute("mesg")!=null){
-    session.removeAttribute("mesg");
-} %>
+</head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container mt-4">
+    <div class="row">
+        <!-- 사이드바 자리-->
 
-<!-- 메인 컨텐츠 영역 -->
-<div class="content">
-    <form action="/myPage/update" method="post">
-        <input type="hidden" name="userId" value="${login.userId}">
-        *아이디:${login.userId}
-        <span id="result"></span>
-        <br>
-        이름:<input type="text" name="username" value="${login.username }" ><br>
-        <input type="text" value="${login.zip_Code }"name="zip_Code" id="sample4_postcode" placeholder="우편번호">
-        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-        <input type="text" value="${login.address }" name="address" id="sample4_roadAddress" placeholder="도로명주소">
-        <input type="text" value="${login.addr_Detail }" name="addr_Detail" id="sample4_jibunAddress" placeholder="상세주소">
-        <span id="guide" style="color:#999"></span>
-        <br>
-        전화번호:
-        <input type="text" value="${login.phoneNumber}" name="phoneNumber" ><br>
-
-        이메일:<input type="text" value="${login.email}" name="email" id="email">
-        <br>
-        <input type="submit" value="수정">
-        <input type="reset" value="취소">
-    </form>
+        <!-- 메인 컨텐츠 시작 -->
+        <div class="col-md-8 shadow">
+            <div class="form-section">
+                <h2 class="center-align">개인정보 수정</h2>
+            </div>
+            <form id="update-form">
+                <div class="form-section section-container">
+                    <div class="section-title center-align" style="text-align: center">변경할 수 없는 정보</div>
+                    <div class="section-content">
+                        <div class="mb-3">
+                            <label for="realName" class="form-label">이름</label>
+                            <input type="text" class="form-control fc" id="realName" value="${login.username}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" class="form-control fc" id="email" value="${login.email}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">휴대폰 번호</label>
+                            <input type="text" class="form-control fc" id="phoneNumber" value="${login.phoneNumber}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section section-container">
+                    <div class="section-title center-align">비밀번호 변경</div>
+                    <div class="section-content">
+                        <div class="mb-3">
+                            <label for="current-password" class="form-label">현재 비밀번호</label>
+                            <input type="password" name="currentPassword" class="form-control fc" id="current-password" required>
+                        </div>
+                        <div class="center-align" style="margin-bottom: 15px; color: darkgreen;">(비밀번호는 영문/숫자/특수문자 2가지 이상 조합의 8~20자여야 합니다.)</div>
+                        <div class="mb-3">
+                            <label for="new-password" class="form-label">새 비밀번호</label>
+                            <input type="password" name="newPassword" class="form-control fc" id="new-password" th:onkeyup="newPasswordValidate()" required>
+                        </div>
+                        <div id="passwordHelpBlock" style="display: none;">
+                            <p id="lengthCheck" class="text-danger">✖ 영문/숫자/특수문자 2가지 이상 조합 (8~20자)</p>
+                            <p id="sequenceCheck" class="text-danger">✖ 3개 이상 연속되거나 동일한 문자/숫자 제외</p>
+                            <p id="excludeUsername" class="text-danger">✖ 아이디(이메일) 제외</p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-password-check" class="form-label">다시 입력</label>
+                            <input type="password" class="form-control fc" id="new-password-check" required>
+                        </div>
+                        <div class="center-align">
+                            <p id="password-match-result"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section section-container">
+                    <div class="section-title center-align">주소 변경</div>
+                    <div class="section-content">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">주소</label>
+                            <input type="text" class="form-control fc" id="address" name="address" value="${login.address}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="zipCode" class="form-label">우편 번호</label>
+                            <input type="text" class="form-control fc" id="zipCode" value="${login.zip_Code}" name="zip_Code" readonly required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailAddress" class="form-label">상세 주소</label>
+                            <input type="text" class="form-control fc" id="detailAddress" name="addr_Detail"
+                                   value="${login.addr_Detail}" required>
+                        </div>
+                        <div class="mb-3 right-align">
+                            <button type="button" class="btn btn-outline-secondary address-btn" onclick="searchAddress()">
+                                주소 검색
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-align">
+                    <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정</button>
+                </div>
+                <input type="hidden" name="memberId" value="${login.memberId}" id="memberId">
+            </form>
+        </div>
+        <!-- 메인 컨텐츠 끝 -->
+    </div>
 </div>
-
-<!-- 다음 주소 API 스크립트 -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    $(document).ready(function() {
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+        $("form").submit(function(event) {
+            event.preventDefault();
 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
+            updateValidation()
+
+            var userData = {
+                "memberId":$("#memberId").val(),
+                "newPassword": $("#new-password").val(),
+                "address": $("#address").val(),
+                "addr_Detail": $("#detailAddress").val(),
+                "zip_Code": $("#zipCode").val(),
+                "currentPassword": $("#current-password").val()
+            };
+            console.log(userData);
+
+            $.ajax({
+                type: "PATCH",
+                url: "/api/member",
+                contentType: "application/json",
+                data: JSON.stringify(userData),
+                dataType: "json",
+                success: function(response) {
+                    alert("사용자 정보가 업데이트되었습니다.");
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = JSON.parse(xhr.responseText).message;
+                    alert(errorMessage);
                 }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
-                }
+            });
+        });
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+        $("#new-password, #new-password-check").on("input", function() {
+            validatePasswordsMatch();
+        });
 
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+        function updateValidation() {
+            const newPassword = $("#new-password").val();
+            const newPasswordCheck = $("#new-password-check").val();
+            const address = $('#address').val();
+            const detailAddress = $('#detailAddress').val();
 
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                } else {
-                    document.getElementById('guide').innerHTML = '';
-                }
+            if (newPassword !== newPasswordCheck) {
+                e.preventDefault();
+                alert("새 비밀번호와 다시 입력한 비밀번호가 일치하지 않습니다.");
+                $("#new-password-check").focus();
             }
-        }).open();
-    }
 
+            if (!validateAddress(address) || !validateDetailAddress(detailAddress)) {
+                alert('주소를 정확히 입력해주세요.');
+                return false;
+            }
+        }
+
+        // 비밀번호 일치 검사
+        function validatePasswordsMatch() {
+            const newPassword = $("#new-password").val();
+            const newPasswordCheck = $("#new-password-check").val();
+            if (newPassword === newPasswordCheck) {
+                $("#password-match-result").text('✔ 비밀번호가 일치합니다.').css('color', 'green');
+            } else {
+                $("#password-match-result").text('✖ 비밀번호가 일치하지 않습니다.').css('color', 'red');
+            }
+            if (newPasswordCheck === '' && newPassword === '') {
+                $("#password-match-result").text('');
+            }
+        }
+        // 주소 검색
+        function searchAddress() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    $('#address').val(data.address);
+                    $('#zipCode').val(data.zonecode);
+                    $('#detailAddress').focus();
+                }
+            }).open();
+        }
+
+        $(".address-btn").click(searchAddress);
+
+        function validateAddress(address) {
+            return address.trim().length > 0;
+        }
+
+        function validateDetailAddress(detailAddress) {
+            return detailAddress.trim().length > 0;
+        }
+    });
 </script>
+</html>
+

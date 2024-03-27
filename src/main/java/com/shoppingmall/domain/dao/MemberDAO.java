@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.shoppingmall.domain.dto.WishListDTO;
+import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 
 @Repository
 public class MemberDAO {
@@ -29,10 +30,8 @@ public class MemberDAO {
         return session.selectOne("MemberMapper.myPage",userid);
 	}
 
-	public int memberUpdate(MemberDTO dto) {
-		System.out.println("MemberDAO : " + dto);
-		int n = session.update("MemberMapper.memberUpdate",dto);
-		return n;
+	public int memberUpdate(MemberUpdateRequestDTO requestDTO) {
+        return session.update("MemberMapper.update",requestDTO);
 	}
 
 

@@ -1,7 +1,7 @@
 package com.shoppingmall.web.controller;
 
 import com.shoppingmall.domain.dto.InquiryDTO;
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.InquiryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

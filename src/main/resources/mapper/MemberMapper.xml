@@ -28,15 +28,15 @@
 <!--        where userid = #{userid}-->
 <!--    </select>-->
 
-    <update id="memberUpdate" parameterType="MemberDTO">
+    <update id="update" parameterType="MemberUpdateRequestDTO">
         update member
-        set zip_Code = #{zip_Code},
+        set PASSWORD = #{newPassword},
+            zip_Code = #{zip_Code},
             address = #{address},
-            addr_Detail = #{addr_Detail},
-            phoneNumber = #{phoneNumber},
-            email = #{email}
-            where userid = #{userId}
+            addr_Detail = #{addr_Detail}
+            where MEMBERID = #{memberId}
     </update>
+
     <select id="login" parameterType="hashmap" resultType="MemberDTO">
         select MEMBERID,userId,password,username,zip_Code,address,addr_Detail,
                phoneNumber,email

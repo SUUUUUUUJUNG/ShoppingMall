@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
