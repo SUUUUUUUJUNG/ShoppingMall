@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.MemberService;
 
 @Controller

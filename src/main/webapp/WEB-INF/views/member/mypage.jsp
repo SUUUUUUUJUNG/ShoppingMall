@@ -65,7 +65,7 @@
                         <div class="center-align" style="margin-bottom: 15px; color: darkgreen;">(비밀번호는 영문/숫자/특수문자 2가지 이상 조합의 8~20자여야 합니다.)</div>
                         <div class="mb-3">
                             <label for="new-password" class="form-label">새 비밀번호</label>
-                            <input type="password" class="form-control fc" id="new-password" th:onkeyup="newPasswordValidate()" required>
+                            <input type="password" name="newPassword" class="form-control fc" id="new-password" th:onkeyup="newPasswordValidate()" required>
                         </div>
                         <div id="passwordHelpBlock" style="display: none;">
                             <p id="lengthCheck" class="text-danger">✖ 영문/숫자/특수문자 2가지 이상 조합 (8~20자)</p>
@@ -161,9 +161,8 @@
         });
 
         function updateValidation() {
-            var newPassword = $("#new-password").val();
-            var newPasswordCheck = $("#new-password-check").val();
-            const password = $('#new-password').val();
+            const newPassword = $("#new-password").val();
+            const newPasswordCheck = $("#new-password-check").val();
             const address = $('#address').val();
             const detailAddress = $('#detailAddress').val();
 
@@ -171,11 +170,6 @@
                 e.preventDefault();
                 alert("새 비밀번호와 다시 입력한 비밀번호가 일치하지 않습니다.");
                 $("#new-password-check").focus();
-            }
-
-            if (!validatePasswordComplexity(password)) {
-                alert('비밀번호는 영문/숫자/특수문자 2가지 이상 조합의 8~20자여야 합니다.');
-                return false;
             }
 
             if (!validateAddress(address) || !validateDetailAddress(detailAddress)) {
@@ -209,12 +203,6 @@
         }
 
         $(".address-btn").click(searchAddress);
-
-
-        function validatePasswordComplexity(password) {
-            const re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W]).{8,20}$/;
-            return re.test(password);
-        }
 
         function validateAddress(address) {
             return address.trim().length > 0;

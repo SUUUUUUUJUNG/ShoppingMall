@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dto;
+package com.shoppingmall.domain.dto.member;
 
 import jakarta.validation.constraints.*;
 import org.apache.ibatis.type.Alias;
@@ -161,5 +161,12 @@ public class MemberDTO {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public void update(MemberUpdateRequestDTO requestDTO) {
+		this.password = requestDTO.getNewPassword();
+		this.zip_Code = requestDTO.getZip_Code();
+		this.address = requestDTO.getAddress();
+		this.addr_Detail = requestDTO.getAddr_Detail();
 	}
 }

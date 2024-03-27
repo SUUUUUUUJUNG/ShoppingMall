@@ -1,6 +1,6 @@
 package com.shoppingmall.web.controller.member;
 
-import com.shoppingmall.domain.dto.MemberDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
