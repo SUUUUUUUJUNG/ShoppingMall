@@ -29,4 +29,16 @@ public class MemberUpdateRequestDTO {
 
     @NotBlank
     private String addr_Detail;
+
+    public MemberUpdateRequestDTO(Long memberId, String currentPassword, String newPassword, String zip_Code, String address, String addr_Detail) {
+        this.memberId = memberId;
+        this.currentPassword = currentPassword;
+        this.newPassword = newPassword;
+        this.zip_Code = zip_Code;
+        this.address = address;
+        this.addr_Detail = addr_Detail;
+    }
+
+    public MemberUpdateRequestDTO() {
+    }
 }
