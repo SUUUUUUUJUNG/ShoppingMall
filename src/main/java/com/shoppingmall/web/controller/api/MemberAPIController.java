@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,25 +25,26 @@ public class MemberAPIController {
     private final MemberService memberService;
 
     @PatchMapping
-    public ResponseEntity<?> update(@RequestBody MemberUpdateRequestDTO requestDTO, HttpSession session) {
+    public ResponseEntity<?> update(@RequestBody @Validated MemberUpdateRequestDTO requestDTO, HttpSession session) {
+        System.out.println("requestDTO = " + requestDTO);
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
 
         if (memberDTO == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요한 작업입니다.");
         }
 
-        if(!Objects.equals(memberDTO.getMemberId(), requestDTO.getMemberId())){
+        if (!Objects.equals(memberDTO.getMemberId(), requestDTO.getMemberId())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "잘못된 접근입니다.");
         }
 
-        if(!Objects.equals(memberDTO.getPassword(), requestDTO.getCurrentPassword())){
+        if (!Objects.equals(memberDTO.getPassword(), requestDTO.getCurrentPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "비밀번호를 확인해주세요.");
         }
 
         memberDTO.update(requestDTO);
-        memberService.memberUpdate(memberDTO);
+        memberService.memberUpdate(requestDTO);
 
-        return ResponseEntity.ok(Map.of("message","회원정보가 수정되었습니다."));
+        return ResponseEntity.ok(Map.of("message", "회원정보가 수정되었습니다."));
     }
 }
 

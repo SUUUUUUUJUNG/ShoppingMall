@@ -24,15 +24,4 @@ public class MyPageController {
         session.setAttribute("login", dto);
         return "myPage";
     }
-
-    @PostMapping("/update")
-    public String memberUpdate(MemberDTO dto, HttpSession session){
-        System.out.println("MemberController " + dto);
-        int n = service.memberUpdate(dto);
-        session.setAttribute("login", dto);
-        session.setAttribute("mesg", "회원정보가 수정되었습니다.");
-        return "redirect:/myPage";
-        //1. myPage.jsp바로 응답처리
-        //2. /loginCheck/myPage로 재요청 -> servlet-context/myPage -> myPage.jsp
-    }
 }

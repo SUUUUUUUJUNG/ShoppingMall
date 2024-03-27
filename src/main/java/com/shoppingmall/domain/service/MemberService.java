@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shoppingmall.domain.dto.WishListDTO;
+import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +30,8 @@ public class MemberService {
         return dao.myPage(userId);
 	}
 
-	public int memberUpdate(MemberDTO dto) {
-		System.out.println("MemberService : " + dto);
-		int n= dao.memberUpdate(dto);
-		return n;
-		
+	public int memberUpdate(MemberUpdateRequestDTO requestDTO) {
+        return dao.memberUpdate(requestDTO);
 	}
 
 
