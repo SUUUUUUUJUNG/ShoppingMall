@@ -37,7 +37,7 @@
             <div class="form-section">
                 <h2 class="center-align">개인정보 수정</h2>
             </div>
-            <form action="/myPage/update" method="post">
+            <form id="update-form">
                 <div class="form-section section-container">
                     <div class="section-title center-align" style="text-align: center">변경할 수 없는 정보</div>
                     <div class="section-content">
@@ -107,7 +107,7 @@
                 <div class="center-align">
                     <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정</button>
                 </div>
-                <input type="hidden" name="userId" value="${login.userId}" id="userId">
+                <input type="hidden" name="memberId" value="${login.memberId}" id="memberId">
             </form>
         </div>
         <!-- 메인 컨텐츠 끝 -->
@@ -125,24 +125,18 @@
             updateValidation()
 
             var userData = {
-                "userID":$("#userID").val(),
-                "username": $("#username").val(),
-                "password": $("#new-password").val(),
-                "email": $("#email").val(),
-                "realName": $("#realName").val(),
-                "role": $("#role").val(),
-                "userGrade": $("#userGrade").val(),
-                "phoneNumber": $("#phoneNumber").val(),
+                "memberId":$("#memberId").val(),
+                "newPassword": $("#new-password").val(),
                 "address": $("#address").val(),
-                "detailAddress": $("#detailAddress").val(),
-                "zipCode": $("#zipCode").val(),
-                "status": $("#status").val(),
+                "addr_Detail": $("#detailAddress").val(),
+                "zip_Code": $("#zipCode").val(),
                 "currentPassword": $("#current-password").val()
             };
+            console.log(userData);
 
             $.ajax({
                 type: "PATCH",
-                url: "/api/users",
+                url: "/api/member",
                 contentType: "application/json",
                 data: JSON.stringify(userData),
                 dataType: "json",
@@ -151,7 +145,8 @@
                     window.location.reload();
                 },
                 error: function(xhr, status, error) {
-                    alert("업데이트에 실패했습니다: " + xhr.responseText);
+                    var errorMessage = JSON.parse(xhr.responseText).message;
+                    alert(errorMessage);
                 }
             });
         });

@@ -14,7 +14,6 @@ public class MemberUpdateRequestDTO {
     private Long memberId;
 
     @NotBlank(message = "비밀번호를 정확히 입력해주세요.")
-    @Size(min=8, max=30 , message = "영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.")
     private String currentPassword;
 
     @NotBlank(message = "비밀번호를 정확히 입력해주세요.")
