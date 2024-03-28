@@ -13,7 +13,7 @@ public class MemberLoginService {
     public MemberDTO getLogin(HttpSession session) {
         MemberDTO member = (MemberDTO) session.getAttribute("login");
         if (member == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "로그인이 필요한 서비스입니다.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요한 서비스입니다.");
         }
         return member;
     }

@@ -11,7 +11,7 @@ public class ProductInquiryDAO {
     @Autowired
     SqlSessionTemplate session;
 
-    public void create(ProductInquiryDTO productInquiryDTO) {
-        session.insert("ProductInquiryMapper.create", productInquiryDTO);
+    public Integer create(ProductInquiryDTO productInquiryDTO) {
+        return session.insert("ProductInquiryMapper.create", productInquiryDTO);
     }
 }

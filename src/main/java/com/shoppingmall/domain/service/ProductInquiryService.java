@@ -11,7 +11,7 @@ public class ProductInquiryService {
     @Autowired
     ProductInquiryDAO productInquiryDAO;
 
-    public void create(ProductInquiryDTO productInquiryDTO) {
-        productInquiryDAO.create(productInquiryDTO);
+    public Integer create(ProductInquiryDTO productInquiryDTO) {
+        return productInquiryDAO.create(productInquiryDTO);
     }
 }
