@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,4 +27,12 @@ public class ProductInquiryAPIController {
         productInquiryService.create(new ProductInquiryDTO(requestDTO, login.getMemberId()));
         return ResponseEntity.ok(Map.of("message","문의가 등록되었습니다."));
     }
+
+    @GetMapping
+    public ResponseEntity<?> findAllByMemberId(HttpSession session){
+        MemberDTO login = memberLoginService.getLogin(session);
+        List<ProductInquiryDTO> inquiries = productInquiryService.findAllByMemberId(login.getMemberId());
+        return ResponseEntity.ok(inquiries);
+    }
+
 }

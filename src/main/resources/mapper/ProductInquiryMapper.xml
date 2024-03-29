@@ -9,4 +9,8 @@ insert into PRODUCTINQUIRY (INQUIRYID,MEMBERID,GCODE,INQUIRYCONTENT,INQUIRYDATE,
 values (SUJUNG.PRODUCTINQUIRY_SEQ.nextval,#{memberId},#{gCode},#{inquiry_Content},#{inquiry_Date}, #{status})
 </insert>
 
+<select id="findAllByMemberId" parameterType="Long" resultType="ProductInquiryDTO">
+select * from PRODUCTINQUIRY where MEMBERID = #{memberId}
+</select>
+
 </mapper>

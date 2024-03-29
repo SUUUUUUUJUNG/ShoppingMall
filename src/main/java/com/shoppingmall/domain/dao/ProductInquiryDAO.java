@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProductInquiryDAO {
 
@@ -13,5 +15,9 @@ public class ProductInquiryDAO {
 
     public Integer create(ProductInquiryDTO productInquiryDTO) {
         return session.insert("ProductInquiryMapper.create", productInquiryDTO);
+    }
+
+    public List<ProductInquiryDTO> findAllByMemberId(Long memberId) {
+        return session.selectList("ProductInquiryMapper.findAllByMemberId",memberId);
     }
 }
