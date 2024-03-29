@@ -16,9 +16,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -63,5 +67,19 @@ class ProductInquiryAPIControllerTest {
                 )
                 .andExpect(status().isOk()) // HTTP 200 상태 코드를 기대함
                 .andExpect(jsonPath("$.message").value("문의가 등록되었습니다.")); // 응답 본문에 특정 메시지가 포함되어 있는지 검증
+    }
+
+    @Test
+    void givenUserLoggedIn_whenFindAllByMemberId_thenReturnsInquiriesList() throws Exception{
+        // 테스트 데이터 준비
+        ProductInquiryCreateRequestDTO requestDTO = new ProductInquiryCreateRequestDTO();
+        requestDTO.setMemberId(1L);
+
+        mockMvc.perform(get("/api/productInquiry")
+                .sessionAttr("login",memberDTO)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDTO))
+        )
+                .andExpect(status().isOk());
     }
 }
