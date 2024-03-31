@@ -22,6 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -71,7 +72,6 @@ class ProductInquiryAPIControllerTest {
 
     @Test
     void givenUserLoggedIn_whenFindAllByMemberId_thenReturnsInquiriesList() throws Exception{
-        // 테스트 데이터 준비
         ProductInquiryCreateRequestDTO requestDTO = new ProductInquiryCreateRequestDTO();
         requestDTO.setMemberId(1L);
 
@@ -82,4 +82,34 @@ class ProductInquiryAPIControllerTest {
         )
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void whenGCodeIsMissingOrInvalid_thenReturnsBadRequest() throws Exception{
+        mockMvc.perform(get("/api/productInquiry")
+                .sessionAttr("login",memberDTO))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void whenFindAllByGCode_thenReturnInquiriesList() throws  Exception{
+        //Given
+        String testGCode = "testGCode";
+        List<ProductInquiryDTO> expectedInquiries = new ArrayList<>();
+        ProductInquiryDTO inquiry1 = new ProductInquiryDTO(1L,"1문의 내용입니다.");
+        ProductInquiryDTO inquiry2 = new ProductInquiryDTO(1L, "2문의 내용입니다.");
+        expectedInquiries.add(inquiry1);
+        expectedInquiries.add(inquiry2);
+
+        given(productInquiryService.findAllByGCode(testGCode)).willReturn(expectedInquiries);
+
+        //when & Then
+        mockMvc.perform(get("/api/productInquiry")
+                .param("gCode",testGCode)
+                .sessionAttr("login",memberDTO))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(expectedInquiries.size()))
+                .andExpect(jsonPath("$[0]").exists())
+                .andExpect(jsonPath("$[1]").exists());
+    }
+
 }
