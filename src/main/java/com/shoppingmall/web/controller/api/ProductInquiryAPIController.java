@@ -28,11 +28,23 @@ public class ProductInquiryAPIController {
         return ResponseEntity.ok(Map.of("message","문의가 등록되었습니다."));
     }
 
-    @GetMapping
+    @GetMapping("/member")
     public ResponseEntity<?> findAllByMemberId(HttpSession session){
         MemberDTO login = memberLoginService.getLogin(session);
         List<ProductInquiryDTO> inquiries = productInquiryService.findAllByMemberId(login.getMemberId());
         return ResponseEntity.ok(inquiries);
     }
 
+    @GetMapping
+    public ResponseEntity<?> findAllByGCode(@RequestParam("gCode") String gCode) {
+        List<ProductInquiryDTO> inquiries = productInquiryService.findAllByGCode(gCode);
+        return ResponseEntity.ok(inquiries);
+    }
+
+    @PostMapping("/update/{inquiry_Id}")
+    public ResponseEntity<?> updateProductInquiry(@PathVariable("inquiry_Id")Long inquiry_Id, @RequestBody ProductInquiryCreateRequestDTO requestDTO, HttpSession session){
+        MemberDTO login = memberLoginService.getLogin(session);
+        List<ProductInquiryDTO> inquiry = productInquiryService.updateProductInquiry(inquiry_Id);
+        return ResponseEntity.ok(inquiry);
+    }
 }

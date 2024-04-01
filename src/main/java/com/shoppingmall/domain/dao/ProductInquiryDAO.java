@@ -20,4 +20,12 @@ public class ProductInquiryDAO {
     public List<ProductInquiryDTO> findAllByMemberId(Long memberId) {
         return session.selectList("ProductInquiryMapper.findAllByMemberId",memberId);
     }
+
+    public List<ProductInquiryDTO> findAllByGCode(String gCode) {
+        return session.selectList("ProductInquiryMapper.findAllByGCode",gCode);
+    }
+
+    public List<ProductInquiryDTO> updateProductInquiry(Long inquiryId) {
+        return session.selectList("ProductInquiryMapper.updateProductInquiry",inquiryId);
+    }
 }

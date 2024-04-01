@@ -20,4 +20,12 @@ public class ProductInquiryService {
     public List<ProductInquiryDTO> findAllByMemberId(Long memberId) {
         return productInquiryDAO.findAllByMemberId(memberId);
     }
+
+    public List<ProductInquiryDTO> findAllByGCode(String gCode) {
+        return productInquiryDAO.findAllByGCode(gCode);
+    }
+
+    public List<ProductInquiryDTO> updateProductInquiry(Long inquiryId) {
+        return productInquiryDAO.updateProductInquiry(inquiryId);
+    }
 }

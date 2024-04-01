@@ -4,13 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductInquiryMapper">
 
-<insert id="create" parameterType="ProductInquiryDTO">
-insert into PRODUCTINQUIRY (INQUIRYID,MEMBERID,GCODE,INQUIRYCONTENT,INQUIRYDATE,STATUS)
-values (SUJUNG.PRODUCTINQUIRY_SEQ.nextval,#{memberId},#{gCode},#{inquiry_Content},#{inquiry_Date}, #{status})
-</insert>
+    <insert id="create" parameterType="ProductInquiryDTO">
+        insert into PRODUCTINQUIRY (INQUIRYID, MEMBERID, GCODE, INQUIRYCONTENT, INQUIRYDATE, STATUS)
+        values (SUJUNG.PRODUCTINQUIRY_SEQ.nextval, #{memberId}, #{gCode}, #{inquiry_Content}, #{inquiry_Date},
+                #{status})
+    </insert>
 
-<select id="findAllByMemberId" parameterType="Long" resultType="ProductInquiryDTO">
-select * from PRODUCTINQUIRY where MEMBERID = #{memberId}
-</select>
+    <select id="findAllByMemberId" parameterType="Long" resultType="ProductInquiryDTO">
+        select *
+        from PRODUCTINQUIRY
+        where MEMBERID = #{memberId}
+    </select>
+
+    <update id="updateProductInquiry" parameterType="Long">
+        update PRODUCTINQUIRY set INQUIRYCONTENT = #{inquiry_Content} where INQUIRYID = #{inquiry_Id}
+    </update>
 
 </mapper>

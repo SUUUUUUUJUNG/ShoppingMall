@@ -24,4 +24,9 @@ public class ProductInquiryDTO {
         this.gCode = requestDTO.getGCode();
         this.inquiry_Content = requestDTO.getInquiry_Content();
     }
+
+    public ProductInquiryDTO(Long memberId, String inquiry_Content) {
+        this.memberId = memberId;
+        this.inquiry_Content = inquiry_Content;
+    }
 }
