@@ -25,7 +25,15 @@ public class ProductInquiryDAO {
         return session.selectList("ProductInquiryMapper.findAllByGCode",gCode);
     }
 
-    public List<ProductInquiryDTO> updateProductInquiry(Long inquiryId) {
-        return session.selectList("ProductInquiryMapper.updateProductInquiry",inquiryId);
+    public int updateProductInquiry(Long inquiryId) {
+        return session.update("ProductInquiryMapper.updateProductInquiry",inquiryId);
+    }
+
+    public int deleteProductInquiry(Long inquiryId) {
+        return session.delete("ProductInquiryMapper.deleteProductInquiry",inquiryId);
+    }
+
+    public ProductInquiryDTO findById(Long inquiryId) {
+        return session.selectOne("ProductInquiryMapper.findById", inquiryId);
     }
 }

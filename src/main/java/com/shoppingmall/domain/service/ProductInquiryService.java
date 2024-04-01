@@ -25,7 +25,16 @@ public class ProductInquiryService {
         return productInquiryDAO.findAllByGCode(gCode);
     }
 
-    public List<ProductInquiryDTO> updateProductInquiry(Long inquiryId) {
+    public int updateProductInquiry(Long inquiryId) {
         return productInquiryDAO.updateProductInquiry(inquiryId);
+    }
+
+    public boolean deleteProductInquiry(Long inquiryId) {
+        int deletedRows = productInquiryDAO.deleteProductInquiry(inquiryId);
+        return deletedRows > 0;
+    }
+
+    public ProductInquiryDTO findById(Long inquiryId){
+        return productInquiryDAO.findById(inquiryId);
     }
 }
