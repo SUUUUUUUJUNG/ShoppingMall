@@ -20,6 +20,7 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -145,5 +146,36 @@ class ProductInquiryAPIControllerTest {
                 .andExpect(jsonPath("$.inquiryId").value(1));
     }
 
+    @Test
+    void deleteProductInquiry_WhenInquiryDoesNotExist_ShouldReturnNotFound() throws Exception {
+        Long inquiryId = 1L;
+        Long memberId = 1L;
+        MemberDTO mockMember = new MemberDTO();
+        mockMember.setMemberId(memberId);
 
+        given(memberLoginService.getLogin(any())).willReturn(mockMember);
+
+        mockMvc.perform(delete("/api/productInquiry/{inquiryId}", inquiryId))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("문의를 찾을 수 없습니다."));
+    }
+    @Test
+    void deleteProductInquiry_WhenInquiryExists_ShouldReturnSuccessMessage() throws Exception {
+        Long inquiryId = 1L;
+        Long memberId = 1L;
+
+        ProductInquiryDTO productInquiryDTO = new ProductInquiryDTO();
+        productInquiryDTO.setInquiry_Id(inquiryId);
+        productInquiryDTO.setMemberId(memberId);
+
+        MemberDTO mockMember = new MemberDTO();
+        mockMember.setMemberId(memberId);
+
+        given(memberLoginService.getLogin(any())).willReturn(mockMember);
+        given(productInquiryService.findById(inquiryId)).willReturn(productInquiryDTO);
+
+        mockMvc.perform(delete("/api/productInquiry/{inquiryId}", inquiryId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("문의가 삭제되었습니다."));
+    }
 }
