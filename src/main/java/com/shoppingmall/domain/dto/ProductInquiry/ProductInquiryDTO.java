@@ -29,4 +29,8 @@ public class ProductInquiryDTO {
         this.memberId = memberId;
         this.inquiry_Content = inquiry_Content;
     }
+
+    public ProductInquiryDTO() {
+
+    }
 }

@@ -46,26 +46,29 @@ public class ProductInquiryAPIController {
 
     @PatchMapping
     public ResponseEntity<?> updateProductInquiry(@RequestBody ProductInquiryUpdateRequestDTO requestDTO, HttpSession session){
-        Long memberId = memberLoginService.getLogin(session).getMemberId();
-        // id를 find  dto user
-        ProductInquiryDTO inquiryDTO = productInquiryService.findById(requestDTO.getInquiry_Id());
-        if (!inquiryDTO.getMemberId().equals(memberId)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "mesg");
-        }
+        validateIsInquiryOwner(requestDTO.getInquiry_Id(), session);
         productInquiryService.update(requestDTO);
-        return ResponseEntity.ok(Map.of("message", "문의가 수정되었습니다.", "inquiryId", inquiryDTO.getInquiry_Id()));
+        return ResponseEntity.ok(Map.of("message", "문의가 수정되었습니다.", "inquiryId", requestDTO.getInquiry_Id()));
     }
+
+
 
     @DeleteMapping("/{inquiryId}")
     public ResponseEntity<?> deleteProductInquiry(@PathVariable("inquiryId") Long inquiryId, HttpSession session) {
-        // MemberLoginService에서 로그인 여부를 체크하므로, 여기서 별도의 로그인 체크는 필요 없음
-        Long memberId = memberLoginService.getLogin(session).getMemberId(); // 로그인되지 않았다면, 여기서 ResponseStatusException이 발생
-
+        validateIsInquiryOwner(inquiryId, session);
 
         boolean isDeleted = productInquiryService.deleteProductInquiry(inquiryId);
         if (!isDeleted) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "문의를 찾을 수 없습니다."));
         }
         return ResponseEntity.ok(Map.of("message", "문의가 삭제되었습니다."));
+    }
+
+    private void validateIsInquiryOwner(Long inquiryId, HttpSession session) {
+        Long memberId = memberLoginService.getLogin(session).getMemberId();
+        ProductInquiryDTO inquiryDTO = productInquiryService.findById(inquiryId);
+        if (!inquiryDTO.getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "mesg");
+        }
     }
 }
