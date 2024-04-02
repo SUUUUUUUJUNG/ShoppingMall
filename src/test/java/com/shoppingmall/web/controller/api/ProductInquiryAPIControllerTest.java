@@ -124,7 +124,7 @@ class ProductInquiryAPIControllerTest {
         // 요청 DTO 모의 데이터
         ProductInquiryUpdateRequestDTO requestDTO = new ProductInquiryUpdateRequestDTO();
         requestDTO.setInquiry_Id(1L);
-        requestDTO.setInquiry_Content("데이트해요..!");
+        requestDTO.setInquiry_Content("test content");
 
         // 서비스 메소드 호출 결과 모의 설정
         ProductInquiryDTO mockInquiryDTO = new ProductInquiryDTO();
