@@ -53,7 +53,7 @@ public class ProductInquiryAPIController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "mesg");
         }
         productInquiryService.update(requestDTO);
-        return ResponseEntity.ok(Map.of("message", "문의가 수정되었습니다", "inquiryId", inquiryDTO.getInquiry_Id()));
+        return ResponseEntity.ok(Map.of("message", "문의가 수정되었습니다.", "inquiryId", inquiryDTO.getInquiry_Id()));
     }
 
     @DeleteMapping("/{inquiryId}")
