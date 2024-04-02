@@ -16,7 +16,7 @@
         where MEMBERID = #{memberId}
     </select>
 
-    <update id="updateProductInquiry" parameterType="Long">
+    <update id="update" parameterType="ProductInquiryUpdateRequestDTO">
         update PRODUCTINQUIRY set INQUIRYCONTENT = #{inquiry_Content} where INQUIRYID = #{inquiry_Id}
     </update>
 
