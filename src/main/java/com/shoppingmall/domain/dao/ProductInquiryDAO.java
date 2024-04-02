@@ -26,8 +26,8 @@ public class ProductInquiryDAO {
         return session.selectList("ProductInquiryMapper.findAllByGCode",gCode);
     }
 
-    public int deleteProductInquiry(Long inquiryId) {
-        return session.delete("ProductInquiryMapper.deleteProductInquiry",inquiryId);
+    public int delete(Long inquiryId) {
+        return session.delete("ProductInquiryMapper.delete",inquiryId);
     }
 
     public ProductInquiryDTO findById(Long inquiryId) {

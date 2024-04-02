@@ -56,19 +56,19 @@ public class ProductInquiryAPIController {
     @DeleteMapping("/{inquiryId}")
     public ResponseEntity<?> deleteProductInquiry(@PathVariable("inquiryId") Long inquiryId, HttpSession session) {
         validateIsInquiryOwner(inquiryId, session);
-
-        boolean isDeleted = productInquiryService.deleteProductInquiry(inquiryId);
-        if (!isDeleted) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "문의를 찾을 수 없습니다."));
-        }
+        productInquiryService.delete(inquiryId);
         return ResponseEntity.ok(Map.of("message", "문의가 삭제되었습니다."));
     }
 
     private void validateIsInquiryOwner(Long inquiryId, HttpSession session) {
         Long memberId = memberLoginService.getLogin(session).getMemberId();
         ProductInquiryDTO inquiryDTO = productInquiryService.findById(inquiryId);
+
+        if (inquiryDTO == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "문의를 찾을 수 없습니다.");
+        }
         if (!inquiryDTO.getMemberId().equals(memberId)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "mesg");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "권한이 없습니다.");
         }
     }
 }

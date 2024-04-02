@@ -27,8 +27,8 @@ public class ProductInquiryService {
     }
 
 
-    public boolean deleteProductInquiry(Long inquiryId) {
-        int deletedRows = productInquiryDAO.deleteProductInquiry(inquiryId);
+    public boolean delete(Long inquiryId) {
+        int deletedRows = productInquiryDAO.delete(inquiryId);
         return deletedRows > 0;
     }
 

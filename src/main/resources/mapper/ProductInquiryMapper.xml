@@ -20,7 +20,7 @@
         update PRODUCTINQUIRY set INQUIRYCONTENT = #{inquiry_Content} where INQUIRYID = #{inquiry_Id}
     </update>
 
-    <delete id="deleteProductInquiry" parameterType="Long">
+    <delete id="delete" parameterType="Long">
         delete from PRODUCTINQUIRY where INQUIRYID=#{inquiry_Id}
     </delete>
 
