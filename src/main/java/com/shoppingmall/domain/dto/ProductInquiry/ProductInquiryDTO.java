@@ -30,6 +30,13 @@ public class ProductInquiryDTO {
         this.inquiry_Content = inquiry_Content;
     }
 
+    public ProductInquiryDTO(Long inquiry_Id, Long memberId, String gCode, String inquiry_Content) {
+        this.inquiry_Id = inquiry_Id;
+        this.memberId = memberId;
+        this.gCode = gCode;
+        this.inquiry_Content = inquiry_Content;
+    }
+
     public ProductInquiryDTO() {
 
     }

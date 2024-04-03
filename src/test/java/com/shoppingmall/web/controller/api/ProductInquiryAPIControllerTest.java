@@ -49,7 +49,7 @@ class ProductInquiryAPIControllerTest {
     @MockBean
     private MemberLoginService memberLoginService;
 
-
+    private ProductInquiryDTO productInquiryDTO;
     private MemberDTO memberDTO;
 
     @BeforeEach
@@ -57,13 +57,21 @@ class ProductInquiryAPIControllerTest {
         memberDTO = new MemberDTO();
         memberDTO.setMemberId(1L);
 
+        productInquiryDTO = new ProductInquiryDTO(
+                1L,
+                1L,
+                "test content",
+                "test gCode"
+                );
+
+
         given(productInquiryService.create(any(ProductInquiryDTO.class))).willReturn(1);
     }
 
     @Test
     void createProductInquiry_ReturnsOkWithMessage_IfUserLoggedIn() throws Exception {
         ProductInquiryCreateRequestDTO requestDTO = new ProductInquiryCreateRequestDTO();
-        requestDTO.setGCode("sampleCode");
+        requestDTO.setCode("sampleCode");
         requestDTO.setInquiry_Content("상품에 대한 문의 내용입니다.");
 
         mockMvc.perform(post("/api/productInquiry")
@@ -177,5 +185,18 @@ class ProductInquiryAPIControllerTest {
         mockMvc.perform(delete("/api/productInquiry/{inquiryId}", inquiryId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("문의가 삭제되었습니다."));
+    }
+
+    @Test
+    public void findByIdTest() throws Exception {
+
+        Long inquiryId = productInquiryDTO.getInquiry_Id();
+        when(productInquiryService.findById(inquiryId)).thenReturn(productInquiryDTO);
+
+        mockMvc.perform(get("/api/productInquiry/one")
+                        .param("inquiryId", inquiryId.toString())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(productInquiryDTO)));
     }
 }
