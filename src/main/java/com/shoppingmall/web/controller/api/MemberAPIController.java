@@ -26,7 +26,6 @@ public class MemberAPIController {
 
     @PatchMapping
     public ResponseEntity<?> update(@RequestBody @Validated MemberUpdateRequestDTO requestDTO, HttpSession session) {
-        System.out.println("requestDTO = " + requestDTO);
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
 
         if (memberDTO == null) {
@@ -47,4 +46,3 @@ public class MemberAPIController {
         return ResponseEntity.ok(Map.of("message", "회원정보가 수정되었습니다."));
     }
 }
-
