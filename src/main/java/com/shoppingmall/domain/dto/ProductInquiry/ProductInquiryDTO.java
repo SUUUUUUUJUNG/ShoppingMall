@@ -21,7 +21,7 @@ public class ProductInquiryDTO {
 
     public ProductInquiryDTO(ProductInquiryCreateRequestDTO requestDTO, Long memberId) {
         this.memberId = memberId;
-        this.gCode = requestDTO.getGCode();
+        this.gCode = requestDTO.getCode();
         this.inquiry_Content = requestDTO.getInquiry_Content();
     }
 

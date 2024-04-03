@@ -5,27 +5,33 @@
 <mapper namespace="ProductInquiryMapper">
 
     <insert id="create" parameterType="ProductInquiryDTO">
-        insert into PRODUCTINQUIRY (INQUIRYID, MEMBERID, GCODE, INQUIRYCONTENT, INQUIRYDATE, STATUS)
+        insert into PRODUCT_INQUIRY (INQUIRY_ID, MEMBERID, GCODE, INQUIRY_CONTENT, INQUIRY_DATE, STATUS)
         values (SUJUNG.PRODUCTINQUIRY_SEQ.nextval, #{memberId}, #{gCode}, #{inquiry_Content}, #{inquiry_Date},
                 #{status})
     </insert>
 
     <select id="findAllByMemberId" parameterType="Long" resultType="ProductInquiryDTO">
         select *
-        from PRODUCTINQUIRY
+        from PRODUCT_INQUIRY
         where MEMBERID = #{memberId}
     </select>
 
+    <select id="findAllByGCode" parameterType="String" resultType="ProductInquiryDTO">
+        select *
+        from PRODUCT_INQUIRY
+        where gCode = #{gCode}
+    </select>
+
     <update id="update" parameterType="ProductInquiryUpdateRequestDTO">
-        update PRODUCTINQUIRY set INQUIRYCONTENT = #{inquiry_Content} where INQUIRYID = #{inquiry_Id}
+        update PRODUCT_INQUIRY set INQUIRY_CONTENT = #{inquiry_Content} where INQUIRY_ID = #{inquiry_Id}
     </update>
 
     <delete id="delete" parameterType="Long">
-        delete from PRODUCTINQUIRY where INQUIRYID=#{inquiry_Id}
+        delete from PRODUCT_INQUIRY where INQUIRY_ID=#{inquiry_Id}
     </delete>
 
-    <select id="findById" parameterType="Long">
-        select * from PRODUCTINQUIRY where INQUIRYID=#{inquiry_Id}
+    <select id="findById" parameterType="Long" resultType="ProductInquiryDTO">
+        select * from PRODUCT_INQUIRY where INQUIRY_ID=#{inquiry_Id}
     </select>
 
 </mapper>

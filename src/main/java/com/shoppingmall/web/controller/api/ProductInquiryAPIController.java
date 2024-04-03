@@ -34,14 +34,17 @@ public class ProductInquiryAPIController {
     @GetMapping("/member")
     public ResponseEntity<?> findAllByMemberId(HttpSession session){
         MemberDTO login = memberLoginService.getLogin(session);
-        List<ProductInquiryDTO> inquiries = productInquiryService.findAllByMemberId(login.getMemberId());
-        return ResponseEntity.ok(inquiries);
+        return ResponseEntity.ok(productInquiryService.findAllByMemberId(login.getMemberId()));
     }
 
     @GetMapping
     public ResponseEntity<?> findAllByGCode(@RequestParam("gCode") String gCode) {
-        List<ProductInquiryDTO> inquiries = productInquiryService.findAllByGCode(gCode);
-        return ResponseEntity.ok(inquiries);
+        return ResponseEntity.ok(productInquiryService.findAllByGCode(gCode));
+    }
+
+    @GetMapping("/one")
+    public ResponseEntity<?> findById(@RequestParam("inquiryId") Long inquiryId) {
+        return ResponseEntity.ok(productInquiryService.findById(inquiryId));
     }
 
     @PatchMapping
