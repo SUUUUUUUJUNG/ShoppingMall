@@ -7,7 +7,7 @@
 
     <select id="idSearch" resultType="string"
             parameterType="MemberDTO">
-        select userid
+        select USERNAME
         from member
         where username=#{username} and phoneNumber=#{phoneNumber}
     </select>
@@ -15,18 +15,11 @@
 
 
     <insert id="memberAdd" parameterType="MemberDTO">
-        insert into member (memberid,userid,password,username,zip_Code,address,addr_Detail,
+        insert into member (memberid,USERNAME,password,REALNAME,zip_Code,address,addr_Detail,
                             phoneNumber,email, ROLE,STATUS)
         values(SUJUNG.MEMBERID_SEQ.nextval, #{userId},#{password},#{username},#{zip_Code},#{address},#{addr_Detail},
                #{phoneNumber},#{email},'ROLE_User','Active')
     </insert>
-
-<!--    <select id="idCheck" parameterType="string"-->
-<!--            resultType="int">-->
-<!--        select count(*)-->
-<!--        from member-->
-<!--        where userid = #{userid}-->
-<!--    </select>-->
 
     <update id="update" parameterType="MemberUpdateRequestDTO">
         update member
@@ -37,18 +30,8 @@
             where MEMBERID = #{memberId}
     </update>
 
-    <select id="login" parameterType="hashmap" resultType="MemberDTO">
-        select MEMBERID,userId,password,username,zip_Code,address,addr_Detail,
-               phoneNumber,email
-        from member
-        where userId = #{userId} and PASSWORD = #{password}
-    </select>
 
     <select id="myPage" parameterType="String" resultType="MemberDTO">
-        select * from member where userId = #{userId}
+        select * from member where USERNAME = #{userId}
     </select>
-
-
-
-
 </mapper>
