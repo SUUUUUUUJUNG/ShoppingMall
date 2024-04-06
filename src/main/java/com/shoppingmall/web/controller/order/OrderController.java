@@ -24,7 +24,7 @@ public class OrderController {
     public String orderConfirm(@RequestParam("cartId") String cartId, Model model) {
         CartListResponseDTO cart = goodsService.findById(cartId);
         String userId = cart.getUserId();
-        MemberDTO member = memberService.myPage(userId);
+        MemberDTO member = memberService.findByUsername(userId);
         model.addAttribute("mDTO", member);
         model.addAttribute("cDTO", cart);
         return "orderConfirm";
@@ -34,7 +34,7 @@ public class OrderController {
     public String orderDone(@RequestParam("orderNum") Integer orderNum, OrderDTO oDTO,
                             HttpSession session, Model model) {
         MemberDTO dto = (MemberDTO)session.getAttribute("login");
-        oDTO.setUserId(dto.getUserId());
+        oDTO.setUserId(dto.getUsername());
         goodsService.orderDone(oDTO,orderNum);//insert,delete
         model.addAttribute("oDTO", oDTO);
         return "orderDone";

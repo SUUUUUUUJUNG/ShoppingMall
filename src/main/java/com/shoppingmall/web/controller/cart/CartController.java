@@ -27,7 +27,7 @@ public class CartController {
     @RequestMapping("/list")
     public String cartList(HttpSession session, Model model) {
         MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
-        String userId = memberDTO.getUserId();
+        String userId = memberDTO.getUsername();
         List<CartListResponseDTO> list = goodsService.cartList(userId);
         model.addAttribute("cartList",list);
         return "cartList";
@@ -37,7 +37,7 @@ public class CartController {
     @ResponseBody
     public ResponseEntity<?> cartAddV2(@RequestBody Map<String, String> map, HttpSession session) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        String userId = memberDTO.getUserId();
+        String userId = memberDTO.getUsername();
         map.put("userId", userId);
         goodsService.mergeCartItems(map);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","장바구니에 추가되었습니다."));

@@ -184,7 +184,7 @@
                     <form th:action="@{/registerProc}" method="post" class="form-signin needs-validation" >
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="userId" name="userId"  placeholder="아이디" value="${memberDTO.userId}" required >
+                            <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" value="${memberDTO.username}" required >
                             <label for="userId">아이디</label>
                         </div>
                         <p id="idCheck" style="display: none; color: red">이미 사용중인 아이디입니다.</p>
@@ -202,7 +202,7 @@
                         <p id="passwordMismatch" style="display: none; color: red;"></p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon"><i class="fas fa-id-card"></i></span>
-                            <input type="text" class="form-control" id="username" name="username"  placeholder="이름" value="${memberDTO.username}" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="이름" value="${memberDTO.realName}" required>
                             <label for="password">이름</label>
                         </div>
                         <div class="input-group mb-3 form-floating">
