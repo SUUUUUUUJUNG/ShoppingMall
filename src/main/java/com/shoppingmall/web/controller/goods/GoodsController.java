@@ -3,6 +3,7 @@ package com.shoppingmall.web.controller.goods;
 import com.shoppingmall.domain.dto.GoodsDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class GoodsController {
 
 	private final GoodsService goodsService;
+	private final WishListService wishListService;
 
 	@RequestMapping(value="/list")
 	public ModelAndView goodsList(@RequestParam("gCategory")String gCategory) {
@@ -29,7 +31,7 @@ public class GoodsController {
 			gCategory="top";
 		}
 
-		List<GoodsDTO> list = goodsService.goodsList(gCategory);
+		List<GoodsDTO> list = goodsService.findByCategory(gCategory);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("goodsList",list);
 		mav.setViewName("main");
@@ -41,11 +43,11 @@ public class GoodsController {
 	public String goodsRetrieve(@RequestParam("gCode")String gCode, Model model, HttpSession session) {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
 		Long memberId = memberDTO.getMemberId();
-		GoodsDTO goodsDTO = goodsService.goodsRetrieve(gCode);
+		GoodsDTO goodsDTO = goodsService.findByCode(gCode);
 		Map<String, String> map = new HashMap<>();
 		map.put("memberId", String.valueOf(memberId));
 		map.put("gCode",gCode);
-		boolean itemWishlisted = goodsService.isItemWishlisted(map);
+		boolean itemWishlisted = wishListService.isItemWishlisted(map);
 		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
 

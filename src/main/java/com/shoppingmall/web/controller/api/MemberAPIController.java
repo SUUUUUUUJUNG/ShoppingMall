@@ -41,7 +41,7 @@ public class MemberAPIController {
         }
 
         memberDTO.update(requestDTO);
-        memberService.memberUpdate(requestDTO);
+        memberService.update(requestDTO);
 
         return ResponseEntity.ok(Map.of("message", "회원정보가 수정되었습니다."));
     }

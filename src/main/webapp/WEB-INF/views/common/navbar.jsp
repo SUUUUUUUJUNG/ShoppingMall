@@ -54,7 +54,7 @@
     <a class="nav-item nav-link" href="/login">로그인</a>
     <a class="nav-item nav-link" href="/member/register">회원가입</a>
     <% } else { %>
-    <span class="nav-item"><%=memberDTO.getUsername()%> 님</span>
+    <span class="nav-item"><%=memberDTO.getRealName()%> 님</span>
     <a class="nav-item nav-link" href="/logout">로그아웃</a>
     <a class="nav-item nav-link" href="/myPage">마이페이지</a>
     <a class="nav-item nav-link" href="/cart/list">장바구니</a>

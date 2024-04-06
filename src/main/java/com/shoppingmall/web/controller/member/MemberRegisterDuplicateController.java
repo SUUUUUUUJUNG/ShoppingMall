@@ -17,7 +17,7 @@ public class MemberRegisterDuplicateController {
     @PostMapping("/idDuplicateCheck")
     public ResponseEntity<?> idDuplicateCheck(@RequestParam("userId") String userId) {
         System.out.println("userId = " + userId);
-        MemberDTO memberDTO = memberService.myPage(userId);
+        MemberDTO memberDTO = memberService.findByUsername(userId);
         System.out.println("memberDTO = " + memberDTO);
         if(memberDTO==null) {
             return ResponseEntity.ok(Map.of("message","사용 가능한 아이디입니다.","valid",true));

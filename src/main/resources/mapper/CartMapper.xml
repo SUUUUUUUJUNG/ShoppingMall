@@ -4,33 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CartMapper">
 
-    <insert id="orderDone" parameterType="OrderDTO" >
-        insert into order_info (ORDER_ID,USERID,GCODE,GSIZE,GCOLOR,GAMOUNT,
-                               ORDERNAME,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,PAYMETHOD,ORDERDAY,TOTALPRICE)
-        values(orderInfo_seq.nextval, #{userId},#{gCode},
-               #{gSize},#{gColor},#{gAmount},
-              #{orderName},#{zip_Code},#{address},#{addr_Detail},#{phoneNumber},#{payMethod}, #{orderDay}, #{totalPrice})
-    </insert>
 
-
-    <insert id="orderAllDone" parameterType="arraylist" >
-
-        insert all
-        <foreach collection="list" item="item">
-            into ORDER_INFO (order_Id,userid,gCode,gSize,gColor,gAmount,
-            orderName,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,payMethod)
-
-            values( orderSeq()  , #{item.userId},#{item.gCode},
-            #{item.gSize},#{item.gColor},#{item.gAmount},
-           #{item.orderName},#{item.post},
-            #{item.addr1},#{item.addr2},#{item.phone},#{item.payMethod} )
-        </foreach>
-        select *
-        from dual
-    </insert>
 
     <select id="orderAllConfirm" parameterType="arraylist" resultType="CartDTO">
-        select num,userid,gCode,gPrice,gSize,gColor,gAmount,gName,gImage
+        select num,USERNAME,gCode,gPrice,gSize,gColor,gAmount,gName,gImage
         from cart
         where num
         IN
@@ -39,10 +16,10 @@
         </foreach>
     </select>
 
-    <select id="cartByNum" parameterType="string" resultType="CartListResponseDTO">
+    <select id="findByUsername" parameterType="string" resultType="CartListResponseDTO">
         SELECT
             c.CARTID as CARTID,
-            c.USERID as USERID,
+            c.USERNAME as USERNAME,
             c.GCODE as GCODE,
             c.GSIZE as GSIZE,
             c.GCOLOR as GCOLOR,
@@ -55,14 +32,14 @@
                 JOIN
             goods g ON c.GCODE = g.GCODE
         WHERE
-            c.USERID = #{userId}
+            c.USERNAME = #{username}
     </select>
 
 
     <select id="findByCartId" parameterType="string" resultType="CartListResponseDTO">
         SELECT
             c.CARTID as CARTID,
-            c.USERID as USERID,
+            c.USERNAME as USERNAME,
             c.GCODE as GCODE,
             c.GSIZE as GSIZE,
             c.GCOLOR as GCOLOR,
@@ -80,7 +57,7 @@
 
 
 
-    <delete id="cartAllDel" parameterType="arraylist">
+    <delete id="deleteAll" parameterType="arraylist">
         delete from cart
         where num
         IN
@@ -89,21 +66,21 @@
         </foreach>
     </delete>
 
-    <update id="cartUpdate" parameterType="map">
+    <update id="update" parameterType="map">
         update cart
         set gAmount = #{gAmount}
         where CARTID = #{cartId}
     </update>
 
-    <delete id="cartDel" parameterType="int">
+    <delete id="delete" parameterType="int">
         delete
         from cart
         where CARTID = #{cartId}
     </delete>
 
-    <insert id="cartAdd" parameterType="map" >
-        insert into cart (cartid,userid,gCode,gSize,gColor,gAmount)
-        values (cart_seq.nextval,#{userId},#{gCode},
+    <insert id="create" parameterType="map" >
+        insert into cart (cartid,USERNAME,gCode,gSize,gColor,gAmount)
+        values (cart_seq.nextval,#{username},#{gCode},
                 #{gSize},#{gColor},#{gAmount})
     </insert>
 
@@ -114,14 +91,13 @@
     </select>-->
 
     <select id="findDuplicateCartItem" parameterType="map" resultType="CartDTO">
-        select * from cart where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and userId=#{userId}
+        select * from cart where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and USERNAME=#{username}
     </select>
 
     <update id="updateItemQuantity" parameterType="map">
         update cart
         set gAmount = gAmount+1
-        where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and userId=#{userId}
+        where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and USERNAME=#{username}
     </update>
-
 
 </mapper>

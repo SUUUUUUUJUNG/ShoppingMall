@@ -4,20 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="InquiryMapper">
 
-   <insert id="submitInquiry" parameterType="inquiryDTO">
+   <insert id="create" parameterType="inquiryDTO">
 insert into CUSTOMER_INQUIRIES (INQUIRY_ID,MEMBERID,INQUIRY_TYPE,INQUIRY_TITLE,INQUIRY_CONTENT,INQUIRY_DATE,STATUS)
 values (SUJUNG.CUSTOMER_INQUIRIES_SEQ.nextval, #{memberId},#{inquiry_Type},#{inquiry_Title},#{inquiry_Content},#{inquiry_Date}, #{status})
    </insert>
 
-   <select id="inquiriesList" parameterType="Long" resultType="inquiryDTO">
+   <select id="findByMemberId" parameterType="Long" resultType="inquiryDTO">
       select * from CUSTOMER_INQUIRIES where MEMBERID=#{memberId}
    </select>
 
-   <delete id="deleteInquiryByMemberId" parameterType="Long">
+   <delete id="delete" parameterType="Long">
     delete from CUSTOMER_INQUIRIES where INQUIRY_ID=#{inquiry_Id}
    </delete>
 
-   <select id="viewInquiryDetails" parameterType="Long" resultType="inquiryDTO">
+   <select id="findByInquiryId" parameterType="Long" resultType="inquiryDTO">
         select * from CUSTOMER_INQUIRIES where INQUIRY_ID=#{inquiry_Id}
    </select>
 

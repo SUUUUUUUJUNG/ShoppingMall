@@ -22,10 +22,10 @@ public class MainController {
 	@GetMapping("/") // 리스트 무조건 뿌리기
 	public String mainView(@RequestParam(value = "gCategory", required = false) String gCategory, Model model) {
 		if (gCategory == null) {
-			List<GoodsDTO> list = service.goodsList("top");
+			List<GoodsDTO> list = service.findByCategory("top");
 			model.addAttribute("goodsList", list);
 		} else{
-			List<GoodsDTO> list = service.goodsList(gCategory);
+			List<GoodsDTO> list = service.findByCategory(gCategory);
 			model.addAttribute("goodsList", list);
 		}
 		return "main";

@@ -2,7 +2,7 @@ package com.shoppingmall.web.controller.cart;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
-import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.CartService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,13 +22,13 @@ import java.util.Map;
 @RequestMapping("/cart")
 public class CartController {
 
-    private final GoodsService goodsService;
+    private final CartService cartService;
 
     @RequestMapping("/list")
     public String cartList(HttpSession session, Model model) {
         MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
         String userId = memberDTO.getUsername();
-        List<CartListResponseDTO> list = goodsService.cartList(userId);
+        List<CartListResponseDTO> list = cartService.findByUsername(userId);
         model.addAttribute("cartList",list);
         return "cartList";
     }
@@ -39,7 +39,7 @@ public class CartController {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         String userId = memberDTO.getUsername();
         map.put("userId", userId);
-        goodsService.mergeCartItems(map);
+        cartService.mergeCartItems(map);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","장바구니에 추가되었습니다."));
     }
 }

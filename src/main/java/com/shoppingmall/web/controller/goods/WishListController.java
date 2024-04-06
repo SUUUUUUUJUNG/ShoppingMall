@@ -2,6 +2,7 @@ package com.shoppingmall.web.controller.goods;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class WishListController {
 
     private final GoodsService goodsService;
+    private final WishListService wishListService;
 
     @PostMapping
     public ResponseEntity<?> save(HttpSession session, @RequestParam(value = "gCode") String gCode){
@@ -26,7 +28,7 @@ public class WishListController {
         map.put("memberId", String.valueOf(memberId));
         map.put("gCode",gCode);
 
-        String message = goodsService.toggleWishlistItem(map);
+        String message = wishListService.toggleWishlistItem(map);
 
         return ResponseEntity.ok().body(Map.of("message", message));
     }
@@ -37,7 +39,7 @@ public class WishListController {
         Long memberId = memberDTO.getMemberId();
         map.put("memberId", String.valueOf(memberId));
         map.put("wishListId", String.valueOf(wishListId));
-        goodsService.deleteWishListItem(map);
+        wishListService.deleteWishListItem(map);
         return ResponseEntity.ok().body(Map.of("message", "Item deleted successfully"));
     }
 

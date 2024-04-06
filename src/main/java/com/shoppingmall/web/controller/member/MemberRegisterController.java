@@ -33,7 +33,7 @@ public class MemberRegisterController {
             return "memberForm";
         }
 
-        int n = memberService.memberAdd(memberDTO);
+        int n = memberService.create(memberDTO);
         model.addAttribute("success","회원가입성공"); // request객체에 담겨있는거
         return "redirect:/";
     }
