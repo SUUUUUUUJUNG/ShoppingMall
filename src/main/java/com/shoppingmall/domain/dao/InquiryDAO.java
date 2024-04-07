@@ -8,19 +8,19 @@ import java.util.List;
 
 @Repository
 public class InquiryDAO {
-    public void submitInquiry(SqlSessionTemplate session, InquiryDTO inquiryDTO) {
-       session.insert("InquiryMapper.submitInquiry",inquiryDTO);
+    public void create(SqlSessionTemplate session, InquiryDTO inquiryDTO) {
+       session.insert("InquiryMapper.create",inquiryDTO);
     }
 
-    public List<InquiryDTO> inquiriesList(SqlSessionTemplate session, Long memberId) {
-        return session.selectList("InquiryMapper.inquiriesList",memberId);
+    public List<InquiryDTO> findByMemberId(SqlSessionTemplate session, Long memberId) {
+        return session.selectList("InquiryMapper.findByMemberId",memberId);
     }
 
-    public void deleteInquiryByMemberId(SqlSessionTemplate session, Long inquiryId) {
-        session.delete("InquiryMapper.deleteInquiryByMemberId",inquiryId);
+    public void delete(SqlSessionTemplate session, Long inquiryId) {
+        session.delete("InquiryMapper.delete",inquiryId);
     }
 
-    public List<InquiryDTO> viewInquiryDetails(SqlSessionTemplate session, Long inquiryId) {
-        return session.selectList("InquiryMapper.viewInquiryDetails",inquiryId);
+    public List<InquiryDTO> findByInquiryId(SqlSessionTemplate session, Long inquiryId) {
+        return session.selectList("InquiryMapper.findByInquiryId",inquiryId);
     }
 }

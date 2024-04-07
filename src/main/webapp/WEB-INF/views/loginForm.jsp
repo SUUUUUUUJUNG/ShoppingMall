@@ -137,19 +137,19 @@
 </head>
 <body>
 <div class="centered-container">
-<div class="container">
-    <a href="/"><img src="/images/logo.png" class="login-logo"/></a>
-    <div class="row justify-content-center">
-        <div class="login-container">
-            <form action="/login" method="post" class="login-form" id="loginForm">
-                <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" required>
-                <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
-                <button type="submit" class="btn btn-primary">로그인</button>
-                <a href="/member/register" class="login-form-link">회원가입</a>
-            </form>
+    <div class="container">
+        <a href="/"><img src="/images/logo.png" class="login-logo"/></a>
+        <div class="row justify-content-center">
+            <div class="login-container">
+                <form action="/login-proc" method="post" class="login-form" id="loginForm">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="아이디" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <a href="/member/register" class="login-form-link">회원가입</a>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <script>

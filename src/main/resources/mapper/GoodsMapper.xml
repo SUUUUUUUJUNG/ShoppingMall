@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GoodsMapper">
 
-     <select id="goodsRetrieve" parameterType="string" resultType="GoodsDTO">
+     <select id="findByCode" parameterType="string" resultType="GoodsDTO">
        select gCode,gCategory,gName,gContent,gPrice,gImage
        from goods
        where gCode = #{gCode}
@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
   
 	
-	<select id="goodsList" parameterType="string" resultType="GoodsDTO">
+	<select id="findByCategory" parameterType="string" resultType="GoodsDTO">
        select gCode,gCategory,gName,gContent,gPrice,gImage
        from goods
        where gCategory = #{gCategory}

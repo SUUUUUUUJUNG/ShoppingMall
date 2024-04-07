@@ -15,19 +15,19 @@ public class InquiryService {
     private final InquiryDAO inquiryDAO;
     private final SqlSessionTemplate session;
 
-    public void submitInquiry(InquiryDTO inquiryDTO) {
-        inquiryDAO.submitInquiry(session,inquiryDTO);
+    public void create(InquiryDTO inquiryDTO) {
+        inquiryDAO.create(session,inquiryDTO);
     }
 
-    public List<InquiryDTO> inquiriesList(Long memberId) {
-        return inquiryDAO.inquiriesList(session,memberId);
+    public List<InquiryDTO> findByMemberId(Long memberId) {
+        return inquiryDAO.findByMemberId(session,memberId);
     }
 
-    public void deleteInquiryByMemberId(Long inquiryId) {
-        inquiryDAO.deleteInquiryByMemberId(session,inquiryId);
+    public void delete(Long inquiryId) {
+        inquiryDAO.delete(session,inquiryId);
     }
 
-    public List<InquiryDTO> viewInquiryDetails(Long inquiryId) {
-         return inquiryDAO.viewInquiryDetails(session,inquiryId);
+    public List<InquiryDTO> findByInquiryId(Long inquiryId) {
+         return inquiryDAO.findByInquiryId(session,inquiryId);
     }
 }

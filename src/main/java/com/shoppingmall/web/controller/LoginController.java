@@ -28,18 +28,6 @@ public class LoginController {
 		return "loginForm";
 	}
 
-	@PostMapping("/login")
-	public String login(@RequestParam Map<String,String> m,HttpSession session, Model model) {
-		MemberDTO memberDTO=memberService.login(m);
-		if(memberDTO!=null) {
-			session.setAttribute("login", memberDTO); // spring security 추후 이용
-			return "redirect:/goods/list?gCategory=top";//로그인시 top카테고리를 보이도록 작성
-		}else {
-			model.addAttribute("mesg","아이디 또는 비번이 잘못되었습니다.");
-			return "loginForm";
-		}
-	}
-
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		if(session.getAttribute("login")!=null){

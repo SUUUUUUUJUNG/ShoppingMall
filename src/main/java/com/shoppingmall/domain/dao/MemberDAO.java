@@ -1,7 +1,6 @@
 package com.shoppingmall.domain.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.shoppingmall.domain.dto.WishListDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
@@ -15,27 +14,18 @@ import com.shoppingmall.domain.dto.member.MemberDTO;
 public class MemberDAO {
 
 	@Autowired
-	SqlSessionTemplate session;  // 자동 주입
+	SqlSessionTemplate session;
 
-	public int memberAdd(MemberDTO dto) {
-		int n = session.insert("MemberMapper.memberAdd",dto);
-		return n;
+	public int create(MemberDTO dto) {
+		return session.insert("MemberMapper.create", dto);
 	}
 
-	public MemberDTO login(Map<String, String> m) {
-		return session.selectOne("MemberMapper.login",m);
+	public MemberDTO findByUsername(String userid) {
+        return session.selectOne("MemberMapper.findByUsername",userid);
 	}
 
-	public MemberDTO myPage(String userid) {
-        return session.selectOne("MemberMapper.myPage",userid);
-	}
-
-	public int memberUpdate(MemberUpdateRequestDTO requestDTO) {
+	public int update(MemberUpdateRequestDTO requestDTO) {
         return session.update("MemberMapper.update",requestDTO);
 	}
 
-
-	public List<WishListDTO> findWishListByMemberId(Long memberId) {
-		return session.selectList("WishListMapper.findWishListByMemberId",memberId);
-	}
 }

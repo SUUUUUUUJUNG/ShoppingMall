@@ -4,8 +4,8 @@ import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryUpdateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
+import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.ProductInquiryService;
-import com.shoppingmall.web.service.MemberLoginService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -25,15 +26,16 @@ public class ProductInquiryAPIController {
     private final ProductInquiryService productInquiryService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ProductInquiryCreateRequestDTO requestDTO, HttpSession session){
-        MemberDTO login = memberLoginService.getLogin(session);
+    public ResponseEntity<?> create(@RequestBody ProductInquiryCreateRequestDTO requestDTO, Principal principal){
+        MemberDTO login = memberLoginService.findByPrinciple(
+                principal);
         productInquiryService.create(new ProductInquiryDTO(requestDTO, login.getMemberId()));
         return ResponseEntity.ok(Map.of("message","문의가 등록되었습니다."));
     }
 
     @GetMapping("/member")
-    public ResponseEntity<?> findAllByMemberId(HttpSession session){
-        MemberDTO login = memberLoginService.getLogin(session);
+    public ResponseEntity<?> findAllByMemberId(Principal principal){
+        MemberDTO login = memberLoginService.findByPrinciple(principal);
         return ResponseEntity.ok(productInquiryService.findAllByMemberId(login.getMemberId()));
     }
 
@@ -48,8 +50,8 @@ public class ProductInquiryAPIController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateProductInquiry(@RequestBody ProductInquiryUpdateRequestDTO requestDTO, HttpSession session){
-        validateIsInquiryOwner(requestDTO.getInquiry_Id(), session);
+    public ResponseEntity<?> updateProductInquiry(@RequestBody ProductInquiryUpdateRequestDTO requestDTO, Principal principal){
+        validateIsInquiryOwner(requestDTO.getInquiry_Id(), principal);
         productInquiryService.update(requestDTO);
         return ResponseEntity.ok(Map.of("message", "문의가 수정되었습니다.", "inquiryId", requestDTO.getInquiry_Id()));
     }
@@ -57,14 +59,14 @@ public class ProductInquiryAPIController {
 
 
     @DeleteMapping("/{inquiryId}")
-    public ResponseEntity<?> deleteProductInquiry(@PathVariable("inquiryId") Long inquiryId, HttpSession session) {
-        validateIsInquiryOwner(inquiryId, session);
+    public ResponseEntity<?> deleteProductInquiry(@PathVariable("inquiryId") Long inquiryId, Principal principal) {
+        validateIsInquiryOwner(inquiryId, principal);
         productInquiryService.delete(inquiryId);
         return ResponseEntity.ok(Map.of("message", "문의가 삭제되었습니다."));
     }
 
-    private void validateIsInquiryOwner(Long inquiryId, HttpSession session) {
-        Long memberId = memberLoginService.getLogin(session).getMemberId();
+    private void validateIsInquiryOwner(Long inquiryId, Principal principal) {
+        Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         ProductInquiryDTO inquiryDTO = productInquiryService.findById(inquiryId);
 
         if (inquiryDTO == null) {

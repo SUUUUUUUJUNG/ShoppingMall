@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Alias("OrderDTO")
 public class OrderDTO {
 	Long order_Id;
-	String userId;
+	String username;
 	String gCode;
 	String gName;
 	int gPrice;

@@ -1,6 +1,6 @@
 package com.shoppingmall.web.controller.cart;
 
-import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,24 +15,24 @@ import java.util.Map;
 @RequestMapping("/cart")
 public class CartManagementController {
 
-    private final GoodsService goodsService;
+    private final CartService cartService;
 
     @RequestMapping("/update")
     public void cartUpdate(@RequestParam Map<String, String> m) {
-        goodsService.cartUpdate(m);
+        cartService.update(m);
 
     }
 
     @RequestMapping("/delete")
     public String cartDelete(int cartId) {
-        goodsService.cartDel(cartId);
+        cartService.delete(cartId);
         return "ok";
     }
 
     @RequestMapping("/delete/all") // ajax 처리로 바꿔야함 지금 동작 안함.
     public String cartAllDel(@RequestParam("check") String[] array) {
         List<String> list = Arrays.asList(array);
-        goodsService.cartAllDel(list);
+        cartService.deleteAll(list);
         return "redirect:cartList";
     }
 }
