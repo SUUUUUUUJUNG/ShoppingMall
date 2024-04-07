@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReviewDTO">
 
-<insert id="create" parameterType="ReviewDTO">
-insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT,UPDATED_AT)
-values (SUJUNG.REVIEWS_SEQ.nextval, #{review_id},#{gCode},#{memberId},#{review_Text},#{createdAt},#{createdAt})
+<insert id="create" parameterType="ReviewCreateRequestDTO">
+insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT)
+values (SUJUNG.REVIEWS_SEQ.nextval, #{gCode},#{memberId},#{review_Text},#{rating},#{createdAt})
 </insert>
 
 </mapper>
