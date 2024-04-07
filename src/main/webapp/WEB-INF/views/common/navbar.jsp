@@ -1,6 +1,6 @@
-<%@ page import="com.shoppingmall.domain.dto.member.MemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style>
   .navbar {
@@ -47,19 +47,16 @@
 
   <!-- 사용자 관련 액션 -->
   <div class="user-actions">
-    <%
-      MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-      if(memberDTO == null) {
-    %>
-    <a class="nav-item nav-link" href="/login">로그인</a>
-    <a class="nav-item nav-link" href="/member/register">회원가입</a>
-    <% } else { %>
-    <span class="nav-item"><%=memberDTO.getRealName()%> 님</span>
-    <a class="nav-item nav-link" href="/logout">로그아웃</a>
-    <a class="nav-item nav-link" href="/myPage">마이페이지</a>
-    <a class="nav-item nav-link" href="/cart/list">장바구니</a>
-    <a class="nav-item nav-link" href="/myShopping">찜목록</a>
-    <% } %>
+    <sec:authorize access="!isAuthenticated()">
+      <a class="nav-item nav-link" href="/login">로그인</a>
+      <a class="nav-item nav-link" href="/member/register">회원가입</a>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+      <a class="nav-item nav-link" href="/logout">로그아웃</a>
+      <a class="nav-item nav-link" href="/myPage">마이페이지</a>
+      <a class="nav-item nav-link" href="/cart/list">장바구니</a>
+      <a class="nav-item nav-link" href="/myShopping">찜목록</a>
+    </sec:authorize>
     <a class="nav-item nav-link" href="/inquiry">고객센터</a>
   </div>
 </div>

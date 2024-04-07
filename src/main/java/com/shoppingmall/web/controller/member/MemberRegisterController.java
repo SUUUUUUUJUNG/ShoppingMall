@@ -4,6 +4,7 @@ import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.MemberService;
 import com.shoppingmall.web.service.RegistrationValidationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ public class MemberRegisterController {
 
     private final MemberService memberService;
     private final RegistrationValidationService registrationValidationService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/register")
     public String memberForm(Model model, MemberDTO memberDTO) {
@@ -30,9 +32,11 @@ public class MemberRegisterController {
     @PostMapping("/register")
     public String memberAdd(@Validated @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult, Model model) { // validated 이용
         if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult.getAllErrors());
             return "memberForm";
         }
-
+        String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
+        memberDTO.setPassword(encodedPassword);
         int n = memberService.create(memberDTO);
         model.addAttribute("success","회원가입성공"); // request객체에 담겨있는거
         return "redirect:/";

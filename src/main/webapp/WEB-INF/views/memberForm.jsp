@@ -31,65 +31,65 @@
             });
 
 
-                // 비밀번호 일치 여부 검사
-                let idValid = false;
+            // 비밀번호 일치 여부 검사
+            let idValid = false;
 
-                $("#password, #password2").on("keyup", function () {
-                    var password = $("#password").val();
-                    var confirmPassword = $("#password2").val();
+            $("#password, #password2").on("keyup", function () {
+                var password = $("#password").val();
+                var confirmPassword = $("#password2").val();
 
-                    // 비밀번호와 비밀번호 확인이 일치하지 않는 경우
-                    if (password !== confirmPassword) {
-                        $("#passwordMismatch").show().text("비밀번호가 일치하지 않습니다.");
-                    } else {
-                        // 일치하는 경우
-                        $("#passwordMismatch").hide();
-                    }
-                });
+                // 비밀번호와 비밀번호 확인이 일치하지 않는 경우
+                if (password !== confirmPassword) {
+                    $("#passwordMismatch").show().text("비밀번호가 일치하지 않습니다.");
+                } else {
+                    // 일치하는 경우
+                    $("#passwordMismatch").hide();
+                }
+            });
 
-                $("#userId").on("keyup", function () {
-                    var userId = $(this).val();
-                    $.ajax({
-                        url: "/idDuplicateCheck",
-                        type: "post",
-                        datatype: "json",
-                        data: {userId: userId},
-                        success: function (data) {
-                            idValid = data.valid;
-                            if (!idValid) {
-                                $("#userId").css("border-color", "red");
-                                $("#idCheck").show().text("이미 사용중인 아이디입니다.");
-                            } else {
-                                $("#userId").css("border-color", ""); // 테두리 색상 초기화
-                                $("#idCheck").hide(); // 메시지 숨김
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(error);
+            $("#username").on("keyup", function () {
+                var userId = $(this).val();
+                $.ajax({
+                    url: "/idDuplicateCheck",
+                    type: "post",
+                    datatype: "json",
+                    data: {userId: userId},
+                    success: function (data) {
+                        idValid = data.valid;
+                        if (!idValid) {
+                            $("#username").css("border-color", "red");
+                            $("#idCheck").show().text("이미 사용중인 아이디입니다.");
+                        } else {
+                            $("#username").css("border-color", ""); // 테두리 색상 초기화
+                            $("#idCheck").hide(); // 메시지 숨김
                         }
-                    });
-                });
-
-                // 폼 제출 이벤트
-                $("form").on("submit", function (event) {
-                    var password = $("#password").val();
-                    var confirmPassword = $("#password2").val();
-
-
-                    if (password !== confirmPassword) {
-                        alert("비밀번호가 일치하지 않습니다.");
-                        event.preventDefault();
-                        return;
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
                     }
-
-                    if (!idValid) {
-                        alert("아이디를 다시 확인해주세요");
-                        event.preventDefault();
-                        return;
-                    }
-                    alert("회원가입이 완료되었습니다.");
                 });
             });
+
+            // 폼 제출 이벤트
+            $("form").on("submit", function (event) {
+                var password = $("#password").val();
+                var confirmPassword = $("#password2").val();
+
+
+                if (password !== confirmPassword) {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    event.preventDefault();
+                    return;
+                }
+
+                if (!idValid) {
+                    alert("아이디를 다시 확인해주세요");
+                    event.preventDefault();
+                    return;
+                }
+                alert("회원가입이 완료되었습니다.");
+            });
+        });
     </script>
     <style>
         body {
@@ -181,49 +181,49 @@
             <div class="card shadow-lg border-0 rounded-lg mt-5">
                 <div class="card-header"><h3 class="text-center font-weight-light my-4">회원가입</h3></div>
                 <div class="card-body">
-                    <form th:action="@{/registerProc}" method="post" class="form-signin needs-validation" >
+                    <form method="post" class="form-signin needs-validation" >
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" value="${memberDTO.username}" required >
-                            <label for="userId">아이디</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="아이디" required >
+                            <label for="username">아이디</label>
                         </div>
                         <p id="idCheck" style="display: none; color: red">이미 사용중인 아이디입니다.</p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password"  placeholder=" " aria-label="비밀번호" value="${memberDTO.password}" aria-describedby="basic-addon1" required>
+                            <input type="password" class="form-control" id="password" name="password"  placeholder=" " aria-label="비밀번호" aria-describedby="basic-addon1" required>
                             <label for="password">비밀번호</label>
                         </div>
                         <p id="pwCheck" style="display: none; color: red"></p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon2_1"><i class="fas fa-lock"></i></span>
                             <input type="password2" class="form-control" id="password2" placeholder=" " aria-label="비밀번호 확인" aria-describedby="basic-addon1" required>
-                            <label for="password">비밀번호 확인</label>
+                            <label for="password2">비밀번호 확인</label>
                         </div>
                         <p id="passwordMismatch" style="display: none; color: red;"></p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon"><i class="fas fa-id-card"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="이름" value="${memberDTO.realName}" required>
-                            <label for="password">이름</label>
+                            <input type="text" class="form-control" id="realName" name="realName" placeholder="이름" required>
+                            <label for="realName">이름</label>
                         </div>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon3"><i class="fas fa-envelope"></i></span>
-                            <input type="email" class="form-control" id="email" name="email"  placeholder="이메일" value="${memberDTO.email}" required>
+                            <input type="email" class="form-control" id="email" name="email"  placeholder="이메일" required>
                             <label for="email">이메일</label>
                         </div>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon4"><i class="fas fa-phone"></i></span>
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="휴대폰 번호" value="${memberDTO.phoneNumber}" required>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="휴대폰 번호" required>
                             <label for="phoneNumber">휴대폰 번호</label>
                         </div>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon5"><i class="fas fa-home"></i></span>
-                            <input type="text" class="form-control" id="address" name="address"  placeholder="주소" value="${memberDTO.address}" required readonly>
+                            <input type="text" class="form-control" id="address" name="address"  placeholder="주소" required readonly>
                             <label for="address">주소</label>
                             <button type="button" class="btn btn-outline-secondary address-btn" onclick="searchAddress()">주소 검색</button>
                         </div>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon6"><i class="fas fa-building"></i></span>
-                            <input type="text" class="form-control" id="addr_Detail" name="addr_Detail" value="${memberDTO.addr_Detail}" placeholder="상세 주소">
+                            <input type="text" class="form-control" id="addr_Detail" name="addr_Detail" placeholder="상세 주소">
                             <label for="addr_Detail">상세 주소</label>
                         </div>
                         <div class="input-group mb-3">
@@ -250,6 +250,7 @@
         $('.address-btn').click(function() {
             new daum.Postcode({
                 oncomplete: function(data) {
+                    console.log(data.zonecode);
                     $('#address').val(data.address);
                     $('#zip_Code').val(data.zonecode);
                     $('#detailAddress').focus();
