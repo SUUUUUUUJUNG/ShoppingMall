@@ -6,8 +6,8 @@ import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryUpdateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
+import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.ProductInquiryService;
-import com.shoppingmall.web.service.MemberLoginService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -140,7 +140,7 @@ class ProductInquiryAPIControllerTest {
         mockInquiryDTO.setInquiry_Id(1L);
         mockInquiryDTO.setMemberId(1L); // 이 부분은 실제 테스트 시나리오에 맞게 조정해야 합니다.
 
-        given(memberLoginService.getLogin(any())).willReturn(memberDTO);
+        given(memberLoginService.findByPrinciple(any())).willReturn(memberDTO);
         given(productInquiryService.findById(any())).willReturn(mockInquiryDTO);
         given(productInquiryService.update(any())).willReturn(1);
 
@@ -161,7 +161,7 @@ class ProductInquiryAPIControllerTest {
         MemberDTO mockMember = new MemberDTO();
         mockMember.setMemberId(memberId);
 
-        given(memberLoginService.getLogin(any())).willReturn(mockMember);
+        given(memberLoginService.findByPrinciple(any())).willReturn(mockMember);
 
         mockMvc.perform(delete("/api/productInquiry/{inquiryId}", inquiryId))
                 .andExpect(status().isNotFound())
@@ -179,7 +179,7 @@ class ProductInquiryAPIControllerTest {
         MemberDTO mockMember = new MemberDTO();
         mockMember.setMemberId(memberId);
 
-        given(memberLoginService.getLogin(any())).willReturn(mockMember);
+        given(memberLoginService.findByPrinciple(any())).willReturn(mockMember);
         given(productInquiryService.findById(inquiryId)).willReturn(productInquiryDTO);
 
         mockMvc.perform(delete("/api/productInquiry/{inquiryId}", inquiryId))
