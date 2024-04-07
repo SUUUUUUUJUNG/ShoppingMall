@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ReviewService {
 
     private final ReviewDAO reviewDAO;
-    
+
     public Integer create(ReviewCreateRequestDTO requestDTO) {
         return reviewDAO.create(requestDTO);
     }
