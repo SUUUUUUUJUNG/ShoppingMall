@@ -9,4 +9,8 @@ insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT)
 values (SUJUNG.REVIEWS_SEQ.nextval, #{gCode},#{memberId},#{review_Text},#{rating},#{createdAt})
 </insert>
 
+    <select id="findByReviewId" parameterType="ReviewDTO">
+        select * from REVIEWS where REVIEW_ID = #{review_Id}
+    </select>
+
 </mapper>

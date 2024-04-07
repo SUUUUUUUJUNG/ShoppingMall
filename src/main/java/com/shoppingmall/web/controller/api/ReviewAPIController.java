@@ -7,10 +7,7 @@ import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Map;
@@ -29,5 +26,10 @@ public class ReviewAPIController {
         requestDTO.setMemberId(memberId);
         reviewService.create(requestDTO);
         return ResponseEntity.ok(Map.of("message","리뷰가 등록되었습니다."));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findByReviewId(@RequestParam("reviewId") Long reviewId){
+        return ResponseEntity.ok(reviewService.findByReviewId(reviewId));
     }
 }
