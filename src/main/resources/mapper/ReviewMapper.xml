@@ -2,11 +2,30 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ReviewDTO">
+<mapper namespace="ReviewMapper">
 
-<insert id="create" parameterType="ReviewDTO">
-insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT,UPDATED_AT)
-values (SUJUNG.REVIEWS_SEQ.nextval, #{review_id},#{gCode},#{memberId},#{review_Text},#{createdAt},#{createdAt})
+<insert id="create" parameterType="ReviewCreateRequestDTO">
+insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT)
+values (SUJUNG.REVIEWS_SEQ.nextval, #{code},#{memberId},#{review_Text},#{rating},#{createdAt})
 </insert>
 
+    <select id="findByReviewId" parameterType="Long" resultType="ReviewDTO">
+        select * from REVIEWS where REVIEW_ID = #{review_Id}
+    </select>
+
+    <select id="findAllByGCode" parameterType="String" resultType="ReviewDTO">
+        select * from REVIEWS where GCODE = #{gCode}
+    </select>
+
+    <select id="findAllByMemberId" parameterType="Long" resultType="ReviewDTO">
+        select * from REVIEWS where MEMBERID = #{memberId}
+    </select>
+
+    <update id="update" parameterType="ReviewUpdateRequestDTO">
+        update REVIEWS set REVIEW_TEXT = #{review_Text}, RATING = #{rating} where REVIEW_ID = #{review_Id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from REVIEWS where REVIEW_ID = #{review_Id}
+    </delete>
 </mapper>
