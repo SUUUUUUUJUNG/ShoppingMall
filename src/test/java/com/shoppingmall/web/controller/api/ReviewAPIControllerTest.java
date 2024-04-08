@@ -54,7 +54,7 @@ public class ReviewAPIControllerTest {
     @BeforeEach
     void setUp() {
         requestDTO = new ReviewCreateRequestDTO();
-        requestDTO.setGCode("G123");
+        requestDTO.setCode("G123");
         requestDTO.setReview_Text("요청한 리뷰 내용입니다.");
         requestDTO.setRating(5);
 
