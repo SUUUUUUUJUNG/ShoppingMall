@@ -43,6 +43,4 @@ public class ReviewAPIController {
         MemberDTO login = memberLoginService.findByPrinciple(principal);
         return ResponseEntity.ok(reviewService.findAllByMemberId(login.getMemberId()));
     }
-
-
 }
