@@ -27,4 +27,8 @@ public class ReviewService {
     public List<ReviewDTO> findAllByGCode(String gCode) {
         return reviewDAO.findAllByGCode(gCode);
     }
+
+    public List<ReviewDTO> findAllByMemberId(Long memberId) {
+        return reviewDAO.findAllByMemberId(memberId);
+    }
 }

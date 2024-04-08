@@ -26,4 +26,8 @@ public class ReviewDAO {
     public List<ReviewDTO> findAllByGCode(String gCode) {
         return session.selectList("ReviewMapper.findAllByGCode",gCode);
     }
+
+    public List<ReviewDTO> findAllByMemberId(Long memberId) {
+        return session.selectList("ReviewMapper.findAllByMemberId",memberId);
+    }
 }

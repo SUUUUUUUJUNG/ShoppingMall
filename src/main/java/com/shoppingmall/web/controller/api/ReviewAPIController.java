@@ -38,5 +38,11 @@ public class ReviewAPIController {
         return ResponseEntity.ok(reviewService.findAllByGCode(gCode));
     }
 
+    @GetMapping("/member")
+    public ResponseEntity<?> findAllByMemberId(Principal principal){
+        MemberDTO login = memberLoginService.findByPrinciple(principal);
+        return ResponseEntity.ok(reviewService.findAllByMemberId(login.getMemberId()));
+    }
+
 
 }
