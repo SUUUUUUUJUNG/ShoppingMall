@@ -35,4 +35,8 @@ public class ReviewDAO {
     public int update(ReviewUpdateRequestDTO requestDTO) {
         return session.update("ReviewMapper.update",requestDTO);
     }
+
+    public int delete(Long reviewId) {
+        return session.delete("ReviewMapper.delete",reviewId);
+    }
 }

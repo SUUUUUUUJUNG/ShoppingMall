@@ -36,4 +36,8 @@ public class ReviewService {
     public int update(ReviewUpdateRequestDTO requestDTO) {
         return reviewDAO.update(requestDTO);
     }
+
+    public int delete(Long reviewId) {
+        return reviewDAO.delete(reviewId);
+    }
 }

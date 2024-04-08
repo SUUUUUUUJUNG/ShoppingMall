@@ -55,6 +55,13 @@ public class ReviewAPIController {
         return ResponseEntity.ok(Map.of("message","리뷰가 수정되었습니다.","review_Id",requestDTO.getReview_Id()));
     }
 
+    @DeleteMapping("/{review_Id}")
+    public ResponseEntity<?> delete(@PathVariable("review_Id") Long review_Id, Principal principal){
+        validateIsReviewOwner(review_Id,principal);
+        reviewService.delete(review_Id);
+        return ResponseEntity.ok(Map.of("message", "리뷰가 삭제되었습니다."));
+    }
+
     private void validateIsReviewOwner(Long review_Id, Principal principal){
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         ReviewDTO reviewDTO = reviewService.findByReviewId(review_Id);
