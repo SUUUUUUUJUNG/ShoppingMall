@@ -52,7 +52,7 @@ public class ReviewAPIController {
     public ResponseEntity<?> update(@RequestBody ReviewUpdateRequestDTO requestDTO, Principal principal){
         validateIsReviewOwner(requestDTO.getReview_Id(), principal);
         reviewService.update(requestDTO);
-        return ResponseEntity.ok(Map.of("message","리뷰가 수정되었습니다,","review_Id",requestDTO.getReview_Id()));
+        return ResponseEntity.ok(Map.of("message","리뷰가 수정되었습니다.","review_Id",requestDTO.getReview_Id()));
     }
 
     private void validateIsReviewOwner(Long review_Id, Principal principal){

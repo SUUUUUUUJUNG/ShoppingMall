@@ -5,6 +5,7 @@ import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
+import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +26,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -83,16 +83,16 @@ public class ReviewAPIControllerTest {
 
     @Test
     public void findByReviewId_Success() throws Exception {
-        // Given
+
         long reviewId = 1L;
         when(reviewService.findByReviewId(anyLong())).thenReturn(reviewDTO);
 
-        // When
+
         mockMvc.perform(get("/api/review")
                         .param("reviewId", Long.toString(reviewId))
                         .accept(MediaType.APPLICATION_JSON))
 
-                // Then
+
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.review_Id").value(reviewDTO.getReview_Id()))
                 .andExpect(jsonPath("$.review_Text").value(reviewDTO.getReview_Text()))
@@ -102,7 +102,7 @@ public class ReviewAPIControllerTest {
 
     @Test
     public void findAllByGCode_Success() throws Exception {
-        // Given: 준비
+
         String gCode = "G123";
         List<ReviewDTO> reviews = new ArrayList<>();
         ReviewDTO review1 = new ReviewDTO();
@@ -140,7 +140,7 @@ public class ReviewAPIControllerTest {
     @Test
     @WithMockUser(username="user1", roles="USER")
     public void findAllByMemberId_Success() throws Exception {
-        // Given
+
         MemberDTO member = new MemberDTO();
         member.setMemberId(1L);
 
@@ -163,7 +163,7 @@ public class ReviewAPIControllerTest {
         when(memberLoginService.findByPrinciple(any(Principal.class))).thenReturn(member);
         when(reviewService.findAllByMemberId(eq(1L))).thenReturn(reviews);
 
-        // When & Then
+
         mockMvc.perform(get("/api/review/member")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -176,5 +176,35 @@ public class ReviewAPIControllerTest {
                 .andExpect(jsonPath("$[1].review_Text").value("두 번째 리뷰입니다."))
                 .andExpect(jsonPath("$[1].rating").value(4))
                 .andExpect(jsonPath("$[1].memberId").value(1L));
+    }
+
+    @Test
+    @WithMockUser(username="user1", roles="USER")
+    public void updateReview_Success() throws Exception {
+
+        ReviewUpdateRequestDTO updateRequestDTO = new ReviewUpdateRequestDTO();
+        updateRequestDTO.setReview_Id(1L);
+        updateRequestDTO.setReview_Text("수정 요청할 리뷰입니다.");
+        updateRequestDTO.setRating(4);
+
+        MemberDTO member = new MemberDTO();
+        member.setMemberId(1L);
+
+        ReviewDTO existingReview = new ReviewDTO();
+        existingReview.setReview_Id(1L);
+        existingReview.setReview_Text("수정 전 리뷰입니다.");
+        existingReview.setRating(5);
+        existingReview.setMemberId(1L);
+
+        when(memberLoginService.findByPrinciple(any(Principal.class))).thenReturn(member);
+        when(reviewService.findByReviewId(anyLong())).thenReturn(existingReview);
+        when(reviewService.update(any(ReviewUpdateRequestDTO.class))).thenReturn(1);
+
+        mockMvc.perform(patch("/api/review")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequestDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("리뷰가 수정되었습니다."))
+                .andExpect(jsonPath("$.review_Id").value(updateRequestDTO.getReview_Id()));
     }
 }
