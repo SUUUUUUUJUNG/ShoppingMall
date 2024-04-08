@@ -18,7 +18,7 @@ public class ReviewDAO {
         return session.insert("ReviewMapper.create",requestDTO);
     }
 
-    public List<ReviewDTO> findByReviewId(Long reviewId) {
-        return session.selectList("ReviewMapper.findByReviewId",reviewId);
+    public ReviewDTO findByReviewId(Long reviewId) {
+        return session.selectOne("ReviewMapper.findByReviewId",reviewId);
     }
 }

@@ -19,7 +19,7 @@ public class ReviewService {
     }
 
 
-    public List<ReviewDTO> findByReviewId(Long reviewId) {
+    public ReviewDTO findByReviewId(Long reviewId) {
         return reviewDAO.findByReviewId(reviewId);
     }
 }
