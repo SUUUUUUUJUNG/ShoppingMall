@@ -2,6 +2,7 @@ package com.shoppingmall.domain.dao;
 
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
+import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,9 @@ public class ReviewDAO {
 
     public List<ReviewDTO> findAllByMemberId(Long memberId) {
         return session.selectList("ReviewMapper.findAllByMemberId",memberId);
+    }
+
+    public int update(ReviewUpdateRequestDTO requestDTO) {
+        return session.update("ReviewMapper.update",requestDTO);
     }
 }

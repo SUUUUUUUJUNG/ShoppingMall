@@ -3,6 +3,7 @@ package com.shoppingmall.domain.service;
 import com.shoppingmall.domain.dao.ReviewDAO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
+import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,9 @@ public class ReviewService {
 
     public List<ReviewDTO> findAllByMemberId(Long memberId) {
         return reviewDAO.findAllByMemberId(memberId);
+    }
+
+    public int update(ReviewUpdateRequestDTO requestDTO) {
+        return reviewDAO.update(requestDTO);
     }
 }

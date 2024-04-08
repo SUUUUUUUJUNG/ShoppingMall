@@ -20,4 +20,8 @@ values (SUJUNG.REVIEWS_SEQ.nextval, #{gCode},#{memberId},#{review_Text},#{rating
     <select id="findAllByMemberId" parameterType="Long" resultType="ReviewDTO">
         select * from REVIEWS where MEMBERID = #{memberId}
     </select>
+
+    <update id="update" parameterType="ReviewUpdateRequestDTO">
+        update REVIEWS set REVIEW_TEXT = #{review_Text}, RATING = #{rating} where REVIEW_ID = #{review_Id}
+    </update>
 </mapper>

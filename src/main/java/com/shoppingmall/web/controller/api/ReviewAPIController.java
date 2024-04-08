@@ -1,13 +1,17 @@
 package com.shoppingmall.web.controller.api;
 
+import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
+import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.Map;
@@ -42,5 +46,24 @@ public class ReviewAPIController {
     public ResponseEntity<?> findAllByMemberId(Principal principal){
         MemberDTO login = memberLoginService.findByPrinciple(principal);
         return ResponseEntity.ok(reviewService.findAllByMemberId(login.getMemberId()));
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> update(@RequestBody ReviewUpdateRequestDTO requestDTO, Principal principal){
+        validateIsReviewOwner(requestDTO.getReview_Id(), principal);
+        reviewService.update(requestDTO);
+        return ResponseEntity.ok(Map.of("message","리뷰가 수정되었습니다,","review_Id",requestDTO.getReview_Id()));
+    }
+
+    private void validateIsReviewOwner(Long review_Id, Principal principal){
+        Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
+        ReviewDTO reviewDTO = reviewService.findByReviewId(review_Id);
+
+        if(reviewDTO == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"리뷰를 찾을 수 없습니다.");
+        }
+        if(!reviewDTO.getMemberId().equals(memberId)){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"권한이 없습니다.");
+        }
     }
 }
