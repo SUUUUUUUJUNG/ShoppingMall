@@ -1,6 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -14,16 +13,16 @@
 		text-align: center; /* 텍스트 정렬을 이용해 내부 요소 중앙 정렬 */
 	}
 
-	</style>
+</style>
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Bootstrap JS 추가 -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS 추가 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS 추가 -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap CSS 추가 -->
 
 <div class="container">
-
-
 	<!-- 탭 버튼들 -->
 	<ul class="nav nav-pills nav-fill">
 		<li class="nav-item">
@@ -64,101 +63,106 @@
 
 			<!-- 문의하기 버튼 -->
 			<button class="btn btn-outline-primary" data-toggle="modal" data-target="#inquiryModal">문의하기</button>
-
-			<!-- 문의하기 모달 -->
-			<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="inquiryModalLabel">상품 문의</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<!-- 여기에 폼 내용을 추가 -->
-							<form id="inquiryForm">
-								<!-- 폼 필드 예시 -->
-								<div class="form-group">
-									<label for="inquiry_Content">문의내용</label>
-									<textarea class="form-control" id="inquiry_Content" placeholder="문의 내용을 입력하세요"></textarea>
-								</div>
-								<input type="hidden" id="gCode" value="${param.gCode}">
-								<!-- 추가 필드 추가 가능 -->
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="submit">확인</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 문의 수정 모달 -->
-			<div class="modal fade" id="inquiryUpdateModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<!-- 여기에 폼 내용을 추가 -->
-							<form id="inquiryUpdateForm">
-								<!-- 폼 필드 예시 -->
-								<div class="form-group">
-									<label for="inquiry_Content">문의내용</label>
-									<textarea class="form-control" id="inquiry_Update_Content" placeholder="문의 내용을 입력하세요"></textarea>
-								</div>
-								<input type="hidden" id="inquiry_id">
-								<!-- 추가 필드 추가 가능 -->
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="update-modal-btn">확인</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 리뷰 수정 모달 -->
-			<div class="modal fade" id="reviewUpdateModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="reviewUpdateModalLabel">리뷰 수정</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-
-							<!-- 여기에 폼 내용을 추가 -->
-							<form id="reviewUpdateForm">
-								<!-- 폼 필드 예시 -->
-								<div class="form-group">
-									<label for="review_Update_Content">리뷰 내용</label>
-									<textarea class="form-control" id="review_Update_Content" placeholder="리뷰 내용을 입력하세요"></textarea>
-								</div>
-								<input type="hidden" id="reviewId">
-							</form>
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="review-update-modal-btn">확인</button>
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
 	</div>
 </div>
+
+<!-- 문의하기 모달 -->
+<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel"
+	 aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="inquiryModalLabel">상품 문의</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- 여기에 폼 내용을 추가 -->
+				<form id="inquiryForm">
+					<!-- 폼 필드 예시 -->
+					<div class="form-group">
+						<label for="inquiry_Content">문의내용</label>
+						<textarea class="form-control" id="inquiry_Content" placeholder="문의 내용을 입력하세요"></textarea>
+					</div>
+					<input type="hidden" id="gCode" value="${param.gCode}">
+					<!-- 추가 필드 추가 가능 -->
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="submit">확인</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 문의 수정 모달 -->
+<div class="modal fade" id="inquiryUpdateModal" tabindex="-1" role="dialog"
+	 aria-labelledby="inquiryModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- 여기에 폼 내용을 추가 -->
+				<form id="inquiryUpdateForm">
+					<!-- 폼 필드 예시 -->
+					<div class="form-group">
+						<label for="inquiry_Content">문의내용</label>
+						<textarea class="form-control" id="inquiry_Update_Content"
+								  placeholder="문의 내용을 입력하세요"></textarea>
+					</div>
+					<input type="hidden" id="inquiry_id">
+					<!-- 추가 필드 추가 가능 -->
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="update-modal-btn">확인</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 리뷰 수정 모달 -->
+<div class="modal fade" id="reviewUpdateModal" tabindex="-1" role="dialog"
+	 aria-labelledby="reviewModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="reviewUpdateModalLabel">리뷰 수정</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<!-- 여기에 폼 내용을 추가 -->
+				<form id="reviewUpdateForm">
+					<!-- 폼 필드 예시 -->
+					<div class="form-group">
+						<label for="review_Update_Content">리뷰 내용</label>
+						<textarea class="form-control" id="review_Update_Content" placeholder="리뷰 내용을 입력하세요"></textarea>
+					</div>
+					<input type="number" min="1" max="5" id="update-rating">
+					<input type="hidden" id="reviewId">
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="review-update-modal-btn">확인</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	$(document).ready(function () {
 		var gCode = $("#gCode").val();
@@ -190,7 +194,7 @@
 			var data = {
 				"code": gCode,
 				"review_Text": $("#review_Text").val(),
-				"rating" : $("#rating").val()
+				"rating": $("#rating").val()
 			};
 
 			$.ajax({
@@ -257,7 +261,32 @@
 				type: "get",
 				success: function (data) {
 					$("#review_Update_Content").val(data.review_Text);
-					$('#reviewUpdateModal').modal('show'); // 모달 창을 열어주는 코드 추가
+					$("#update-rating").val(data.rating);
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$(document).on('click', "#review-update-modal-btn", function () {  //리뷰 수정
+			let id = $("#reviewId").val();
+			let rating = $("#update-rating").val();
+			let content = $("#review_Update_Content").val();
+			let data = {
+				"review_Text": content,
+				"review_Id": id,
+				"rating":rating
+			}
+
+			$.ajax({
+				url: "/api/review",
+				type: "patch",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				success: function (data, status, xhr) {
+					alert(data.message);
+					window.location.reload();
 				},
 				error: function (xhr, status, error) {
 					console.log(error);
@@ -269,8 +298,8 @@
 		$(document).on('click', "#update-modal-btn", function () {
 			let id = $("#inquiry_id").val();
 			let content = $("#inquiry_Update_Content").val();
-			let data={
-				"inquiry_Content":content,
+			let data = {
+				"inquiry_Content": content,
 				"inquiry_Id": id,
 			}
 
@@ -324,13 +353,13 @@
 
 		});
 
-			function displayInquiries(data) {
+		function displayInquiries(data) {
 			$('#product-inquiries').empty();
 			if (data.length === 0) {
 				$('#product-inquiries').append('<p>문의가 없습니다.</p>');
 				return;
 			}
-			data.forEach(function(inquiry) {
+			data.forEach(function (inquiry) {
 				var inquiryHtml = '<div class="card mb-3">' +
 						'<div class="card-header">' +
 						'문의 날짜: ' + inquiry.inquiry_Date +
@@ -352,7 +381,7 @@
 				$('#product-reviews').append('<p>리뷰가 없습니다.</p>');
 				return;
 			}
-			data.forEach(function(review) {
+			data.forEach(function (review) {
 				var reviewHtml = '<div class="card mb-3">' +
 						'<div class="card-header">' +
 						'리뷰 날짜: ' + review.createdAt +
