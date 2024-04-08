@@ -13,7 +13,8 @@
 	.nav-pills.nav-fill {
 		text-align: center; /* 텍스트 정렬을 이용해 내부 요소 중앙 정렬 */
 	}
-</style>
+
+	</style>
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -50,7 +51,12 @@
 		</div>
 		<div class="tab-pane" id="tab3">
 			<!-- 탭 #3 내용 -->
-			<p>구매후기의 내용이 여기에 표시됩니다.</p>
+			<p id="product-reviews">구매후기의 내용이 여기에 표시됩니다.</p>
+			<form id="reviewForm">
+				<textarea class="form-control" id="review_Text" placeholder="리뷰내용을 입력하세요"></textarea>
+				<input type="number" min="1" max="5" id="rating">
+				<button>전송하기</button>
+			</form>
 		</div>
 		<div class="tab-pane" id="tab4">
 			<!-- 탭 #3 내용 -->
@@ -59,7 +65,7 @@
 			<!-- 문의하기 버튼 -->
 			<button class="btn btn-outline-primary" data-toggle="modal" data-target="#inquiryModal">문의하기</button>
 
-			<!-- 모달 -->
+			<!-- 문의하기 모달 -->
 			<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -89,7 +95,7 @@
 				</div>
 			</div>
 
-			<!-- 모달 -->
+			<!-- 문의 수정 모달 -->
 			<div class="modal fade" id="inquiryUpdateModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -113,6 +119,37 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary" id="update-modal-btn">확인</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 리뷰 수정 모달 -->
+			<div class="modal fade" id="reviewUpdateModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="reviewUpdateModalLabel">리뷰 수정</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<!-- 여기에 폼 내용을 추가 -->
+							<form id="reviewUpdateForm">
+								<!-- 폼 필드 예시 -->
+								<div class="form-group">
+									<label for="review_Update_Content">리뷰 내용</label>
+									<textarea class="form-control" id="review_Update_Content" placeholder="리뷰 내용을 입력하세요"></textarea>
+								</div>
+								<input type="hidden" id="reviewId">
+							</form>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="review-update-modal-btn">확인</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 						</div>
 					</div>
@@ -148,12 +185,46 @@
 			});
 		});
 
+		$("#reviewForm").on("submit", function (e) {
+			e.preventDefault();
+			var data = {
+				"code": gCode,
+				"review_Text": $("#review_Text").val(),
+				"rating" : $("#rating").val()
+			};
+
+			$.ajax({
+				url: "/api/review",
+				type: "post",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				success: function (data, status, xhr) {
+					alert(data.message);
+					window.location.reload();
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+			});
+		});
+
 		function inquiryLoad() {
 			$.ajax({
 				url: "/api/productInquiry?gCode=" + gCode,
 				type: "get",
 				success: function (data) {
 					displayInquiries(data);
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+			});
+
+			$.ajax({
+				url: "/api/review?gCode=" + gCode,
+				type: "get",
+				success: function (data) {
+					displayReviews(data);
 				},
 				error: function (xhr, status, error) {
 					console.log(error);
@@ -170,6 +241,23 @@
 				type: "get",
 				success: function (data) {
 					$("#inquiry_Update_Content").val(data.inquiry_Content);
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$(document).on('click', ".review-update-btn", function () {
+			let id = $(this).data("id");
+			$("#reviewId").val(id);
+
+			$.ajax({
+				url: "/api/review/one?reviewId=" + id,
+				type: "get",
+				success: function (data) {
+					$("#review_Update_Content").val(data.review_Text);
+					$('#reviewUpdateModal').modal('show'); // 모달 창을 열어주는 코드 추가
 				},
 				error: function (xhr, status, error) {
 					console.log(error);
@@ -219,6 +307,23 @@
 
 		});
 
+		$(document).on('click', ".review-delete-btn", function () {
+			let id = $(this).data("id");
+
+			$.ajax({
+				url: "/api/review/" + id,
+				type: "delete",
+				success: function (data) {
+					alert(data.message);
+					window.location.reload();
+				},
+				error: function (xhr, status, error) {
+					console.log(error);
+				}
+			});
+
+		});
+
 			function displayInquiries(data) {
 			$('#product-inquiries').empty();
 			if (data.length === 0) {
@@ -234,10 +339,33 @@
 						'<h5 class="card-title">문의 내용</h5>' +
 						'<p class="card-text">' + inquiry.inquiry_Content + '</p>' +
 						'<div><button class="delete-btn" data-id="' + inquiry.inquiry_Id + '">삭제</button>' +
-						'<button data-toggle="modal" data-target="#inquiryUpdateModal" class="update-btn" data-id="' + inquiry.inquiry_Id + '">수정</buttonid></div>' +
+						'<button data-toggle="modal" data-target="#inquiryUpdateModal" class="update-btn" data-id="' + inquiry.inquiry_Id + '">수정</button></div>' +
 						'</div>' +
 						'</div>';
 				$('#product-inquiries').append(inquiryHtml);
+			});
+		}
+
+		function displayReviews(data) {
+			$('#product-reviews').empty();
+			if (data.length === 0) {
+				$('#product-reviews').append('<p>리뷰가 없습니다.</p>');
+				return;
+			}
+			data.forEach(function(review) {
+				var reviewHtml = '<div class="card mb-3">' +
+						'<div class="card-header">' +
+						'리뷰 날짜: ' + review.createdAt +
+						'</div>' +
+						'<div class="card-body">' +
+						'<h5 class="card-title">리뷰 내용</h5>' +
+						'<p class="card-text">' + review.review_Text + '</p>' +
+						'<p class="card-text">평점 : ' + review.rating + '</p>' +
+						'<div><button class="review-delete-btn" data-id="' + review.review_Id + '">삭제</button>' +
+						'<button data-toggle="modal" data-target="#reviewUpdateModal" class="review-update-btn" data-id="' + review.review_Id + '">수정</button></div>' +
+						'</div>' +
+						'</div>';
+				$('#product-reviews').append(reviewHtml);
 			});
 		}
 	});

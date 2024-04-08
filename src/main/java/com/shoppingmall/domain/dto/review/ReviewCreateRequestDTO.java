@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @ToString
 public class ReviewCreateRequestDTO {
 
-    private String gCode;
+    private String code;
 
     private Long memberId;
 

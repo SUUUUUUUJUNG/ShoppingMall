@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ReviewDTO">
+<mapper namespace="ReviewMapper">
 
 <insert id="create" parameterType="ReviewCreateRequestDTO">
 insert into REVIEWS (REVIEW_ID,GCODE,MEMBERID,REVIEW_TEXT,RATING,CREATED_AT)
-values (SUJUNG.REVIEWS_SEQ.nextval, #{gCode},#{memberId},#{review_Text},#{rating},#{createdAt})
+values (SUJUNG.REVIEWS_SEQ.nextval, #{code},#{memberId},#{review_Text},#{rating},#{createdAt})
 </insert>
 
-    <select id="findByReviewId" parameterType="ReviewDTO">
+    <select id="findByReviewId" parameterType="Long" resultType="ReviewDTO">
         select * from REVIEWS where REVIEW_ID = #{review_Id}
     </select>
 
