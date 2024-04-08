@@ -28,7 +28,7 @@ public class ReviewAPIController {
         return ResponseEntity.ok(Map.of("message","리뷰가 등록되었습니다."));
     }
 
-    @GetMapping
+    @GetMapping("/one")
     public ResponseEntity<?> findByReviewId(@RequestParam("reviewId") Long reviewId){
         return ResponseEntity.ok(reviewService.findByReviewId(reviewId));
     }
