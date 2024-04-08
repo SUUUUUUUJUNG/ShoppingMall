@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,9 @@ public class ReviewService {
 
     public ReviewDTO findByReviewId(Long reviewId) {
         return reviewDAO.findByReviewId(reviewId);
+    }
+
+    public List<ReviewDTO> findAllByGCode(String gCode) {
+        return reviewDAO.findAllByGCode(gCode);
     }
 }

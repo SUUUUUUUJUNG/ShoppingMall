@@ -32,4 +32,11 @@ public class ReviewAPIController {
     public ResponseEntity<?> findByReviewId(@RequestParam("reviewId") Long reviewId){
         return ResponseEntity.ok(reviewService.findByReviewId(reviewId));
     }
+
+    @GetMapping
+    public ResponseEntity<?> findAllByGCode(@RequestParam("gCode") String gCode) {
+        return ResponseEntity.ok(reviewService.findAllByGCode(gCode));
+    }
+
+
 }

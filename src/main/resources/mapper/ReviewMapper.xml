@@ -13,4 +13,7 @@ values (SUJUNG.REVIEWS_SEQ.nextval, #{gCode},#{memberId},#{review_Text},#{rating
         select * from REVIEWS where REVIEW_ID = #{review_Id}
     </select>
 
+    <select id="findAllByGCode" parameterType="String" resultType="ReviewDTO">
+        select * from REVIEWS where GCODE = #{gCode}
+    </select>
 </mapper>
