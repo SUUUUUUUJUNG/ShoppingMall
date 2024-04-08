@@ -207,4 +207,25 @@ public class ReviewAPIControllerTest {
                 .andExpect(jsonPath("$.message").value("리뷰가 수정되었습니다."))
                 .andExpect(jsonPath("$.review_Id").value(updateRequestDTO.getReview_Id()));
     }
+
+    @Test
+    @WithMockUser(username="user1", roles="USER")
+    public void deleteReview_Success() throws Exception {
+
+        Long reviewId = 1L;
+        MemberDTO member = new MemberDTO();
+        member.setMemberId(1L);
+        ReviewDTO existingReview = new ReviewDTO();
+        existingReview.setReview_Id(reviewId);
+        existingReview.setMemberId(1L);
+
+        when(memberLoginService.findByPrinciple(any(Principal.class))).thenReturn(member);
+        when(reviewService.findByReviewId(reviewId)).thenReturn(existingReview);
+        when(reviewService.delete(reviewId)).thenReturn(1);
+
+        mockMvc.perform(delete("/api/review/{review_Id}", reviewId)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("리뷰가 삭제되었습니다."));
+    }
 }
