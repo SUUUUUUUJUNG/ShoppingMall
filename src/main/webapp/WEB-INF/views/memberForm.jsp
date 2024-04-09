@@ -196,7 +196,7 @@
                         <p id="pwCheck" style="display: none; color: red"></p>
                         <div class="input-group mb-3 form-floating">
                             <span class="input-group-text" id="basic-addon2_1"><i class="fas fa-lock"></i></span>
-                            <input type="password2" class="form-control" id="password2" placeholder=" " aria-label="비밀번호 확인" aria-describedby="basic-addon1" required>
+                            <input type="password" class="form-control" id="password2" placeholder=" " aria-label="비밀번호 확인" aria-describedby="basic-addon1" required>
                             <label for="password2">비밀번호 확인</label>
                         </div>
                         <p id="passwordMismatch" style="display: none; color: red;"></p>
