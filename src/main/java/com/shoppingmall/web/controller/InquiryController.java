@@ -3,6 +3,7 @@ package com.shoppingmall.web.controller;
 import com.shoppingmall.domain.dto.InquiryDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.InquiryService;
+import com.shoppingmall.domain.service.MemberLoginService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,7 @@ import java.util.Map;
 public class InquiryController {
 
     private final InquiryService inquiryService;
+    private final MemberLoginService memberLoginService;
 
     @GetMapping
     public String inquiry() {
@@ -36,9 +39,9 @@ public class InquiryController {
     }
 
     @GetMapping("/inquiriesList")
-    public String inquiriesList(HttpSession session, Model model) {
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        Long memberId = memberDTO.getMemberId();
+    public String inquiriesList(Principal principal, Model model) {
+        MemberDTO member = memberLoginService.findByPrinciple(principal);
+        Long memberId = member.getMemberId();
         List<InquiryDTO> inquiries = inquiryService.findByMemberId(memberId);
         model.addAttribute("inquiries", inquiries);
         return "inquiriesList";
