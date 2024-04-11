@@ -1,19 +1,14 @@
 package com.shoppingmall.domain.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.shoppingmall.domain.dto.cart.CartDTO;
-import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
-import com.shoppingmall.domain.dto.member.MemberDTO;
+import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppingmall.domain.dao.GoodsDAO;
-import com.shoppingmall.domain.dto.GoodsDTO;
-import com.shoppingmall.domain.dto.OrderDTO;
+import com.shoppingmall.domain.dto.goods.GoodsDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -30,4 +25,7 @@ public class GoodsService {
 		return dao.findByCode(session, gCode);
 	}
 
+	public Integer create(GoodsCreateRequestDTO requestDTO) {
+		return dao.create(session,requestDTO);
+	}
 }

@@ -17,6 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        from goods
        where gCategory = #{gCategory}
 	</select>
+
+    <insert id="create" parameterType="GoodsCreateRequestDTO">
+        insert into GOODS (GCODE,GCATEGORY,GNAME,GCONTENT,GPRICE,GIMAGE)
+        values (#{gCode},#{gCategory},#{gName},#{gContent},#{gPrice},#{gImage})
+    </insert>
 	
 	
 	
