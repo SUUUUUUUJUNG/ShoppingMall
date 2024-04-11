@@ -9,9 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        from goods
        where gCode = #{gCode}
 	</select>
-   
-  
-	
+
 	<select id="findByCategory" parameterType="string" resultType="GoodsDTO">
        select gCode,gCategory,gName,gContent,gPrice,gImage
        from goods
@@ -20,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="create" parameterType="GoodsCreateRequestDTO">
         insert into GOODS (GCODE,GCATEGORY,GNAME,GCONTENT,GPRICE,GIMAGE)
-        values (#{gCode},#{gCategory},#{gName},#{gContent},#{gPrice},#{gImage})
+        values (#{code},#{category},#{name},#{content},#{price},'image')
     </insert>
 
     <delete id="delete" parameterType="String">
@@ -30,9 +28,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <update id="update" parameterType="GoodsUpdateRequestDTO">
         update GOODS set GCATEGORY = #{gCategory}, GNAME = #{gName}, GCONTENT = #{gContent}, GPRICE = #{gPrice}, GIMAGE = #{gImage} where GCODE = #{gCode}
    </update>
-	
-	
-	
-	
-	
+
 </mapper>

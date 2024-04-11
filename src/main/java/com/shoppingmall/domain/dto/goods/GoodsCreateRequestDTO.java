@@ -9,10 +9,10 @@ import lombok.ToString;
 @ToString
 public class GoodsCreateRequestDTO {
 
-    private String gCode;
-    private String gCategory;
-    private String gName;
-    private String gContent;
-    private int gPrice;
-    private String gImage;
+    private String code;
+    private String category;
+    private String name;
+    private String content;
+    private int price;
+    private String image;
 }

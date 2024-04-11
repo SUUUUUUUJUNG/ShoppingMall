@@ -55,9 +55,9 @@ class GoodsAPIControllerTest {
     @BeforeEach
     void setUp() {
         createRequestDTO = new GoodsCreateRequestDTO();
-        createRequestDTO.setGName("New Product");
-        createRequestDTO.setGPrice(999);
-        createRequestDTO.setGContent("A description of the new product");
+        createRequestDTO.setName("New Product");
+        createRequestDTO.setPrice(999);
+        createRequestDTO.setContent("A description of the new product");
 
         memberDTO = new MemberDTO();
         memberDTO.setMemberId(1L);
