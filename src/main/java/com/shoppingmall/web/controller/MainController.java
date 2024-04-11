@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shoppingmall.domain.dto.GoodsDTO;
+import com.shoppingmall.domain.dto.goods.GoodsDTO;
 import com.shoppingmall.domain.service.GoodsService;
 
 @Controller

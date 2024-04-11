@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dto;
+package com.shoppingmall.domain.dto.goods;
 
 import lombok.Getter;
 import lombok.Setter;
