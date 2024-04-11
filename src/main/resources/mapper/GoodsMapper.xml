@@ -26,6 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delete" parameterType="String">
         delete from GOODS where GCODE = #{gCode}
     </delete>
+
+   <update id="update" parameterType="GoodsUpdateRequestDTO">
+        update GOODS set GCATEGORY = #{gCategory}, GNAME = #{gName}, GCONTENT = #{gContent}, GPRICE = #{gPrice}, GIMAGE = #{gImage} where GCODE = #{gCode}
+   </update>
 	
 	
 	

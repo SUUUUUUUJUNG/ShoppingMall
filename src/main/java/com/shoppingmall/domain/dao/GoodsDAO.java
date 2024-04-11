@@ -3,6 +3,7 @@ package com.shoppingmall.domain.dao;
 import java.util.List;
 
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
+import com.shoppingmall.domain.dto.goods.GoodsUpdateRequestDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +27,9 @@ public class GoodsDAO {
     public int delete(SqlSessionTemplate session, String gCode) {
 		return session.delete("GoodsMapper.delete",gCode);
 
+    }
+
+    public int update(SqlSessionTemplate session, GoodsUpdateRequestDTO requestDTO) {
+		return session.update("GoodsMapper.update",requestDTO);
     }
 }

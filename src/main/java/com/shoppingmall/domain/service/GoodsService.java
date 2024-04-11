@@ -3,6 +3,8 @@ package com.shoppingmall.domain.service;
 import java.util.List;
 
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
+import com.shoppingmall.domain.dto.goods.GoodsUpdateRequestDTO;
+import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -32,4 +34,8 @@ public class GoodsService {
 	public int delete(String gCode) {
 		return dao.delete(session,gCode);
 	}
+
+    public int update(GoodsUpdateRequestDTO requestDTO) {
+		return dao.update(session, requestDTO);
+    }
 }
