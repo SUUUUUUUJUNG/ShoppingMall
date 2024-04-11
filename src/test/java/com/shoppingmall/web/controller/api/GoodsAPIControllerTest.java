@@ -23,8 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -109,5 +108,27 @@ class GoodsAPIControllerTest {
                 .andExpect(jsonPath("$.name").value("니트"))
                 .andExpect(jsonPath("$.price").value(9999))
                 .andExpect(jsonPath("$.image").value("top001.jpg"));
+    }
+
+    @Test
+    void deleteGoodsAsAdminShouldSucceed() throws Exception{
+        String gCode = "001";
+        when(memberLoginService.findByPrinciple(any())).thenReturn(memberDTO);
+
+        mockMvc.perform(delete("/api/goods/{gCode}",gCode)
+                .with(user("admin").roles("ADMIN")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("상품이 삭제되었습니다."));
+    }
+
+    @Test
+    void deleteGoodsAsUserShouldFail() throws Exception{
+        String gCode = "001";
+        memberDTO.setRole("ROLE_USER");
+        when(memberLoginService.findByPrinciple(any())).thenReturn(memberDTO);
+
+        mockMvc.perform(delete("/api/goods/{gCode}",gCode)
+                .with(user("user").roles("USER")))
+                .andExpect(status().isUnauthorized());
     }
 }
