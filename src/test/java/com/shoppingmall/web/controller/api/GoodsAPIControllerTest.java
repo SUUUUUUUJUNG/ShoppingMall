@@ -3,6 +3,7 @@ package com.shoppingmall.web.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
+import com.shoppingmall.domain.dto.goods.GoodsDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
 import com.shoppingmall.domain.service.MemberLoginService;
@@ -19,8 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,19 +49,27 @@ class GoodsAPIControllerTest {
 
     private MemberDTO memberDTO;
 
+    private GoodsDTO sampleGoodsDTO;
+
 
     @BeforeEach
     void setUp() {
-        // Set up the request DTO with sample data
         requestDTO = new GoodsCreateRequestDTO();
         requestDTO.setGName("New Product");
         requestDTO.setGPrice(999);
         requestDTO.setGContent("A description of the new product");
 
-        // Set up the MemberDTO for the admin user
         memberDTO = new MemberDTO();
         memberDTO.setMemberId(1L);
         memberDTO.setRole("ROLE_ADMIN");
+
+        sampleGoodsDTO = new GoodsDTO();
+        sampleGoodsDTO.setGCode("001");
+        sampleGoodsDTO.setGCategory("top");
+        sampleGoodsDTO.setGName("니트");
+        sampleGoodsDTO.setGContent("니트 입니다.");
+        sampleGoodsDTO.setGPrice(9999);
+        sampleGoodsDTO.setGImage("top001.jpg");
     }
 
     @Test
@@ -84,5 +95,19 @@ class GoodsAPIControllerTest {
                 .content(objectMapper.writeValueAsString(requestDTO))
                 .with(user("user").roles("USER")))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void findByCodeShouldReturnGoodsInfo() throws Exception {
+        when(goodsService.findByCode(eq("001"))).thenReturn(sampleGoodsDTO);
+
+        mockMvc.perform(get("/api/goods")
+                        .param("gCode", "001")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("001"))
+                .andExpect(jsonPath("$.name").value("니트"))
+                .andExpect(jsonPath("$.price").value(9999))
+                .andExpect(jsonPath("$.image").value("top001.jpg"));
     }
 }
