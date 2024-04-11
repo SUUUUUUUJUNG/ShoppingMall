@@ -1,17 +1,15 @@
 package com.shoppingmall.web.controller.api;
 
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
+import com.shoppingmall.domain.dto.goods.GoodsDTO;
+import com.shoppingmall.domain.dto.goods.GoodsResponseDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
 import com.shoppingmall.domain.service.MemberLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -34,5 +32,12 @@ public class GoodsAPIController {
         }
         goodsService.create(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message","상품이 정상적으로 등록되었습니다."));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findByCode(@RequestParam("gCode") String gCode) {
+        GoodsDTO goodsDTO = goodsService.findByCode(gCode);
+        GoodsResponseDTO responseDTO = new GoodsResponseDTO(goodsDTO);
+        return ResponseEntity.ok(responseDTO);
     }
 }
