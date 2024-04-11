@@ -55,5 +55,10 @@ public class GoodsController {
 
 
 		return "goodsRetrieve";
-	} 
+	}
+
+	@GetMapping("/create")
+	public String create(){
+		return "goodsPost";
+	}
 }
