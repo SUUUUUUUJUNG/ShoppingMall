@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into GOODS (GCODE,GCATEGORY,GNAME,GCONTENT,GPRICE,GIMAGE)
         values (#{gCode},#{gCategory},#{gName},#{gContent},#{gPrice},#{gImage})
     </insert>
+
+    <delete id="delete" parameterType="String">
+        delete from GOODS where GCODE = #{gCode}
+    </delete>
 	
 	
 	

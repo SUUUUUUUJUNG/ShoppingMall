@@ -22,4 +22,9 @@ public class GoodsDAO {
 	public Integer create(SqlSessionTemplate session, GoodsCreateRequestDTO requestDTO) {
 		return session.insert("GoodsMapper.create",requestDTO);
 	}
+
+    public int delete(SqlSessionTemplate session, String gCode) {
+		return session.delete("GoodsMapper.delete",gCode);
+
+    }
 }

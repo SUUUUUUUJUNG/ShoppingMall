@@ -40,4 +40,14 @@ public class GoodsAPIController {
         GoodsResponseDTO responseDTO = new GoodsResponseDTO(goodsDTO);
         return ResponseEntity.ok(responseDTO);
     }
+
+    @DeleteMapping("/{gCode}")
+    public ResponseEntity<?> delete(@PathVariable("gCode") String gCode, Principal principal){
+        MemberDTO member = memberLoginService.findByPrinciple(principal);
+        if (!Objects.equals(member.getRole(), "ROLE_ADMIN")) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"권한이 없습니다.");
+        }
+        goodsService.delete(gCode);
+        return ResponseEntity.ok(Map.of("message", "상품이 삭제되었습니다."));
+    }
 }

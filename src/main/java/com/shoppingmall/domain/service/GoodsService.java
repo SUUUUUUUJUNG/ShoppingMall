@@ -28,4 +28,8 @@ public class GoodsService {
 	public Integer create(GoodsCreateRequestDTO requestDTO) {
 		return dao.create(session,requestDTO);
 	}
+
+	public int delete(String gCode) {
+		return dao.delete(session,gCode);
+	}
 }
