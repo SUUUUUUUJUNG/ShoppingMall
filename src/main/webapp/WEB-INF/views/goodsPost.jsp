@@ -101,9 +101,6 @@
                 return this.loader.file.then(file => {
                     const formData = new FormData();
                     formData.append('image', file); // 'image' 필드에 파일 추가
-                    let data = {
-
-                    }
                     return fetch('/api/file', {
                         method: 'POST',
                         body: formData,
@@ -122,9 +119,7 @@
         let editorInstance;
         ClassicEditor
             .create(document.querySelector('#gContent'), {
-                extraPlugins: [MyCustomUploadAdapterPlugin],
-                toolbar: ['undo', 'redo', '|', 'bold', 'italic', '|', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-                // 다른 설정...
+                extraPlugins: [MyCustomUploadAdapterPlugin], // 필요한 추가 플러그인 설정
             })
             .then(editor => {
                 editorInstance = editor; // 에디터 인스턴스 저장
