@@ -8,7 +8,6 @@ import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
 import com.shoppingmall.domain.service.MemberLoginService;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.PackagePrivate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +61,4 @@ public class GoodsAPIController {
         goodsService.update(requestDTO);
         return ResponseEntity.ok(Map.of("message","상품이 수정되었습니다."));
     }
-
 }

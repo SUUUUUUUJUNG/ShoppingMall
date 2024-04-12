@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,5 +61,11 @@ public class GoodsController {
 	@GetMapping("/create")
 	public String create(){
 		return "goodsPost";
+	}
+
+	@GetMapping("/update/{gCode}")
+	public String update(@PathVariable("gCode") String gCode, Model model){
+		model.addAttribute("gCode", gCode);
+		return "goodsUpdate";
 	}
 }
