@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsImagesMapper">
+
+    <!-- 상품 이미지 생성 -->
+    <insert id="create" parameterType="map">
+        INSERT INTO Goods_Images (IMAGEID, GCODE, IMAGEPATH)
+        VALUES (GOODSIMAGES_SEQ.nextval, #{code}, #{imagePath})
+    </insert>
+
+    <!-- 상품 이미지 삭제 -->
+    <delete id="delete" parameterType="Long">
+        DELETE FROM Goods_Images
+        WHERE IMAGEID = #{id}
+    </delete>
+
+    <!-- 특정 상품 코드에 대한 모든 이미지 조회 -->
+    <select id="findAllByGCode" parameterType="String" resultType="GoodsImagesDTO">
+        SELECT IMAGEID, GCODE, IMAGEPATH
+        FROM Goods_Images
+        WHERE GCODE = #{gCode}
+    </select>
+
+    <!-- 이미지 데이터 삭제 쿼리 -->
+    <delete id="deleteAll" parameterType="String">
+        DELETE FROM Goods_Images
+        WHERE GCODE = #{code}
+    </delete>
+
+</mapper>
