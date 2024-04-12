@@ -21,6 +21,7 @@
 <h1>Create New Goods</h1>
 <div class="container mt-4">
     <form enctype="multipart/form-data" id="goodsForm">
+        <img id="imageSrc"><br>
         <label for="gCode">상품코드</label>
         <input type="text" id="gCode" name="gCode" required><br><br>
 
@@ -53,7 +54,8 @@
 
         var uploadedImages = []; // 업로드한 이미지를 저장할 배열
 
-// 이미지 선택 시 처리 로직
+
+        // 이미지 선택 시 처리 로직
         $("#image").change(function () {
             var files = $('#image')[0].files;
             for (var i = 0; i < files.length; i++) {
@@ -115,25 +117,25 @@
             });
         }
         loadInitialImageList(); // 페이지 로드 시 초기 이미지 리스트 로드
+
         let imgSrc = "";
+
+        loadGoodsData();
         $("#goodsForm").on("submit",function(e){
             e.preventDefault();
             const descriptionData = editorInstance.getData();
-            const code = $('#gCode').val();
-            console.log(code);
 
             const productData = {
-                code:code,
+                code:$('#gCode').val(),
                 category:$('#gCategory').val(),
                 name:$('#gName').val(),
                 content:descriptionData,
                 price:$('#gPrice').val(),
-                imageUrls: uploadedImages // 이미지 업로드 로직에서 업데이트된 배열
+                image: imgSrc // 이미지 업로드 로직에서 업데이트된 배열
             };
-
             $.ajax({
                 url:"/api/goods",
-                type:"POST",
+                type:"PATCH",
                 contentType:'application/json',
                 data:JSON.stringify(productData),
                 success:function(response){
@@ -144,8 +146,10 @@
                 }
             });//end ajax
 
+
+            console.log(uploadedImages);
             let data = {
-                code:code,
+                code:"${gCode}",
                 images: uploadedImages,
             }
 
@@ -158,8 +162,9 @@
                     // alert(response.message);
                 },
                 error:function(xhr,status,error){
+
                 }
-            });//end goods images
+            });//end goods images ajax
         });//end click
 
 
@@ -214,8 +219,28 @@
         //     // 이미지를 업로드하고, 서버로부터 응답 받은 후 응답형 이미지 처리를 위한 로직 구현...
         // }
 
+        function loadGoodsData() {
+            let gCode = "${gCode}";
+            console.log(gCode);
 
-
+            $.ajax({
+                url: "/api/goods?gCode=" + gCode,
+                type: "GET",
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#gCode').val(response.code);
+                    $('#gCategory').val(response.category);
+                    $('#gName').val(response.name);
+                    editorInstance.setData(response.content);
+                    $('#gPrice').val(response.price);
+                    $('#imageSrc').attr("src", "/images/items/" + response.image + ".gif");
+                    imgSrc = response.image;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });//end ajax
+        }
     });
 </script>
 </body>
