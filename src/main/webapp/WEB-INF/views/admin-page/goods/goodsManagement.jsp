@@ -5,6 +5,7 @@
     <title>상품 관리</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         .table-custom {
             margin-top: 20px;
@@ -49,13 +50,37 @@
                 <td>${item.gPrice}</td>
                 <td>
                     <a href="/admin/goods/edit/${item.gCode}" class="btn btn-warning btn-sm">수정</a>
-                    <a href="/admin/goods/delete/${item.gCode}" class="btn btn-danger btn-sm" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+                    <button class="btn btn-danger btn-sm delete-btn" data-code="${item.gCode}">삭제</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".delete-btn").on("click", function () {
+
+            let code = $(this).data("code");
+
+            $.ajax({
+                url: "/api/goods/" + code,
+                type: "DELETE",
+                contentType: 'application/json',
+                success: function (response) {
+                    alert(response.message);
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });//end ajax
+        });
+    });
+</script>
 
 <!-- Bootstrap JS and Popper.js (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
