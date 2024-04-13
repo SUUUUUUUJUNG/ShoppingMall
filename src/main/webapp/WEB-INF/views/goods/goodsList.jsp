@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.shoppingmall.domain.dto.GoodsDTO"%>
+<%@ page import="com.shoppingmall.domain.dto.goods.GoodsDTO"%>
 
 <table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
