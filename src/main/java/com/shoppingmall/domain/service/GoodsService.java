@@ -2,7 +2,9 @@ package com.shoppingmall.domain.service;
 
 import java.util.List;
 
+import com.shoppingmall.domain.dao.GoodsImagesDAO;
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
+import com.shoppingmall.domain.dto.goods.GoodsResponseNewDTO;
 import com.shoppingmall.domain.dto.goods.GoodsUpdateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +18,33 @@ import com.shoppingmall.domain.dto.goods.GoodsDTO;
 @RequiredArgsConstructor
 public class GoodsService {
 
-	private final GoodsDAO dao;
+	private final GoodsDAO goodsDAO;
+	private final GoodsImagesDAO goodsImagesDAO;
 	private final SqlSessionTemplate session;
 
 	public List<GoodsDTO> findByCategory(String gCategory) {
-		return dao.findByCategory(session, gCategory);
+		return goodsDAO.findByCategory(session, gCategory);
 	}
 
 	public GoodsDTO findByCode(String gCode) {
-		return dao.findByCode(session, gCode);
+		return goodsDAO.findByCode(session, gCode);
 	}
 
 	public Integer create(GoodsCreateRequestDTO requestDTO) {
-		return dao.create(session,requestDTO);
+		return goodsDAO.create(session,requestDTO);
 	}
 
 	public int delete(String gCode) {
-		return dao.delete(session,gCode);
+		return goodsDAO.delete(session,gCode);
 	}
 
     public int update(GoodsUpdateRequestDTO requestDTO) {
-		return dao.update(session, requestDTO);
+		return goodsDAO.update(session, requestDTO);
     }
+
+	public List<GoodsResponseNewDTO> findAll() {
+		List<GoodsResponseNewDTO> list = goodsDAO.findAll(session);
+		System.out.println("list = " + list);
+		return list;
+	}
 }

@@ -1,9 +1,6 @@
 package com.shoppingmall.web.controller.api;
 
-import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
-import com.shoppingmall.domain.dto.goods.GoodsDTO;
-import com.shoppingmall.domain.dto.goods.GoodsResponseDTO;
-import com.shoppingmall.domain.dto.goods.GoodsUpdateRequestDTO;
+import com.shoppingmall.domain.dto.goods.*;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
 import com.shoppingmall.domain.service.MemberLoginService;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,6 +38,15 @@ public class GoodsAPIController {
         GoodsDTO goodsDTO = goodsService.findByCode(gCode);
         GoodsResponseDTO responseDTO = new GoodsResponseDTO(goodsDTO);
         return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> findAll() {
+        List<GoodsResponseNewDTO> list = goodsService.findAll();
+        if(list.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(list);
     }
 
     @DeleteMapping("/{gCode}")

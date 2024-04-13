@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        where gCode = #{gCode}
 	</select>
 
+     <select id="findAll" resultType="GoodsResponseNewDTO">
+       select * from goods
+	 </select>
+
 	<select id="findByCategory" parameterType="string" resultType="GoodsDTO">
        select gCode,gCategory,gName,gContent,gPrice,gImage
        from goods
