@@ -54,18 +54,6 @@ public class GoodsController {
 		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
 
-
 		return "goodsRetrieve";
-	}
-
-	@GetMapping("/create")
-	public String create(){
-		return "goodsPost";
-	}
-
-	@GetMapping("/update/{gCode}")
-	public String update(@PathVariable("gCode") String gCode, Model model){
-		model.addAttribute("gCode", gCode);
-		return "goodsUpdate";
 	}
 }
