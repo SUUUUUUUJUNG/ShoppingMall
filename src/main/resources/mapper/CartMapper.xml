@@ -80,7 +80,7 @@
 
     <insert id="create" parameterType="map" >
         insert into cart (cartid,USERNAME,gCode,gSize,gColor,gAmount)
-        values (cart_seq.nextval,#{username},#{gCode},
+        values (cart_seq.nextval,#{userId},#{gCode},
                 #{gSize},#{gColor},#{gAmount})
     </insert>
 
@@ -91,13 +91,19 @@
     </select>-->
 
     <select id="findDuplicateCartItem" parameterType="map" resultType="CartDTO">
-        select * from cart where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and USERNAME=#{username}
+        SELECT *
+        FROM cart
+        WHERE USERNAME = #{userId}
+          AND GCODE = #{gCode}
+          AND GSIZE = #{gSize}
+          AND GCOLOR = #{gColor}
+          AND GAMOUNT = #{gAmount}
     </select>
 
     <update id="updateItemQuantity" parameterType="map">
         update cart
         set gAmount = gAmount+1
-        where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and USERNAME=#{username}
+        where gCode=#{gCode} and gColor=#{gColor} and gSize=#{gSize} and USERNAME=#{userId}
     </update>
 
 </mapper>

@@ -44,7 +44,6 @@ public class GoodsService {
 
 	public List<GoodsResponseNewDTO> findAll() {
 		List<GoodsResponseNewDTO> list = goodsDAO.findAll(session);
-		System.out.println("list = " + list);
 		return list;
 	}
 }
