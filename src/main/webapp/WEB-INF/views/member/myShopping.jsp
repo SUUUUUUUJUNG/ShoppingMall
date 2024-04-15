@@ -131,7 +131,7 @@
 <%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary cart-btn button-group" data-toggle="modal" data-target="#exampleModal" data-code="<%=item.getGCode()%>">
+    <button type="button" class="btn btn-primary cart-btn button-group" data-bs-toggle="modal" data-bs-target="#exampleModal" data-code="<%=item.getGCode()%>">
         장바구니
     </button>
 
@@ -143,7 +143,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">상품 옵션 선택</h1>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Size Selection -->
@@ -172,7 +172,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="cart">장바구니 담기</button>
                     <button type="button" class="btn btn-primary">결제하기</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>

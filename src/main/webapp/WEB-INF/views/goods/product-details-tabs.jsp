@@ -4,38 +4,68 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
-	.nav-pills.nav-fill .nav-item {
-		display: inline-block; /* 인라인 블록 요소로 변경 */
-		float: none; /* 기본 플로팅 해제 */
+
+	.nav-pills .nav-link {
+		border-radius: 0.25rem;
+		background-color: #f8f9fa;
+		color: #495057;
 	}
 
-	.nav-pills.nav-fill {
-		text-align: center; /* 텍스트 정렬을 이용해 내부 요소 중앙 정렬 */
+	.nav-pills .nav-link.active {
+		background-color: #0062cc;
+		color: white;
 	}
 
+	.card-custom {
+		border: none;
+		box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+	}
+
+	.modal-content {
+		border-radius: 0.3rem;
+	}
+
+	.btn-custom {
+		background-color: #0062cc;
+		color: white;
+	}
+
+	.btn-custom:hover {
+		background-color: #004885;
+	}
+
+	.btn-outline-custom {
+		border-color: #0062cc;
+		color: #0062cc;
+	}
+
+	.btn-outline-custom:hover {
+		background-color: #0062cc;
+		color: white;
+	}
+
+	.form-control, .form-select {
+		border-radius: 0.25rem;
+	}
+
+	.form-label {
+		font-weight: 500;
+	}
 </style>
-
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Bootstrap JS 추가 -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap CSS 추가 -->
-
 <div class="container">
 	<!-- 탭 버튼들 -->
 	<ul class="nav nav-pills nav-fill">
 		<li class="nav-item">
-			<a class="nav-link active" href="#tab1" data-toggle="tab">상품정보</a>
+			<a class="nav-link active" href="#tab1" data-bs-toggle="tab">상품정보</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#tab2" data-toggle="tab">디테일</a>
+			<a class="nav-link" href="#tab2" data-bs-toggle="tab">디테일</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#tab3" data-toggle="tab">구매후기</a>
+			<a class="nav-link" href="#tab3" data-bs-toggle="tab">구매후기</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#tab4" data-toggle="tab">상품문의</a>
+			<a class="nav-link" href="#tab4" data-bs-toggle="tab">상품문의</a>
 		</li>
 	</ul>
 	<!-- 탭 내용 -->
@@ -62,7 +92,7 @@
 			<p id="product-inquiries">상품문의의 내용이 여기에 표시됩니다.</p>
 
 			<!-- 문의하기 버튼 -->
-			<button class="btn btn-outline-primary" data-toggle="modal" data-target="#inquiryModal">문의하기</button>
+			<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#inquiryModal">문의하기</button>
 		</div>
 	</div>
 </div>
@@ -74,7 +104,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="inquiryModalLabel">상품 문의</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -92,7 +122,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="submit">확인</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -105,7 +135,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -124,7 +154,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="update-modal-btn">확인</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -137,7 +167,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="reviewUpdateModalLabel">리뷰 수정</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -157,7 +187,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="review-update-modal-btn">확인</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -368,7 +398,7 @@
 						'<h5 class="card-title">문의 내용</h5>' +
 						'<p class="card-text">' + inquiry.inquiry_Content + '</p>' +
 						'<div><button class="delete-btn" data-id="' + inquiry.inquiry_Id + '">삭제</button>' +
-						'<button data-toggle="modal" data-target="#inquiryUpdateModal" class="update-btn" data-id="' + inquiry.inquiry_Id + '">수정</button></div>' +
+						'<button data-bs-toggle="modal" data-bs-target="#inquiryUpdateModal" class="update-btn" data-id="' + inquiry.inquiry_Id + '">수정</button></div>' +
 						'</div>' +
 						'</div>';
 				$('#product-inquiries').append(inquiryHtml);
@@ -391,7 +421,7 @@
 						'<p class="card-text">' + review.review_Text + '</p>' +
 						'<p class="card-text">평점 : ' + review.rating + '</p>' +
 						'<div><button class="review-delete-btn" data-id="' + review.review_Id + '">삭제</button>' +
-						'<button data-toggle="modal" data-target="#reviewUpdateModal" class="review-update-btn" data-id="' + review.review_Id + '">수정</button></div>' +
+						'<button data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" class="review-update-btn" data-id="' + review.review_Id + '">수정</button></div>' +
 						'</div>' +
 						'</div>';
 				$('#product-reviews').append(reviewHtml);

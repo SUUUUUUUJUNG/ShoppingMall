@@ -2,7 +2,6 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="container mt-5">
 	<div class="row">
 		<c:forEach var="dto" items="${goodsList}" varStatus="status">
 		<div class="col-md-3 col-sm-6 goods-item">
@@ -23,5 +22,4 @@
 	</div><div class="row"> <!-- New row for every 4 items -->
 	</c:if>
 	</c:forEach>
-</div>
 </div>
