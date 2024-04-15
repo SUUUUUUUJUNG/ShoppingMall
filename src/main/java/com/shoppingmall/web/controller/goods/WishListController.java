@@ -2,12 +2,14 @@ package com.shoppingmall.web.controller.goods;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.MemberLoginService;
 import com.shoppingmall.domain.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,10 +20,11 @@ public class WishListController {
 
     private final GoodsService goodsService;
     private final WishListService wishListService;
+    private final MemberLoginService memberLoginService;
 
     @PostMapping
-    public ResponseEntity<?> save(HttpSession session, @RequestParam(value = "gCode") String gCode){
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+    public ResponseEntity<?> save(Principal principal, @RequestParam(value = "gCode") String gCode){
+        MemberDTO memberDTO = memberLoginService.findByPrinciple(principal);
         Long memberId = memberDTO.getMemberId();
 
         Map<String,String> map = new HashMap<>();
