@@ -10,9 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<div class="container mt-5">
 <jsp:include page="common/navbar.jsp" flush="true"/>
-<h1>장바구니 목록 화면입니다</h1><br>
-<hr>
-<jsp:include page="cart/cartList.jsp" flush="true"></jsp:include><br>
+    <div style="margin-bottom: 70px;"></div>
+<jsp:include page="cart/cartList.jsp" flush="true"/>
+</div>
 </body>
 </html>

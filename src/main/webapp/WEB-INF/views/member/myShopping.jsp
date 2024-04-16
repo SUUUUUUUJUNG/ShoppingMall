@@ -131,7 +131,7 @@
 <%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary cart-btn button-group" data-bs-toggle="modal" data-bs-target="#exampleModal" data-code="<%=item.getGCode()%>">
+    <button type="button" class="btn btn-primary cart-btn button-group" data-toggle="modal" data-target="#exampleModal" data-code="<%=item.getGCode()%>">
         장바구니
     </button>
 

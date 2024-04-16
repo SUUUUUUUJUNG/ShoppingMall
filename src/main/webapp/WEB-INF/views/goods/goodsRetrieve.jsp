@@ -114,9 +114,9 @@
 					</div>
 					<button class="btn btn-pink" id="wishlist-button" data-code="${goodsDTO.GCode}">
 						<% if ((boolean) request.getAttribute("itemWishlisted")) { %>
-						<i class="fas fa-heart"></i> 찜한 상품
+						<i class="fas fa-heart"></i>
 						<% } else { %>
-						<i class="far fa-heart"></i> 찜하기
+						<i class="far fa-heart"></i>
 						<% } %>
 					</button>
 					<button class="btn btn-pink">구매하기</button>

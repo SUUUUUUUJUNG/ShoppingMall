@@ -2,14 +2,125 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Bootstrap JS 추가 -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap CSS 추가 -->
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .header-row {
+        background: #007bff;
+        color: white;
+        border-radius: 6px;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .btn-sm {
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: .2rem;
+    }
+
+    input[type='checkbox'] {
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        border: 1px solid #ddd;
+        margin-right: 5px;
+        width: 50px;
+        text-align: center;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    td {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .td_default {
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+    }
+
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+</style>
 
 <script>
     $(document).ready(function () {
+
+        $("#allCheck").on("click", function () {
+            // #allCheck의 체크 상태에 따라 모든 .check 체크박스의 상태를 설정
+            var isChecked = $(this).is(":checked"); // #allCheck의 상태 (true or false)
+            $(".check").prop("checked", isChecked); // 모든 .check 체크박스의 상태를 isChecked와 동일하게 설정
+        });
+
+        // '선택 주문하기' 버튼 클릭 이벤트
+        $("#process-selected-items").on("click", function() {
+            // 체크박스에서 선택된 모든 cartId를 배열로 수집
+            var selectedCartIds = $(".check:checked").map(function() {
+                return $(this).val();
+            }).get();
+
+            // 선택된 항목이 없으면 경고하고 중단
+            if (selectedCartIds.length === 0) {
+                alert("주문할 항목을 선택해 주세요.");
+                return;
+            }
+
+            // 서버로 선택된 cartId 목록을 전송하는 AJAX 요청
+            $.ajax({
+                url: "/order/processSelectedItems",  // 서버의 주문 처리 엔드포인트
+                type: "POST",
+                contentType: "application/json",  // JSON 형식으로 데이터를 전송
+                data: JSON.stringify(selectedCartIds),  // JSON 문자열로 변환
+                success: function(response) {
+                    alert("선택한 항목이 주문되었습니다.");
+                    location.reload();  // 성공 시 페이지 리로드 또는 다른 화면으로 이동
+                },
+                error: function(xhr, status, error) {
+                    alert("주문 처리 중 오류가 발생했습니다: " + xhr.responseText);
+                }
+            });
+        });
+
         $(".check").on("click", function () {
             var cartid = $(this).val(); // 체크박스의 value 값 (dto.cartid)을 가져옴
             var sumValue = $("#sum" + cartid).text(); // 해당 항목의 합계
@@ -22,6 +133,7 @@
             console.log("gPrice" + cartid + ": " + gPriceValue); // 수정된 부분: 변수 이름 일치
         });
 
+        //수정 버튼 처리
         $(".update-Btn").on("click", function () {
             let cartId = $(this).data("id");
 			const id = '#cartAmount' + cartId;
@@ -42,6 +154,7 @@
                     console.log(data)
                     $("#sum" + cartId).text(total);
                     totalResult();
+                    alert("수정 되었습니다.")
                 },
                 error: function (xhr, status, error) {
                     console.log(error)
@@ -65,6 +178,7 @@
                     console.log("success");
                     xxx.parents().filter("tr").remove();
                     totalResult(); //화면 로딩 완료 후
+                    alert("상품이 삭제되었습니다.")
                 },
                 error: function (xhr, status, error) {
                     console.log(error);
@@ -81,13 +195,6 @@
             });
             $("#totalReuslt").text(total); // 총합계를 #totalReuslt 요소에 설정
         }
-
-
-        $("#allCheck").on("click", function () {
-            // #allCheck의 체크 상태에 따라 모든 .check 체크박스의 상태를 설정
-            var isChecked = $(this).is(":checked"); // #allCheck의 상태 (true or false)
-            $(".check").prop("checked", isChecked); // 모든 .check 체크박스의 상태를 isChecked와 동일하게 설정
-        });
 
         $("#delAllCart").on("click", function () {
             $("form").attr("action", "loginCheck/delAllCart");
@@ -120,120 +227,36 @@
 
 </script>
 
-<table width="90%" cellspacing="0" cellpadding="0" border="0">
-    <tr>
-        <td height="30">
-    </tr>
-
-    <tr>
-        <td colspan="5" class="td_default">&nbsp;&nbsp;&nbsp; <font
-                size="5"><b>- 장바구니-</b></font> &nbsp;
-        </td>
-    </tr>
-
-    <tr>
-        <td height="15">
-    </tr>
-
-    <tr>
-        <td colspan="10">
-            <hr size="1" color="CCCCCC">
-        </td>
-    </tr>
-
-    <tr>
-        <td height="7">
-    </tr>
-
-    <tr>
-        <td class="td_default" align="center">
-            <input type="checkbox" onclick="allCheck(this)"
-                   name="allCheck" id="allCheck"> <strong>전체선택</strong></td>
-        <td class="td_default" align="center"><strong>주문번호</strong></td>
-        <td class="td_default" align="center" colspan="2"><strong>상품정보</strong></td>
-        <td class="td_default" align="center"><strong>판매가</strong></td>
-        <td class="td_default" align="center" colspan="2"><strong>수량</strong></td>
-        <td class="td_default" align="center"><strong>합계</strong></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td height="7">
-    </tr>
-
-    <tr>
-        <td colspan="10">
-            <hr size="1" color="CCCCCC">
-        </td>
-    </tr>
-
-    <form name="myForm">
+<div class="container">
+    <table class="table">
+        <thead class="header-row">
+        <tr>
+            <th scope="col"><input type="checkbox" name="allCheck" id="allCheck"> 전체선택</th>
+            <th scope="col">주문번호</th>
+            <th scope="col" colspan="2">상품정보</th>
+            <th scope="col">판매가</th>
+            <th scope="col" colspan="2">수량</th>
+            <th scope="col">합계</th>
+            <th scope="col">주문</th>
+            <th scope="col">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach var="dto" items="${cartList}">
             <tr>
-                <td class="td_default" width="80">
-                    <!-- checkbox는 체크된 값만 서블릿으로 넘어간다.
-                    따라서 value에 삭제할 cartid값을 설정한다. -->
-                    <input type="checkbox"
-                           name="check" id="check${dto.cartId}" class="check"
-                           value="${dto.cartId}"></td>
-                <td class="td_default" width="80">${dto.cartId}</td>
-                <td class="td_default" width="80"><img src="/images/items/${dto.GImage}.gif" border="0" align="center"
-                                                       width="80"/></td>
-                <td class="td_default" width="300" style='padding-left: 30px'>${dto.GName}
-                    <br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.GSize}) , 색상(${dto.GColor})] </font></td>
-                <td class="td_default" align="center" width="110">
-                    <span id="">${dto.GPrice}</span>
-                </td>
-                <td class="td_default" align="center" width="90">
-
-                    <input class="input_default" type="text" name="cartAmount"
-                           id="cartAmount${dto.cartId}" style="text-align: right" maxlength="3"
-                           size="2" value="${dto.GAmount }"></input></td>
-
-
-                <td><input type="button" value="수정"
-                           class="update-Btn btn btn-primary btn-sm"
-                           data-id="${dto.cartId}" data-amount="${dto.GAmount}"
-                           data-price="${dto.GPrice}" id="gPrice${dto.cartId}"/></td>
-
-
-                <td class="td_default" align="center" width="80"
-                    style='padding-left: 5px'><span id="sum${dto.cartId}" class="sum">
-                        ${dto.GAmount*dto.GPrice}
-                </span></td>
-                <td>
-                    <a href="/order/confirm?cartId=${dto.cartId}" type="button" class="btn btn-primary btn-sm" ${dto.cartId}>주문</a></td>
-                <td class="td_default" align="center" width="30"
-                    style='padding-left: 10px'>
-                    <input type="button" value="삭제"
-                           class="delBtn btn btn-primary btn-sm" data-id="${dto.cartId}"></td>
-                <td height="10"></td>
+                <td><input type="checkbox" class="check" value="${dto.cartId}"></td>
+                <td>${dto.cartId}</td>
+                <td><img src="/images/items/${dto.GImage}.gif" border="0" align="center" width="80"/></td>
+                <td>${dto.GName} <br> [옵션: 사이즈(${dto.GSize}), 색상(${dto.GColor})]</td>
+                <td>${dto.GPrice}</td>
+                <td><input type="text" name="cartAmount" id="cartAmount${dto.cartId}" value="${dto.GAmount}"></td>
+                <td><button class="btn btn-primary btn-sm update-Btn" data-id="${dto.cartId}" data-price="${dto.GPrice}">수정</button></td>
+                <td id="sum${dto.cartId}">${dto.GAmount * dto.GPrice}</td>
+                <td><button class="btn btn-primary btn-sm">주문</button></td>
+                <td><button class="btn btn-danger btn-sm delBtn" data-id="${dto.cartId}">삭제</button></td>
             </tr>
-            <!-- 반복끝 -->
         </c:forEach>
+        </tbody>
+    </table>
+</div>
 
-    </form>
-    <tr>
-        <td colspan="10">
-            총합 :
-            <div id="totalReuslt"></div>
-
-            <hr size="1" color="CCCCCC">
-        </td>
-    </tr>
-    <tr>
-        <td height="30">
-    </tr>
-
-    <tr>
-        <td align="center" colspan="5">&nbsp;&nbsp;
-            <button onclick="orderAllConfirm(myForm)" class="btn btn-primary btn-sm">전체 주문하기</button>
-            <button id="delAllCart" class="btn btn-primary btn-sm">전체 삭제하기</button>
-            <button id="continue-shopping" class="btn btn-primary btn-sm">계속 쇼핑하기</button>
-        </td>
-    </tr>
-    <tr>
-        <td height="20">
-    </tr>
-
-</table>
