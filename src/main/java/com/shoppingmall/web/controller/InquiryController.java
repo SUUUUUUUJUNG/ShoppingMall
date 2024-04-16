@@ -31,8 +31,9 @@ public class InquiryController {
 
     @PostMapping("/submitInquiry")
     @ResponseBody
-    public ResponseEntity<?> submitInquiry(@RequestBody InquiryDTO inquiryDTO) {
-        System.out.println("inquiryDTO = " + inquiryDTO);
+    public ResponseEntity<?> submitInquiry(@RequestBody InquiryDTO inquiryDTO,Principal principal) {
+        Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
+        inquiryDTO.setMemberId(memberId);
         inquiryService.create(inquiryDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Map.of("message", "등록이 완료 되었습니다. 문의하신 내역은 고객센터에서 확인하실 수 있습니다."));
