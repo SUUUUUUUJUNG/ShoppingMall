@@ -112,6 +112,10 @@
 							<option value="gray">그레이</option>
 						</select>
 					</div>
+					<div class="mb-3">
+						<label for="gAmount">수량:</label>
+						<input type="number" id="gAmount" name="gAmount" value="1" min="1" class="form-control form-control-sm">
+					</div>
 					<button class="btn btn-pink" id="wishlist-button" data-code="${goodsDTO.GCode}">
 						<% if ((boolean) request.getAttribute("itemWishlisted")) { %>
 						<i class="fas fa-heart"></i>
