@@ -201,15 +201,14 @@
             $("form").submit();
         });
 
-/*
+
         $(".orderBtn").on("click", function () {
-            var cartId = $(this).data("id");
+            let cartId = $(this).data("id");
             $.ajax({
-                url:"/order/confirm",
-                type:"post",
-                dataType:"text",
+                url:"/order",
+                type:"GET",
                 data:{
-                    cartId:cartId
+                    cartId: cartId
                 },
                 success:function (data,status,xhr){
                     console.log("success");
@@ -219,14 +218,8 @@
                 }
             });//end ajax
         })
-*/
-
-
     });
-
-
 </script>
-
 <div class="container">
     <table class="table">
         <thead class="header-row">
@@ -252,7 +245,7 @@
                 <td><input type="text" name="cartAmount" id="cartAmount${dto.cartId}" value="${dto.GAmount}"></td>
                 <td><button class="btn btn-primary btn-sm update-Btn" data-id="${dto.cartId}" data-price="${dto.GPrice}">수정</button></td>
                 <td id="sum${dto.cartId}">${dto.GAmount * dto.GPrice}</td>
-                <td><button class="btn btn-primary btn-sm">주문</button></td>
+                <td><a class="btn btn-primary btn-sm" href="/order?cartId=${dto.cartId}">주문</a></td>
                 <td><button class="btn btn-danger btn-sm delBtn" data-id="${dto.cartId}">삭제</button></td>
             </tr>
         </c:forEach>

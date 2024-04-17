@@ -49,7 +49,7 @@ public class GoodsController {
 			Map<String, String> map = new HashMap<>();
 			map.put("memberId", String.valueOf(memberLoginService.findByPrinciple(principal).getMemberId()));
 			map.put("gCode",gCode);
-			itemWishlisted = wishListService.isItemWishlisted(Map.of());
+			itemWishlisted = wishListService.isItemWishlisted(map);
 		}
 
 		GoodsDTO goodsDTO = goodsService.findByCode(gCode);
