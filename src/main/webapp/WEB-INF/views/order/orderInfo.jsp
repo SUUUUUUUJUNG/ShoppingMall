@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="../common/navbar.jsp" flush="true"/>
 <div class="container mt-4">
     <h1>주문 완료</h1>
     <div class="alert alert-success" role="alert">
