@@ -12,7 +12,6 @@
 </head>
 <body>
 <jsp:include page="common/navbar.jsp" flush="true"/>
-<h1>문의내역 목록 화면입니다</h1><br>
 
 <jsp:include page="member/inquiriesList.jsp" flush="true"></jsp:include><br>
 </body>

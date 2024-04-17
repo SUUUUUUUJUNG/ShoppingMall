@@ -84,7 +84,9 @@
                 <input type="file" class="form-control-file" id="imageUpload" name="image" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary" id="send">보내기</button>
+            <a href="/inquiry/inquiriesList" class="btn btn-primary">문의 내역</a>
         </form>
+
     </div>
 </div>
 

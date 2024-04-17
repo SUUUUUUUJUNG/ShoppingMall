@@ -33,7 +33,7 @@
         <!-- 사이드바 자리-->
 
         <!-- 메인 컨텐츠 시작 -->
-        <div class="col-md-8 shadow">
+        <div class="col-md-8 offset-md-3 shadow">
             <div class="form-section">
                 <h2 class="center-align">개인정보 수정</h2>
             </div>
