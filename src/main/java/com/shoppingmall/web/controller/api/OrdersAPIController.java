@@ -27,9 +27,11 @@ public class OrdersAPIController {
                                      Principal principal){
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         ordersCreateRequestDTO.setMemberId(memberId);
+
         Long orderId = ordersService.create(ordersCreateRequestDTO);
-        paymentsService.create(new PaymentsCreateRequestDTO(ordersCreateRequestDTO, orderId, memberId));
-        return ResponseEntity.ok(Map.of("message","상품이 추가되었습니다."));
+        PaymentsCreateRequestDTO paymentsCreateRequestDTO = new PaymentsCreateRequestDTO(ordersCreateRequestDTO, memberId, orderId);
+        paymentsService.create(paymentsCreateRequestDTO);
+        return ResponseEntity.ok(Map.of("message","상품이 추가되었습니다.", "orderId", orderId));
     }
 
     @GetMapping

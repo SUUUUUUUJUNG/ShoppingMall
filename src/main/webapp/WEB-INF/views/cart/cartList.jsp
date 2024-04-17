@@ -92,33 +92,20 @@
             $(".check").prop("checked", isChecked); // 모든 .check 체크박스의 상태를 isChecked와 동일하게 설정
         });
 
-        // '선택 주문하기' 버튼 클릭 이벤트
         $("#process-selected-items").on("click", function() {
-            // 체크박스에서 선택된 모든 cartId를 배열로 수집
+            let url = "/order?"
             var selectedCartIds = $(".check:checked").map(function() {
+                url += "cartId=" + $(this).val() + "&"
                 return $(this).val();
             }).get();
 
-            // 선택된 항목이 없으면 경고하고 중단
             if (selectedCartIds.length === 0) {
                 alert("주문할 항목을 선택해 주세요.");
                 return;
             }
 
-            // 서버로 선택된 cartId 목록을 전송하는 AJAX 요청
-            $.ajax({
-                url: "/order/processSelectedItems",  // 서버의 주문 처리 엔드포인트
-                type: "POST",
-                contentType: "application/json",  // JSON 형식으로 데이터를 전송
-                data: JSON.stringify(selectedCartIds),  // JSON 문자열로 변환
-                success: function(response) {
-                    alert("선택한 항목이 주문되었습니다.");
-                    location.reload();  // 성공 시 페이지 리로드 또는 다른 화면으로 이동
-                },
-                error: function(xhr, status, error) {
-                    alert("주문 처리 중 오류가 발생했습니다: " + xhr.responseText);
-                }
-            });
+            location.href= url;
+
         });
 
         $(".check").on("click", function () {
@@ -251,5 +238,6 @@
         </c:forEach>
         </tbody>
     </table>
+    <button id="process-selected-items">선택주문</button>
 </div>
 

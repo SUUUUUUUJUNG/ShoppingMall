@@ -56,47 +56,46 @@
                 }
             }).render('#paypal-button-container');
 
-
-            function orderProcessing() {
-                let receiverName = $('#receiverName').val();
-                let receiverAddress = $('#receiverAddress').val();
-                let receiverDetailAddress = $('#receiverDetailAddress').val();
-                let receiverZipCode = $('#receiverZipCode').val();
-                let receiverContact = $('#receiverContact').val();
-                let deliveryNote = $('#deliveryNote').val();
-                let paymentResult = $('#paymentResult').val();
-                let paymentMethod = $('#paymentMethod').val();
-                let totalPrice = $('#totalPrice').val();
-
-                let data = {
-                    receiverName: receiverName,
-                    receiverAddress: receiverAddress,
-                    receiverDetailAddress:receiverDetailAddress,
-                    receiverZipCode:receiverZipCode,
-                    receiverContact:receiverContact,
-                    deliveryNote:deliveryNote,
-                    paymentResult:paymentResult,
-                    paymentMethod:paymentMethod,
-                    amount:totalPrice,
-                };
-
-                $.ajax({
-                    url:"/api/orders",
-                    type: "post",
-                    contentType: "application/json",
-                    data:JSON.stringify(data),
-                    success:function (data,status,xhr){
-                        alert(data.message);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error)
-                    },
-                })
-
-
-
-            }
         });
+
+        function orderProcessing() {
+            let receiverName = $('#receiverName').val();
+            let receiverAddress = $('#receiverAddress').val();
+            let receiverDetailAddress = $('#receiverDetailAddress').val();
+            let receiverZipCode = $('#receiverZipCode').val();
+            let receiverContact = $('#receiverContact').val();
+            let deliveryNote = $('#deliveryNote').val();
+            let paymentResult = $('#paymentResult').val();
+            let paymentMethod = $('#paymentMethod').val();
+            let totalPrice = $('#totalPrice').val();
+
+            let data = {
+                receiverName: receiverName,
+                receiverAddress: receiverAddress,
+                receiverDetailAddress:receiverDetailAddress,
+                receiverZipCode:receiverZipCode,
+                receiverContact:receiverContact,
+                deliveryNote:deliveryNote,
+                paymentResult:paymentResult,
+                paymentMethod:paymentMethod,
+                amount:totalPrice,
+            };
+
+            $.ajax({
+                url:"/api/orders",
+                type: "post",
+                contentType: "application/json",
+                data:JSON.stringify(data),
+                success:function (data,status,xhr){
+                    alert(data.message);
+                    location.href = "/order/" + response.orderId;
+                },
+                error: function (xhr, status, error) {
+                    console.log(error)
+                },
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -197,7 +196,7 @@
             <div id="paypal-button-container"></div>
             <input type="hidden" name="paymentResult" id="paymentResult" value="">
         </div>
-        <button type="submit" class="btn btn-primary">주문 확인</button>
+        <button type="submit" class="btn btn-primary" onclick="orderProcessing()">주문 확인</button>
     </form>
 </div>
 </body
