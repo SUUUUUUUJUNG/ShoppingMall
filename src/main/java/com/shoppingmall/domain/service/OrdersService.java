@@ -17,8 +17,9 @@ public class OrdersService {
     private final SqlSessionTemplate session;
 
 
-    public int create(OrdersCreateRequestDTO ordersCreateRequestDTO) {
-       return ordersDAO.create(session, ordersCreateRequestDTO);
+    public Long create(OrdersCreateRequestDTO ordersCreateRequestDTO) {
+        ordersDAO.create(session, ordersCreateRequestDTO);
+        return ordersCreateRequestDTO.getOrderId();
     }
 
     public List<OrdersDTO> findAllByMemberId(Long memberId) {

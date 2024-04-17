@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public class OrdersDAO {
-    public int create(SqlSessionTemplate session, OrdersCreateRequestDTO ordersCreateRequestDTO) {
-       return session.insert("OrdersMapper.create",ordersCreateRequestDTO);
+    public void create(SqlSessionTemplate session, OrdersCreateRequestDTO ordersCreateRequestDTO) {
+       session.insert("OrdersMapper.create",ordersCreateRequestDTO);
     }
 
     public List<OrdersDTO> findAllByMemberId(SqlSessionTemplate session, Long memberId) {

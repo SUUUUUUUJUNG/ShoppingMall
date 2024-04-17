@@ -4,10 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrdersMapper">
 
-   <insert id="create" parameterType="OrdersCreateRequestDTO">
-       insert into ORDERS (ORDERID, MEMBERID, RECEIVERNAME, RECEIVERADDRESS, RECEIVERCONTACT, DELIVERYNOTE, PAYMENTID)
-       values (SEQ_ORDERS.nextval, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote}, #{paymentId})
-   </insert>
+    <insert id="create" parameterType="OrdersCreateRequestDTO">
+    <selectKey keyProperty="orderId" resultType="long" order="BEFORE">
+        SELECT SEQ_ORDERS.nextval AS orderId FROM DUAL
+    </selectKey>
+        INSERT INTO ORDERS
+        (ORDERID, MEMBERID, RECEIVERNAME, RECEIVERADDRESS, RECEIVERCONTACT, DELIVERYNOTE)
+        values
+            (#{orderId}, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote})
+    </insert>
+
 
     <select id="findAllByMemberId" parameterType="Long" resultType="OrdersDTO">
         select * from ORDERS where MEMBERID = #{memberId}
