@@ -21,7 +21,9 @@ public class PaymentsCreateRequestDTO {
     private LocalDateTime PaymentDate = LocalDateTime.now();
     private String paymentMethod;
 
-    public PaymentsCreateRequestDTO(OrdersCreateRequestDTO ordersCreateRequestDTO) {
+    public PaymentsCreateRequestDTO(OrdersCreateRequestDTO ordersCreateRequestDTO, Long memberId, Long orderId) {
+        this.memberId = memberId;
+        this.orderId = orderId;
         this.amount = ordersCreateRequestDTO.getAmount();
         this.paymentMethod = ordersCreateRequestDTO.getPaymentMethod();
         this.paymentResult = ordersCreateRequestDTO.getPaymentResult();
