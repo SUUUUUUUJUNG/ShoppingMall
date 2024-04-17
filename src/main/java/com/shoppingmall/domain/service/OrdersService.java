@@ -2,9 +2,12 @@ package com.shoppingmall.domain.service;
 
 import com.shoppingmall.domain.dao.OrdersDAO;
 import com.shoppingmall.domain.dto.order.OrdersCreateRequestDTO;
+import com.shoppingmall.domain.dto.order.OrdersDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +17,11 @@ public class OrdersService {
     private final SqlSessionTemplate session;
 
 
-    public void create(OrdersCreateRequestDTO ordersCreateRequestDTO) {
-        ordersDAO.create(session, ordersCreateRequestDTO);
+    public int create(OrdersCreateRequestDTO ordersCreateRequestDTO) {
+       return ordersDAO.create(session, ordersCreateRequestDTO);
+    }
+
+    public List<OrdersDTO> findAllByMemberId(Long memberId) {
+        return ordersDAO.findAllByMemberId(session,memberId);
     }
 }

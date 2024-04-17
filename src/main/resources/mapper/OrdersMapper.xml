@@ -9,4 +9,7 @@
        values (SEQ_ORDERS.nextval, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote}, #{paymentId})
    </insert>
 
+    <select id="findAllByMemberId" parameterType="Long" resultType="OrdersDTO">
+        select * from ORDERS where MEMBERID = #{memberId}
+    </select>
 </mapper>
