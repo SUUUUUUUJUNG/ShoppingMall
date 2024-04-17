@@ -1,6 +1,6 @@
 package com.shoppingmall.domain.dto.payment;
 
-import com.shoppingmall.domain.dto.order.OrdersCreateRequestDTO;
+import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,11 +21,11 @@ public class PaymentsCreateRequestDTO {
     private LocalDateTime PaymentDate = LocalDateTime.now();
     private String paymentMethod;
 
-    public PaymentsCreateRequestDTO(OrdersCreateRequestDTO ordersCreateRequestDTO, Long memberId, Long orderId) {
+    public PaymentsCreateRequestDTO(OrderCreateRequestDTO orderCreateRequestDTO, Long memberId, Long orderId) {
         this.memberId = memberId;
         this.orderId = orderId;
-        this.amount = ordersCreateRequestDTO.getAmount();
-        this.paymentMethod = ordersCreateRequestDTO.getPaymentMethod();
-        this.paymentResult = ordersCreateRequestDTO.getPaymentResult();
+        this.amount = orderCreateRequestDTO.getAmount();
+        this.paymentMethod = orderCreateRequestDTO.getPaymentMethod();
+        this.paymentResult = orderCreateRequestDTO.getPaymentResult();
     }
 }
