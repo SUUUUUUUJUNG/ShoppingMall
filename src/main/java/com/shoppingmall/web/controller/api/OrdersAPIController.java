@@ -1,10 +1,10 @@
 package com.shoppingmall.web.controller.api;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.dto.order.OrdersCreateRequestDTO;
+import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import com.shoppingmall.domain.dto.payment.PaymentsCreateRequestDTO;
 import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.OrdersService;
+import com.shoppingmall.domain.service.OrderService;
 import com.shoppingmall.domain.service.PaymentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +18,19 @@ import java.util.Map;
 @RequestMapping("/api/orders")
 public class OrdersAPIController {
 
-    private final OrdersService ordersService;
+    private final OrderService orderService;
     private final MemberLoginService memberLoginService;
     private final PaymentsService paymentsService;
 
     @PostMapping
-    public ResponseEntity<?> create (@RequestBody OrdersCreateRequestDTO ordersCreateRequestDTO,
+    public ResponseEntity<?> create (@RequestBody OrderCreateRequestDTO orderCreateRequestDTO,
                                      Principal principal){
+        System.out.println("principal = " + principal);
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
-        ordersCreateRequestDTO.setMemberId(memberId);
+        orderCreateRequestDTO.setMemberId(memberId);
 
-        Long orderId = ordersService.create(ordersCreateRequestDTO);
-        PaymentsCreateRequestDTO paymentsCreateRequestDTO = new PaymentsCreateRequestDTO(ordersCreateRequestDTO, memberId, orderId);
+        Long orderId = orderService.create(orderCreateRequestDTO);
+        PaymentsCreateRequestDTO paymentsCreateRequestDTO = new PaymentsCreateRequestDTO(orderCreateRequestDTO, memberId, orderId);
         paymentsService.create(paymentsCreateRequestDTO);
         return ResponseEntity.ok(Map.of("message","상품이 추가되었습니다.", "orderId", orderId));
     }
@@ -37,6 +38,6 @@ public class OrdersAPIController {
     @GetMapping
     public ResponseEntity<?> findAllByMemberId(Principal principal){
         MemberDTO memberDTO = memberLoginService.findByPrinciple(principal);
-        return ResponseEntity.ok(ordersService.findAllByMemberId(memberDTO.getMemberId()));
+        return ResponseEntity.ok(orderService.findAllByMemberId(memberDTO.getMemberId()));
     }
 }

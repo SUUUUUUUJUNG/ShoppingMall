@@ -88,10 +88,10 @@
                 data:JSON.stringify(data),
                 success:function (data,status,xhr){
                     alert(data.message);
-                    location.href = "/order/" + response.orderId;
+                    window.location.href = "/order/" + data.orderId;
                 },
                 error: function (xhr, status, error) {
-                    console.log(error)
+                    alert(error.message)
                 },
             })
         }

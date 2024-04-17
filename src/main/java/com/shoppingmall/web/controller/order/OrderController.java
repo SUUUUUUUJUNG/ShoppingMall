@@ -1,12 +1,15 @@
 package com.shoppingmall.web.controller.order;
 
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
+import com.shoppingmall.domain.dto.order.OrderDTO;
 import com.shoppingmall.domain.service.CartService;
 import com.shoppingmall.domain.service.MemberLoginService;
+import com.shoppingmall.domain.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +23,7 @@ public class OrderController {
 
     private final CartService cartService;
     private final MemberLoginService memberLoginService;
+    private final OrderService orderService;
 
     @GetMapping
     public String orderForm(@RequestParam("cartId") List<String> cartIds, Model model, Principal principal) {
@@ -27,5 +31,17 @@ public class OrderController {
         model.addAttribute("cartList", list);
         model.addAttribute("member", memberLoginService.findByPrinciple(principal));
         return "order/orderForm";
+    }
+
+    @GetMapping("/{orderId}")
+    public String orderInfo(@PathVariable("orderId") Long orderId, Model model, Principal principal) {
+        Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
+        OrderDTO orderDTO = orderService.findById(orderId);
+        if (!memberId.equals(orderDTO.getMemberId())) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("orderDTO", orderDTO);
+        return "order/orderInfo";
     }
 }
