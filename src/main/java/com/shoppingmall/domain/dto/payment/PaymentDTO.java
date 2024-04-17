@@ -1,6 +1,5 @@
 package com.shoppingmall.domain.dto.payment;
 
-import com.shoppingmall.domain.enums.PaymentStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,6 @@ public class PaymentDTO {
     private Double amount;
     private String paymentMethod;
     private LocalDateTime paymentDate;
-    private PaymentStatus paymentStatus;
+    private String paymentStatus;
 }
 
