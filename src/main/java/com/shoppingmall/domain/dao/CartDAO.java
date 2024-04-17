@@ -1,6 +1,5 @@
 package com.shoppingmall.domain.dao;
 
-import com.shoppingmall.domain.dto.OrderDTO;
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import org.mybatis.spring.SqlSessionTemplate;

@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrdersDTO {
+public class OrderDTO {
 
     private Long orderId;
     private Long memberId;
