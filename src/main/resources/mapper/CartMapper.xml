@@ -72,7 +72,7 @@
         where CARTID = #{cartId}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="Long">
         delete
         from cart
         where CARTID = #{cartId}

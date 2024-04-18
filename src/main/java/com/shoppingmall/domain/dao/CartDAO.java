@@ -23,8 +23,8 @@ public class CartDAO {
         session.selectList("CartMapper.update",m);
     }
 
-    public void delete(SqlSessionTemplate session, int num) {
-        session.delete("CartMapper.delete",num);
+    public int delete(SqlSessionTemplate session, Long num) {
+        return session.delete("CartMapper.delete",num);
     }
 
     public void deleteAll(SqlSessionTemplate session, List<String> list) {

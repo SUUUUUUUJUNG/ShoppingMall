@@ -25,8 +25,8 @@ public class CartService {
         dao.update(session, m);
     }
 
-    public void delete(int num) {
-        dao.delete(session, num);
+    public int delete(Long num) {
+        return dao.delete(session, num);
     }
 
     public void deleteAll(List<String> list) {
