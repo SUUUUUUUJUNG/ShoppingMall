@@ -4,9 +4,8 @@ import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryUpdateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.ProductInquiryService;
-import jakarta.servlet.http.HttpSession;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.goods.ProductInquiryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Map;
 
 @RestController

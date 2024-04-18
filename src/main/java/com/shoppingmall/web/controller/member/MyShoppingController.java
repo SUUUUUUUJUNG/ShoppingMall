@@ -1,8 +1,7 @@
 package com.shoppingmall.web.controller.member;
 
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.WishListService;
-import jakarta.servlet.http.HttpSession;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.member.WishListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

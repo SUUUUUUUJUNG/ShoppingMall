@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dao;
+package com.shoppingmall.domain.dao.order;
 
 import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import com.shoppingmall.domain.dto.order.OrderDTO;

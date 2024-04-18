@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.goods;
 
-import com.shoppingmall.domain.dao.ReviewDAO;
+import com.shoppingmall.domain.dao.goods.ReviewDAO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
 import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

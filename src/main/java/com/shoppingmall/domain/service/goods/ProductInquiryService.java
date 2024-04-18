@@ -1,10 +1,9 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.goods;
 
-import com.shoppingmall.domain.dao.ProductInquiryDAO;
+import com.shoppingmall.domain.dao.goods.ProductInquiryDAO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

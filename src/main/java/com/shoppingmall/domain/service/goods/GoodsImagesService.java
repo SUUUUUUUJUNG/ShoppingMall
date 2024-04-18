@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.goods;
 
-import com.shoppingmall.domain.dao.GoodsImagesDAO;
+import com.shoppingmall.domain.dao.goods.GoodsImagesDAO;
 import com.shoppingmall.domain.dto.goodsImages.GoodsImagesCreateRequestDTO;
 import com.shoppingmall.domain.dto.goodsImages.GoodsImagesDTO;
 import lombok.RequiredArgsConstructor;

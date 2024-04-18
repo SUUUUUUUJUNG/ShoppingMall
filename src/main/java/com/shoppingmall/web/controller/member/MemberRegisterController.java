@@ -1,7 +1,7 @@
 package com.shoppingmall.web.controller.member;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.member.MemberService;
 import com.shoppingmall.web.service.RegistrationValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

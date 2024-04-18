@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.member;
 
-import com.shoppingmall.domain.dao.CartDAO;
+import com.shoppingmall.domain.dao.member.CartDAO;
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import lombok.RequiredArgsConstructor;

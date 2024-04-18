@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dao;
+package com.shoppingmall.domain.dao.member;
 
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;

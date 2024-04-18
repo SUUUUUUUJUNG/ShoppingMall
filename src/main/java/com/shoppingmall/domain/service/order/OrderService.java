@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.order;
 
-import com.shoppingmall.domain.dao.OrderDAO;
+import com.shoppingmall.domain.dao.order.OrderDAO;
 import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import com.shoppingmall.domain.dto.order.OrderDTO;
 import lombok.RequiredArgsConstructor;

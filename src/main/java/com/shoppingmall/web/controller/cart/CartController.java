@@ -2,9 +2,8 @@ package com.shoppingmall.web.controller.cart;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
-import com.shoppingmall.domain.service.CartService;
-import com.shoppingmall.domain.service.MemberLoginService;
-import jakarta.servlet.http.HttpSession;
+import com.shoppingmall.domain.service.member.CartService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

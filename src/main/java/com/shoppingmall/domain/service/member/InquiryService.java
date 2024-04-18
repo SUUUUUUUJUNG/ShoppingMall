@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.member;
 
-import com.shoppingmall.domain.dao.InquiryDAO;
+import com.shoppingmall.domain.dao.member.InquiryDAO;
 import com.shoppingmall.domain.dto.InquiryDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;

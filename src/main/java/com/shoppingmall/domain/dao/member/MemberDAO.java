@@ -1,8 +1,5 @@
-package com.shoppingmall.domain.dao;
+package com.shoppingmall.domain.dao.member;
 
-import java.util.List;
-
-import com.shoppingmall.domain.dto.WishListDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,10 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.member;
 
-import java.util.List;
-
-import com.shoppingmall.domain.dto.WishListDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shoppingmall.domain.dao.MemberDAO;
+import com.shoppingmall.domain.dao.member.MemberDAO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 
 @Service

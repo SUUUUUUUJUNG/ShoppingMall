@@ -1,7 +1,7 @@
 package com.shoppingmall.web.controller;
 
 import com.shoppingmall.domain.dto.goods.GoodsResponseNewDTO;
-import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.goods.GoodsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

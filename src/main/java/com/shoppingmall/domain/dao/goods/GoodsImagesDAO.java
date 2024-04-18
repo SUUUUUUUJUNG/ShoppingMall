@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dao;
+package com.shoppingmall.domain.dao.goods;
 
 import com.shoppingmall.domain.dto.goodsImages.GoodsImagesDTO;
 import lombok.RequiredArgsConstructor;

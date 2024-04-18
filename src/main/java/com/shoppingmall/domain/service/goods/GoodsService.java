@@ -1,17 +1,16 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.goods;
 
 import java.util.List;
 
-import com.shoppingmall.domain.dao.GoodsImagesDAO;
+import com.shoppingmall.domain.dao.goods.GoodsImagesDAO;
 import com.shoppingmall.domain.dto.goods.GoodsCreateRequestDTO;
 import com.shoppingmall.domain.dto.goods.GoodsResponseNewDTO;
 import com.shoppingmall.domain.dto.goods.GoodsUpdateRequestDTO;
-import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
-import com.shoppingmall.domain.dao.GoodsDAO;
+import com.shoppingmall.domain.dao.goods.GoodsDAO;
 import com.shoppingmall.domain.dto.goods.GoodsDTO;
 
 @Service

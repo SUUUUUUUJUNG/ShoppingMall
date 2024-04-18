@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dao;
+package com.shoppingmall.domain.dao.goods;
 
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ReviewDAO {

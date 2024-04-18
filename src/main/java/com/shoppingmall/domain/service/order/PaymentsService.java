@@ -1,9 +1,8 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.order;
 
-import com.shoppingmall.domain.dao.PaymentsDAO;
+import com.shoppingmall.domain.dao.order.PaymentsDAO;
 import com.shoppingmall.domain.dto.payment.PaymentsCreateRequestDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

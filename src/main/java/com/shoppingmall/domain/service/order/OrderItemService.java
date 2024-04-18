@@ -1,6 +1,6 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.order;
 
-import com.shoppingmall.domain.dao.OrderItemDAO;
+import com.shoppingmall.domain.dao.order.OrderItemDAO;
 import com.shoppingmall.domain.dto.OrderItemsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

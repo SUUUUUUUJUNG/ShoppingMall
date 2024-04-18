@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.domain.service.member;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import lombok.RequiredArgsConstructor;
