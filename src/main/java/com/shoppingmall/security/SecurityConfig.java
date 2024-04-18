@@ -39,8 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // 정적 리소스 허용
                                 .requestMatchers("/register/**", "/register-proc", "/login/**", "/login-proc").permitAll()
-                                .requestMatchers("/mypage/**").authenticated()
-                                .requestMatchers("/hasAnyRole").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/mypage/**", "/cart/**", "/order/**").authenticated()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().permitAll()
                 );
