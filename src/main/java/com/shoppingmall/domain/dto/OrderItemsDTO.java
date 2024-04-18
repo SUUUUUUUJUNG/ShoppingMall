@@ -23,4 +23,16 @@ public class OrderItemsDTO {
         this.sizeOption = responseDTO.getGSize();
         this.quantity = responseDTO.getGAmount();
     }
+
+    public OrderItemsDTO(Long orderItemId, Long orderId, String gCode, String colorOption, String sizeOption, Integer quantity) {
+        this.orderItemId = orderItemId;
+        this.orderId = orderId;
+        this.gCode = gCode;
+        this.colorOption = colorOption;
+        this.sizeOption = sizeOption;
+        this.quantity = quantity;
+    }
+
+    public OrderItemsDTO() {
+    }
 }
