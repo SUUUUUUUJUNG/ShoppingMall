@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -17,6 +19,7 @@ public class OrderCreateRequestDTO {
     private String receiverZipCode;
     private String receiverContact;
     private String deliveryNote;
+    private List<Long> cartIds;
 
     /* 결제 정보 */
     private Double amount;

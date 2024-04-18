@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
 @ToString
 public class CartListResponseDTO {
 
-	private int cartId;
+	private Long cartId;
 	private String userId;
 	private String gCode;
 	private String gName;
@@ -21,7 +21,7 @@ public class CartListResponseDTO {
 	private int gAmount;
 	private String gImage;
 
-	public CartListResponseDTO(int cartId, String userId, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage) {
+	public CartListResponseDTO(Long cartId, String userId, String gCode, String gName, int gPrice, String gSize, String gColor, int gAmount, String gImage) {
 		this.cartId = cartId;
 		this.userId = userId;
 		this.gCode = gCode;
