@@ -1,17 +1,17 @@
 package com.shoppingmall.web.controller.api;
 
+import com.shoppingmall.domain.dto.OrderItemsDTO;
+import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import com.shoppingmall.domain.dto.payment.PaymentsCreateRequestDTO;
-import com.shoppingmall.domain.service.CartService;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.OrderService;
-import com.shoppingmall.domain.service.PaymentsService;
+import com.shoppingmall.domain.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,20 +24,34 @@ public class OrderAPIController {
     private final MemberLoginService memberLoginService;
     private final PaymentsService paymentsService;
     private final CartService cartService;
+    private final OrderItemService orderItemService;
 
     @PostMapping
-    public ResponseEntity<?> processOrderAndClearCart (@RequestBody OrderCreateRequestDTO requestDTO,
-                                     Principal principal){
+    public ResponseEntity<?> processOrderAndClearCart(@RequestBody OrderCreateRequestDTO requestDTO,
+                                                      Principal principal) {
+
+        /* Order */
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         requestDTO.setMemberId(memberId);
-
         Long orderId = orderService.create(requestDTO);
+
+        /* OrderItem*/
+        List<OrderItemsDTO> orderItemsDTOS = requestDTO.getCartIds().stream()
+                .map(cartService::findByCartId)
+                .map(OrderItemsDTO::new)
+                .toList();
+        orderItemsDTOS.forEach(orderItemsDTO -> orderItemsDTO.setOrderId(orderId));
+        orderItemsDTOS.forEach(orderItemService::create);
+
+        /* Payment */
         PaymentsCreateRequestDTO paymentsCreateRequestDTO = new PaymentsCreateRequestDTO(requestDTO, memberId, orderId);
         paymentsService.create(paymentsCreateRequestDTO);
 
+        /* cart 삭제 */
         List<Integer> list = requestDTO.getCartIds().stream().map(cartService::delete).toList();
 
-        return ResponseEntity.ok(Map.of("message","상품이 추가되었습니다.", "orderId", orderId));
+
+        return ResponseEntity.ok(Map.of("message", "상품이 추가되었습니다.", "orderId", orderId));
     }
 
     @GetMapping
