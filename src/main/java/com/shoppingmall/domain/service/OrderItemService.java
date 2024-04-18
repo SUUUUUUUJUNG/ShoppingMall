@@ -5,6 +5,8 @@ import com.shoppingmall.domain.dto.OrderItemsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrderItemService {
@@ -13,5 +15,9 @@ public class OrderItemService {
 
     public int create(OrderItemsDTO orderItemsDTO) {
         return orderItemDAO.create(orderItemsDTO);
+    }
+
+    public List<OrderItemsDTO> findByOrderId(Long orderId) {
+        return orderItemDAO.findByOrderId(orderId);
     }
 }

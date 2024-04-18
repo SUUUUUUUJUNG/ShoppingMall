@@ -9,4 +9,10 @@
         values (SEQ_ORDERITEMS.nextval, #{orderId}, #{gCode}, #{colorOption}, #{sizeOption}, #{quantity})
     </insert>
 
+    <select id="findByOrderId" parameterType="Long" resultType="OrderItemsDTO">
+        select *
+        from SUJUNG.ORDERITEMS
+        where ORDERID = ${orderId}
+    </select>
+
 </mapper>
