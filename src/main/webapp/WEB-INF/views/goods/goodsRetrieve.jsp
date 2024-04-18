@@ -75,118 +75,58 @@
 
 	});
 </script>
-<!--  -->
-<form name="goodRetrieveForm" method="GET" action="#"><!--action을 막음 --><!-- hidden data -->
+<form name="goodRetrieveForm" method="GET" action="#" class="container mt-3">
 	<input type="hidden" name="gImage" id="gImage" value="${goodsDTO.GImage}">
 	<input type="hidden" name="gCode" id="gCode" value="${goodsDTO.GCode}">
-	<input	type="hidden" name="gName" id="gName" value="${goodsDTO.GName}">
-	<input	type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.GPrice}">
+	<input type="hidden" name="gName" id="gName" value="${goodsDTO.GName}">
+	<input type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.GPrice}">
 
-
-
-	<%--상품 정보 table 가운데 정렬하는 코드 추가--%>
-	<table width="710" cellspacing="0" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
-		<tr>
-			<td height="30">
-		</tr>
-		<tr>
-			<td>
-				<table align="center" width="710" cellspacing="0" cellpadding="0"
-					   border="0" style='margin-left: 30px'>
-					<tr>
-						<td class="td_default"><font size="5"><b>- 상품 정보 -</b></font>
-							&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="5"></td>
-					</tr>
-					<tr>
-						<td height="1" colspan="8" bgcolor="CECECE"></td>
-					</tr>
-					<tr>
-						<td height="10"></td>
-					</tr>
-
-					<tr>
-						<td rowspan="7"><img src="/images/items/${goodsDTO.GImage}.gif"
-											 border="0" align="center" width="300" /></td>
-						<td class="td_title">제품코드</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.GCode}
-						</td>
-					</tr>
-					<tr>
-						<td class="td_title">상품명</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.GName}
-
-						</td>
-					</tr>
-					<tr>
-						<td class="td_title">가격</td>
-
-						<td class="td_red" colspan="2" style='padding-left: 30px'>
-							${goodsDTO.GPrice}
-						</td>
-					</tr>
-					<tr>
-						<td class="td_title">배송비</td>
-						<td colspan="2"><font color="#2e56a9" size="2"
-											  style='padding-left: 30px'><b> 무료배송</b> </font> <font size="2">(도서
-							산간지역 별도 배송비 추가)</font></td>
-					</tr>
-					<tr>
-						<td class="td_title" rowspan="2">상품옵션</td>
-						<td colspan="2" style='padding-left: 30px'>
-							<select class="select_change" size="1" name="gSize" id="gSize">
-							<option selected value="사이즈선택">사이즈선택</option>
+	<div class="card card-custom bg-light mb-3">
+		<div class="row g-0">
+			<div class="col-md-4">
+				<img src="/images/items/${goodsDTO.GImage}.gif" class="img-fluid rounded-image" alt="${goodsDTO.GName}">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title">${goodsDTO.GName}</h5>
+					<p class="card-text"><strong>제품 코드:</strong> ${goodsDTO.GCode}</p>
+					<p class="card-text"><strong>가격:</strong> ${goodsDTO.GPrice}</p>
+					<p class="card-text"><small class="text-muted">특정 지역 무료 배송, 도서산간 추가 배송비 발생.</small></p>
+					<div class="mb-2">
+						<label>사이즈:</label>
+						<select class="form-select form-select-sm" name="gSize" id="gSize">
+							<option selected value="사이즈선택">사이즈 선택</option>
 							<option value="L">L</option>
 							<option value="M">M</option>
 							<option value="S">S</option>
-						</select></td>
-					</tr>
-					<tr>
-						<td colspan="2" style='padding-left: 30px'><select
-								class="select_change" size="1" name="gColor"
-								id="gColor">
-							<option selected value="색상선택">색상선택</option>
-							<option value="navy">navy</option>
-							<option value="black">black</option>
-							<option value="ivory">ivory</option>
-							<option value="white">white</option>
-							<option value="gray">gray</option>
-						</select></td>
-					</tr>
-
-					<tr>
-						<td class="td_title">주문수량</td>
-						<td style="padding-left: 30px"><input type="text"
-															  name="gAmount" value="1" id="gAmount"
-															  style="text-align: right; height: 18px"> <img
-								src="/images/up.PNG" id="up"> <img src="/images/down.png"
-																  id="down"></td>
-					</tr>
-				</table>
-
-
-			</td>
-		</tr>
-	</table>
-	<%
-		GoodsDTO goodsDTO = (GoodsDTO)request.getAttribute("goodsDTO");
-		String gCode = goodsDTO.getGCode();
-		System.out.println("gCode = " + gCode);
-	%>
-	<div style="text-align: center;">
-		<button class="btn btn-primary" id="wishlist-button" data-code="<%=gCode%>"><%
-			boolean itemWishlisted = (boolean) request.getAttribute("itemWishlisted");
-			if (itemWishlisted) { %>
-			<i class="fas fa-heart"></i>
-
-			<%} else {%>
-			<i class="far fa-heart"></i>
-			<%}%></button>
-		<button class="btn btn-primary" >구매</button>
-		<button class="btn btn-primary" id="cart">장바구니</button>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label>색상:</label>
+						<select class="form-select form-select-sm" name="gColor" id="gColor">
+							<option selected value="색상선택">색상 선택</option>
+							<option value="navy">네이비</option>
+							<option value="black">블랙</option>
+							<option value="ivory">아이보리</option>
+							<option value="white">화이트</option>
+							<option value="gray">그레이</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label for="gAmount">수량:</label>
+						<input type="number" id="gAmount" name="gAmount" value="1" min="1" class="form-control form-control-sm">
+					</div>
+					<button class="btn btn-pink" id="wishlist-button" data-code="${goodsDTO.GCode}">
+						<% if ((boolean) request.getAttribute("itemWishlisted")) { %>
+						<i class="fas fa-heart"></i>
+						<% } else { %>
+						<i class="far fa-heart"></i>
+						<% } %>
+					</button>
+					<button class="btn btn-pink">구매하기</button>
+					<button class="btn btn-pink" id="cart">장바구니 추가</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </form>

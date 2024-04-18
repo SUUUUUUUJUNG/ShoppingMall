@@ -38,9 +38,8 @@ public class CartController {
 
     @PostMapping("/add")
     @ResponseBody
-    public ResponseEntity<?> cartAddV2(@RequestBody Map<String, String> map, HttpSession session) {
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        String userId = memberDTO.getUsername();
+    public ResponseEntity<?> cartAdd(@RequestBody Map<String, String> map, Principal principal) {
+        String userId = memberLoginService.findByPrinciple(principal).getUsername();
         map.put("userId", userId);
         cartService.mergeCartItems(map);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","장바구니에 추가되었습니다."));

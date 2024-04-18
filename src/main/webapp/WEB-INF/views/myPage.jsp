@@ -10,9 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<div class="container mt-5">
 <jsp:include page="common/navbar.jsp" flush="true"/>
-<hr>
-<jsp:include page="common/sidebar.jsp" flush="true"></jsp:include>
-<jsp:include page="member/mypage.jsp" flush="true"></jsp:include>
+    <div style="margin-bottom: 70px;"></div>
+<jsp:include page="common/sidebar.jsp" flush="true"/>
+<jsp:include page="member/mypage.jsp" flush="true"/>
+</div>
 </body>
 </html>

@@ -55,8 +55,6 @@
       <a class="nav-item nav-link" href="/logout">로그아웃</a>
       <a class="nav-item nav-link" href="/myPage">마이페이지</a>
       <a class="nav-item nav-link" href="/cart/list">장바구니</a>
-      <a class="nav-item nav-link" href="/myShopping">찜목록</a>
     </sec:authorize>
-    <a class="nav-item nav-link" href="/inquiry">고객센터</a>
   </div>
 </div>

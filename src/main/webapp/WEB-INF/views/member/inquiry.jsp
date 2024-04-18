@@ -56,10 +56,6 @@
         }
     </style>
 
-<%
-    MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-    Long memberId = memberDTO.getMemberId();
-%>
 
 
 
@@ -67,7 +63,7 @@
     <div class="inquiry-form">
         <h2>문의하기</h2>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="memberId" id="memberId" value="<%=memberId%>">
+            <input type="hidden" name="memberId" id="memberId">
             <div class="form-group">
                 <label for="inquiryType">문의 유형을 선택해주세요</label>
                 <select class="form-control" id="inquiryType" name="inquiryType">
@@ -88,7 +84,9 @@
                 <input type="file" class="form-control-file" id="imageUpload" name="image" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary" id="send">보내기</button>
+            <a href="/inquiry/inquiriesList" class="btn btn-primary">문의 내역</a>
         </form>
+
     </div>
 </div>
 

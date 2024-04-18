@@ -44,13 +44,15 @@ public class GoodsController {
 	
 	@GetMapping("/detail")
 	public String goodsRetrieve(@RequestParam("gCode")String gCode, Model model, Principal principal) {
-		MemberDTO memberDTO = memberLoginService.findByPrinciple(principal);
-		Long memberId = memberDTO.getMemberId();
+		boolean itemWishlisted = false;
+		if (principal != null) {
+			Map<String, String> map = new HashMap<>();
+			map.put("memberId", String.valueOf(memberLoginService.findByPrinciple(principal).getMemberId()));
+			map.put("gCode",gCode);
+			itemWishlisted = wishListService.isItemWishlisted(map);
+		}
+
 		GoodsDTO goodsDTO = goodsService.findByCode(gCode);
-		Map<String, String> map = new HashMap<>();
-		map.put("memberId", String.valueOf(memberId));
-		map.put("gCode",gCode);
-		boolean itemWishlisted = wishListService.isItemWishlisted(map);
 		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
 

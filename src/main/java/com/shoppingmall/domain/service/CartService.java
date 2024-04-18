@@ -1,13 +1,11 @@
 package com.shoppingmall.domain.service;
 
 import com.shoppingmall.domain.dao.CartDAO;
-import com.shoppingmall.domain.dto.OrderDTO;
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -27,19 +25,17 @@ public class CartService {
         dao.update(session, m);
     }
 
-    public void delete(int num) {
-        dao.delete(session, num);
+    public int delete(Long num) {
+        return dao.delete(session, num);
     }
 
     public void deleteAll(List<String> list) {
         dao.deleteAll(session, list);
     }
 
-    public CartListResponseDTO findByCartId(String cartid) {
-        return dao.findByCartId(session, cartid);
+    public CartListResponseDTO findByCartId(Long cartId) {
+        return dao.findByCartId(session, cartId);
     }
-
-
 
     public void mergeCartItems(Map<String, String> map) {
         System.out.println("GoodsService map = " + map);

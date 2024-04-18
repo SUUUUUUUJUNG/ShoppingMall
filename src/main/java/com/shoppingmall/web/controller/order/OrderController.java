@@ -1,47 +1,52 @@
 package com.shoppingmall.web.controller.order;
 
-import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.dto.OrderDTO;
+import com.shoppingmall.domain.dto.OrderItemsDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
+import com.shoppingmall.domain.dto.order.OrderDTO;
 import com.shoppingmall.domain.service.CartService;
-import com.shoppingmall.domain.service.GoodsService;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.MemberLoginService;
+import com.shoppingmall.domain.service.OrderItemService;
 import com.shoppingmall.domain.service.OrderService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final GoodsService goodsService;
-    private final MemberService memberService;
     private final CartService cartService;
+    private final MemberLoginService memberLoginService;
     private final OrderService orderService;
+    private final OrderItemService orderItemService;
 
-//    @RequestMapping(value="/confirm")
-//    public String orderConfirm(@RequestParam("cartId") String cartId, Model model) {
-//        CartListResponseDTO cart = cartService.findById(cartId);
-//        String userId = cart.getUserId();
-//        MemberDTO member = memberService.findByUsername(userId);
-//        model.addAttribute("mDTO", member);
-//        model.addAttribute("cDTO", cart);
-//        return "orderConfirm";
-//    }
+    @GetMapping
+    public String orderForm(@RequestParam("cartId") List<Long> cartIds, Model model, Principal principal) {
+        List<CartListResponseDTO> list = cartIds.stream().map(cartService::findByCartId).toList();
+        model.addAttribute("cartList", list);
+        model.addAttribute("member", memberLoginService.findByPrinciple(principal));
+        model.addAttribute("cartIds",cartIds);
+        return "order/orderForm";
+    }
 
-    @RequestMapping(value="/done")
-    public String orderDone(@RequestParam("orderNum") Integer orderNum, OrderDTO oDTO,
-                            HttpSession session, Model model) {
-        MemberDTO dto = (MemberDTO)session.getAttribute("login");
-        oDTO.setUsername(dto.getUsername());
-        orderService.orderDone(oDTO,orderNum);//insert,delete
-        model.addAttribute("oDTO", oDTO);
-        return "orderDone";
+    @GetMapping("/{orderId}")
+    public String orderInfo(@PathVariable("orderId") Long orderId, Model model, Principal principal) {
+        Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
+        OrderDTO orderDTO = orderService.findById(orderId);
+        if (!memberId.equals(orderDTO.getMemberId())) {
+            return "redirect:/login";
+        }
+        List<OrderItemsDTO> orderItemsDTOS = orderItemService.findByOrderId(orderId);
 
+        model.addAttribute("orderItems", orderItemsDTOS);
+        model.addAttribute("orderDTO", orderDTO);
+        return "order/orderInfo";
     }
 }

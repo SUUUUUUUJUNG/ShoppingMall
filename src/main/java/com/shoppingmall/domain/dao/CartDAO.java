@@ -1,6 +1,5 @@
 package com.shoppingmall.domain.dao;
 
-import com.shoppingmall.domain.dto.OrderDTO;
 import com.shoppingmall.domain.dto.cart.CartDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,15 +23,15 @@ public class CartDAO {
         session.selectList("CartMapper.update",m);
     }
 
-    public void delete(SqlSessionTemplate session, int num) {
-        session.delete("CartMapper.delete",num);
+    public int delete(SqlSessionTemplate session, Long num) {
+        return session.delete("CartMapper.delete",num);
     }
 
     public void deleteAll(SqlSessionTemplate session, List<String> list) {
         session.delete("CartMapper.deleteAll",list);
     }
 
-    public CartListResponseDTO findByCartId(SqlSessionTemplate session, String cartId) {
+    public CartListResponseDTO findByCartId(SqlSessionTemplate session, Long cartId) {
         return session.selectOne("CartMapper.findByCartId",cartId);
     }
 

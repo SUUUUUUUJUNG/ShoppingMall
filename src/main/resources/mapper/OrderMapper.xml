@@ -4,31 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderMapper">
 
-    <insert id="create" parameterType="OrderDTO" >
-        insert into order_info (ORDER_ID,USERNAME,GCODE,GSIZE,GCOLOR,GAMOUNT,
-                                ORDERNAME,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,PAYMETHOD,ORDERDAY,TOTALPRICE)
-        values(orderInfo_seq.nextval, #{username},#{gCode},
-               #{gSize},#{gColor},#{gAmount},
-               #{orderName},#{zip_Code},#{address},#{addr_Detail},#{phoneNumber},#{payMethod}, #{orderDay}, #{totalPrice})
+    <insert id="create" parameterType="OrderCreateRequestDTO">
+    <selectKey keyProperty="orderId" resultType="long" order="BEFORE">
+        SELECT SEQ_ORDERS.nextval AS orderId FROM DUAL
+    </selectKey>
+        INSERT INTO ORDERS
+        (ORDERID, MEMBERID, RECEIVERNAME, RECEIVERADDRESS, RECEIVERCONTACT, DELIVERYNOTE)
+        values
+            (#{orderId}, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote})
     </insert>
 
 
-    <insert id="orderAllDone" parameterType="arraylist" >
+    <select id="findAllByMemberId" parameterType="Long" resultType="OrderDTO">
+        select * from ORDERS where MEMBERID = #{memberId}
+    </select>
 
-        insert all
-        <foreach collection="list" item="item">
-            into ORDER_INFO (order_Id,USERNAME,gCode,gSize,gColor,gAmount,
-            orderName,ZIP_CODE,ADDRESS,ADDR_DETAIL,PHONENUMBER,payMethod)
-
-            values( orderSeq()  , #{item.username},#{item.gCode},
-            #{item.gSize},#{item.gColor},#{item.gAmount},
-            #{item.orderName},#{item.post},
-            #{item.addr1},#{item.addr2},#{item.phone},#{item.payMethod} )
-        </foreach>
-        select *
-        from dual
-    </insert>
-
-
+    <select id="findById" parameterType="Long" resultType="OrderDTO">
+        select * from ORDERS where ORDERID = #{orderId}
+    </select>
 
 </mapper>

@@ -143,7 +143,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">상품 옵션 선택</h1>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Size Selection -->
@@ -172,7 +172,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="cart">장바구니 담기</button>
                     <button type="button" class="btn btn-primary">결제하기</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
