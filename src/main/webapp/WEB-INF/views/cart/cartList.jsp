@@ -212,7 +212,6 @@
         <thead class="header-row">
         <tr>
             <th scope="col"><input type="checkbox" name="allCheck" id="allCheck"> 전체선택</th>
-            <th scope="col">주문번호</th>
             <th scope="col" colspan="2">상품정보</th>
             <th scope="col">판매가</th>
             <th scope="col" colspan="2">수량</th>
@@ -225,7 +224,6 @@
         <c:forEach var="dto" items="${cartList}">
             <tr>
                 <td><input type="checkbox" class="check" value="${dto.cartId}"></td>
-                <td>${dto.cartId}</td>
                 <td><img src="/images/items/${dto.GImage}.gif" border="0" align="center" width="80"/></td>
                 <td>${dto.GName} <br> [옵션: 사이즈(${dto.GSize}), 색상(${dto.GColor})]</td>
                 <td>${dto.GPrice}</td>

@@ -36,7 +36,7 @@
     </select>
 
 
-    <select id="findByCartId" parameterType="string" resultType="CartListResponseDTO">
+    <select id="findByCartId" parameterType="Long" resultType="CartListResponseDTO">
         SELECT
             c.CARTID as CARTID,
             c.USERNAME as USERNAME,

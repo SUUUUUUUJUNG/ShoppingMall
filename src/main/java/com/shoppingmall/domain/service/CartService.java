@@ -33,11 +33,9 @@ public class CartService {
         dao.deleteAll(session, list);
     }
 
-    public CartListResponseDTO findByCartId(String cartid) {
-        return dao.findByCartId(session, cartid);
+    public CartListResponseDTO findByCartId(Long cartId) {
+        return dao.findByCartId(session, cartId);
     }
-
-
 
     public void mergeCartItems(Map<String, String> map) {
         System.out.println("GoodsService map = " + map);

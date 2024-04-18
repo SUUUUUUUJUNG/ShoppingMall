@@ -31,7 +31,7 @@ public class CartDAO {
         session.delete("CartMapper.deleteAll",list);
     }
 
-    public CartListResponseDTO findByCartId(SqlSessionTemplate session, String cartId) {
+    public CartListResponseDTO findByCartId(SqlSessionTemplate session, Long cartId) {
         return session.selectOne("CartMapper.findByCartId",cartId);
     }
 

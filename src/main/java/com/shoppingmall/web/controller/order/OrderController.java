@@ -25,7 +25,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public String orderForm(@RequestParam("cartId") @ModelAttribute List<String> cartIds, Model model, Principal principal) {
+    public String orderForm(@RequestParam("cartId") List<Long> cartIds, Model model, Principal principal) {
         List<CartListResponseDTO> list = cartIds.stream().map(cartService::findByCartId).toList();
         model.addAttribute("cartList", list);
         model.addAttribute("member", memberLoginService.findByPrinciple(principal));
