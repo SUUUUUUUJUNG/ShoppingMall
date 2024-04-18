@@ -1,9 +1,11 @@
 package com.shoppingmall.web.controller.order;
 
+import com.shoppingmall.domain.dto.OrderItemsDTO;
 import com.shoppingmall.domain.dto.cart.CartListResponseDTO;
 import com.shoppingmall.domain.dto.order.OrderDTO;
 import com.shoppingmall.domain.service.CartService;
 import com.shoppingmall.domain.service.MemberLoginService;
+import com.shoppingmall.domain.service.OrderItemService;
 import com.shoppingmall.domain.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class OrderController {
     private final CartService cartService;
     private final MemberLoginService memberLoginService;
     private final OrderService orderService;
+    private final OrderItemService orderItemService;
 
     @GetMapping
     public String orderForm(@RequestParam("cartId") List<Long> cartIds, Model model, Principal principal) {
@@ -40,7 +43,9 @@ public class OrderController {
         if (!memberId.equals(orderDTO.getMemberId())) {
             return "redirect:/login";
         }
+        List<OrderItemsDTO> orderItemsDTOS = orderItemService.findByOrderId(orderId);
 
+        model.addAttribute("orderItems", orderItemsDTOS);
         model.addAttribute("orderDTO", orderDTO);
         return "order/orderInfo";
     }
