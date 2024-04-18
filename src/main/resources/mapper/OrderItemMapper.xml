@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderItemMapper">
+
+    <insert id="create" parameterType="OrderItemsDTO">
+        insert into SUJUNG.ORDERITEMS (ORDERITEMID, ORDERID, GCODE, COLOROPTION, SIZEOPTION, QUANTITY)
+        values (SEQ_ORDERITEMS.nextval, #{orderId}, #{gCode}, #{colorOption}, #{sizeOption}, #{quantity})
+    </insert>
+
+</mapper>
