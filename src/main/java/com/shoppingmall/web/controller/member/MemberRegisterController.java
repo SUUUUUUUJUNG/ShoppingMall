@@ -26,14 +26,14 @@ public class MemberRegisterController {
     @GetMapping("/register")
     public String memberForm(Model model, MemberDTO memberDTO) {
         model.addAttribute("memberDTO", memberDTO);
-        return "memberForm";
+        return "member/memberForm";
     }
 
     @PostMapping("/register")
     public String memberAdd(@Validated @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult, Model model) { // validated 이용
         if (bindingResult.hasErrors()) {
             System.out.println("bindingResult = " + bindingResult.getAllErrors());
-            return "memberForm";
+            return "member/memberForm";
         }
         String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
         memberDTO.setPassword(encodedPassword);

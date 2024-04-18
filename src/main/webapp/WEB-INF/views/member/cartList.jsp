@@ -11,9 +11,9 @@
 </head>
 <body>
 <div class="container mt-5">
-<jsp:include page="common/navbar.jsp" flush="true"/>
+<jsp:include page="../common/navbar.jsp" flush="true"/>
     <div style="margin-bottom: 70px;"></div>
-<jsp:include page="cart/cartList.jsp" flush="true"/>
+<jsp:include page="../cart/cartList.jsp" flush="true"/>
 </div>
 </body>
 </html>

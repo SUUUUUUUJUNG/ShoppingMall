@@ -32,7 +32,7 @@ public class CartController {
         String username = memberDTO.getUsername();
         List<CartListResponseDTO> list = cartService.findByUsername(username);
         model.addAttribute("cartList",list);
-        return "cartList";
+        return "member/cartList";
     }
 
     @PostMapping("/add")

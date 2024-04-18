@@ -54,6 +54,6 @@ public class GoodsController {
 		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
 
-		return "goodsRetrieve";
+		return "goods/goodsRetrieve";
 	}
 }

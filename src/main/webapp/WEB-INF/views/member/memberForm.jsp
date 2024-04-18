@@ -174,7 +174,7 @@
     </style>
 </head>
 <body>
-<div th:replace="~{common/navBar :: content}"></div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">

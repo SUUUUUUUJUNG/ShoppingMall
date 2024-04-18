@@ -19,7 +19,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String loginForm() { //void로 처리 loginForm.jsp로 이동
-		return "loginForm";
+		return "member/loginForm";
 	}
 
 	@RequestMapping("/logout")
@@ -27,6 +27,6 @@ public class LoginController {
 		if(session.getAttribute("login")!=null){
 			session.invalidate();
 		}
-		return "loginForm";
+		return "member/loginForm";
 	}
 }

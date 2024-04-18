@@ -23,6 +23,6 @@ public class MyShoppingController {
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
 //        Long memberId = memberLoginService.getLogin(session).getMemberId();
         model.addAttribute("wishListItems", wishListService.findByMemberId(memberId));
-        return "myShopping";
+        return "member/wishList";
     }
 }

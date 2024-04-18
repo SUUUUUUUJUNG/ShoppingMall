@@ -25,7 +25,7 @@ public class InquiryController {
 
     @GetMapping
     public String inquiry() {
-        return "inquiry";
+        return "member/inquiry";
     }
 
     @PostMapping("/submitInquiry")
@@ -44,7 +44,7 @@ public class InquiryController {
         Long memberId = member.getMemberId();
         List<InquiryDTO> inquiries = inquiryService.findByMemberId(memberId);
         model.addAttribute("inquiries", inquiries);
-        return "inquiriesList";
+        return "member/inquiriesList";
     }
 
     @GetMapping("/delete")
@@ -57,6 +57,6 @@ public class InquiryController {
     public String viewInquiryDetails(@PathVariable("inquiryId") Long inquiryId,Model model){
         List<InquiryDTO> inquiries = inquiryService.findByInquiryId(inquiryId);
         model.addAttribute("inquiries",inquiries);
-        return "inquiryDetail";
+        return "member/inquiriesList";
     }
 }
