@@ -1,6 +1,6 @@
 package com.shoppingmall.web.controller.cart;
 
-import com.shoppingmall.domain.service.CartService;
+import com.shoppingmall.domain.service.member.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -2,9 +2,8 @@ package com.shoppingmall.web.controller;
 
 import com.shoppingmall.domain.dto.InquiryDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.InquiryService;
-import com.shoppingmall.domain.service.MemberLoginService;
-import jakarta.servlet.http.HttpSession;
+import com.shoppingmall.domain.service.member.InquiryService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class InquiryController {
 
     @GetMapping
     public String inquiry() {
-        return "inquiry";
+        return "member/inquiry";
     }
 
     @PostMapping("/submitInquiry")
@@ -45,7 +44,7 @@ public class InquiryController {
         Long memberId = member.getMemberId();
         List<InquiryDTO> inquiries = inquiryService.findByMemberId(memberId);
         model.addAttribute("inquiries", inquiries);
-        return "inquiriesList";
+        return "member/inquiriesList";
     }
 
     @GetMapping("/delete")
@@ -58,6 +57,6 @@ public class InquiryController {
     public String viewInquiryDetails(@PathVariable("inquiryId") Long inquiryId,Model model){
         List<InquiryDTO> inquiries = inquiryService.findByInquiryId(inquiryId);
         model.addAttribute("inquiries",inquiries);
-        return "inquiryDetail";
+        return "member/inquiriesList";
     }
 }

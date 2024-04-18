@@ -1,13 +1,12 @@
 package com.shoppingmall.web.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
 import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.ReviewService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.goods.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

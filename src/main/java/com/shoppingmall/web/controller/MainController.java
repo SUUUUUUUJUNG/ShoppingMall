@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoppingmall.domain.dto.goods.GoodsDTO;
-import com.shoppingmall.domain.service.GoodsService;
+import com.shoppingmall.domain.service.goods.GoodsService;
 
 @Controller
 @Slf4j

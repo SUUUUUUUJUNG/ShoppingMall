@@ -1,15 +1,13 @@
 package com.shoppingmall.web.controller.goods;
 
 import com.shoppingmall.domain.dto.goods.GoodsDTO;
-import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.GoodsService;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.WishListService;
+import com.shoppingmall.domain.service.goods.GoodsService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.member.WishListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,6 +54,6 @@ public class GoodsController {
 		model.addAttribute("itemWishlisted",itemWishlisted);
 		model.addAttribute("goodsDTO", goodsDTO);
 
-		return "goodsRetrieve";
+		return "goods/goodsRetrieve";
 	}
 }

@@ -2,7 +2,7 @@ package com.shoppingmall.web.controller.api;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.member.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

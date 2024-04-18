@@ -1,7 +1,7 @@
 package com.shoppingmall.web.controller.member;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

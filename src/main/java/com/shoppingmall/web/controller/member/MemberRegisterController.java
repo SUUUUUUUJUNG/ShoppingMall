@@ -1,7 +1,7 @@
 package com.shoppingmall.web.controller.member;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.member.MemberService;
 import com.shoppingmall.web.service.RegistrationValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,14 +26,14 @@ public class MemberRegisterController {
     @GetMapping("/register")
     public String memberForm(Model model, MemberDTO memberDTO) {
         model.addAttribute("memberDTO", memberDTO);
-        return "memberForm";
+        return "member/memberForm";
     }
 
     @PostMapping("/register")
     public String memberAdd(@Validated @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult, Model model) { // validated 이용
         if (bindingResult.hasErrors()) {
             System.out.println("bindingResult = " + bindingResult.getAllErrors());
-            return "memberForm";
+            return "member/memberForm";
         }
         String encodedPassword = bCryptPasswordEncoder.encode(memberDTO.getPassword());
         memberDTO.setPassword(encodedPassword);

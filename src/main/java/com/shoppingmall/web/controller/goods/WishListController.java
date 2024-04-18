@@ -1,9 +1,9 @@
 package com.shoppingmall.web.controller.goods;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.GoodsService;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.WishListService;
+import com.shoppingmall.domain.service.goods.GoodsService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.member.WishListService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

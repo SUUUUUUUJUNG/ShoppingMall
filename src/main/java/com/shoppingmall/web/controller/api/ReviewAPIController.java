@@ -1,12 +1,11 @@
 package com.shoppingmall.web.controller.api;
 
-import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.review.ReviewCreateRequestDTO;
 import com.shoppingmall.domain.dto.review.ReviewDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.review.ReviewUpdateRequestDTO;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.ReviewService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.goods.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

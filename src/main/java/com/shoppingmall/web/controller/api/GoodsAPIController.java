@@ -2,8 +2,8 @@ package com.shoppingmall.web.controller.api;
 
 import com.shoppingmall.domain.dto.goods.*;
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.GoodsService;
-import com.shoppingmall.domain.service.MemberLoginService;
+import com.shoppingmall.domain.service.goods.GoodsService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,12 @@
 package com.shoppingmall.web.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shoppingmall.domain.dao.ProductInquiryDAO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryCreateRequestDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryDTO;
 import com.shoppingmall.domain.dto.ProductInquiry.ProductInquiryUpdateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberLoginService;
-import com.shoppingmall.domain.service.ProductInquiryService;
-import jakarta.servlet.http.HttpSession;
+import com.shoppingmall.domain.service.member.MemberLoginService;
+import com.shoppingmall.domain.service.goods.ProductInquiryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;

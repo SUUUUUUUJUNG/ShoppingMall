@@ -1,20 +1,14 @@
 package com.shoppingmall.web.controller;
 
-import java.util.Map;
-
 import jakarta.servlet.http.HttpSession;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shoppingmall.domain.dto.member.MemberDTO;
-import com.shoppingmall.domain.service.MemberService;
+import com.shoppingmall.domain.service.member.MemberService;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,7 +19,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String loginForm() { //void로 처리 loginForm.jsp로 이동
-		return "loginForm";
+		return "member/loginForm";
 	}
 
 	@RequestMapping("/logout")
@@ -33,6 +27,6 @@ public class LoginController {
 		if(session.getAttribute("login")!=null){
 			session.invalidate();
 		}
-		return "loginForm";
+		return "member/loginForm";
 	}
 }
