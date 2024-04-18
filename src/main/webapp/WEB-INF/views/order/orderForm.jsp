@@ -13,6 +13,7 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AWBPCVEiX4w3yudS0xAVkag-1LRWSxlVX1lWiWtsPdt3lHsWu5DI7VCcB07d9OguyDPmL7--_R1m3zok"></script>
     <script>
         $(document).ready(function() {
+
             $('#sameAsOrderer').change(function() {
                 if (this.checked) {
                     $('#receiverName').val($('#ordererName').val());
@@ -79,6 +80,7 @@
                 paymentResult:paymentResult,
                 paymentMethod:paymentMethod,
                 amount:totalPrice,
+                cartIds:${cartIds}
             };
 
             $.ajax({

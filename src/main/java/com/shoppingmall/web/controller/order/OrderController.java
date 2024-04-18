@@ -8,10 +8,9 @@ import com.shoppingmall.domain.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -26,10 +25,11 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public String orderForm(@RequestParam("cartId") List<String> cartIds, Model model, Principal principal) {
+    public String orderForm(@RequestParam("cartId") @ModelAttribute List<String> cartIds, Model model, Principal principal) {
         List<CartListResponseDTO> list = cartIds.stream().map(cartService::findByCartId).toList();
         model.addAttribute("cartList", list);
         model.addAttribute("member", memberLoginService.findByPrinciple(principal));
+        model.addAttribute("cartIds",cartIds);
         return "order/orderForm";
     }
 
