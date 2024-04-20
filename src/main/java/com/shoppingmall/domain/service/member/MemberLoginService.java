@@ -24,4 +24,8 @@ public class MemberLoginService {
         }
         return memberDTO;
     }
+
+    public MemberDTO findByUsername(String username) {
+        return memberService.findByUsername(username);
+    }
 }
