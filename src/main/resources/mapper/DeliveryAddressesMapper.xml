@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeliveryAddressesMapper">
+
+    <insert id="create" parameterType="DeliveryAddressesCreateRequestDTO">
+        insert into DELIVERYADDRESSES (ID, MEMBERID, ADDRESS, ADDR_DETAIL, ZIP_CODE, PHONENUMBER, RECIPIENT_NAME)
+        values (sujung.DELIVERY_ADDRESS_SEQ.nextval,#{memberId},#{address},#{addr_Detail},#{zip_Code},#{phoneNumber},#{recipient_name})
+    </insert>
+
+
+</mapper>
