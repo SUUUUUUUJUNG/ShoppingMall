@@ -1,4 +1,4 @@
-package com.shoppingmall.domain.dto;
+package com.shoppingmall.domain.dto.delivery;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 public class DeliveryAddressesDTO {
 
     private Long id;
-    private Long userId;
+    private Long memberId;
     private String address;
     private String addr_Detail;
     private String zip_Code;
