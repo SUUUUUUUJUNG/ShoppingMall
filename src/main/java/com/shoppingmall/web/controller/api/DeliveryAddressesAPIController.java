@@ -19,7 +19,7 @@ import java.util.Map;
 public class DeliveryAddressesAPIController {
 
     private final MemberLoginService memberLoginService;
-    private DeliveryAddressesService deliveryAddressesService;
+    private final DeliveryAddressesService deliveryAddressesService;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody DeliveryAddressesCreateRequestDTO requestDTO, Principal principal) {
