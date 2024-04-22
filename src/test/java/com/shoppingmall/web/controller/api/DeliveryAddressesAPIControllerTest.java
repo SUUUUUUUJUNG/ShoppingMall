@@ -19,10 +19,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,8 +52,6 @@ class DeliveryAddressesAPIControllerTest {
 
     private DeliveryAddressesCreateRequestDTO requestDTO;
 
-    private DeliveryAddressesDTO deliveryDTO;
-
     private MemberDTO memberDTO;
 
     @Autowired
@@ -62,7 +63,7 @@ class DeliveryAddressesAPIControllerTest {
         requestDTO.setAddress("AAA");
         requestDTO.setAddr_Detail("삼원빌딩");
         requestDTO.setZip_Code("12345");
-        requestDTO.setPhoneNumber("123-456-7890");
+        requestDTO.setPhoneNumber("123-4567-7890");
         requestDTO.setRecipient_name("홍길동");
 
         memberDTO = new MemberDTO();
@@ -87,4 +88,31 @@ class DeliveryAddressesAPIControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("주소가 추가되었습니다."));
     }
+
+    @Test
+    @WithMockUser(username="user1", roles = "USER")
+    public void findAllByMemberId_Success() throws Exception {
+        List<DeliveryAddressesDTO> addresses = new ArrayList<>();
+        DeliveryAddressesDTO deliveryAddress1 = new DeliveryAddressesDTO();
+        deliveryAddress1.setAddress("서울시 강남구");
+        deliveryAddress1.setAddr_Detail("타워팰리스");
+        deliveryAddress1.setZip_Code("135-080");
+        deliveryAddress1.setPhoneNumber("010-1234-5678");
+        deliveryAddress1.setRecipient_name("홍길동");
+
+        addresses.add(deliveryAddress1);
+
+        when(deliveryAddressesService.findAllByMemberId(1L)).thenReturn(addresses);
+
+        mockMvc.perform(get("/api/delivery")
+                        .principal(principal)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].address").value("서울시 강남구"))
+                .andExpect(jsonPath("$[0].addr_Detail").value("타워팰리스"))
+                .andExpect(jsonPath("$[0].zip_Code").value("135-080"))
+                .andExpect(jsonPath("$[0].phoneNumber").value("010-1234-5678"))
+                .andExpect(jsonPath("$[0].recipient_name").value("홍길동"));
+    }
+
 }
