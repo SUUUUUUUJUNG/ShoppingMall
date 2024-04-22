@@ -31,4 +31,8 @@ public class DeliveryAddressesDAO {
     public int delete(Long id) {
         return session.delete("DeliveryAddressesMapper.delete", id);
     }
+
+    public int update(DeliveryAddressesUpdateRequestDTO requestDTO) {
+        return session.update("DeliveryAddressesMapper.update", requestDTO);
+    }
 }

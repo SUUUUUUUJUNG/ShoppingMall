@@ -21,4 +21,14 @@
         delete from DELIVERYADDRESSES where ID = #{id}
     </delete>
 
+    <update id="update" parameterType="DeliveryAddressesUpdateRequestDTO">
+        update DELIVERYADDRESSES
+        set ADDRESS = #{address},
+            ADDR_DETAIL = #{addr_Detail},
+            ZIP_CODE = #{zip_Code},
+            PHONENUMBER = #{phoneNumber},
+            RECIPIENT_NAME = #{recipient_name}
+        where ID = #{id}
+    </update>
+
 </mapper>
