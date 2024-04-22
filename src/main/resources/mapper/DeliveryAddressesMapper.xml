@@ -9,5 +9,9 @@
         values (sujung.DELIVERY_ADDRESS_SEQ.nextval,#{memberId},#{address},#{addr_Detail},#{zip_Code},#{phoneNumber},#{recipient_name})
     </insert>
 
+    <select id="findAllByMemberId" parameterType="Long" resultType="DeliveryAddressesDTO">
+        select * from DELIVERYADDRESSES where MEMBERID=#{memberId}
+    </select>
+
 
 </mapper>
