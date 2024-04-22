@@ -31,4 +31,8 @@ public class DeliveryAddressesService {
     public int delete(Long id) {
         return deliveryAddressesDAO.delete(id);
     }
+
+    public int update(DeliveryAddressesUpdateRequestDTO requestDTO) {
+        return deliveryAddressesDAO.update(requestDTO);
+    }
 }
