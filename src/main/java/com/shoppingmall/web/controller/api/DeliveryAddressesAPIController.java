@@ -44,6 +44,13 @@ public class DeliveryAddressesAPIController {
         return ResponseEntity.ok(Map.of("message","배송지가 삭제되었습니다."));
    }
 
+   @PatchMapping
+   public ResponseEntity<?> update(@RequestBody DeliveryAddressesUpdateRequestDTO requestDTO, Principal principal) {
+        validateIsDeliveryAddressesOwner(requestDTO.getId(),principal);
+        deliveryAddressesService.update(requestDTO);
+        return ResponseEntity.ok(Map.of("message","배송지가 수정되었습니다."));
+   }
+
     private void validateIsDeliveryAddressesOwner(Long Id, Principal principal) {
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         DeliveryAddressesDTO deliveryAddressesDTO = deliveryAddressesService.findById(Id);
