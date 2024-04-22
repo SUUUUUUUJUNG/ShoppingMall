@@ -14,4 +14,9 @@ public class MyPageController {
     public String myPage() {
         return "member/myPage";
     }
+
+    @GetMapping("/deliveryAddresses")
+    public String deliveryAddresses() {
+        return "member/deliveryAddresses";
+    }
 }
