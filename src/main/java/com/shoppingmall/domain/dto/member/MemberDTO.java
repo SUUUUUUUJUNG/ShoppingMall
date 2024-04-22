@@ -64,6 +64,10 @@ public class MemberDTO {
 		this.role = role;
 	}
 
+	public MemberDTO(long memberId) {
+		this.memberId = memberId;
+	}
+
 	public void update(MemberUpdateRequestDTO requestDTO) {
 		this.password = requestDTO.getNewPassword();
 		this.zip_Code = requestDTO.getZip_Code();

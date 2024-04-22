@@ -1,11 +1,11 @@
 package com.shoppingmall.domain.dao.member;
 
+import com.shoppingmall.domain.dto.delivery.DeliveryAddressesDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.shoppingmall.domain.dto.member.MemberDTO;
 
 @Repository
 public class MemberDAO {
@@ -25,4 +25,7 @@ public class MemberDAO {
         return session.update("MemberMapper.update",requestDTO);
 	}
 
+    public int setPrimaryAddress(DeliveryAddressesDTO deliveryAddressesDTO) {
+		return session.update("MemberMapper.setPrimaryAddress",deliveryAddressesDTO);
+    }
 }

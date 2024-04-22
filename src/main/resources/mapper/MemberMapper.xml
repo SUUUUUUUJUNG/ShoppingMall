@@ -4,15 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 
-
     <select id="idSearch" resultType="string"
             parameterType="MemberDTO">
         select USERNAME
         from member
         where username=#{username} and phoneNumber=#{phoneNumber}
     </select>
-
-
 
     <insert id="create" parameterType="MemberDTO">
         insert into member (memberid,USERNAME,password,REALNAME,zip_Code,address,addr_Detail,
@@ -30,8 +27,17 @@
         where MEMBERID = #{memberId}
     </update>
 
-
     <select id="findByUsername" parameterType="String" resultType="MemberDTO">
         select * from member where USERNAME = #{userId}
     </select>
+
+    <update id="setPrimaryAddress" parameterType="DeliveryAddressesDTO">
+        update member
+        set address = #{address},
+            addr_Detail = #{addr_Detail},
+            zip_Code = #{zip_Code},
+            phoneNumber = #{phoneNumber}
+        where MEMBERID = #{memberId}
+    </update>
+
 </mapper>
