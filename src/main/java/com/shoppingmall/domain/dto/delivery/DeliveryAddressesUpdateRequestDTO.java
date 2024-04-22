@@ -14,5 +14,4 @@ public class DeliveryAddressesUpdateRequestDTO {
     private String zip_Code;
     private String phoneNumber;
     private String recipient_name;
-
 }
