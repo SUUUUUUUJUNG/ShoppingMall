@@ -13,5 +13,12 @@
         select * from DELIVERYADDRESSES where MEMBERID=#{memberId}
     </select>
 
+    <select id="findById" parameterType="Long" resultType="DeliveryAddressesDTO">
+        select * from DELIVERYADDRESSES where ID = #{id}
+    </select>
+
+    <delete id="delete" parameterType="Long">
+        delete from DELIVERYADDRESSES where ID = #{id}
+    </delete>
 
 </mapper>
