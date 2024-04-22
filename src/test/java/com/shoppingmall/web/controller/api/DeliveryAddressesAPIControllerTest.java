@@ -3,6 +3,7 @@ package com.shoppingmall.web.controller.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoppingmall.domain.dto.delivery.DeliveryAddressesCreateRequestDTO;
 import com.shoppingmall.domain.dto.delivery.DeliveryAddressesDTO;
+import com.shoppingmall.domain.dto.delivery.DeliveryAddressesUpdateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.member.DeliveryAddressesService;
 import com.shoppingmall.domain.service.member.MemberLoginService;
@@ -68,8 +69,8 @@ class DeliveryAddressesAPIControllerTest {
         memberDTO.setMemberId(1L);
         memberDTO.setUsername("user1");
 
-        when(principal.getName()).thenReturn("user1");  // Principal의 getName() 메서드가 "user1"을 반환하도록 설정
-        when(memberLoginService.findByPrinciple(principal)).thenReturn(memberDTO);  // 적절한 사용자 ID 반환
+        when(principal.getName()).thenReturn("user1");
+        when(memberLoginService.findByPrinciple(principal)).thenReturn(memberDTO);
         when(memberService.findByUsername("user1")).thenReturn(memberDTO);
     }
 
@@ -133,5 +134,38 @@ class DeliveryAddressesAPIControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("배송지가 삭제되었습니다."));
+    }
+
+    @Test
+    @WithMockUser(username = "user1", roles = "USER")
+    public void updateDeliveryAddress_Success() throws Exception {
+        Long id = 1L; // Assuming this is the ID of the delivery address to update
+        DeliveryAddressesUpdateRequestDTO updateRequestDTO = new DeliveryAddressesUpdateRequestDTO();
+        updateRequestDTO.setId(id);
+        updateRequestDTO.setAddress("서울시 서초구");
+        updateRequestDTO.setAddr_Detail("업데이트 빌딩");
+        updateRequestDTO.setZip_Code("137-070");
+        updateRequestDTO.setPhoneNumber("010-9876-5432");
+        updateRequestDTO.setRecipient_name("김철수");
+
+        DeliveryAddressesDTO existingAddress = new DeliveryAddressesDTO();
+        existingAddress.setId(id);
+        existingAddress.setMemberId(1L);
+        existingAddress.setAddress("서울시 강남구");
+        existingAddress.setAddr_Detail("타워팰리스");
+        existingAddress.setZip_Code("135-080");
+        existingAddress.setPhoneNumber("010-1234-5678");
+        existingAddress.setRecipient_name("홍길동");
+
+        when(memberLoginService.findByPrinciple(principal)).thenReturn(memberDTO);
+        when(deliveryAddressesService.findById(id)).thenReturn(existingAddress);
+        when(deliveryAddressesService.update(any(DeliveryAddressesUpdateRequestDTO.class))).thenReturn(1);
+
+        mockMvc.perform(patch("/api/delivery")
+                        .principal(principal)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequestDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("배송지가 수정되었습니다."));
     }
 }
