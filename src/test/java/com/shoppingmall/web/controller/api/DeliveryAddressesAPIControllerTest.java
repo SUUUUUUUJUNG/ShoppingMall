@@ -23,10 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -76,21 +74,21 @@ class DeliveryAddressesAPIControllerTest {
     }
 
     @Test
-    @WithMockUser(username="user1",roles = "USER")
+    @WithMockUser(username = "user1", roles = "USER")
     public void createDeliveryAddress_Success() throws Exception {
 
         when(deliveryAddressesService.create(any(DeliveryAddressesCreateRequestDTO.class))).thenReturn(1);
 
         mockMvc.perform(post("/api/delivery")
-                 .principal(principal)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(requestDTO)))
+                        .principal(principal)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("주소가 추가되었습니다."));
     }
 
     @Test
-    @WithMockUser(username="user1", roles = "USER")
+    @WithMockUser(username = "user1", roles = "USER")
     public void findAllByMemberId_Success() throws Exception {
         List<DeliveryAddressesDTO> addresses = new ArrayList<>();
         DeliveryAddressesDTO deliveryAddress1 = new DeliveryAddressesDTO();
@@ -115,4 +113,25 @@ class DeliveryAddressesAPIControllerTest {
                 .andExpect(jsonPath("$[0].recipient_name").value("홍길동"));
     }
 
+    @Test
+    @WithMockUser(username = "user1", roles = "USER")
+    public void deleteDeliveryAddress_Success() throws Exception {
+
+        Long id = 1L;
+        MemberDTO member = new MemberDTO();
+        member.setMemberId(1L);
+        DeliveryAddressesDTO existingAddress = new DeliveryAddressesDTO();
+        existingAddress.setId(id);
+        existingAddress.setMemberId(1L);
+
+        when(memberLoginService.findByPrinciple(principal)).thenReturn(member);
+        when(deliveryAddressesService.findById(id)).thenReturn(existingAddress);
+        when(deliveryAddressesService.delete(id)).thenReturn(1);
+
+        mockMvc.perform(delete("/api/delivery/{id}", id)
+                        .principal(principal)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("배송지가 삭제되었습니다."));
+    }
 }
