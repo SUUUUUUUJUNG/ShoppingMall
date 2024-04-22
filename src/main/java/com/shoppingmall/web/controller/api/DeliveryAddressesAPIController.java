@@ -37,14 +37,14 @@ public class DeliveryAddressesAPIController {
         return ResponseEntity.ok(deliveryAddressesService.findAllByMemberId(member.getMemberId()));
     }
 
-   @DeleteMapping("/{Id}")
-   public ResponseEntity<?> delete(@PathVariable("Id") Long Id, Principal principal) {
-        validateIsInquiryOwner(Id, principal);
+   @DeleteMapping("/{id}")
+   public ResponseEntity<?> delete(@PathVariable("id") Long Id, Principal principal) {
+        validateIsDeliveryAddressesOwner(Id, principal);
         deliveryAddressesService.delete(Id);
         return ResponseEntity.ok(Map.of("message","배송지가 삭제되었습니다."));
    }
 
-    private void validateIsInquiryOwner(Long Id, Principal principal) {
+    private void validateIsDeliveryAddressesOwner(Long Id, Principal principal) {
         Long memberId = memberLoginService.findByPrinciple(principal).getMemberId();
         DeliveryAddressesDTO deliveryAddressesDTO = deliveryAddressesService.findById(Id);
 
@@ -54,10 +54,5 @@ public class DeliveryAddressesAPIController {
         if(!deliveryAddressesDTO.getMemberId().equals(memberId)){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"권한이 없습니다.");
         }
-
-
     }
-
-
-
 }
