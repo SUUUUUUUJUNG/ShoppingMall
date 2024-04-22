@@ -1,11 +1,11 @@
 package com.shoppingmall.domain.service.member;
 
+import com.shoppingmall.domain.dao.member.MemberDAO;
+import com.shoppingmall.domain.dto.delivery.DeliveryAddressesDTO;
+import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.dto.member.MemberUpdateRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import com.shoppingmall.domain.dao.member.MemberDAO;
-import com.shoppingmall.domain.dto.member.MemberDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -27,4 +27,7 @@ public class MemberService {
 	}
 
 
+    public int setPrimaryAddress(DeliveryAddressesDTO deliveryAddressesDTO) {
+		return dao.setPrimaryAddress(deliveryAddressesDTO);
+    }
 }
