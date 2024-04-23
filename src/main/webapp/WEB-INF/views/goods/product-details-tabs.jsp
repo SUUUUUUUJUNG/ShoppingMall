@@ -2,7 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <style>
 
     .nav-pills .nav-link {
@@ -111,15 +110,15 @@
     .form-label {
         font-weight: 500;
     }
+    .shadow {
+        box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+    }
 </style>
 <div class="container">
     <!-- 탭 버튼들 -->
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
             <a class="nav-link active" href="#tab1" data-bs-toggle="tab">상품정보</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#tab2" data-bs-toggle="tab">디테일</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#tab3" data-bs-toggle="tab">구매후기</a>
@@ -132,11 +131,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="tab1">
             <!-- 탭 #1 내용 -->
-            <p>상품정보의 내용이 여기에 표시됩니다.</p>
-        </div>
-        <div class="tab-pane" id="tab2">
-            <!-- 탭 #2 내용 -->
-            <p>디테일의 내용이 여기에 표시됩니다.</p>
+            <p class="col-md-8 offset-md-3 shadow">${goodsDTO.GContent}</p>
         </div>
         <div class="tab-pane" id="tab3">
             <!-- 탭 #3 내용 -->
