@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <script>
 
@@ -24,15 +23,13 @@
 
 </script>
 <body>
-<div class="container mt-5">
-<jsp:include page="../common/navbar.jsp" flush="true"/>
+<div class="container mt-5" style="width: 90%">
+    <jsp:include page="../common/navbar.jsp" flush="true"/>
     <div style="margin-bottom: 70px;"></div>
-<jsp:include page="../common/sidebar.jsp" flush="true"/>
+    <jsp:include page="../common/sidebar.jsp" flush="true"/>
 
-    <div class="container mt-4">
+    <div class="container mt-5" ㄴ>
         <div class="row">
-            <!-- 사이드바 자리-->
-
             <!-- 메인 컨텐츠 시작 -->
             <div class="col-md-8 offset-md-3 shadow">
                 <div class="form-section">
@@ -44,7 +41,8 @@
                         <div class="section-content">
                             <div class="mb-3">
                                 <label for="realName" class="form-label">이름</label>
-                                <input type="text" class="form-control fc" id="realName" value="${member.realName}" disabled>
+                                <input type="text" class="form-control fc" id="realName" value="${member.realName}"
+                                       disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">이메일</label>
@@ -52,7 +50,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">휴대폰 번호</label>
-                                <input type="text" class="form-control fc" id="phoneNumber" value="${member.phoneNumber}" disabled>
+                                <input type="text" class="form-control fc" id="phoneNumber"
+                                       value="${member.phoneNumber}" disabled>
                             </div>
                         </div>
                     </div>
@@ -61,12 +60,16 @@
                         <div class="section-content">
                             <div class="mb-3">
                                 <label for="current-password" class="form-label">현재 비밀번호</label>
-                                <input type="password" name="currentPassword" class="form-control fc" id="current-password" required>
+                                <input type="password" name="currentPassword" class="form-control fc"
+                                       id="current-password" required>
                             </div>
-                            <div class="center-align" style="margin-bottom: 15px; color: darkgreen;">(비밀번호는 영문/숫자/특수문자 2가지 이상 조합의 8~20자여야 합니다.)</div>
+                            <div class="center-align" style="margin-bottom: 15px; color: darkgreen;">(비밀번호는 영문/숫자/특수문자
+                                2가지 이상 조합의 8~20자여야 합니다.)
+                            </div>
                             <div class="mb-3">
                                 <label for="new-password" class="form-label">새 비밀번호</label>
-                                <input type="password" name="newPassword" class="form-control fc" id="new-password" th:onkeyup="newPasswordValidate()" required>
+                                <input type="password" name="newPassword" class="form-control fc" id="new-password"
+                                       th:onkeyup="newPasswordValidate()" required>
                             </div>
                             <div id="passwordHelpBlock" style="display: none;">
                                 <p id="lengthCheck" class="text-danger">✖ 영문/숫자/특수문자 2가지 이상 조합 (8~20자)</p>
@@ -87,11 +90,13 @@
                         <div class="section-content">
                             <div class="mb-3">
                                 <label for="address" class="form-label">주소</label>
-                                <input type="text" class="form-control fc" id="address" name="address" value="${member.address}" required>
+                                <input type="text" class="form-control fc" id="address" name="address"
+                                       value="${member.address}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="zipCode" class="form-label">우편 번호</label>
-                                <input type="text" class="form-control fc" id="zipCode" value="${member.zip_Code}" name="zip_Code" readonly required>
+                                <input type="text" class="form-control fc" id="zipCode" value="${member.zip_Code}"
+                                       name="zip_Code" readonly required>
                             </div>
                             <div class="mb-3">
                                 <label for="detailAddress" class="form-label">상세 주소</label>
@@ -99,14 +104,16 @@
                                        value="${member.addr_Detail}" required>
                             </div>
                             <div class="mb-3 right-align">
-                                <button type="button" class="btn btn-outline-secondary address-btn" onclick="searchAddress()">
+                                <button type="button" class="btn btn-outline-secondary address-btn"
+                                        onclick="searchAddress()">
                                     주소 검색
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="center-align">
-                        <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정</button>
+                        <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정
+                        </button>
                     </div>
                     <input type="hidden" name="memberId" value="${member.memberId}" id="memberId">
                 </form>
@@ -119,15 +126,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $("form").submit(function(event) {
+        $("form").submit(function (event) {
             event.preventDefault();
 
             updateValidation()
 
             var userData = {
-                "memberId":$("#memberId").val(),
+                "memberId": $("#memberId").val(),
                 "newPassword": $("#new-password").val(),
                 "address": $("#address").val(),
                 "addr_Detail": $("#detailAddress").val(),
@@ -142,18 +149,18 @@
                 contentType: "application/json",
                 data: JSON.stringify(userData),
                 dataType: "json",
-                success: function(response) {
+                success: function (response) {
                     alert("사용자 정보가 업데이트되었습니다.");
                     window.location.reload();
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     var errorMessage = JSON.parse(xhr.responseText).message;
                     alert(errorMessage);
                 }
             });
         });
 
-        $("#new-password, #new-password-check").on("input", function() {
+        $("#new-password, #new-password-check").on("input", function () {
             validatePasswordsMatch();
         });
 
@@ -188,10 +195,11 @@
                 $("#password-match-result").text('');
             }
         }
+
         // 주소 검색
         function searchAddress() {
             new daum.Postcode({
-                oncomplete: function(data) {
+                oncomplete: function (data) {
                     $('#address').val(data.address);
                     $('#zipCode').val(data.zonecode);
                     $('#detailAddress').focus();

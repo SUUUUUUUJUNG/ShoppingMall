@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <html>
 <head>
 
@@ -61,7 +61,7 @@
     </ul>
     <ul class="list-group">
         <li class="list-group-item active" aria-current="true">MY 정보</li>
-        <li class="list-group-item">개인정보확인/수정</li>
+        <li class="list-group-item"><a href="/myPage">개인정보확인/수정</a></li>
         <li class="list-group-item">결제수단 관리</li>
         <li class="list-group-item"><a href="/myPage/deliveryAddresses">배송지 관리</a></li>
     </ul>
