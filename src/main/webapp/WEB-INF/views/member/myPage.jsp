@@ -108,7 +108,7 @@
                     <div class="center-align">
                         <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정</button>
                     </div>
-                    <input type="hidden" name="memberId" value="${login.memberId}" id="memberId">
+                    <input type="hidden" name="memberId" value="${member.memberId}" id="memberId">
                 </form>
             </div>
             <!-- 메인 컨텐츠 끝 -->
