@@ -44,15 +44,15 @@
                         <div class="section-content">
                             <div class="mb-3">
                                 <label for="realName" class="form-label">이름</label>
-                                <input type="text" class="form-control fc" id="realName" value="${login.username}" disabled>
+                                <input type="text" class="form-control fc" id="realName" value="${member.realName}" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">이메일</label>
-                                <input type="email" class="form-control fc" id="email" value="${login.email}" disabled>
+                                <input type="email" class="form-control fc" id="email" value="${member.email}" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">휴대폰 번호</label>
-                                <input type="text" class="form-control fc" id="phoneNumber" value="${login.phoneNumber}" disabled>
+                                <input type="text" class="form-control fc" id="phoneNumber" value="${member.phoneNumber}" disabled>
                             </div>
                         </div>
                     </div>
@@ -87,16 +87,16 @@
                         <div class="section-content">
                             <div class="mb-3">
                                 <label for="address" class="form-label">주소</label>
-                                <input type="text" class="form-control fc" id="address" name="address" value="${login.address}" required>
+                                <input type="text" class="form-control fc" id="address" name="address" value="${member.address}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="zipCode" class="form-label">우편 번호</label>
-                                <input type="text" class="form-control fc" id="zipCode" value="${login.zip_Code}" name="zip_Code" readonly required>
+                                <input type="text" class="form-control fc" id="zipCode" value="${member.zip_Code}" name="zip_Code" readonly required>
                             </div>
                             <div class="mb-3">
                                 <label for="detailAddress" class="form-label">상세 주소</label>
                                 <input type="text" class="form-control fc" id="detailAddress" name="addr_Detail"
-                                       value="${login.addr_Detail}" required>
+                                       value="${member.addr_Detail}" required>
                             </div>
                             <div class="mb-3 right-align">
                                 <button type="button" class="btn btn-outline-secondary address-btn" onclick="searchAddress()">
@@ -108,7 +108,7 @@
                     <div class="center-align">
                         <button type="submit" class="btn btn-primary" onclick="return validateRegisterForm()">정보 수정</button>
                     </div>
-                    <input type="hidden" name="memberId" value="${login.memberId}" id="memberId">
+                    <input type="hidden" name="memberId" value="${member.memberId}" id="memberId">
                 </form>
             </div>
             <!-- 메인 컨텐츠 끝 -->
