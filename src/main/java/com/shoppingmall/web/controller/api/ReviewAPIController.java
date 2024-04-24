@@ -49,6 +49,7 @@ public class ReviewAPIController {
 
     @PatchMapping
     public ResponseEntity<?> update(@RequestBody ReviewUpdateRequestDTO requestDTO, Principal principal){
+        System.out.println("requestDTO = " + requestDTO);
         validateIsReviewOwner(requestDTO.getReview_Id(), principal);
         reviewService.update(requestDTO);
         return ResponseEntity.ok(Map.of("message","리뷰가 수정되었습니다.","review_Id",requestDTO.getReview_Id()));

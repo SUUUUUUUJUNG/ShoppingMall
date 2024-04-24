@@ -12,6 +12,4 @@ public class ReviewUpdateRequestDTO {
     private Long review_Id;
     private String review_Text;
     private int rating;
-
-
 }

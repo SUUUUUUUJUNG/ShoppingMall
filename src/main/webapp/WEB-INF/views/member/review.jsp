@@ -43,14 +43,82 @@
         </div>
     </div>
 </div>
+<!-- 리뷰 수정 모달 -->
+<div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editReviewModalLabel">리뷰 수정</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editReviewForm">
+                    <div class="form-group">
+                        <label for="reviewText">리뷰 내용</label>
+                        <textarea class="form-control" id="reviewText" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">평점</label>
+                        <select class="form-control" id="reviewRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <input type="hidden" id="reviewId">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="saveChanges">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {
         function editReview(reviewId) {
-            console.log("리뷰 수정:", reviewId);
-            // 리뷰 수정 로직을 여기에 추가
-        }
 
+            $.ajax({
+                type: 'get', // 또는 'PUT'
+                url: '/api/review/one?reviewId=' + reviewId,
+                success: function(response) {
+                    $('#reviewId').val(response.review_Id)
+                    $('#reviewText').val(response.review_Text);
+                    $('#reviewRating').val(response.rating);
+                },
+                error: function(xhr, status, error) {
+                    alert("리뷰 수정에 실패했습니다.");
+                }
+            });
+        }
+        $('#saveChanges').off('click').on('click', function() {
+            var reviewId = $('#reviewId').val();
+            $.ajax({
+                type: 'PATCH', // 또는 'PUT'
+                url: '/api/review',
+                contentType: "application/json",
+                data:JSON.stringify({
+                    review_Id: reviewId,
+                    review_Text: $('#reviewText').val(),
+                    rating: $('#reviewRating').val()
+                }),
+                success: function(response) {
+                    alert("리뷰가 성공적으로 수정되었습니다.");
+                    $('#editReviewModal').modal('hide'); // 모달창 숨기기
+                    window.location.reload();
+                    // 여기에 페이지를 새로고침하거나, 테이블의 데이터를 업데이트하는 로직을 추가할 수 있습니다.
+                },
+                error: function(xhr, status, error) {
+                    alert("리뷰 수정에 실패했습니다.");
+                }
+            });
+        });
         function deleteReview(reviewId, rowElement) {
             console.log("리뷰 삭제:", reviewId);
             // AJAX 요청을 통해 리뷰를 삭제
@@ -88,7 +156,7 @@
                     row.append($('<td></td>').text(review.created_At));
 
                     // 작업 열 추가
-                    var editButton = $('<button></button>').text('수정').click(function () {
+                    var editButton = $('<button data-bs-toggle="modal" data-bs-target="#editReviewModal"></button>').text('수정').click(function () {
                         editReview(review.review_Id);
                     });
                     var deleteButton = $('<button></button>').text('삭제').click(function() {
