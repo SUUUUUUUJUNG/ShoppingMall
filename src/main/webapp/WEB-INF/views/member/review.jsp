@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +31,7 @@
                         <th>리뷰 내용</th>
                         <th>평점</th>
                         <th>작성 시간</th>
+                        <th>작업</th> <!-- 작업 헤더 추가 -->
                     </tr>
                     </thead>
                     <tbody>
@@ -44,15 +45,39 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+        function editReview(reviewId) {
+            console.log("리뷰 수정:", reviewId);
+            // 리뷰 수정 로직을 여기에 추가
+        }
+
+        function deleteReview(reviewId, rowElement) {
+            console.log("리뷰 삭제:", reviewId);
+            // AJAX 요청을 통해 리뷰를 삭제
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/review/' + reviewId, // 리뷰 ID를 이용한 삭제 요청 경로
+                success: function (response) {
+                    console.log(response.message);
+                    alert("리뷰가 성공적으로 삭제되었습니다.");
+                    // 삭제 성공 시 테이블에서 해당 행을 제거
+                    rowElement.remove();
+                },
+                error: function (xhr, status, error) {
+                    console.error("삭제 실패: ", error);
+                    alert("리뷰 삭제에 실패하였습니다.");
+                }
+            });
+        }
+
         $.ajax({
             type: 'GET',
             url: '/api/review/member', // 요청을 보낼 서버의 URL 주소
             dataType: 'json', // 서버에서 보내줄 데이터의 타입
-            success: function(reviews) {
+            success: function (reviews) {
                 // 서버로부터 응답을 성공적으로 받았을 때 실행할 코드
                 var tableBody = $('#reviewsTable tbody');
-                reviews.forEach(function(review) {
+                reviews.forEach(function (review) {
                     var row = $('<tr></tr>');
                     row.append($('<td></td>').text(review.review_Id));
                     var link = $('<a></a>').attr('href', '/goods/detail?gCode=' + review.gcode).text(review.gcode);
@@ -60,11 +85,22 @@
                     row.append(td);
                     row.append($('<td></td>').text(review.review_Text));
                     row.append($('<td></td>').text(review.rating));
-                    row.append($('<td></td>').text(review.createdAt));
+                    row.append($('<td></td>').text(review.created_At));
+
+                    // 작업 열 추가
+                    var editButton = $('<button></button>').text('수정').click(function () {
+                        editReview(review.review_Id);
+                    });
+                    var deleteButton = $('<button></button>').text('삭제').click(function() {
+                        deleteReview(review.review_Id, row); // 삭제 버튼 클릭 시 해당 함수 호출
+                    });
+                    var actionTd = $('<td></td>').append(editButton, deleteButton);
+                    row.append(actionTd);
+
                     tableBody.append(row);
                 });
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 // 요청 실패시 실행할 코드
                 console.error("Error: " + error);
                 alert("리뷰 데이터를 불러오는 데 실패했습니다.");
