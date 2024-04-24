@@ -58,7 +58,7 @@
             <li class="list-group-item active" aria-current="true">MY 활동</li>
             <li class="list-group-item"><a href="/inquiry">문의하기</a></li>
             <li class="list-group-item"><a href="/inquiry/inquiriesList">문의내역 확인</a></li>
-            <li class="list-group-item">리뷰관리</li>
+            <li class="list-group-item"><a href="/myPage/review">리뷰관리</a></li>
             <li class="list-group-item"><a href="/myShopping">찜 리스트</a></li>
         </ul>
         <ul class="list-group">
