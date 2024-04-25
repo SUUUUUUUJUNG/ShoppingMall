@@ -155,14 +155,14 @@
                     row.append($('<td></td>').text(review.rating));
                     row.append($('<td></td>').text(review.created_At));
 
-                    // 작업 열 추가
-                    var editButton = $('<button data-bs-toggle="modal" data-bs-target="#editReviewModal"></button>').text('수정').click(function () {
-                        editReview(review.review_Id);
+                    // 수정 및 삭제 버튼 - Bootstrap 스타일 적용
+                    var editButton = $('<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal"></button>').text('수정').click(function () {
+                        editReview(review.review_Id); // 수정 버튼 클릭 이벤트
                     });
-                    var deleteButton = $('<button></button>').text('삭제').click(function() {
-                        deleteReview(review.review_Id, row); // 삭제 버튼 클릭 시 해당 함수 호출
+                    var deleteButton = $('<button class="btn btn-danger btn-sm"></button>').text('삭제').click(function() {
+                        deleteReview(review.review_Id, row); // 삭제 버튼 클릭 이벤트
                     });
-                    var actionTd = $('<td></td>').append(editButton, deleteButton);
+                    var actionTd = $('<td></td>').append(editButton, ' ', deleteButton); // 공간 추가
                     row.append(actionTd);
 
                     tableBody.append(row);
