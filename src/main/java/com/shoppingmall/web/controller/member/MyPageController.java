@@ -28,4 +28,9 @@ public class MyPageController {
     public String deliveryAddresses() {
         return "member/deliveryAddresses";
     }
+
+    @GetMapping("/review")
+    public String review() {
+        return "member/review";
+    }
 }

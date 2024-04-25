@@ -21,9 +21,9 @@ public class ReviewDTO {
 
     private int rating;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime created_At = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_At;
 
     public ReviewDTO(Long memberId) {
     }
