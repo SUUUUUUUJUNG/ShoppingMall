@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class MemberVerificationDTO {
+public class EmailVerificationDTO {
     private Long memberId;
     private String verificationKey;
     private LocalDate expiresAt;
