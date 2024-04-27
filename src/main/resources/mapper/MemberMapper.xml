@@ -40,4 +40,14 @@
         where MEMBERID = #{memberId}
     </update>
 
+    <select id="findByMemberId" parameterType="Long" resultType="MemberDTO">
+        select * from member where MEMBERID = #{memberId}
+    </select>
+
+    <update id="activateMemberById" parameterType="Long">
+        UPDATE SUJUNG.MEMBER
+        SET STATUS = 'active'
+        WHERE MEMBERID = #{memberId}
+    </update>
+
 </mapper>

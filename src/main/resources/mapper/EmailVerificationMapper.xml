@@ -4,4 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="EmailVerificationMapper">
 
+    <insert id="create" parameterType="EmailVerificationCreateRequestDTO">
+        INSERT INTO EmailVerification (MEMBERID, VERIFICATIONKEY, EXPIRESAT)
+        VALUES (#{memberId}, #{verificationKey}, #{expiresAt})
+    </insert>
+
+    <select id="findByVerificationKey" parameterType="String" resultType="EmailVerificationDTO">
+        select *
+        from EMAILVERIFICATION
+        where VERIFICATIONKEY = #{verificationKey}
+    </select>
+
 </mapper>

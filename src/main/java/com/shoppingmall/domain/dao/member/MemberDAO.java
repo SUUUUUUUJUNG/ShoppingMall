@@ -28,4 +28,12 @@ public class MemberDAO {
     public int setPrimaryAddress(DeliveryAddressesDTO deliveryAddressesDTO) {
 		return session.update("MemberMapper.setPrimaryAddress",deliveryAddressesDTO);
     }
+
+	public MemberDTO findByMemberId(Long memberId) {
+		return session.selectOne("MemberMapper.findByMemberId", memberId);
+	}
+
+	public int activateMemberById(Long memberId) {
+		return session.update("MemberMapper.activateMemberById", memberId);
+	}
 }
