@@ -1,14 +1,14 @@
-package com.shoppingmall.domain.dto;
+package com.shoppingmall.domain.dto.EmailVerification;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class EmailVerificationDTO {
     private Long memberId;
     private String verificationKey;
-    private LocalDate expiresAt;
+    private LocalDateTime expiresAt;
 }
