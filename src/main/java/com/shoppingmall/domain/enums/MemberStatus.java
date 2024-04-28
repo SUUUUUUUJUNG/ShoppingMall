@@ -12,4 +12,13 @@ public enum MemberStatus {
     }
 
     public String getDescription() {return description;}
+
+    public static MemberStatus fromDescription(String description) {
+        for (MemberStatus status : MemberStatus.values()) {
+            if (status.getDescription().equals(description)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("No matching constant for [" + description + "]");
+    }
 }

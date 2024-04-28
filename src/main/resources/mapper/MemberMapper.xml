@@ -14,8 +14,8 @@
     <insert id="create" parameterType="MemberDTO">
         insert into member (memberid,USERNAME,password,REALNAME,zip_Code,address,addr_Detail,
                             phoneNumber,email, ROLE,STATUS)
-        values(SUJUNG.MEMBERID_SEQ.nextval, #{username},#{password},#{username},#{zip_Code},#{address},#{addr_Detail},
-               #{phoneNumber},#{email},'ROLE_User','Active')
+        values(SUJUNG.MEMBERID_SEQ.nextval, #{username},#{password},#{realName},#{zip_Code},#{address},#{addr_Detail},
+               #{phoneNumber},#{email},'ROLE_USER','INACTIVE')
     </insert>
 
     <update id="update" parameterType="MemberUpdateRequestDTO">
