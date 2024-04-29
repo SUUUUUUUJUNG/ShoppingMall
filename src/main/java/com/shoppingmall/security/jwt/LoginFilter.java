@@ -13,8 +13,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
@@ -55,6 +58,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+
+        String username = obtainUsername(request);
+        String encodedUsername = URLEncoder.encode(username, StandardCharsets.UTF_8);
+
+        if (Objects.equals(exception.getMessage(), "이메일 인증이 필요합니다.")) {
+            // 이메일 인증이 필요한 경우의 로직
+            response.sendRedirect("/verify?username=" + encodedUsername); // 이메일 인증 페이지로 리디렉션
+            return;
+        }
+
         response.sendRedirect("/login?error=true"); // 기본 로그인 페이지로 리디렉션
     }
 }

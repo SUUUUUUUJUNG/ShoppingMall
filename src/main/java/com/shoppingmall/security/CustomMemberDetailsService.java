@@ -1,9 +1,8 @@
-package com.shoppingmall.domain.service;
+package com.shoppingmall.security;
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.enums.MemberStatus;
 import com.shoppingmall.domain.service.member.MemberLoginService;
-import com.shoppingmall.security.CustomUserDetails;
 import com.shoppingmall.security.exception.MemberLoginAuthenticatedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
