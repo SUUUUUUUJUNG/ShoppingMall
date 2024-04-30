@@ -46,7 +46,7 @@
 
     <update id="activateMemberById" parameterType="Long">
         UPDATE SUJUNG.MEMBER
-        SET STATUS = 'active'
+        SET STATUS = 'ACTIVE'
         WHERE MEMBERID = #{memberId}
     </update>
 
