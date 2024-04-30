@@ -15,4 +15,10 @@
         where VERIFICATIONKEY = #{verificationKey}
     </select>
 
+    <delete id="deleteByVerificationKey" parameterType="String">
+        delete
+        from EMAILVERIFICATION
+        where VERIFICATIONKEY = #{verificationKey}
+    </delete>
+
 </mapper>

@@ -19,4 +19,8 @@ public class EmailVerificationDAO {
     public EmailVerificationDTO findByVerificationKey(String verificationKey) {
         return session.selectOne("EmailVerificationMapper.findByVerificationKey", verificationKey);
     }
+
+    public void deleteByVerificationKey(String verificationKey) {
+        session.delete("EmailVerificationMapper.deleteByVerificationKey", verificationKey);
+    }
 }
