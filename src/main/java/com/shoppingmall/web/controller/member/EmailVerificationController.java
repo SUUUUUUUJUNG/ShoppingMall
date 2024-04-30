@@ -1,7 +1,10 @@
 package com.shoppingmall.web.controller.member;
 
+import com.shoppingmall.domain.dto.EmailVerification.EmailVerificationCreateRequestDTO;
 import com.shoppingmall.domain.dto.member.MemberDTO;
 import com.shoppingmall.domain.service.EmailService;
+import com.shoppingmall.domain.service.EmailVerificationService;
+import com.shoppingmall.domain.service.member.MemberLoginService;
 import com.shoppingmall.domain.service.member.MemberService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +23,12 @@ public class EmailVerificationController {
 
     private final MemberService memberService;
     private final EmailService emailService;
+    private final EmailVerificationService emailVerificationService;
+    private final MemberLoginService memberLoginService;
 
     @GetMapping
     public String emailVerifyForm(@RequestParam(value = "username", required = false) String username, Model model) {
-        if(username == null) {
+        if (username == null) {
             return "redirect:/login";
         }
         MemberDTO user = memberService.findByUsername(username);
@@ -33,7 +38,18 @@ public class EmailVerificationController {
 
     @PostMapping("/send")
     public String emailVerify(@RequestParam("username") String username, @RequestParam("email") String email) throws MessagingException {
-        emailService.sendVerificationEmail(username, email);
+        MemberDTO user = memberLoginService.findByUsername(username);
+        EmailVerificationCreateRequestDTO requestDTO = emailVerificationService.create(user.getMemberId());
+        emailService.sendVerificationEmail(username, email, requestDTO);
         return "redirect:/login";
+    }
+
+    @GetMapping("/result")
+    public String verifyMember(@RequestParam("verificationKey") String verificationKey) {
+        if (emailVerificationService.verifyToken(verificationKey)) {
+            return "verifySuccess";
+        }
+
+        return "verifyFail";
     }
 }
