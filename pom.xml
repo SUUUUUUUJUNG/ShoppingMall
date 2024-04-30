@@ -31,8 +31,6 @@
     </dependencyManagement>
     <!-- 라이브러리 -->
     <dependencies>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -99,7 +97,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -126,9 +123,11 @@
             <version>0.12.5</version>
             <scope>runtime</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

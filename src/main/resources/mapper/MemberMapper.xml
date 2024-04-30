@@ -14,8 +14,8 @@
     <insert id="create" parameterType="MemberDTO">
         insert into member (memberid,USERNAME,password,REALNAME,zip_Code,address,addr_Detail,
                             phoneNumber,email, ROLE,STATUS)
-        values(SUJUNG.MEMBERID_SEQ.nextval, #{username},#{password},#{username},#{zip_Code},#{address},#{addr_Detail},
-               #{phoneNumber},#{email},'ROLE_User','Active')
+        values(SUJUNG.MEMBERID_SEQ.nextval, #{username},#{password},#{realName},#{zip_Code},#{address},#{addr_Detail},
+               #{phoneNumber},#{email},'ROLE_USER','INACTIVE')
     </insert>
 
     <update id="update" parameterType="MemberUpdateRequestDTO">
@@ -38,6 +38,16 @@
             zip_Code = #{zip_Code},
             phoneNumber = #{phoneNumber}
         where MEMBERID = #{memberId}
+    </update>
+
+    <select id="findByMemberId" parameterType="Long" resultType="MemberDTO">
+        select * from member where MEMBERID = #{memberId}
+    </select>
+
+    <update id="activateMemberById" parameterType="Long">
+        UPDATE SUJUNG.MEMBER
+        SET STATUS = 'ACTIVE'
+        WHERE MEMBERID = #{memberId}
     </update>
 
 </mapper>

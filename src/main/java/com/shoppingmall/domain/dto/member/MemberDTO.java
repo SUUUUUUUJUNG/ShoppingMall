@@ -1,5 +1,6 @@
 package com.shoppingmall.domain.dto.member;
 
+import com.shoppingmall.domain.enums.MemberStatus;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,7 @@ public class MemberDTO {
 	@NotBlank
 	private String addr_Detail;
 
-	private String status;
+	private MemberStatus status;
 
 	@NotBlank
 	private String role;
@@ -50,7 +51,7 @@ public class MemberDTO {
 	public MemberDTO() {
 	}
 
-	public MemberDTO(Long memberId, String username, String realName, String password, String email, String phoneNumber, String zip_Code, String address, String addr_Detail, String status, String role) {
+	public MemberDTO(Long memberId, String username, String realName, String password, String email, String phoneNumber, String zip_Code, String address, String addr_Detail, MemberStatus status, String role) {
 		this.memberId = memberId;
 		this.username = username;
 		this.realName = realName;

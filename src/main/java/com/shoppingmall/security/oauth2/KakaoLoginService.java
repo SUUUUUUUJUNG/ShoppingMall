@@ -2,6 +2,7 @@ package com.shoppingmall.security.oauth2;
 
 
 import com.shoppingmall.domain.dto.member.MemberDTO;
+import com.shoppingmall.domain.enums.MemberStatus;
 import com.shoppingmall.domain.service.member.MemberService;
 import com.shoppingmall.security.jwt.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class KakaoLoginService implements SocialOauth2Service{
             memberDTO.setZip_Code("test");
             memberDTO.setRole(role);
             memberDTO.setPassword(UUID.randomUUID().toString());
-            memberDTO.setStatus("ACTIVE");
+            memberDTO.setStatus(MemberStatus.ACTIVE);
             memberService.create(memberDTO);
         }
 
