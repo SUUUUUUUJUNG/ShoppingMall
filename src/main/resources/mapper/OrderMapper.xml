@@ -14,7 +14,6 @@
             (#{orderId}, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote})
     </insert>
 
-
     <select id="findAllByMemberId" parameterType="Long" resultType="OrderDTO">
         select * from ORDERS where MEMBERID = #{memberId}
     </select>
@@ -22,5 +21,30 @@
     <select id="findById" parameterType="Long" resultType="OrderDTO">
         select * from ORDERS where ORDERID = #{orderId}
     </select>
+
+    <select id="selectSalesPast30Days" resultType="ChartDateDTO">
+        SELECT PAYMENTDATE, SUM(AMOUNT) AS totalSales
+        FROM PAYMENTS
+        WHERE PAYMENTDATE >= TRUNC(SYSDATE) - 30
+        GROUP BY PAYMENTDATE
+        ORDER BY PAYMENTDATE
+    </select>
+
+    <select id="selectMonthlySalesPastYear" resultType="ChartDateDTO">
+        SELECT TO_CHAR(PAYMENTDATE, 'YYYY-MM') AS paymentMonth, SUM(AMOUNT) AS totalSales
+        FROM PAYMENTS
+        WHERE PAYMENTDATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -12)
+        GROUP BY TO_CHAR(PAYMENTDATE, 'YYYY-MM')
+        ORDER BY paymentMonth
+    </select>
+
+    <select id="selectYearlySalesPastThreeYears" resultType="ChartDateDTO">
+        SELECT TO_CHAR(PAYMENTDATE, 'YYYY') AS paymentYear, SUM(AMOUNT) AS totalSales
+        FROM PAYMENTS
+        WHERE PAYMENTDATE >= ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), -36)
+        GROUP BY TO_CHAR(PAYMENTDATE, 'YYYY')
+        ORDER BY paymentYear
+    </select>
+
 
 </mapper>
