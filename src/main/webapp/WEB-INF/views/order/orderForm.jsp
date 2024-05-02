@@ -38,11 +38,12 @@
                     size: 'responsive', // or 'small', 'medium', 'large', 'responsive' for automatic resizing
                 },
                 createOrder: function (data, actions) {
+                    let totalPrice = calculateTotalPrice();
                     // 결제 생성
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '10.00' // 테스트 결제 금액
+                                value: (totalPrice / 1300).toFixed(2) // 테스트 결제 금액
                             }
                         }]
                     });
@@ -59,6 +60,21 @@
 
         });
 
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+
+            // 모든 제품 행에 대해 반복
+            $('tbody tr').each(function() {
+                let price = parseFloat($(this).find('td:nth-child(3)').text().replace('원', '').trim()); // 가격을 가져옴
+                let amount = parseFloat($(this).find('input[type="number"]').val()); // 수량을 가져옴
+                let total = price * amount; // 총 가격 계산
+                totalPrice += total; // 전체 합계에 더함
+            });
+
+            $('#totalPrice').val(totalPrice.toFixed(2)); // 총 가격을 입력 필드에 업데이트
+            return totalPrice.toFixed(2); // 총 가격 반환
+        }
+
         function orderProcessing() {
             let receiverName = $('#receiverName').val();
             let receiverAddress = $('#receiverAddress').val();
@@ -68,7 +84,7 @@
             let deliveryNote = $('#deliveryNote').val();
             let paymentResult = $('#paymentResult').val();
             let paymentMethod = $('#paymentMethod').val();
-            let totalPrice = $('#totalPrice').val();
+            let totalPrice =  calculateTotalPrice();
 
             let data = {
                 receiverName: receiverName,
@@ -184,7 +200,6 @@
             </div>
         </fieldset>
         <!-- 결제 방식 선택 -->
-        <input type="number" id="totalPrice" name="totalPrice" value="10000">
         <div class="mb-3">
             <label for="paymentMethod" class="form-label">결제 방식</label>
             <select class="form-select" id="paymentMethod" name="paymentMethod">

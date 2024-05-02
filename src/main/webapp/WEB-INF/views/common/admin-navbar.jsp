@@ -10,7 +10,7 @@
 <div class="mb-3">
     <a href="/admin" class="btn btn-secondary header-link">어드민 페이지</a>
     <a href="/admin/goods" class="btn btn-secondary header-link">상품 관리</a>
-    <a href="/admin/statistics" class="btn btn-secondary header-link">판매 통계(구현예정)</a>
+    <a href="/admin/statistics" class="btn btn-secondary header-link">판매 통계</a>
     <a href="/admin/coupon" class="btn btn-secondary header-link">할인 쿠폰(구현예정)</a>
 </div>
 

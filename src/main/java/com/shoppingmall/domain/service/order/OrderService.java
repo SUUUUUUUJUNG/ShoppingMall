@@ -1,6 +1,7 @@
 package com.shoppingmall.domain.service.order;
 
 import com.shoppingmall.domain.dao.order.OrderDAO;
+import com.shoppingmall.domain.dto.ChartDateDTO;
 import com.shoppingmall.domain.dto.order.OrderCreateRequestDTO;
 import com.shoppingmall.domain.dto.order.OrderDTO;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,17 @@ public class OrderService {
 
     public OrderDTO findById(Long orderId) {
         return orderDAO.findById(orderId);
+    }
+
+    public List<ChartDateDTO> selectSalesPast30Days() {
+        return orderDAO.selectSalesPast30Days();
+    }
+
+    public List<ChartDateDTO> selectMonthlySalesPastYear() {
+        return orderDAO.selectMonthlySalesPastYear();
+    }
+
+    public List<ChartDateDTO> selectYearlySalesPastThreeYears() {
+        return orderDAO.selectYearlySalesPastThreeYears();
     }
 }
