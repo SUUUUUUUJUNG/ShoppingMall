@@ -86,55 +86,51 @@
 </head>
 <body>
 <jsp:include page="../common/navbar.jsp" flush="true"/>
-<hr>
-statistics.jsp
-<a href="/admin">어드민 페이지</a><br>
-<a href="/admin/goods">상품 관리</a><br>
-<a href="/statistics">판매 통계(구현예정)</a><br>
-<a href="/admin/coupon">할인 쿠폰(구현예정)</a><br>
-<hr>
 <div class="container mt-4">
-    <div class="row">
+    <h2>판매량 통계</h2>
+    <hr>
 
-        <!-- 메인 컨텐츠 시작 -->
-        <div class="col-md-9 shadow">
-            <div class="container">
-                <div class="header">
-                    <h2>판매량 통계</h2>
-                    <div class="export-buttons">
-                        <button class="btn btn-size btn-export">PDF 다운로드</button>
-                        <button class="btn btn-size btn-export">Excel 다운로드</button>
+    <jsp:include page="../common/admin-navbar.jsp" flush="true"></jsp:include>
+    <div class="container mt-4">
+        <div class="row">
+
+            <!-- 메인 컨텐츠 시작 -->
+            <div class="col-md-9 shadow">
+                <div class="container">
+                    <div class="header">
+                        <div class="export-buttons">
+                            <button class="btn btn-size btn-export">PDF 다운로드</button>
+                            <button class="btn btn-size btn-export">Excel 다운로드</button>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-container">
-                    <div class="filters">
-                        <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
-                        <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
-                        <select class="form-select" id="categorySelect">
-                            <option selected>전체 카테고리</option>
-                            <option value="1">카테고리 1</option>
-                            <option value="2">카테고리 2</option>
-                        </select>
+                    <div class="filter-container">
+                        <div class="filters">
+                            <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
+                            <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
+                            <select class="form-select" id="categorySelect">
+                                <option selected>전체 카테고리</option>
+                                <option value="1">카테고리 1</option>
+                                <option value="2">카테고리 2</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col chart-container">
-                        <canvas id="last30DaysSalesChart" class="chart"></canvas>
-                    </div>
-                    <div class="col chart-container">
-                        <canvas id="last12MonthsSalesChart" class="chart"></canvas>
-                    </div>
-                    <br>
-                    <div class="col chart-container bottom-chart">
-                        <canvas id="last3YearsSalesChart" class="chart"></canvas>
+                    <div class="row">
+                        <div class="col chart-container">
+                            <canvas id="last30DaysSalesChart" class="chart"></canvas>
+                        </div>
+                        <div class="col chart-container">
+                            <canvas id="last12MonthsSalesChart" class="chart"></canvas>
+                        </div>
+                        <div class="col chart-container bottom-chart">
+                            <canvas id="last3YearsSalesChart" class="chart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- 메인 컨텐츠 끝 -->
         </div>
-        <!-- 메인 컨텐츠 끝 -->
     </div>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
