@@ -1,7 +1,9 @@
 package com.shoppingmall.web.controller;
 
+import com.shoppingmall.domain.dto.ChartDateDTO;
 import com.shoppingmall.domain.dto.goods.GoodsResponseNewDTO;
 import com.shoppingmall.domain.service.goods.GoodsService;
+import com.shoppingmall.domain.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,19 @@ public class AdminController {
 
     private final GoodsService goodsService;
 
+    private final OrderService orderService;
+
+    @GetMapping("/statistics")
+    public String statistics(Model model) {
+        List<ChartDateDTO> salesPast30Days = orderService.selectSalesPast30Days();
+        List<ChartDateDTO> monthlySalesPastYear = orderService.selectMonthlySalesPastYear();
+        List<ChartDateDTO> yearlySalesPastThreeYears = orderService.selectYearlySalesPastThreeYears();
+        model.addAttribute("salesPast30Days", salesPast30Days);
+        model.addAttribute("monthlySalesPastYear", monthlySalesPastYear);
+        model.addAttribute("yearlySalesPastThreeYears", yearlySalesPastThreeYears);
+        return "admin-page/statistics";
+    }
+
     @GetMapping
     public String adminHome(){
         return "admin-page/admin";
@@ -28,11 +43,6 @@ public class AdminController {
         List<GoodsResponseNewDTO> list = goodsService.findAll();
         model.addAttribute("list", list);
         return "admin-page/goods/goodsManagement";
-    }
-
-    @GetMapping("/statistics")
-    public String statistics(){
-        return "admin-page/statistics";
     }
 
     @GetMapping("/coupon")
