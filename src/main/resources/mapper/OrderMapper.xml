@@ -5,25 +5,29 @@
 <mapper namespace="OrderMapper">
 
     <insert id="create" parameterType="OrderCreateRequestDTO">
-    <selectKey keyProperty="orderId" resultType="long" order="BEFORE">
-        SELECT SEQ_ORDERS.nextval AS orderId FROM DUAL
-    </selectKey>
+        <selectKey keyProperty="orderId" resultType="long" order="BEFORE">
+            SELECT SEQ_ORDERS.nextval AS orderId FROM DUAL
+        </selectKey>
         INSERT INTO ORDERS
         (ORDERID, MEMBERID, RECEIVERNAME, RECEIVERADDRESS, RECEIVERCONTACT, DELIVERYNOTE)
         values
-            (#{orderId}, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote})
+        (#{orderId}, #{memberId}, #{receiverName}, #{receiverAddress}, #{receiverContact}, #{deliveryNote})
     </insert>
 
     <select id="findAllByMemberId" parameterType="Long" resultType="OrderDTO">
-        select * from ORDERS where MEMBERID = #{memberId}
+        select *
+        from ORDERS
+        where MEMBERID = #{memberId}
     </select>
 
     <select id="findById" parameterType="Long" resultType="OrderDTO">
-        select * from ORDERS where ORDERID = #{orderId}
+        select *
+        from ORDERS
+        where ORDERID = #{orderId}
     </select>
 
     <select id="selectSalesPast30Days" resultType="ChartDateDTO">
-        SELECT PAYMENTDATE, SUM(AMOUNT) AS totalSales
+        SELECT TO_CHAR(PAYMENTDATE, 'YYYY-MM-DD') as dateString, SUM(AMOUNT) AS totalSales
         FROM PAYMENTS
         WHERE PAYMENTDATE >= TRUNC(SYSDATE) - 30
         GROUP BY PAYMENTDATE
@@ -31,19 +35,19 @@
     </select>
 
     <select id="selectMonthlySalesPastYear" resultType="ChartDateDTO">
-        SELECT TO_CHAR(PAYMENTDATE, 'YYYY-MM') AS paymentMonth, SUM(AMOUNT) AS totalSales
+        SELECT TO_CHAR(PAYMENTDATE, 'YYYY-MM') AS dateString, SUM(AMOUNT) AS totalSales
         FROM PAYMENTS
         WHERE PAYMENTDATE >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -12)
         GROUP BY TO_CHAR(PAYMENTDATE, 'YYYY-MM')
-        ORDER BY paymentMonth
+        ORDER BY dateString
     </select>
 
     <select id="selectYearlySalesPastThreeYears" resultType="ChartDateDTO">
-        SELECT TO_CHAR(PAYMENTDATE, 'YYYY') AS paymentYear, SUM(AMOUNT) AS totalSales
+        SELECT TO_CHAR(PAYMENTDATE, 'YYYY') AS dateString, SUM(AMOUNT) AS totalSales
         FROM PAYMENTS
         WHERE PAYMENTDATE >= ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), -36)
         GROUP BY TO_CHAR(PAYMENTDATE, 'YYYY')
-        ORDER BY paymentYear
+        ORDER BY dateString
     </select>
 
 
