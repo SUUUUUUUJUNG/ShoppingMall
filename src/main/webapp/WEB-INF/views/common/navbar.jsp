@@ -56,5 +56,11 @@
       <a class="nav-item nav-link" href="/myPage">마이페이지</a>
       <a class="nav-item nav-link" href="/cart/list">장바구니</a>
     </sec:authorize>
+
+    <!-- 관리자인 경우 -->
+    <sec:authorize access="hasRole('ADMIN')">
+      <a class="nav-item nav-link" href="/admin">관리자페이지</a>
+    </sec:authorize>
+
   </div>
 </div>
