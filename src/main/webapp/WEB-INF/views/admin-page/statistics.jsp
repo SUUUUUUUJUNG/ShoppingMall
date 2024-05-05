@@ -82,51 +82,110 @@
             max-width: 50%;
             margin: auto;
         }
+
+        .table-custom {
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .header-link {
+            margin-bottom: 10px;
+            margin-right: 5px;
+        }
+
+        .sidebar {
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            z-index: 1;
+            padding-top: 20px;
+        }
+
+        .sidebar .list-group-item {
+            border: none;
+            background: transparent;
+            padding: 15px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar .list-group-item:hover,
+        .sidebar .list-group-item:focus {
+            background-color: #FFDDEE; /* 호버시 밝은 배경색 변경 */
+            color: #6d0230;
+            cursor: pointer;
+        }
+
+        .sidebar .list-group-item.active {
+            font-weight: bold;
+            color: white;
+            background-color: #D66D75; /* 활성화된 항목에 대한 배경색 */
+            text-align: center;
+        }
+
+        .sidebar .list-group-item a {
+            color: #6d0230;
+            text-decoration: none;
+        }
+
+        .sidebar .list-group-item a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
-<jsp:include page="../common/navbar.jsp" flush="true"/>
 <div class="container mt-4">
+    <jsp:include page="../common/navbar.jsp" flush="true"></jsp:include>
     <h2>판매량 통계</h2>
     <hr>
-
-    <jsp:include page="../common/admin-navbar.jsp" flush="true"></jsp:include>
-    <div class="container mt-4">
-        <div class="row">
-
-            <!-- 메인 컨텐츠 시작 -->
-            <div class="col-md-9 shadow">
-                <div class="container">
-                    <div class="header">
-                        <div class="export-buttons">
-                            <button class="btn btn-size btn-export">PDF 다운로드</button>
-                            <button class="btn btn-size btn-export">Excel 다운로드</button>
-                        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <!-- 사이드바 자리-->
+                <div class="sidebar">
+                    <div class="shadow">
+                        <ul class="list-group">
+                            <li class="list-group-item active" aria-current="true">관리자 페이지</li>
+                            <li class="list-group-item"><a href="/admin/goods">상품 관리</a></li>
+                            <li class="list-group-item"><a href="/admin/statistics">판매 통계</a></li>
+                            <li class="list-group-item">할인 쿠폰(구현예정)</li>
+                        </ul>
                     </div>
-                    <div class="filter-container">
-                        <div class="filters">
-                            <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
-                            <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
-                            <select class="form-select" id="categorySelect">
-                                <option selected>전체 카테고리</option>
-                                <option value="1">카테고리 1</option>
-                                <option value="2">카테고리 2</option>
-                            </select>
+                </div>
+
+                <!-- 메인 컨텐츠 시작 -->
+                <div class="col-md-8 offset-md-3 shadow">
+                    <div class="container">
+                        <div class="header">
+                            <div class="export-buttons">
+                                <button class="btn btn-size btn-export">PDF 다운로드</button>
+                                <button class="btn btn-size btn-export">Excel 다운로드</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col chart-container">
-                            <canvas id="last30DaysSalesChart" class="chart"></canvas>
+                        <div class="filter-container">
+                            <div class="filters">
+                                <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
+                                <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
+                                <select class="form-select" id="categorySelect">
+                                    <option selected>전체 카테고리</option>
+                                    <option value="1">카테고리 1</option>
+                                    <option value="2">카테고리 2</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col chart-container">
-                            <canvas id="last12MonthsSalesChart" class="chart"></canvas>
-                        </div>
-                        <div class="col chart-container bottom-chart">
-                            <canvas id="last3YearsSalesChart" class="chart"></canvas>
+                        <div class="row">
+                            <div class="col chart-container">
+                                <canvas id="last30DaysSalesChart" class="chart"></canvas>
+                            </div>
+                            <div class="col chart-container">
+                                <canvas id="last12MonthsSalesChart" class="chart"></canvas>
+                            </div>
+                            <div class="col chart-container bottom-chart">
+                                <canvas id="last3YearsSalesChart" class="chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+
             <!-- 메인 컨텐츠 끝 -->
         </div>
     </div>

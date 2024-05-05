@@ -28,7 +28,7 @@
     <div style="margin-bottom: 70px;"></div>
     <jsp:include page="../common/sidebar.jsp" flush="true"/>
 
-    <div class="container mt-5" ㄴ>
+    <div class="container mt-5">
         <div class="row">
             <!-- 메인 컨텐츠 시작 -->
             <div class="col-md-8 offset-md-3 shadow">

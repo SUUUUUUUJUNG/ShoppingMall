@@ -59,8 +59,7 @@
 
     <!-- 관리자인 경우 -->
     <sec:authorize access="hasRole('ADMIN')">
-      <a class="nav-item nav-link" href="/admin">관리자페이지</a>
+      <a class="nav-item nav-link" href="/admin/goods">관리자페이지</a>
     </sec:authorize>
-
   </div>
 </div>
