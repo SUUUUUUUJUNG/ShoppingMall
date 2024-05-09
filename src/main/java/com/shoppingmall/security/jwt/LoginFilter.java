@@ -68,6 +68,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             return;
         }
 
-        response.sendRedirect("/login?error=true"); // 기본 로그인 페이지로 리디렉션
+        response.sendRedirect("/login?error=error"); // 기본 로그인 페이지로 리디렉션
     }
 }
