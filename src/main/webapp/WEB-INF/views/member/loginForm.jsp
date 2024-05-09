@@ -87,6 +87,12 @@
             border: 1px solid #ced4da; /* 입력란 테두리 색상 다시 추가 */
         }
 
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
 
     </style>
     <script>
@@ -141,6 +147,9 @@
         <a href="/"><img src="/images/logo.png" class="login-logo"/></a>
         <div class="row justify-content-center">
             <div class="login-container">
+                <c:if test="${param.error == 'error'}">
+                    <p class="error-message">아이디 또는 비밀번호를 다시 확인하세요. 오늘의 쇼핑에 등록되지 않은 아이디거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.</p>
+                </c:if>
                 <form action="/login" method="post" class="login-form" id="loginForm">
                     <input type="text" class="form-control" id="username" name="username" placeholder="아이디" required>
                     <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
