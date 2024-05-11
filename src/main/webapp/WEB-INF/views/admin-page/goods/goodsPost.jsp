@@ -218,6 +218,7 @@
                 data: JSON.stringify(productData),
                 success: function (response) {
                     alert(response.message);
+                    window.location.href="/admin/goods";
                 },
                 error: function (xhr, status, error) {
 
