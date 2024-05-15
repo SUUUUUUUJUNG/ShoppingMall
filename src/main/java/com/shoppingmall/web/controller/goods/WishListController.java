@@ -37,8 +37,8 @@ public class WishListController {
     }
 
     @DeleteMapping("/delete") // DELETE 메서드를 사용하는 것이 적합
-    public ResponseEntity<?> deleteWishListItem(@RequestParam("wishListId") Long wishListId,HttpSession session, Map<String,String> map) {
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+    public ResponseEntity<?> deleteWishListItem(@RequestParam("wishListId") Long wishListId,Principal principal, Map<String,String> map) {
+        MemberDTO memberDTO = memberLoginService.findByPrinciple(principal);
         Long memberId = memberDTO.getMemberId();
         map.put("memberId", String.valueOf(memberId));
         map.put("wishListId", String.valueOf(wishListId));

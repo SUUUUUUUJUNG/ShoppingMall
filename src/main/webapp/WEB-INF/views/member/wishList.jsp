@@ -51,6 +51,8 @@
                     data: JSON.stringify(data),
                     success: function (data, status, xhr) {
                         alert(data.message);
+                        // 모달을 닫는 코드 추가
+                        $("#cartModal").modal('hide');
                     },
                     error: function (xhr, status, error) {
                         console.log(error)
@@ -90,28 +92,19 @@
             height: auto;
         }
 
-        .button-group a {
-            margin-bottom: 4px;
-            width: 100px; /* 버튼의 너비 조정 */
-        }
-
-        .button-group a:last-child {
-            margin-bottom: 0;
-        }
-
-        .table-no-border td, .table-no-border th {
-            border-top: none !important;
+        .button-group .btn {
+            width: 90px;
+            text-align: center;
         }
 
         .text-details {
             vertical-align: middle;
         }
 
-        .button-group {
-            width: 75%;
-            padding: 10px;
-            margin-bottom: 5px;
+        .modal-footer .btn-primary {
+            width: 120px;
         }
+
     </style>
 </head>
 <body>
@@ -150,20 +143,21 @@
                                 <%--                    <a href="/addToCart?wishListId=<%= item.getWishListId() %>" class="btn btn-primary btn-block">장바구니</a>--%>
 
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary cart-btn button-group" data-toggle="modal"
-                                        data-target="#exampleModal" data-code="<%=item.getGCode()%>">
+                                <button type="button" class="btn btn-primary cart-btn"
+                                        data-code="<%= item.getGCode() %>" data-bs-toggle="modal"
+                                        data-bs-target="#cartModal">
                                     장바구니
                                 </button>
 
                                 <!-- Modal -->
                                 <form action="">
                                     <input type="hidden" name="gCode" id="gCode" value="<%=item.getGCode()%>">
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="cartModal" tabindex="-1"
+                                         aria-labelledby="cartModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">상품 옵션 선택</h1>
+                                                    <h1 class="modal-title fs-5" id="cartModalLabel">상품 옵션 선택</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -180,9 +174,11 @@
                                                     <div class="form-group">
                                                         <label for="gColor">색상 선택</label>
                                                         <select class="form-control" id="gColor">
-                                                            <option value="navy">navy</option>
-                                                            <option value="black">black</option>
-                                                            <option value="white">white</option>
+                                                            <option value="navy">네이비</option>
+                                                            <option value="black">블랙</option>
+                                                            <option value="ivory">아이보리</option>
+                                                            <option value="white">화이트</option>
+                                                            <option value="gray">그레이</option>
                                                         </select>
                                                     </div>
                                                     <!-- Quantity Input -->
@@ -195,7 +191,6 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" id="cart">장바구니 담기
                                                     </button>
-                                                    <button type="button" class="btn btn-primary">결제하기</button>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">닫기
                                                     </button>
@@ -228,7 +223,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>
