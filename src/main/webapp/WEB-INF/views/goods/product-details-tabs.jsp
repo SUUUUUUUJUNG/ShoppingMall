@@ -471,7 +471,7 @@
 			data.forEach(function (review) {
 				var reviewHtml = '<div class="card card-custom">' +
 						'<div class="card-header card-header-custom">' +
-						'리뷰 날짜: ' + review.createdAt +
+						'리뷰 날짜: ' + review.created_At +
 						'</div>' +
 						'<div class="card-body card-body-custom">' +
 						'<h5 class="card-title card-title-custom">리뷰 내용</h5>' +
