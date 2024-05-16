@@ -22,7 +22,7 @@ public class WishListService {
     }
 
     public String toggleWishlistItem(Map<String, String> map) {
-        if(isItemWishlisted(map)){
+        if (isItemWishlisted(map)) {
             wishListDAO.deleteWishlistItem(session, map);
             return "찜 목록에서 삭제되었습니다.";
         } else {
@@ -31,16 +31,16 @@ public class WishListService {
         }
     }
 
-    public boolean isItemWishlisted(Map<String,String> map){
+    public boolean isItemWishlisted(Map<String, String> map) {
         List<MemberDTO> existingItems = wishListDAO.checkWishlistItemExists(session, map);
         return !existingItems.isEmpty();
     }
 
-
-
-
     public void deleteWishListItem(Map<String, String> map) {
-        wishListDAO.deleteWishlistItem(session,map);
+        wishListDAO.deleteWishlistItem(session, map);
     }
 
+    public void deleteByWishListIdAndMemberId(Map<String, String> map) {
+        wishListDAO.deleteByWishListIdAndMemberId(session, map);
+    }
 }
