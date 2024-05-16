@@ -14,7 +14,11 @@
     </select>
 
     <delete id="deleteWishlistItem" parameterType="map">
-        delete from wishList where memberid=#{memberId} and WISHLISTID=#{wishListId}
+        delete from wishList where memberid=#{memberId} and gCode=#{gCode}
+    </delete>
+
+    <delete id="deleteByWishListIdAndMemberId" parameterType="map">
+        delete from WISHLIST where MEMBERID=#{memberId} and WISHLISTID=#{wishListId}
     </delete>
 
     <select id="findWishListByMemberId" parameterType="Long" resultType="WishListDTO">
@@ -28,11 +32,5 @@
                  INNER JOIN GOODS G ON W.GCODE = G.GCODE
         WHERE W.MEMBERID = #{memberId}
     </select>
-
-
-
-
-
-
 
 </mapper>

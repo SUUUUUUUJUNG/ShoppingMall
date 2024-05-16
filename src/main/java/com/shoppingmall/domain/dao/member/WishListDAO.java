@@ -17,19 +17,22 @@ public class WishListDAO {
 
     public void insertWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
         System.out.println("DAO map = " + map);
-        session.insert("WishListMapper.insertWishlistItem",map);
+        session.insert("WishListMapper.insertWishlistItem", map);
     }
 
     public List<WishListDTO> findByMemberId(Long memberId) {
-        return session.selectList("WishListMapper.findWishListByMemberId",memberId);
+        return session.selectList("WishListMapper.findWishListByMemberId", memberId);
     }
 
     public List<MemberDTO> checkWishlistItemExists(SqlSessionTemplate session, Map<String, String> map) {
-        return session.selectList("WishListMapper.checkWishlistItemExists",map);
+        return session.selectList("WishListMapper.checkWishlistItemExists", map);
     }
 
     public void deleteWishlistItem(SqlSessionTemplate session, Map<String, String> map) {
-        session.delete("WishListMapper.deleteWishlistItem",map);
+        session.delete("WishListMapper.deleteWishlistItem", map);
     }
 
+    public void deleteByWishListIdAndMemberId(SqlSessionTemplate session, Map<String, String> map) {
+        session.delete("WishListMapper.deleteByWishListIdAndMemberId", map);
+    }
 }
