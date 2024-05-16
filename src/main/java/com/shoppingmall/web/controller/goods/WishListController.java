@@ -24,6 +24,7 @@ public class WishListController {
 
     @PostMapping
     public ResponseEntity<?> save(Principal principal, @RequestParam(value = "gCode") String gCode){
+        System.out.println("gCode = " + gCode);
         MemberDTO memberDTO = memberLoginService.findByPrinciple(principal);
         Long memberId = memberDTO.getMemberId();
 
@@ -42,8 +43,7 @@ public class WishListController {
         Long memberId = memberDTO.getMemberId();
         map.put("memberId", String.valueOf(memberId));
         map.put("wishListId", String.valueOf(wishListId));
-        wishListService.deleteWishListItem(map);
+        wishListService.deleteByWishListIdAndMemberId(map);
         return ResponseEntity.ok().body(Map.of("message", "Item deleted successfully"));
     }
-
 }
