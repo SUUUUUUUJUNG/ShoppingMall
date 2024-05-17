@@ -117,7 +117,8 @@
     </script>
 </head>
 <body>
-<jsp:include page="../common/navbar.jsp" flush="true"/>
+<div class="container mt-5" style="width: 90%">
+    <jsp:include page="../common/navbar.jsp" flush="true"/>
 <div class="container mt-4">
     <h2>주문 상세 내역</h2>
     <form>
