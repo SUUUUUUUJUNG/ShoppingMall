@@ -12,8 +12,8 @@
             margin-top: 20px;
         }
         .header {
-            background-color: #0056b3;
-            color: white;
+            background-color: #FFDDEE;
+            color: black;
             padding: 10px 15px;
             margin-bottom: 30px;
             border-radius: 5px;
@@ -24,14 +24,18 @@
         .btn-home {
             margin-top: 20px;
         }
+
+        .alert-success {
+            background-color: #FFDDEE; /* 배경색 변경 */
+            color: black; /* 글자색 변경 */
+            border-color: #FFCCE5; /* 테두리 색 변경 */
+        }
     </style>
 </head>
 <body>
-<jsp:include page="../common/navbar.jsp" flush="true"/>
+<div class="container mt-5">
+    <jsp:include page="../common/navbar.jsp" flush="true"/>
 <div class="container">
-    <div class="header">
-        <h1>주문이 성공적으로 처리되었습니다</h1>
-    </div>
     <div class="alert alert-success" role="alert">
         주문 처리가 성공적으로 완료되었습니다.
     </div>
