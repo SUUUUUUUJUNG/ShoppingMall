@@ -143,7 +143,7 @@
         </div>
         <div class="tab-pane" id="tab4">
             <p id="product-inquiries">상품문의의 내용이 여기에 표시됩니다.</p>
-            <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#inquiryModal">문의하기</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inquiryModal">문의하기</button>
         </div>
     </div>
 </div>
