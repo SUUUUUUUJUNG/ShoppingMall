@@ -112,7 +112,7 @@
             <ul class="image-list" id="file-list"></ul>
         </div>
 
-        <button type="submitBtn">상품등록</button>
+        <button type="submit">상품등록</button>
     </form>
 </div>
 <!-- Initialize CKEditor for the 'gContent' field -->
@@ -208,6 +208,7 @@
                 data:JSON.stringify(productData),
                 success:function(response){
                     alert(response.message);
+                    window.location.href="/admin/goods";
                 },
                 error:function(xhr,status,error){
 
