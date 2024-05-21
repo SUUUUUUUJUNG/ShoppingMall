@@ -64,6 +64,17 @@
             text-decoration: underline;
         }
 
+        .btn-submit {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
     </style>
 </head>
 <body>
@@ -112,7 +123,7 @@
             <ul class="image-list" id="file-list"></ul>
         </div>
 
-        <button type="submit">상품등록</button>
+        <button type="submit" class="btn-submit">상품등록</button>
     </form>
 </div>
 <!-- Initialize CKEditor for the 'gContent' field -->
