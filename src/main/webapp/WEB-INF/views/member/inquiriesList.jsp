@@ -10,6 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <style>
+        .black-link {
+            color: black !important;
+            text-decoration: none !important;
+        }
+        .black-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
@@ -35,13 +44,12 @@
                     <c:forEach var="inquiry" items="${inquiries}">
                         <tr>
                             <td>${inquiry.inquiry_Type}</td>
-                            <td><a href="/inquiry/detail/${inquiry.inquiry_Id}">${inquiry.inquiry_Title}</a></td>
+                            <td><a href="/inquiry/detail/${inquiry.inquiry_Id}" class="black-link">${inquiry.inquiry_Title}</a></td>
                             <td><c:out value="${inquiry.inquiry_Date}"/></td>
                             <td>${inquiry.status}</td>
                             <td>
                                 <form action="/inquiry/delete" method="get">
-                                    <input type="hidden" id="inquiry_Id" name="inquiry_Id"
-                                           value="${inquiry.inquiry_Id}"/>
+                                    <input type="hidden" id="inquiry_Id" name="inquiry_Id" value="${inquiry.inquiry_Id}"/>
                                     <button class="btn btn-danger btn-sm" id="submit">삭제</button>
                                 </form>
                             </td>
@@ -51,4 +59,7 @@
                 </table>
             </div> <!-- Closing tag for col-md-8 offset-md-3 shadow -->
         </div> <!-- Closing tag for row -->
-    </div>
+    </div> <!-- Closing tag for container mt-5 -->
+</div> <!-- Closing tag for container mt-5 -->
+</body>
+</html>
