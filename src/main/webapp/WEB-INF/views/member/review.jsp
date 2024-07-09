@@ -9,6 +9,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <style>
+        .custom-link {
+            text-decoration: none; /* 밑줄 없애기 */
+            color: black; /* 글씨 색상 검정으로 변경 */
+        }
+        .custom-link:hover {
+            color: black; /* 호버 시에도 글씨 색상 유지 */
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
@@ -148,7 +157,7 @@
                 reviews.forEach(function (review) {
                     var row = $('<tr></tr>');
                     row.append($('<td></td>').text(review.review_Id));
-                    var link = $('<a></a>').attr('href', '/goods/detail?gCode=' + review.gcode).text(review.gcode);
+                    var link = $('<a></a>').attr('href', '/goods/detail?gCode=' + review.gcode).text(review.gcode).addClass('custom-link'); ;
                     var td = $('<td></td>').append(link);
                     row.append(td);
                     row.append($('<td></td>').text(review.review_Text));
