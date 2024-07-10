@@ -88,7 +88,7 @@
     </script>
     <style>
         .item-image {
-            width: 100px;
+            width: 70px; /* 이미지 크기를 작게 설정 */
             height: auto;
         }
 
