@@ -11,11 +11,35 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <style>
         .custom-link {
-            text-decoration: none; /* 밑줄 없애기 */
-            color: black; /* 글씨 색상 검정으로 변경 */
+            text-decoration: none;
+            color: black;
         }
         .custom-link:hover {
-            color: black; /* 호버 시에도 글씨 색상 유지 */
+            color: black;
+        }
+        .table-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .modal-header {
+            background-color: #007bff;
+            color: white;
+        }
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+        }
+        .modal-footer .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
     </style>
 </head>
@@ -30,17 +54,17 @@
             <!-- 사이드바 자리-->
 
             <!-- 메인 컨텐츠 시작 -->
-            <div class="col-md-8 offset-md-3 shadow">
-                <h2>내 리뷰 관리</h2>
-                <table id="reviewsTable" class="table">
-                    <thead>
+            <div class="col-md-8 offset-md-3 table-container">
+                <h2 class="mb-4">내 리뷰 관리</h2>
+                <table id="reviewsTable" class="table table-hover">
+                    <thead class="table-light">
                     <tr>
                         <th>리뷰 ID</th>
                         <th>상품 코드</th>
                         <th>리뷰 내용</th>
                         <th>평점</th>
                         <th>작성 시간</th>
-                        <th>작업</th> <!-- 작업 헤더 추가 -->
+                        <th>작업</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,13 +82,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editReviewModalLabel">리뷰 수정</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editReviewForm">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="reviewText">리뷰 내용</label>
                         <textarea class="form-control" id="reviewText" rows="3"></textarea>
                     </div>
@@ -92,12 +114,11 @@
 <script>
     $(document).ready(function () {
         function editReview(reviewId) {
-
             $.ajax({
-                type: 'get', // 또는 'PUT'
+                type: 'GET',
                 url: '/api/review/one?reviewId=' + reviewId,
                 success: function(response) {
-                    $('#reviewId').val(response.review_Id)
+                    $('#reviewId').val(response.review_Id);
                     $('#reviewText').val(response.review_Text);
                     $('#reviewRating').val(response.rating);
                 },
@@ -106,42 +127,38 @@
                 }
             });
         }
+
         $('#saveChanges').off('click').on('click', function() {
             var reviewId = $('#reviewId').val();
             $.ajax({
-                type: 'PATCH', // 또는 'PUT'
+                type: 'PATCH',
                 url: '/api/review',
                 contentType: "application/json",
-                data:JSON.stringify({
+                data: JSON.stringify({
                     review_Id: reviewId,
                     review_Text: $('#reviewText').val(),
                     rating: $('#reviewRating').val()
                 }),
                 success: function(response) {
                     alert("리뷰가 성공적으로 수정되었습니다.");
-                    $('#editReviewModal').modal('hide'); // 모달창 숨기기
+                    $('#editReviewModal').modal('hide');
                     window.location.reload();
-                    // 여기에 페이지를 새로고침하거나, 테이블의 데이터를 업데이트하는 로직을 추가할 수 있습니다.
                 },
                 error: function(xhr, status, error) {
                     alert("리뷰 수정에 실패했습니다.");
                 }
             });
         });
+
         function deleteReview(reviewId, rowElement) {
-            console.log("리뷰 삭제:", reviewId);
-            // AJAX 요청을 통해 리뷰를 삭제
             $.ajax({
                 type: 'DELETE',
-                url: '/api/review/' + reviewId, // 리뷰 ID를 이용한 삭제 요청 경로
-                success: function (response) {
-                    console.log(response.message);
+                url: '/api/review/' + reviewId,
+                success: function(response) {
                     alert("리뷰가 성공적으로 삭제되었습니다.");
-                    // 삭제 성공 시 테이블에서 해당 행을 제거
                     rowElement.remove();
                 },
-                error: function (xhr, status, error) {
-                    console.error("삭제 실패: ", error);
+                error: function(xhr, status, error) {
                     alert("리뷰 삭제에 실패하였습니다.");
                 }
             });
@@ -149,37 +166,31 @@
 
         $.ajax({
             type: 'GET',
-            url: '/api/review/member', // 요청을 보낼 서버의 URL 주소
-            dataType: 'json', // 서버에서 보내줄 데이터의 타입
-            success: function (reviews) {
-                // 서버로부터 응답을 성공적으로 받았을 때 실행할 코드
+            url: '/api/review/member',
+            dataType: 'json',
+            success: function(reviews) {
                 var tableBody = $('#reviewsTable tbody');
-                reviews.forEach(function (review) {
+                reviews.forEach(function(review) {
                     var row = $('<tr></tr>');
                     row.append($('<td></td>').text(review.review_Id));
-                    var link = $('<a></a>').attr('href', '/goods/detail?gCode=' + review.gcode).text(review.gcode).addClass('custom-link'); ;
-                    var td = $('<td></td>').append(link);
-                    row.append(td);
+                    var link = $('<a></a>').attr('href', '/goods/detail?gCode=' + review.gcode).text(review.gcode).addClass('custom-link');
+                    row.append($('<td></td>').append(link));
                     row.append($('<td></td>').text(review.review_Text));
                     row.append($('<td></td>').text(review.rating));
                     row.append($('<td></td>').text(review.created_At));
 
-                    // 수정 및 삭제 버튼 - Bootstrap 스타일 적용
-                    var editButton = $('<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editReviewModal"></button>').text('수정').click(function () {
-                        editReview(review.review_Id); // 수정 버튼 클릭 이벤트
+                    var editButton = $('<button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editReviewModal"></button>').text('수정').click(function() {
+                        editReview(review.review_Id);
                     });
                     var deleteButton = $('<button class="btn btn-danger btn-sm"></button>').text('삭제').click(function() {
-                        deleteReview(review.review_Id, row); // 삭제 버튼 클릭 이벤트
+                        deleteReview(review.review_Id, row);
                     });
-                    var actionTd = $('<td></td>').append(editButton, ' ', deleteButton); // 공간 추가
-                    row.append(actionTd);
+                    row.append($('<td></td>').append(editButton, deleteButton));
 
                     tableBody.append(row);
                 });
             },
-            error: function (xhr, status, error) {
-                // 요청 실패시 실행할 코드
-                console.error("Error: " + error);
+            error: function(xhr, status, error) {
                 alert("리뷰 데이터를 불러오는 데 실패했습니다.");
             }
         });
