@@ -18,7 +18,7 @@
             color: black;
         }
         .table-container {
-            background: #f9f9f9;
+            background: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -40,6 +40,16 @@
         .btn-danger {
             background-color: #dc3545;
             border-color: #dc3545;
+        }
+        .btn-close {
+            background-color: transparent;
+            border: none;
+        }
+        .table thead th {
+            background-color: #f2f2f2;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f9f9f9;
         }
     </style>
 </head>
