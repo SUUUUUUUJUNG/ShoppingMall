@@ -1,14 +1,13 @@
 <%@ page import="com.shoppingmall.domain.dto.goods.GoodsDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>Product Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -20,7 +19,6 @@
             background-color: #f8d7da;
             color: #721c24;
         }
-
 
         .table-pink th {
             background-color: #f8d7da;
@@ -50,6 +48,15 @@
         .rounded-image {
             border-radius: 10px;
         }
+
+        .icon-button {
+            background: none;
+            border: none;
+        }
+
+        .modal-body button {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -57,19 +64,15 @@
     <jsp:include page="../common/navbar.jsp" flush="true"/>
     <div style="margin-bottom: 70px;"></div>
 
-
     <script>
         $(function () {
-            // 장바구니 버튼 클릭 이벤트
             $("#cart").on("click", function (e) {
                 e.preventDefault();
-                // 사이즈와 색상이 선택되었는지 확인
                 var gSize = $("#gSize").val();
                 var gColor = $("#gColor").val();
-                // 사이즈나 색상이 선택되지 않았으면 경고창 표시
                 if (gSize === "사이즈선택" || gColor === "색상선택") {
                     alert("상품의 사이즈와 색상 옵션을 선택해주세요.");
-                    return; // 폼 제출 방지
+                    return;
                 }
 
                 var gCode = $("#gCode").val();
@@ -94,13 +97,11 @@
                         console.log(error)
                     },
                 })
-
             });
 
             $("#wishlist-button").on("click", function (e) {
-                event.preventDefault(e);
+                e.preventDefault();
                 var code = $("#wishlist-button").data("code");
-                console.log(code);
                 $.ajax({
                     url: "/api/wishList",
                     type: "post",
@@ -123,31 +124,25 @@
                     }
                 })
             })
-
-
         });
     </script>
+
     <form name="goodRetrieveForm" method="GET" action="#" class="container mt-3">
         <input type="hidden" name="gImage" id="gImage" value="${goodsDTO.GImage}">
         <input type="hidden" name="gCode" id="gCode" value="${goodsDTO.GCode}">
         <input type="hidden" name="gName" id="gName" value="${goodsDTO.GName}">
         <input type="hidden" name="gPrice" id="gPrice" value="${goodsDTO.GPrice}">
 
-
         <div class="card card-custom bg-light mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="/images/items/${goodsDTO.GImage}.gif" class="img-fluid rounded-image"
-                         alt="${goodsDTO.GName}">
+                    <img src="/images/items/${goodsDTO.GImage}.gif" class="img-fluid rounded-image" alt="${goodsDTO.GName}">
                 </div>
                 <div class="col-md-8">
-                    <button type="button" class="icon-button" title="공유하기" style="margin-left: 10px; color: black"
-                            data-bs-toggle="modal" data-bs-target="#shareModal">
-                        <i class="far fa-share-square"></i>
-                    </button>
-
-
                     <div class="card-body">
+                        <button type="button" class="icon-button float-end" title="공유하기" data-bs-toggle="modal" data-bs-target="#shareModal">
+                            <i class="far fa-share-square"></i>
+                        </button>
                         <h5 class="card-title">${goodsDTO.GName}</h5>
                         <p class="card-text"><strong>제품 코드:</strong> ${goodsDTO.GCode}</p>
                         <p class="card-text"><strong>가격:</strong> ${goodsDTO.GPrice}</p>
@@ -174,8 +169,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="gAmount">수량:</label>
-                            <input type="number" id="gAmount" name="gAmount" value="1" min="1"
-                                   class="form-control form-control-sm">
+                            <input type="number" id="gAmount" name="gAmount" value="1" min="1" class="form-control form-control-sm">
                         </div>
                         <button class="btn btn-pink" id="wishlist-button" data-code="${goodsDTO.GCode}">
                             <% if ((boolean) request.getAttribute("itemWishlisted")) { %>
@@ -203,19 +197,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- 공유 옵션 버튼들 -->
-                <button id="copyUrlBtn" class="btn btn-outline-primary w-100 mb-2">URL 복사하기</button>
-                <button id="shareViaEmail" class="btn btn-outline-secondary w-100 mb-2">메일로 공유하기</button>
-                <button id="shareOnTwitter" class="btn btn-outline-info w-100 mb-2">트위터로 공유하기</button>
-                <button id="shareOnKakao" class="btn btn-outline-warning w-100 mb-2">카카오톡으로 공유하기</button>
+                <button id="copyUrlBtn" class="btn btn-outline-primary w-100">URL 복사하기</button>
+                <button id="shareViaEmail" class="btn btn-outline-secondary w-100">메일로 공유하기</button>
+                <button id="shareOnTwitter" class="btn btn-outline-info w-100">트위터로 공유하기</button>
+                <button id="shareOnKakao" class="btn btn-outline-warning w-100">카카오톡으로 공유하기</button>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     $(function() {
-        Kakao.init('f49cdc6ab94e18091b69652084f67569'); // 앱 키 정확히 입력
+        Kakao.init('f49cdc6ab94e18091b69652084f67569');
 
         $("#shareOnKakao").on("click", function () {
             if (Kakao && Kakao.Link) {
@@ -224,7 +216,7 @@
                     content: {
                         title: $("#gName").val(),
                         description: '페이지 설명',
-                        imageUrl: 'http://localhost:8092/images/logo.png', // 적절한 이미지 URL 사용
+                        imageUrl: 'http://localhost:8092/images/logo.png',
                         link: {
                             mobileWebUrl: window.location.href,
                             webUrl: window.location.href
@@ -237,23 +229,24 @@
         });
 
         $("#copyUrlBtn").on("click", function () {
-            var url = window.location.href; // 현재 페이지의 URL
+            var url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
                 alert("URL이 클립보드에 복사되었습니다.");
             });
         });
+
         $("#shareViaEmail").on("click", function () {
             var subject = encodeURIComponent("공유하고 싶은 페이지 제목");
             var body = encodeURIComponent(window.location.href + "\n\n이 페이지를 확인해보세요!");
             window.location.href = "mailto:?subject=" + subject + "&body=" + body;
         });
+
         $("#shareOnTwitter").on("click", function () {
             var tweetText = encodeURIComponent("이 페이지를 확인해보세요! " + window.location.href);
             var twitterUrl = "https://twitter.com/intent/tweet?text=" + tweetText;
             window.open(twitterUrl, '_blank');
         });
     });
-
 </script>
 </body>
 </html>
