@@ -9,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -17,10 +18,9 @@
     <script src="https://fastly.jsdelivr.net/npm/chartjs-adapter-moment"></script>
     <link href="https://fastly.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
         body, html {
-            height: 100%; /* 전체 높이를 100%로 설정 */
-            margin: 0; /* 기본 마진 제거 */
+            height: 100%;
+            margin: 0;
         }
 
         .chart-container {
@@ -57,8 +57,8 @@
 
         .export-buttons {
             display: flex;
-            justify-content: flex-end;
             gap: 10px;
+            margin-left: auto;
         }
 
         .btn-size {
@@ -85,8 +85,9 @@
 
         .table-custom {
             margin-top: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
+
         .header-link {
             margin-bottom: 10px;
             margin-right: 5px;
@@ -109,7 +110,7 @@
 
         .sidebar .list-group-item:hover,
         .sidebar .list-group-item:focus {
-            background-color: #FFDDEE; /* 호버시 밝은 배경색 변경 */
+            background-color: #FFDDEE;
             color: #6d0230;
             cursor: pointer;
         }
@@ -117,7 +118,7 @@
         .sidebar .list-group-item.active {
             font-weight: bold;
             color: white;
-            background-color: #D66D75; /* 활성화된 항목에 대한 배경색 */
+            background-color: #D66D75;
             text-align: center;
         }
 
@@ -129,7 +130,6 @@
         .sidebar .list-group-item a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
@@ -137,54 +137,54 @@
     <jsp:include page="../common/navbar.jsp" flush="true"></jsp:include>
     <h2>판매량 통계</h2>
     <hr>
-        <div class="container mt-4">
-            <div class="row">
-                <!-- 사이드바 자리-->
-                <div class="sidebar">
-                    <div class="shadow">
-                        <ul class="list-group">
-                            <li class="list-group-item active" aria-current="true">관리자 페이지</li>
-                            <li class="list-group-item"><a href="/admin/goods">상품 관리</a></li>
-                            <li class="list-group-item"><a href="/admin/statistics">판매 통계</a></li>
-                            <li class="list-group-item">할인 쿠폰(구현예정)</li>
-                        </ul>
-                    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- 사이드바 자리-->
+            <div class="sidebar">
+                <div class="shadow">
+                    <ul class="list-group">
+                        <li class="list-group-item active" aria-current="true">관리자 페이지</li>
+                        <li class="list-group-item"><a href="/admin/goods">상품 관리</a></li>
+                        <li class="list-group-item"><a href="/admin/statistics">판매 통계</a></li>
+                        <li class="list-group-item">할인 쿠폰(구현예정)</li>
+                    </ul>
                 </div>
+            </div>
 
-                <!-- 메인 컨텐츠 시작 -->
-                <div class="col-md-8 offset-md-3 shadow">
-                    <div class="container">
-                        <div class="header">
-                            <div class="export-buttons">
-                                <button class="btn btn-size btn-export">PDF 다운로드</button>
-                                <button class="btn btn-size btn-export">Excel 다운로드</button>
-                            </div>
-                        </div>
-                        <div class="filter-container">
-                            <div class="filters">
-                                <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
-                                <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
-                                <select class="form-select" id="categorySelect">
-                                    <option selected>전체 카테고리</option>
-                                    <option value="1">카테고리 1</option>
-                                    <option value="2">카테고리 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col chart-container">
-                                <canvas id="last30DaysSalesChart" class="chart"></canvas>
-                            </div>
-                            <div class="col chart-container">
-                                <canvas id="last12MonthsSalesChart" class="chart"></canvas>
-                            </div>
-                            <div class="col chart-container bottom-chart">
-                                <canvas id="last3YearsSalesChart" class="chart"></canvas>
-                            </div>
+            <!-- 메인 컨텐츠 시작 -->
+            <div class="col-md-8 offset-md-3 shadow">
+                <div class="container">
+                    <div class="header">
+                        <h2>판매량 통계</h2>
+                        <div class="export-buttons ms-auto">
+                            <button class="btn btn-size btn-export">PDF 다운로드</button>
+                            <button class="btn btn-size btn-export">Excel 다운로드</button>
                         </div>
                     </div>
+                    <div class="filter-container">
+                        <div class="filters">
+                            <input type="date" class="form-control" id="startDate" placeholder="시작 날짜">
+                            <input type="date" class="form-control" id="endDate" placeholder="종료 날짜">
+                            <select class="form-select" id="categorySelect">
+                                <option selected>전체 카테고리</option>
+                                <option value="1">카테고리 1</option>
+                                <option value="2">카테고리 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col chart-container">
+                            <canvas id="last30DaysSalesChart" class="chart"></canvas>
+                        </div>
+                        <div class="col chart-container">
+                            <canvas id="last12MonthsSalesChart" class="chart"></canvas>
+                        </div>
+                        <div class="col chart-container bottom-chart">
+                            <canvas id="last3YearsSalesChart" class="chart"></canvas>
+                        </div>
+                    </div>
                 </div>
-
+            </div>
 
             <!-- 메인 컨텐츠 끝 -->
         </div>
@@ -192,7 +192,6 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-
         const salesPast30Days = [
             <%
             List<ChartDateDTO> list = (List<ChartDateDTO>) request.getAttribute("salesPast30Days");
@@ -208,45 +207,42 @@
 
         const last12MonthsSales = [
             <%
-         List<ChartDateDTO> list2 = (List<ChartDateDTO>) request.getAttribute("monthlySalesPastYear");
-         for(int i = 0; i < list2.size(); i++) {
-             ChartDateDTO item = list2.get(i);
-             out.print("{x: '" + item.getDateString() + "', y: " + item.getTotalSales() + "}");
-             if (i < list2.size() - 1) {
-                 out.print(", ");
-             }
-         }
-         %>
+            List<ChartDateDTO> list2 = (List<ChartDateDTO>) request.getAttribute("monthlySalesPastYear");
+            for(int i = 0; i < list2.size(); i++) {
+                ChartDateDTO item = list2.get(i);
+                out.print("{x: '" + item.getDateString() + "', y: " + item.getTotalSales() + "}");
+                if (i < list2.size() - 1) {
+                    out.print(", ");
+                }
+            }
+            %>
         ];
 
         const last3YearsSales = [
             <%
-         List<ChartDateDTO> list3 = (List<ChartDateDTO>) request.getAttribute("yearlySalesPastThreeYears");
-         for(int i = 0; i < list3.size(); i++) {
-             ChartDateDTO item = list3.get(i);
-             out.print("{x: '" + item.getDateString() + "', y: " + item.getTotalSales() + "}");
-             if (i < list3.size() - 1) {
-                 out.print(", ");
-             }
-         }
-         %>
+            List<ChartDateDTO> list3 = (List<ChartDateDTO>) request.getAttribute("yearlySalesPastThreeYears");
+            for(int i = 0; i < list3.size(); i++) {
+                ChartDateDTO item = list3.get(i);
+                out.print("{x: '" + item.getDateString() + "', y: " + item.getTotalSales() + "}");
+                if (i < list3.size() - 1) {
+                    out.print(", ");
+                }
+            }
+            %>
         ];
 
         // 차트 데이터 형식 변환 로직 추가
         const formatChartData = (salesData) => {
             return salesData.map(data => ({
-                x: moment(data.x, 'YYYY-MM-DD').toDate(), // 'period'를 날짜 객체로 변환
+                x: moment(data.x, 'YYYY-MM-DD').toDate(),
                 y: data.y
             }));
         };
 
-        let formatChartData1 = formatChartData(salesPast30Days);
-        console.log(formatChartData1);
-
         // 최근 30일 판매 데이터 차트
         const last30DaysSalesChartContext = document.getElementById('last30DaysSalesChart').getContext('2d');
         new Chart(last30DaysSalesChartContext, {
-            type: 'line', // 라인 차트 사용
+            type: 'line',
             data: {
                 datasets: [{
                     label: '최근 30일 판매액',
@@ -259,9 +255,9 @@
             options: {
                 scales: {
                     x: {
-                        type: 'time', // X 축 타입을 'time'으로 변경
+                        type: 'time',
                         time: {
-                            unit: 'day' // 데이터 단위를 'day'로 설정
+                            unit: 'day'
                         },
                         title: {
                             display: true,
@@ -278,11 +274,10 @@
             }
         });
 
-
         // 지난 12개월 판매 데이터 차트
         const last12MonthsSalesChartContext = document.getElementById('last12MonthsSalesChart').getContext('2d');
         new Chart(last12MonthsSalesChartContext, {
-            type: 'bar', // 바 차트 사용
+            type: 'bar',
             data: {
                 datasets: [{
                     label: '지난 12개월 판매액',
@@ -295,10 +290,10 @@
             options: {
                 scales: {
                     x: {
-                        type: 'time', // X 축 타입을 'time'으로 변경
+                        type: 'time',
                         time: {
-                            unit: 'month', // 데이터 단위를 'month'로 설정
-                            tooltipFormat: 'YYYY-MM' // 툴팁에 표시될 날짜 형식
+                            unit: 'month',
+                            tooltipFormat: 'YYYY-MM'
                         },
                         title: {
                             display: true,
@@ -318,13 +313,13 @@
         // 최근 3년 판매 데이터 차트
         const last3YearsSalesChartContext = document.getElementById('last3YearsSalesChart').getContext('2d');
         new Chart(last3YearsSalesChartContext, {
-            type: 'bar', // 바 차트 사용
+            type: 'bar',
             data: {
                 datasets: [{
                     label: '최근 3년 판매액',
                     data: formatChartData(last3YearsSales.map(data => ({
                         ...data,
-                        period: `${data.period}-01` // 연간 데이터는 연도만 있으므로, 날짜 형식을 맞추기 위해 '-01'을 추가
+                        period: `${data.period}-01`
                     }))),
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -336,8 +331,8 @@
                     x: {
                         type: 'time',
                         time: {
-                            unit: 'year', // 데이터 단위를 'year'로 설정
-                            tooltipFormat: 'YYYY' // 툴팁에 표시될 날짜 형식
+                            unit: 'year',
+                            tooltipFormat: 'YYYY'
                         },
                         title: {
                             display: true,
