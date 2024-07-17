@@ -10,63 +10,73 @@
     <title>Product Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+
         .nav-pills .nav-link {
             border-radius: 0.25rem;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
             color: #495057;
+            margin: 0 5px;
         }
 
         .nav-pills .nav-link.active {
-            background-color: #0062cc;
+            background-color: #007bff;
             color: white;
         }
 
         .card-custom {
             background: #ffffff;
             border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .card-custom:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .card-header-custom {
-            background: #f8f9fa;
-            color: #333;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 16px;
+            background: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border-bottom: none;
+            font-size: 18px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
         }
 
         .card-body-custom {
             padding: 20px;
-            line-height: 1.5;
-            color: #666;
+            line-height: 1.6;
+            color: #333;
         }
 
         .card-title-custom {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .card-text-custom {
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .btn-custom {
-            padding: 5px 10px;
-            font-size: 12px;
+            padding: 10px 20px;
+            font-size: 14px;
             border-radius: 5px;
         }
 
         .btn-primary-custom {
             background-color: #007bff;
             border-color: #007bff;
+            color: white;
         }
 
         .btn-primary-custom:hover {
@@ -77,6 +87,7 @@
         .btn-danger-custom {
             background-color: #dc3545;
             border-color: #dc3545;
+            color: white;
         }
 
         .btn-danger-custom:hover {
@@ -85,16 +96,16 @@
         }
 
         .modal-content {
-            border-radius: 0.3rem;
+            border-radius: 0.5rem;
         }
 
         .btn-outline-custom {
-            border-color: #0062cc;
-            color: #0062cc;
+            border-color: #007bff;
+            color: #007bff;
         }
 
         .btn-outline-custom:hover {
-            background-color: #0062cc;
+            background-color: #007bff;
             color: white;
         }
 
@@ -108,6 +119,11 @@
 
         .shadow {
             box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+        }
+
+        .tab-content p {
+            font-size: 18px;
+            color: #333;
         }
     </style>
 </head>
@@ -138,12 +154,12 @@
                 <div class="mb-3">
                     <input type="number" min="1" max="5" id="rating" class="form-control" placeholder="평점">
                 </div>
-                <button type="submit" class="btn btn-primary">전송하기</button>
+                <button type="submit" class="btn btn-primary-custom btn-custom">전송하기</button>
             </form>
         </div>
         <div class="tab-pane" id="tab4">
             <p id="product-inquiries">상품문의의 내용이 여기에 표시됩니다.</p>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inquiryModal">문의하기</button>
+            <button class="btn btn-primary-custom btn-custom" data-bs-toggle="modal" data-bs-target="#inquiryModal">문의하기</button>
         </div>
     </div>
 </div>
@@ -165,8 +181,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="submit">확인</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary-custom btn-custom" id="submit">확인</button>
+                <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">취소</button>
             </div>
         </div>
     </div>
@@ -176,7 +192,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의</h5>
+                <h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의 수정</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -189,8 +205,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="update-modal-btn">확인</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary-custom btn-custom" id="update-modal-btn">확인</button>
+                <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">취소</button>
             </div>
         </div>
     </div>
@@ -216,8 +232,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="review-update-modal-btn">확인</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary-custom btn-custom" id="review-update-modal-btn">확인</button>
+                <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">취소</button>
             </div>
         </div>
     </div>
