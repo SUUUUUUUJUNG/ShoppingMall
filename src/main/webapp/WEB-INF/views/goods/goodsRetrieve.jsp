@@ -38,7 +38,7 @@
         .card-custom {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
             transition: 0.3s;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         .card-custom:hover {
@@ -47,6 +47,9 @@
 
         .rounded-image {
             border-radius: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .icon-button {
@@ -135,7 +138,7 @@
 
         <div class="card card-custom bg-light mb-3">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 d-flex align-items-center">
                     <img src="/images/items/${goodsDTO.GImage}.gif" class="img-fluid rounded-image" alt="${goodsDTO.GName}">
                 </div>
                 <div class="col-md-8">
