@@ -11,6 +11,7 @@
             margin-top: 20px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
+
         .header-link {
             margin-bottom: 10px;
             margin-right: 5px;
@@ -54,6 +55,44 @@
             text-decoration: underline;
         }
 
+        .btn-custom-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+        .btn-custom-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-custom-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-custom-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+            color: #212529;
+        }
+
+        .btn-custom-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .btn-custom-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .table-custom thead {
+            background-color: #343a40;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -77,7 +116,7 @@
             <!-- 메인 컨텐츠 시작 -->
             <div class="col-md-8 offset-md-3 shadow">
                 <div class="mb-3 text-end">
-                    <a href="/admin/goods/add" class="btn btn-primary">상품 추가</a>
+                    <a href="/admin/goods/add" class="btn btn-custom-primary">상품 추가</a>
                 </div>
 
                 <!-- Displaying Goods -->
@@ -99,8 +138,8 @@
                             <td>${item.gName}</td>
                             <td>${item.gPrice}</td>
                             <td>
-                                <a href="/admin/goods/edit/${item.gCode}" class="btn btn-warning btn-sm">수정</a>
-                                <button class="btn btn-danger btn-sm delete-btn" data-code="${item.gCode}">삭제</button>
+                                <a href="/admin/goods/edit/${item.gCode}" class="btn btn-custom-warning btn-sm">수정</a>
+                                <button class="btn btn-custom-danger btn-sm delete-btn" data-code="${item.gCode}">삭제</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -112,28 +151,26 @@
     </div>
     <script>
         $(document).ready(function () {
-
             $(".delete-btn").on("click", function () {
-
                 let code = $(this).data("code");
-
-                $.ajax({
-                    url: "/api/goods/" + code,
-                    type: "DELETE",
-                    contentType: 'application/json',
-                    success: function (response) {
-                        alert(response.message);
-                        window.location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        alert(error);
-                    }
-                });//end ajax
+                if (confirm("이 상품을 삭제하시겠습니까?")) {
+                    $.ajax({
+                        url: "/api/goods/" + code,
+                        type: "DELETE",
+                        contentType: 'application/json',
+                        success: function (response) {
+                            alert(response.message);
+                            window.location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+                }
             });
         });
     </script>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
