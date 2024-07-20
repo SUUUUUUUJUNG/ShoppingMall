@@ -23,7 +23,7 @@
         }
 
         .nav-pills .nav-link.active {
-            background-color: #007bff;
+            background-color: #5a6268;
             color: white;
         }
 
@@ -42,7 +42,7 @@
         }
 
         .card-header-custom {
-            background: #007bff;
+            background: #5a6268;
             color: white;
             padding: 15px 20px;
             border-bottom: none;
@@ -74,14 +74,14 @@
         }
 
         .btn-primary-custom {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
             color: white;
         }
 
         .btn-primary-custom:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #138496;
+            border-color: #117a8b;
         }
 
         .btn-danger-custom {
@@ -100,12 +100,12 @@
         }
 
         .btn-outline-custom {
-            border-color: #007bff;
-            color: #007bff;
+            border-color: #17a2b8;
+            color: #17a2b8;
         }
 
         .btn-outline-custom:hover {
-            background-color: #007bff;
+            background-color: #17a2b8;
             color: white;
         }
 
@@ -143,7 +143,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="tab1">
-            <p class="col-md-8 offset-md-3 shadow">${goodsDTO.GContent}</p>
+            <p class="col-md-8 offset-md-2 shadow p-3">${goodsDTO.GContent}</p>
         </div>
         <div class="tab-pane" id="tab3">
             <p id="product-reviews">구매후기의 내용이 여기에 표시됩니다.</p>
@@ -441,12 +441,9 @@
                     '문의 날짜: ' + inquiry.inquiry_Date +
                     '</div>' +
                     '<div class="card-body card-body-custom">' +
-                    '<h5 class="card-title card-title-custom">문의 내용</h5>' +
                     '<p class="card-text card-text-custom">' + inquiry.inquiry_Content + '</p>' +
-                    '<div>' +
-                    '<button class="btn btn-danger-custom btn-custom delete-btn" data-id="' + inquiry.inquiry_Id + '">삭제</button> ' +
+                    '<button class="btn btn-danger-custom btn-custom delete-btn" data-id="' + inquiry.inquiry_Id + '">삭제</button>' +
                     '<button class="btn btn-primary-custom btn-custom update-btn" data-bs-toggle="modal" data-bs-target="#inquiryUpdateModal" data-id="' + inquiry.inquiry_Id + '">수정</button>' +
-                    '</div>' +
                     '</div>' +
                     '</div>';
                 $('#product-inquiries').append(inquiryHtml);
@@ -465,13 +462,10 @@
                     '리뷰 날짜: ' + review.created_At +
                     '</div>' +
                     '<div class="card-body card-body-custom">' +
-                    '<h5 class="card-title card-title-custom">리뷰 내용</h5>' +
                     '<p class="card-text card-text-custom">' + review.review_Text + '</p>' +
                     '<p class="card-text card-text-custom">평점 : ' + review.rating + '</p>' +
-                    '<div>' +
-                    '<button class="btn btn-danger-custom btn-custom review-delete-btn" data-id="' + review.review_Id + '">삭제</button> ' +
+                    '<button class="btn btn-danger-custom btn-custom review-delete-btn" data-id="' + review.review_Id + '">삭제</button>' +
                     '<button class="btn btn-primary-custom btn-custom review-update-btn" data-bs-toggle="modal" data-bs-target="#reviewUpdateModal" data-id="' + review.review_Id + '">수정</button>' +
-                    '</div>' +
                     '</div>' +
                     '</div>';
                 $('#product-reviews').append(reviewHtml);
