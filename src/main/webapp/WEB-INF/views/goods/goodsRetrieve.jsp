@@ -1,6 +1,5 @@
 <%@ page import="com.shoppingmall.domain.dto.goods.GoodsDTO" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -19,44 +18,36 @@
             background-color: #f8d7da;
             color: #721c24;
         }
-
         .table-pink th {
             background-color: #f8d7da;
             color: #721c24;
         }
-
         .btn-pink {
             background-color: #ff85b2;
             border-color: #ff85b2;
         }
-
         .btn-pink:hover {
             background-color: #ff65a3;
             border-color: #ff65a3;
         }
-
         .card-custom {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
             transition: 0.3s;
             border-radius: 10px;
         }
-
         .card-custom:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
-
         .rounded-image {
             border-radius: 10px;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-
         .icon-button {
             background: none;
             border: none;
         }
-
         .modal-body button {
             margin-bottom: 10px;
         }
@@ -115,7 +106,7 @@
                         let mesg = data.message;
                         alert(mesg);
                         if (mesg.includes("추가")) {
-                            $("#wishlist-button").html('<i class="fas fa-heart"></i>');
+                            $("#wishlist-button").html('<i class="fas fa-heart" style="color:red;"></i>');
                         }
                         if (mesg.includes("삭제")) {
                             $("#wishlist-button").html('<i class="far fa-heart"></i>');
@@ -176,7 +167,7 @@
                         </div>
                         <button class="btn btn-pink" id="wishlist-button" data-code="${goodsDTO.GCode}">
                             <% if ((boolean) request.getAttribute("itemWishlisted")) { %>
-                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart" style="color:red;"></i>
                             <% } else { %>
                             <i class="far fa-heart"></i>
                             <% } %>
