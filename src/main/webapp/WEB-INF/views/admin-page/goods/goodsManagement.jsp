@@ -56,14 +56,14 @@
         }
 
         .btn-custom-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #6c757d;
+            border-color: #6c757d;
             color: white;
         }
 
         .btn-custom-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #5a6268;
+            border-color: #545b62;
         }
 
         .btn-custom-warning {
@@ -79,19 +79,31 @@
         }
 
         .btn-custom-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: #e3342f;
+            border-color: #e3342f;
             color: white;
         }
 
         .btn-custom-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+            background-color: #cc1f1a;
+            border-color: #b71c1c;
         }
 
         .table-custom thead {
-            background-color: #343a40;
-            color: white;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #e9ecef;
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #e2e6ea;
         }
     </style>
 </head>
@@ -121,7 +133,7 @@
 
                 <!-- Displaying Goods -->
                 <table class="table table-hover table-custom">
-                    <thead class="table-dark">
+                    <thead>
                     <tr>
                         <th>코드</th>
                         <th>카테고리</th>
