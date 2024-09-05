@@ -28,22 +28,42 @@
             color: white;
         }
         .modal-footer .btn-secondary {
-            background-color: #6c757d;
+            background-color: #95a5a6; /* A more modern gray */
+            border-color: #95a5a6;
+        }
+        .modal-footer .btn-secondary:hover {
+            background-color: #7f8c8d; /* Darker shade on hover */
+            border-color: #7f8c8d;
         }
         .modal-footer .btn-primary {
-            background-color: #007bff;
+            background-color: #4a90e2; /* A softer, more modern blue */
+            border-color: #4a90e2;
+        }
+        .modal-footer .btn-primary:hover {
+            background-color: #357ABD; /* Darker shade on hover */
+            border-color: #357ABD;
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #4a90e2;
+            border-color: #4a90e2;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+            border-color: #357ABD;
         }
         .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: #e74c3c;  /* A more modern red */
+            border-color: #e74c3c;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;  /* Darker shade of red on hover */
+            border-color: #c0392b;
         }
         .btn-close {
-            background-color: transparent;
-            border: none;
+            color: #34495e; /* Dark slate color for close button */
+        }
+        .btn-close:hover {
+            color: #2c3e50;  /* Darker on hover */
         }
         .table thead th {
             background-color: #f2f2f2;
