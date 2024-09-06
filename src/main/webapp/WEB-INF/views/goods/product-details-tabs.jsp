@@ -23,7 +23,7 @@
         }
 
         .nav-pills .nav-link.active {
-            background-color: #5a6268;
+            background-color: #343a40;
             color: white;
         }
 
@@ -42,7 +42,7 @@
         }
 
         .card-header-custom {
-            background: #5a6268;
+            background: #343a40;
             color: white;
             padding: 15px 20px;
             border-bottom: none;
@@ -73,15 +73,16 @@
             border-radius: 5px;
         }
 
+        /* 변경된 버튼 색상 */
         .btn-primary-custom {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
+            background-color: #007bff;
+            border-color: #007bff;
             color: white;
         }
 
         .btn-primary-custom:hover {
-            background-color: #138496;
-            border-color: #117a8b;
+            background-color: #0056b3;
+            border-color: #004085;
         }
 
         .btn-danger-custom {
@@ -100,12 +101,12 @@
         }
 
         .btn-outline-custom {
-            border-color: #17a2b8;
-            color: #17a2b8;
+            border-color: #6c757d;
+            color: #6c757d;
         }
 
         .btn-outline-custom:hover {
-            background-color: #17a2b8;
+            background-color: #6c757d;
             color: white;
         }
 
