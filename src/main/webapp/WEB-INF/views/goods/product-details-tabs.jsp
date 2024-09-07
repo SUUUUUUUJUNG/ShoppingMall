@@ -12,43 +12,44 @@
     <style>
         body {
             background-color: #f4f4f9;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
         }
 
         .nav-pills .nav-link {
-            border-radius: 0.25rem;
-            background-color: #ffffff;
-            color: #495057;
-            margin: 0 5px;
+            border-radius: 0.5rem;
+            background-color: #fff;
+            color: #343a40;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
         }
 
         .nav-pills .nav-link.active {
-            background-color: #343a40;
+            background-color: #007bff;
             color: white;
         }
 
         .card-custom {
-            background: #ffffff;
+            background-color: #ffffff;
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
         }
 
         .card-custom:hover {
             transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
 
         .card-header-custom {
-            background: #343a40;
+            background-color: #007bff;
             color: white;
-            padding: 15px 20px;
+            padding: 20px;
             border-bottom: none;
             font-size: 18px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
 
         .card-body-custom {
@@ -58,9 +59,9 @@
         }
 
         .card-title-custom {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .card-text-custom {
@@ -71,9 +72,9 @@
             padding: 10px 20px;
             font-size: 14px;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        /* 변경된 버튼 색상 */
         .btn-primary-custom {
             background-color: #007bff;
             border-color: #007bff;
@@ -100,38 +101,38 @@
             border-radius: 0.5rem;
         }
 
-        .btn-outline-custom {
-            border-color: #6c757d;
-            color: #6c757d;
-        }
-
-        .btn-outline-custom:hover {
-            background-color: #6c757d;
-            color: white;
-        }
-
         .form-control, .form-select {
-            border-radius: 0.25rem;
+            border-radius: 0.5rem;
         }
 
         .form-label {
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .shadow {
-            box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .tab-content p {
             font-size: 18px;
             color: #333;
         }
+
+        /* Add smooth animation */
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out;
+            transform: translateY(-10px);
+        }
+
+        .modal.fade.show .modal-dialog {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
 <div class="container my-5">
-    <ul class="nav nav-pills nav-fill mb-3">
+    <ul class="nav nav-pills nav-fill mb-4">
         <li class="nav-item">
             <a class="nav-link active" href="#tab1" data-bs-toggle="tab">상품정보</a>
         </li>
@@ -150,7 +151,7 @@
             <p id="product-reviews">구매후기의 내용이 여기에 표시됩니다.</p>
             <form id="reviewForm">
                 <div class="mb-3">
-                    <textarea class="form-control" id="review_Text" placeholder="리뷰내용을 입력하세요" rows="3"></textarea>
+                    <textarea class="form-control" id="review_Text" placeholder="리뷰 내용을 입력하세요" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
                     <input type="number" min="1" max="5" id="rating" class="form-control" placeholder="평점">
@@ -165,6 +166,7 @@
     </div>
 </div>
 
+<!-- 문의 모달 -->
 <div class="modal fade" id="inquiryModal" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -189,30 +191,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="inquiryUpdateModal" tabindex="-1" aria-labelledby="inquiryUpdateModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의 수정</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="inquiryUpdateForm">
-                    <div class="mb-3">
-                        <label for="inquiry_Update_Content" class="form-label">문의내용</label>
-                        <textarea class="form-control" id="inquiry_Update_Content" placeholder="문의 내용을 입력하세요" rows="3"></textarea>
-                    </div>
-                    <input type="hidden" id="inquiry_id">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary-custom btn-custom" id="update-modal-btn">확인</button>
-                <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">취소</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- 리뷰 수정 모달 -->
 <div class="modal fade" id="reviewUpdateModal" tabindex="-1" aria-labelledby="reviewUpdateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -240,6 +219,31 @@
     </div>
 </div>
 
+<!-- Inquiry Update Modal -->
+<div class="modal fade" id="inquiryUpdateModal" tabindex="-1" aria-labelledby="inquiryUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inquiryUpdateModalLabel">상품 문의 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="inquiryUpdateForm">
+                    <div class="mb-3">
+                        <label for="inquiry_Update_Content" class="form-label">문의 내용</label>
+                        <textarea class="form-control" id="inquiry_Update_Content" placeholder="문의 내용을 입력하세요" rows="3"></textarea>
+                    </div>
+                    <input type="hidden" id="inquiry_id">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary-custom btn-custom" id="update-modal-btn">확인</button>
+                <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -247,6 +251,7 @@
         var gCode = $("#gCode").val();
         inquiryLoad();
 
+        // Submit Inquiry
         $("#submit").on("click", function () {
             var data = {
                 "code": gCode,
@@ -258,7 +263,7 @@
                 type: "post",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status, xhr) {
+                success: function (data) {
                     alert(data.message);
                     window.location.reload();
                 },
@@ -268,6 +273,7 @@
             });
         });
 
+        // Submit Review
         $("#reviewForm").on("submit", function (e) {
             e.preventDefault();
             var data = {
@@ -281,7 +287,7 @@
                 type: "post",
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (data, status, xhr) {
+                success: function (data) {
                     alert(data.message);
                     window.location.reload();
                 },
@@ -291,6 +297,7 @@
             });
         });
 
+        // Load Inquiries and Reviews
         function inquiryLoad() {
             $.ajax({
                 url: "/api/productInquiry?gCode=" + gCode,
@@ -315,121 +322,7 @@
             });
         }
 
-        $(document).on('click', ".update-btn", function () {
-            let id = $(this).data("id");
-            $("#inquiry_id").val(id);
-
-            $.ajax({
-                url: "/api/productInquiry/one?inquiryId=" + id,
-                type: "get",
-                success: function (data) {
-                    $("#inquiry_Update_Content").val(data.inquiry_Content);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $(document).on('click', ".review-update-btn", function () {
-            let id = $(this).data("id");
-            $("#reviewId").val(id);
-
-            $.ajax({
-                url: "/api/review/one?reviewId=" + id,
-                type: "get",
-                success: function (data) {
-                    $("#review_Update_Content").val(data.review_Text);
-                    $("#update-rating").val(data.rating);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $(document).on('click', "#review-update-modal-btn", function () {
-            let id = $("#reviewId").val();
-            let rating = $("#update-rating").val();
-            let content = $("#review_Update_Content").val();
-            let data = {
-                "review_Text": content,
-                "review_Id": id,
-                "rating": rating
-            }
-
-            $.ajax({
-                url: "/api/review",
-                type: "patch",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (data, status, xhr) {
-                    alert(data.message);
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $(document).on('click', "#update-modal-btn", function () {
-            let id = $("#inquiry_id").val();
-            let content = $("#inquiry_Update_Content").val();
-            let data = {
-                "inquiry_Content": content,
-                "inquiry_Id": id,
-            }
-
-            $.ajax({
-                url: "/api/productInquiry",
-                type: "patch",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (data, status, xhr) {
-                    alert(data.message);
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $(document).on('click', ".delete-btn", function () {
-            let id = $(this).data("id");
-
-            $.ajax({
-                url: "/api/productInquiry/" + id,
-                type: "delete",
-                success: function (data) {
-                    alert(data.message);
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-
-        });
-
-        $(document).on('click', ".review-delete-btn", function () {
-            let id = $(this).data("id");
-
-            $.ajax({
-                url: "/api/review/" + id,
-                type: "delete",
-                success: function (data) {
-                    alert(data.message);
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-
-        });
-
+        // Display Inquiries
         function displayInquiries(data) {
             $('#product-inquiries').empty();
             if (data.length === 0) {
@@ -451,6 +344,7 @@
             });
         }
 
+        // Display Reviews
         function displayReviews(data) {
             $('#product-reviews').empty();
             if (data.length === 0) {
@@ -472,6 +366,92 @@
                 $('#product-reviews').append(reviewHtml);
             });
         }
+
+        // Update Inquiry
+        $(document).on('click', "#update-modal-btn", function () {
+            let id = $("#inquiry_id").val();
+            let content = $("#inquiry_Update_Content").val();
+            let data = {
+                "inquiry_Content": content,
+                "inquiry_Id": id,
+            }
+
+            $.ajax({
+                url: "/api/productInquiry",
+                type: "patch",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        // Update Review
+        $(document).on('click', "#review-update-modal-btn", function () {
+            let id = $("#reviewId").val();
+            let rating = $("#update-rating").val();
+            let content = $("#review_Update_Content").val();
+            let data = {
+                "review_Text": content,
+                "review_Id": id,
+                "rating": rating
+            }
+
+            $.ajax({
+                url: "/api/review",
+                type: "patch",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        // Delete Inquiry
+        $(document).on('click', ".delete-btn", function () {
+            let id = $(this).data("id");
+
+            $.ajax({
+                url: "/api/productInquiry/" + id,
+                type: "delete",
+                success: function (data) {
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+
+        });
+
+        // Delete Review
+        $(document).on('click', ".review-delete-btn", function () {
+            let id = $(this).data("id");
+
+            $.ajax({
+                url: "/api/review/" + id,
+                type: "delete",
+                success: function (data) {
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+
+        });
     });
 </script>
 </body>
