@@ -21,12 +21,13 @@
         .table thead th {
             background-color: #f8f9fa;
         }
+        /* Toned down red for the delete button */
         .btn-delete {
-            background-color: #dc3545;
+            background-color: #b54a4a; /* Muted red */
             color: white;
         }
         .btn-delete:hover {
-            background-color: #c82333;
+            background-color: #a03e3e; /* Darker muted red */
             color: white;
         }
         .inquiry-title {
