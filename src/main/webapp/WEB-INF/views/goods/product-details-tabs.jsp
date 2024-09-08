@@ -43,8 +43,8 @@
         }
 
         .card-header-custom {
-            background-color: #007bff;
-            color: white;
+            background-color: #e9ecef; /* Changed to subtle gray */
+            color: #495057;
             padding: 20px;
             border-bottom: none;
             font-size: 18px;
@@ -75,26 +75,28 @@
             transition: background-color 0.3s ease;
         }
 
+        /* Toned down blue for 수정 button */
         .btn-primary-custom {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #5a6a85; /* Muted blue */
+            border-color: #5a6a85;
             color: white;
         }
 
         .btn-primary-custom:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #495a6e; /* Darker muted blue */
+            border-color: #495a6e;
         }
 
+        /* Toned down red for 삭제 button */
         .btn-danger-custom {
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: #b54a4a; /* Muted red */
+            border-color: #b54a4a;
             color: white;
         }
 
         .btn-danger-custom:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+            background-color: #a03e3e; /* Darker muted red */
+            border-color: #a03e3e;
         }
 
         .modal-content {
