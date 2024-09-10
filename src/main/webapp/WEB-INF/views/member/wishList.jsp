@@ -105,6 +105,28 @@
         .modal-footer .btn-primary {
             width: 120px;
         }
+
+        /* 버튼 색상 변경 */
+        .button-group .btn-primary {
+            background-color: #007bff; /* 톤다운된 회색-파란색 */
+            border-color: #007bff; /* 동일한 색상으로 경계 색상 */
+        }
+
+        .button-group .btn-primary:hover {
+            background-color: #4e555b; /* 호버 시 좀 더 어두운 색상 */
+            border-color: #4e555b;
+        }
+
+        .button-group .btn-danger {
+            background-color: #e74c3c; /* 톤다운된 빨간색 */
+            border-color: #e74c3c; /* 약간 더 어두운 경계 색상 */
+        }
+
+        .button-group .btn-danger:hover {
+            background-color: #b52b27; /* 호버 시 좀 더 어두운 색상 */
+            border-color: #a12722;
+        }
+
     </style>
 </head>
 <body>
