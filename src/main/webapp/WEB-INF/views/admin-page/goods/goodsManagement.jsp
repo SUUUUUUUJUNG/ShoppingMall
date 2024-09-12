@@ -66,27 +66,28 @@
             border-color: #545b62;
         }
 
+        /* 수정된 색상 */
         .btn-custom-warning {
-            background-color: #ffc107;
-            border-color: #ffc107;
+            background-color: #d1a700; /* 톤다운된 옐로우 */
+            border-color: #d1a700;
             color: #212529;
         }
 
         .btn-custom-warning:hover {
-            background-color: #e0a800;
-            border-color: #d39e00;
+            background-color: #b89600;
+            border-color: #b89600;
             color: #212529;
         }
 
         .btn-custom-danger {
-            background-color: #e3342f;
-            border-color: #e3342f;
+            background-color: #c9302c; /* 톤다운된 레드 */
+            border-color: #c9302c;
             color: white;
         }
 
         .btn-custom-danger:hover {
-            background-color: #cc1f1a;
-            border-color: #b71c1c;
+            background-color: #a62b27;
+            border-color: #a62b27;
         }
 
         .table-custom thead {
