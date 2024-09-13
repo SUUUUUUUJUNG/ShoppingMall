@@ -68,6 +68,33 @@
         .shadow {
             box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
         }
+
+        /* 수정된 버튼 스타일 */
+        .update-btn {
+            background-color: #5a9bd4;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-btn:hover {
+            background-color: #3a73a1;
+        }
+
+        .delete-btn {
+            background-color: #e57373;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c53939;
+        }
     </style>
 </head>
 <body>
@@ -114,90 +141,90 @@
         </div>
     </div>
 
-        <div class="modal fade" id="createAddressModal" tabindex="-1" aria-labelledby="createAddressModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createAddressModalLabel">새 배송지 추가</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="createAddressForm">
-                            <div class="form-group">
-                                <label for="recipientNameCreate">수령인</label>
-                                <input type="text" class="form-control" id="recipientNameCreate" required>
-                            </div>
-                            <button type="button" class="btn btn-outline-secondary address-btn" id="create-search">주소 검색</button>
-                            <div class="form-group">
-                                <label for="addressCreate">주소</label>
-                                <input type="text" class="form-control" id="addressCreate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="detailAddressCreate">상세 주소</label>
-                                <input type="text" class="form-control" id="detailAddressCreate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="zipCodeCreate">우편번호</label>
-                                <input type="text" class="form-control" id="zipCodeCreate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phoneNumberCreate">연락처</label>
-                                <input type="text" class="form-control" id="phoneNumberCreate" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="saveNewAddress">저장</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    </div>
+    <div class="modal fade" id="createAddressModal" tabindex="-1" aria-labelledby="createAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createAddressModalLabel">새 배송지 추가</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAddressForm">
+                        <div class="form-group">
+                            <label for="recipientNameCreate">수령인</label>
+                            <input type="text" class="form-control" id="recipientNameCreate" required>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary address-btn" id="create-search">주소 검색</button>
+                        <div class="form-group">
+                            <label for="addressCreate">주소</label>
+                            <input type="text" class="form-control" id="addressCreate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailAddressCreate">상세 주소</label>
+                            <input type="text" class="form-control" id="detailAddressCreate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zipCodeCreate">우편번호</label>
+                            <input type="text" class="form-control" id="zipCodeCreate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumberCreate">연락처</label>
+                            <input type="text" class="form-control" id="phoneNumberCreate" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="saveNewAddress">저장</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal fade" id="updateAddressModal" tabindex="-1" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateAddressModalLabel">배송지 수정</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="updateAddressForm">
-                            <input type="hidden" id="addressIdUpdate">
-                            <div class="form-group">
-                                <label for="recipientNameUpdate">수령인</label>
-                                <input type="text" class="form-control" id="recipientNameUpdate" required>
-                            </div>
-                            <button type="button" class="btn btn-outline-secondary address-btn" id="update-search">주소 검색</button>
-                            <div class="form-group">
-                                <label for="addressUpdate">주소</label>
-                                <input type="text" class="form-control" id="addressUpdate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="detailAddressUpdate">상세 주소</label>
-                                <input type="text" class="form-control" id="detailAddressUpdate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="zipCodeUpdate">우편번호</label>
-                                <input type="text" class="form-control" id="zipCodeUpdate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phoneNumberUpdate">연락처</label>
-                                <input type="text" class="form-control" id="phoneNumberUpdate" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="updateAddress">저장</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    </div>
+    <div class="modal fade" id="updateAddressModal" tabindex="-1" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAddressModalLabel">배송지 수정</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateAddressForm">
+                        <input type="hidden" id="addressIdUpdate">
+                        <div class="form-group">
+                            <label for="recipientNameUpdate">수령인</label>
+                            <input type="text" class="form-control" id="recipientNameUpdate" required>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary address-btn" id="update-search">주소 검색</button>
+                        <div class="form-group">
+                            <label for="addressUpdate">주소</label>
+                            <input type="text" class="form-control" id="addressUpdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailAddressUpdate">상세 주소</label>
+                            <input type="text" class="form-control" id="detailAddressUpdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zipCodeUpdate">우편번호</label>
+                            <input type="text" class="form-control" id="zipCodeUpdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumberUpdate">연락처</label>
+                            <input type="text" class="form-control" id="phoneNumberUpdate" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="updateAddress">저장</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
+    </div>
 
 
 </body>
