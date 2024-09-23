@@ -106,27 +106,32 @@
             width: 120px;
         }
 
-        /* 버튼 색상 변경 */
+        /* 버튼 색상 및 애니메이션 효과 */
         .button-group .btn-primary {
-            background-color: #007bff; /* 톤다운된 회색-파란색 */
-            border-color: #007bff; /* 동일한 색상으로 경계 색상 */
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            border-color: #0056b3;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .button-group .btn-primary:hover {
-            background-color: #4e555b; /* 호버 시 좀 더 어두운 색상 */
-            border-color: #4e555b;
+            background: linear-gradient(135deg, #0056b3 0%, #003e7e 100%);
+            border-color: #003e7e;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
 
         .button-group .btn-danger {
-            background-color: #e74c3c; /* 톤다운된 빨간색 */
-            border-color: #e74c3c; /* 약간 더 어두운 경계 색상 */
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-color: #c0392b;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .button-group .btn-danger:hover {
-            background-color: #b52b27; /* 호버 시 좀 더 어두운 색상 */
-            border-color: #a12722;
+            background: linear-gradient(135deg, #c0392b 0%, #96281b 100%);
+            border-color: #96281b;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
-
     </style>
 </head>
 <body>
