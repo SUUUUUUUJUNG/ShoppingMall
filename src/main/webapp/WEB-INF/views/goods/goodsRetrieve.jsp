@@ -51,6 +51,17 @@
         .modal-body button {
             margin-bottom: 10px;
         }
+        /* Custom styling for product code and price */
+        .product-code {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: black; /* Changed to black */
+        }
+        .product-price {
+            font-size: 1.25rem;
+            color: #dc3545; /* Red color for the price */
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -138,8 +149,10 @@
                             <i class="far fa-share-square"></i>
                         </button>
                         <h5 class="card-title">${goodsDTO.GName}</h5>
-                        <p class="card-text"><strong>제품 코드:</strong> ${goodsDTO.GCode}</p>
-                        <p class="card-text"><strong>가격:</strong> ${goodsDTO.GPrice}</p>
+                        <!-- Product code displayed in black -->
+                        <p class="card-text"><span class="product-code">${goodsDTO.GCode}</span></p>
+                        <!-- Price displayed in red, no discount price -->
+                        <p class="card-text"><span class="product-price">${goodsDTO.GPrice}원</span></p>
                         <p class="card-text"><small class="text-muted">특정 지역 무료 배송, 도서산간 추가 배송비 발생.</small></p>
                         <div class="mb-2">
                             <label>사이즈:</label>
