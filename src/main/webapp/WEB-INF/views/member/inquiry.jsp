@@ -50,7 +50,53 @@
     </script>
     <!-- 추가적인 CSS -->
     <style>
+        /* General Styles for Form */
+        h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
 
+        .form-group label {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .form-control {
+            font-size: 1rem;
+        }
+
+        /* Style for buttons */
+        #send, .btn-primary {
+            background-color: #0069d9;
+            border-color: #0069d9;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        #send:hover, .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Style for file input */
+        .form-control-file {
+            display: block;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Adjustments for sidebar and form container */
+        .inquiry-form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -90,3 +136,6 @@
             </div>
         </div>
     </div>
+</div>
+</body>
+</html>
