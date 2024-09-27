@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>문의 내역</title>
     <!-- Google Fonts: Noto Sans KR 추가 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -16,6 +16,10 @@
         /* 폰트 스타일 설정 */
         body, h2, table, button {
             font-family: 'Noto Sans KR', sans-serif;
+        }
+        .container h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
         }
 
         /* 세련된 블랙 링크 */
@@ -32,15 +36,15 @@
             background-color: #f0f2f5; /* 연한 그레이 */
         }
 
-        /* 버튼 스타일 */
+        /* 버튼 스타일 - 단색 */
         .btn-delete {
-            background: linear-gradient(45deg, #2c3e50, #4ca1af); /* 다크 블루 그라데이션 */
+            background-color: #4a90e2; /* 현대적인 블루 */
             color: white;
             border: none;
             transition: background 0.3s ease;
         }
         .btn-delete:hover {
-            background: linear-gradient(45deg, #1a252f, #3a869d); /* 더 어두운 블루 그라데이션 */
+            background-color: #357ABD; /* 더 어두운 블루 */
             color: white;
         }
 
